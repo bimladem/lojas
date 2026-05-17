@@ -1,1 +1,1 @@
-GitHub account 2
+{{ JSON.stringify($('Visualização do top 10').item.json.lojas) }}
