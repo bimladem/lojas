@@ -1,1 +1,1 @@
-{{ JSON.stringify($('Visualização do top 10').item.json.lojas) }}
+{{ JSON.stringify({ semana: $('Visualização do top 10').item.json.emailSubject.replace('📊 Análise Semanal IM · ',''), gerado: new Date().toLocaleDateString('pt-PT'), lojas: $('Visualização do top 10').item.json.lojas }) }}
