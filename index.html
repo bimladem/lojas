@@ -14,89 +14,83 @@
     position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 6px rgba(0,0,0,.08);
     display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
   }
-  .header h1 { font-size: 20px; color: #111; }
+  .header h1 { font-size: 22px; color: #111; }
   .header .sub { font-size: 13px; color: #666; margin-top: 3px; }
-  .periodo { display: inline-block; padding: 5px 14px; background: #f7f7f7; border-left: 4px solid #555; border-radius: 2px; font-size: 13px; color: #333; }
+  .periodo { padding: 6px 16px; background: #f7f7f7; border-left: 4px solid #555; border-radius: 4px; font-size: 14px; color: #333; }
 
-  .container { max-width: 1150px; margin: 24px auto; padding: 0 16px 40px; }
-  .loading { text-align: center; padding: 80px 20px; color: #888; font-size: 16px; }
-  .legenda { font-size: 12px; color: #888; margin: 15px 0; padding: 10px 14px; background: #fff; border-radius: 6px; border: 1px solid #e8e8e8; }
+  .container { max-width: 1180px; margin: 24px auto; padding: 0 16px 40px; }
+  .loading { text-align: center; padding: 80px; color: #666; font-size: 17px; }
+  .legenda { font-size: 13px; color: #555; margin: 15px 0; padding: 12px 16px; background: #fff; border-radius: 6px; border: 1px solid #ddd; }
 
-  /* Reaproveitei o teu CSS original (mantido limpo) */
-  .loja-card { background: #fff; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,.08); margin-bottom: 20px; overflow: hidden; }
-  .loja-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; background: #fafafa; border-bottom: 1px solid #e8e8e8; flex-wrap: wrap; gap: 10px; }
-  .nivel-badge { padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; border: 1px solid; }
+  .loja-card {
+    background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,.1);
+    margin-bottom: 24px; overflow: hidden;
+  }
+  .loja-header {
+    padding: 16px 20px; background: #fafafa; border-bottom: 1px solid #eee;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+  }
+  .rank { font-size: 20px; font-weight: bold; }
+  .nivel-badge { padding: 3px 10px; border-radius: 5px; font-size: 12.5px; font-weight: bold; border: 1px solid; }
   .n1 { color: #27ae60; border-color: #27ae60; }
   .n2 { color: #e65100; border-color: #e65100; }
   .n3 { color: #b71c1c; border-color: #b71c1c; }
-  .stat-box { text-align: center; background: #f7f7f7; border: 1px solid #e0e0e0; border-radius: 6px; padding: 8px 16px; min-width: 130px; }
-  .stat-val { font-size: 22px; font-weight: bold; }
-  .seccoes-header, .seccao-row {
-    display: grid; grid-template-columns: 1fr 130px 130px 120px; padding: 8px 20px; gap: 8px;
+
+  .stats { display: flex; gap: 16px; flex-wrap: wrap; }
+  .stat-box { text-align: center; min-width: 140px; }
+  .stat-val { font-size: 26px; font-weight: bold; }
+  .stat-lbl { font-size: 12px; color: #666; }
+
+  .seccoes-header {
+    display: grid; grid-template-columns: 1fr 110px 110px 130px; background: #222; color: #fff;
+    padding: 10px 20px; font-size: 13px; font-weight: 500;
   }
-  .seccoes-header { background: #222; color: #fff; font-weight: 500; }
-  .seccao-row { border-top: 1px solid #f0f0f0; }
+  .seccao-row {
+    display: grid; grid-template-columns: 1fr 110px 110px 130px; padding: 10px 20px;
+    border-top: 1px solid #f0f0f0; align-items: center;
+  }
   .seccao-row:hover { background: #f9f9f9; }
-  .seccao-nome { font-weight: 500; }
 </style>
 </head>
 <body>
+
 <div class="header">
   <div>
     <h1>📊 Análise Semanal IM</h1>
-    <div class="sub" id="sub-gerado">A carregar Excel...</div>
+    <div class="sub" id="sub-gerado">A carregar ficheiro Excel...</div>
   </div>
   <div class="periodo" id="periodo-label">—</div>
 </div>
 
 <div class="container">
-  <div id="app"><div class="loading">⏳ A processar o ficheiro Excel...</div></div>
+  <div id="app"><div class="loading">⏳ A processar dados do Excel...</div></div>
 </div>
 
 <script>
-// ==================== CONFIGURAÇÃO ====================
-const EXCEL_FILE = 'Análise Semanal IM.xlsx';   // Nome do ficheiro
+const EXCEL_FILE = 'Análise Semanal IM.xlsx';
 
-// ==================== FUNÇÕES AUXILIARES ====================
-function corPct(pct) {
-  const v = parseFloat(pct);
-  if (v <= 20) return '#27ae60';
-  if (v <= 40) return '#e65100';
-  return '#b71c1c';
-}
-
-function nivelClass(n) {
-  return n === 1 ? 'n1' : n === 2 ? 'n2' : 'n3';
-}
-
-// ==================== CARREGAR E PROCESSAR EXCEL ====================
 async function carregarExcel() {
   try {
-    const response = await fetch(EXCEL_FILE + '?t=' + Date.now());
-    if (!response.ok) throw new Error('Ficheiro Excel não encontrado');
+    const resp = await fetch(EXCEL_FILE + '?t=' + Date.now());
+    if (!resp.ok) throw new Error('Ficheiro não encontrado');
 
-    const arrayBuffer = await response.arrayBuffer();
-    const workbook = XLSX.read(arrayBuffer, { type: 'array' });
+    const arrayBuffer = await resp.arrayBuffer();
+    const wb = XLSX.read(arrayBuffer, { type: 'array' });
 
-    // Ler as duas sheets principais
-    const sheetAnalise = workbook.Sheets["Análise"] || workbook.Sheets[workbook.SheetNames[0]];
-    const sheetHistorico = workbook.Sheets["Por Loja Histórico"] || workbook.Sheets[workbook.SheetNames[1]];
+    const sheetAnalise = wb.Sheets['Análise'] || wb.Sheets[wb.SheetNames[0]];
+    const sheetHistorico = wb.Sheets['Por Loja Histórico'] || wb.Sheets[wb.SheetNames[1]];
 
     const analiseData = XLSX.utils.sheet_to_json(sheetAnalise);
     const historicoData = XLSX.utils.sheet_to_json(sheetHistorico);
 
-    // ==================== PROCESSAMENTO (mesma lógica do n8n) ====================
-    // Última semana
-    const semanas = historicoData.map(r => String(r['Semana'] || '').trim()).filter(Boolean);
+    // ====================== LÓGICA EXATA DO TEU CÓDIGO n8n ======================
+    const semanas = historicoData.map(r => String(r['Semana'] || '').trim()).filter(s => s);
     const ultimaSemana = semanas[semanas.length - 1];
 
-    // Processar lojas da última semana
-    const lojasMap = new Map();
-
-    historicoData
+    // Calcular lojas
+    let lojas = historicoData
       .filter(r => String(r['Semana'] || '').trim() === ultimaSemana && r['Loja'])
-      .forEach(r => {
-        const lojaNome = String(r['Loja']).trim();
+      .map(r => {
         const pTotal = Number(r['P Total']) || 0;
         const pAberto = Number(r['P Aberto']) || 0;
         const pFechado = Number(r['P Fechado']) || 0;
@@ -112,28 +106,27 @@ async function carregarExcel() {
         const pctP = parseFloat(pctPAberto);
         const nivel = pctP <= 20 ? 1 : pctP <= 40 ? 2 : 3;
 
-        lojasMap.set(lojaNome, {
-          loja: lojaNome,
+        return {
+          loja: String(r['Loja']).trim(),
           localidade: String(r['Resumo contactos.Localidade'] || r['IM.Localidade'] || '').trim(),
-          pTotal, pAberto, pFechado,
-          npTotal, npAberto, npFechado,
+          pTotal, pAberto, pFechado, npTotal, npAberto, npFechado,
           pctPAberto, pctNPAberto, pctPFechado, pctNPFechado,
           nivel,
           historico: [],
           seccoes: []
-        });
-      });
+        };
+      })
+      .filter(r => r.pAberto > 0);
 
-    const topLojas = Array.from(lojasMap.values())
-      .filter(l => l.pAberto > 0)
-      .sort((a, b) => b.pAberto - a.pAberto)
-      .slice(0, 10);
+    lojas.sort((a, b) => b.pAberto - a.pAberto);
+    const topLojas = lojas.slice(0, 10);
+    const topIds = new Set(topLojas.map(l => l.loja));
 
     // Histórico
     const histPorLoja = {};
     historicoData.forEach(r => {
-      const id = String(r['Loja']).trim();
-      if (!topLojas.some(l => l.loja === id)) return;
+      const id = String(r['Loja'] || '').trim();
+      if (!topIds.has(id)) return;
       if (!histPorLoja[id]) histPorLoja[id] = [];
       histPorLoja[id].push({
         semana: String(r['Semana']).trim(),
@@ -148,11 +141,11 @@ async function carregarExcel() {
       l.diff = ult.length === 2 ? ult[1].pAberto - ult[0].pAberto : null;
     });
 
-    // Secções (da sheet de análise)
+    // Secções
     analiseData.forEach(row => {
       const lojaId = String(row['Loja'] || '').trim();
       const seccao = String(row['Secção'] || '').trim();
-      if (!topLojas.some(l => l.loja === lojaId) || !seccao) return;
+      if (!topIds.has(lojaId) || !seccao) return;
 
       const pAberto = Number(row['P Aberto']) || 0;
       const npAberto = Number(row['NP Aberto']) || 0;
@@ -167,65 +160,87 @@ async function carregarExcel() {
 
     topLojas.forEach(l => l.seccoes.sort((a, b) => b.pAberto - a.pAberto));
 
-    // ==================== RENDERIZAR ====================
-    document.getElementById('sub-gerado').textContent = `Gerado em: ${new Date().toLocaleDateString('pt-PT')}`;
-    document.getElementById('periodo-label').innerHTML = `📅 Período: <strong>${ultimaSemana}</strong>`;
+    // ====================== RENDERIZAR ======================
+    document.getElementById('sub-gerado').textContent = `Gerado em: ${new Date().toLocaleDateString('pt-PT', {weekday:'long', day:'numeric', month:'long', year:'numeric'})}`;
+    document.getElementById('periodo-label').innerHTML = `📅 Período analisado: <strong>${ultimaSemana}</strong>`;
 
-    renderLojas(topLojas, ultimaSemana);
+    renderDashboard(topLojas, ultimaSemana);
 
-  } catch (err) {
-    console.error(err);
-    document.getElementById('app').innerHTML = `
-      <div class="loading" style="color:#c0392b">
-        ❌ Erro ao ler o Excel:<br><br>
-        <small>${err.message}</small><br><br>
-        Certifica-te que o ficheiro <b>${EXCEL_FILE}</b> está na mesma pasta.
-      </div>`;
+  } catch (e) {
+    document.getElementById('app').innerHTML = `<div class="loading" style="color:#c0392b">❌ Erro: ${e.message}<br><br>Verifica se o ficheiro <b>${EXCEL_FILE}</b> está na pasta.</div>`;
   }
 }
 
-// ==================== RENDER (mantido semelhante ao original) ====================
-function renderLojas(lojas, semanaAtual) {
-  const app = document.getElementById('app');
-  let html = `<div class="legenda">🔴 Top 3 &nbsp;|&nbsp; 🟡 Em alerta &nbsp;|&nbsp; Clique nas secções para ver detalhes</div>`;
+function corPct(pct) {
+  const v = parseFloat(pct);
+  if (v <= 20) return '#27ae60';
+  if (v <= 40) return '#e65100';
+  return '#b71c1c';
+}
 
-  lojas.forEach((l, li) => {
-    const emoji = li < 3 ? '🔴' : '🟡';
-    // ... (podes manter ou simplificar o resto conforme necessidade)
-    // Por brevidade, aqui está uma versão resumida. Se quiseres o design completo, avisa.
+function renderDashboard(lojas, semana) {
+  const app = document.getElementById('app');
+  let html = `<div class="legenda">
+    🔴 Top 3 críticas &nbsp;|&nbsp; 🟡 Em alerta &nbsp;|&nbsp; 
+    Nível 1 (verde) = 0–20% &nbsp;|&nbsp; Nível 2 (laranja) = 21–40% &nbsp;|&nbsp; Nível 3 (vermelho) = 41%+
+  </div>`;
+
+  lojas.forEach((l, i) => {
+    const emoji = i < 3 ? '🔴' : '🟡';
+    const tendencia = l.diff === null ? '—' : 
+                      l.diff > 0 ? `<span style="color:#c0392b">▲ +${l.diff}</span>` :
+                      l.diff < 0 ? `<span style="color:#27ae60">▼ ${l.diff}</span>` : '→';
+
     html += `
-      <div class="loja-card">
-        <div class="loja-header">
-          <div style="display:flex; align-items:center; gap:12px;">
-            <span style="font-size:18px;font-weight:bold;">${emoji} ${li+1}</span>
-            <div>
-              <div style="font-weight:bold;">${l.loja}</div>
-              <div style="font-size:13px;color:#666;">${l.localidade || '—'}</div>
-              <span class="nivel-badge ${nivelClass(l.nivel)}">Nível ${l.nivel}</span>
-            </div>
-          </div>
-          <div style="text-align:right">
-            <div style="font-size:24px;font-weight:bold;color:#111">${l.pAberto}</div>
-            <div style="font-size:12px;color:#666">P em aberto</div>
+    <div class="loja-card">
+      <div class="loja-header">
+        <div style="display:flex; align-items:center; gap:14px;">
+          <span class="rank">${emoji} ${i+1}</span>
+          <div>
+            <strong style="font-size:17px;">${l.loja}</strong><br>
+            <span style="color:#555;font-size:13px;">${l.localidade || '—'}</span><br>
+            <span class="nivel-badge n${l.nivel}">Nível ${l.nivel}</span>
           </div>
         </div>
-        <!-- Secções -->
-        <div class="seccoes-header"><span>Secção</span><span>P Aberto</span><span>NP Aberto</span><span></span></div>
-        ${l.seccoes.map(s => `
-          <div class="seccao-row">
-            <div class="seccao-nome">${s.nome}</div>
-            <div style="text-align:center;font-weight:bold">${s.pAberto}</div>
-            <div style="text-align:center">${s.npAberto}</div>
-            <div></div>
+        <div class="stats">
+          <div class="stat-box">
+            <div class="stat-val" style="color:#111">${l.pAberto}</div>
+            <div class="stat-lbl">P em aberto</div>
+            <div style="font-size:13px;color:${corPct(l.pctPAberto)}"><strong>${l.pctPAberto}%</strong> em aberto</div>
           </div>
-        `).join('')}
-      </div>`;
+          <div class="stat-box">
+            <div class="stat-val" style="color:#555">${l.npAberto}</div>
+            <div class="stat-lbl">NP em aberto</div>
+            <div style="font-size:13px;color:${corPct(l.pctNPAberto)}"><strong>${l.pctNPAberto}%</strong> em aberto</div>
+          </div>
+          <div class="stat-box">
+            <div style="font-size:13px;margin-bottom:4px">Tendência: ${tendencia}</div>
+            <small style="color:#666">Histórico: ${l.historico.map(h=>h.pAberto).join(' → ')}</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="seccoes-header">
+        <span>Secção</span>
+        <span style="text-align:center">P em Aberto</span>
+        <span style="text-align:center">NP em Aberto</span>
+        <span></span>
+      </div>
+      ${l.seccoes.map(s => `
+        <div class="seccao-row">
+          <span><strong>${s.nome}</strong></span>
+          <span style="text-align:center; font-weight:bold; color:#c0392b">${s.pAberto}</span>
+          <span style="text-align:center">${s.npAberto}</span>
+          <span></span>
+        </div>
+      `).join('')}
+    </div>`;
   });
 
   app.innerHTML = html;
 }
 
-// ==================== INICIAR ====================
+// Iniciar
 carregarExcel();
 </script>
 </body>
