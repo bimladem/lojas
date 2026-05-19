@@ -5,138 +5,112 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Análise Semanal IM</title>
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: Arial, sans-serif; background: #f2f2f2; color: #222; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, sans-serif; background: #f0f0f0; color: #222; font-size: 14px; }
 
-  .header {
-    background: #fff;
-    border-bottom: 3px solid #222;
-    padding: 18px 28px;
-    position: sticky; top: 0; z-index: 100;
-    box-shadow: 0 2px 6px rgba(0,0,0,.08);
-    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
-  }
-  .header h1 { font-size: 20px; color: #111; }
-  .header .sub { font-size: 13px; color: #666; margin-top: 3px; }
-  .periodo {
-    display: inline-block; padding: 5px 14px;
-    background: #f7f7f7; border-left: 4px solid #555;
-    border-radius: 2px; font-size: 13px; color: #333;
-  }
+.header {
+  background: #fff; border-bottom: 3px solid #222;
+  padding: 16px 28px; position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 2px 6px rgba(0,0,0,.08);
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+}
+.header h1 { font-size: 20px; color: #111; }
+.header .sub { font-size: 12px; color: #777; margin-top: 3px; }
+.periodo { padding: 5px 14px; background: #f7f7f7; border-left: 4px solid #555; border-radius: 2px; font-size: 13px; color: #333; }
 
-  .loading {
-    text-align: center; padding: 60px 20px; color: #888; font-size: 16px;
-  }
+.container { max-width: 1200px; margin: 24px auto; padding: 0 16px 48px; }
 
-  .container { max-width: 1150px; margin: 24px auto; padding: 0 16px 40px; }
+.loading { text-align: center; padding: 60px 20px; color: #888; font-size: 16px; }
 
-  .legenda {
-    font-size: 12px; color: #888; margin-bottom: 16px; padding: 10px 14px;
-    background: #fff; border-radius: 6px; border: 1px solid #e8e8e8;
-  }
+/* Legenda */
+.legenda { font-size: 12px; color: #888; margin-bottom: 16px; padding: 10px 16px; background: #fff; border-radius: 6px; border: 1px solid #e8e8e8; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
 
-  .loja-card {
-    background: #fff; border-radius: 8px;
-    box-shadow: 0 1px 4px rgba(0,0,0,.08);
-    margin-bottom: 20px; overflow: hidden;
-  }
-  .loja-header {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 14px 20px; background: #fafafa;
-    border-bottom: 1px solid #e8e8e8; flex-wrap: wrap; gap: 10px;
-  }
-  .loja-info { display: flex; align-items: center; gap: 12px; }
-  .rank { font-size: 18px; font-weight: bold; min-width: 32px; }
-  .loja-nome { font-size: 16px; font-weight: bold; color: #111; }
-  .loja-local { font-size: 13px; color: #666; margin-top: 2px; }
-  .nivel-badge {
-    display: inline-block; padding: 2px 8px; border-radius: 4px;
-    font-size: 12px; font-weight: bold; border: 1px solid; margin-top: 3px;
-  }
-  .n1 { color: #27ae60; border-color: #27ae60; }
-  .n2 { color: #e65100; border-color: #e65100; }
-  .n3 { color: #b71c1c; border-color: #b71c1c; }
+/* Tabela principal */
+.tabela-wrap { background: #fff; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,.08); overflow: hidden; }
 
-  .loja-stats {
-    display: flex; gap: 16px; flex-wrap: wrap;
-  }
-  .stat-box {
-    text-align: center; background: #f7f7f7;
-    border: 1px solid #e0e0e0; border-radius: 6px;
-    padding: 8px 16px; min-width: 120px;
-  }
-  .stat-val { font-size: 22px; font-weight: bold; color: #111; }
-  .stat-lbl { font-size: 11px; color: #888; margin-top: 2px; }
-  .stat-sub { font-size: 12px; color: #555; margin-top: 4px; }
+.tabela-header {
+  display: grid;
+  grid-template-columns: 70px 160px 220px 150px 150px 200px 80px;
+  background: #222; color: #fff;
+  padding: 10px 12px; gap: 8px; font-size: 13px; font-weight: 500;
+}
 
-  .seccoes-wrap { padding: 0; }
-  .seccoes-header {
-    display: grid; grid-template-columns: 1fr 130px 130px 120px;
-    padding: 8px 20px; background: #222; color: #fff;
-    font-size: 13px; font-weight: 500; gap: 8px;
-  }
-  .seccao-row {
-    display: grid; grid-template-columns: 1fr 130px 130px 120px;
-    padding: 0; border-top: 1px solid #f0f0f0; gap: 8px;
-  }
-  .seccao-summary {
-    display: contents; cursor: pointer;
-  }
-  .seccao-summary > div {
-    padding: 10px 20px; font-size: 13px;
-    transition: background 0.12s;
-  }
-  .seccao-row:hover .seccao-summary > div { background: #f9f9f9; }
-  .seccao-nome { font-weight: 500; display: flex; align-items: center; gap: 8px; }
-  .seccao-arrow { font-size: 12px; color: #aaa; transition: transform 0.2s; }
-  .seccao-arrow.open { transform: rotate(90deg); }
-  .seccao-val { text-align: center; font-weight: bold; }
-  .seccao-btn {
-    display: flex; align-items: center; justify-content: center;
-  }
-  .btn-ver {
-    background: none; border: 1px solid #ccc; border-radius: 5px;
-    padding: 4px 12px; font-size: 12px; color: #444; cursor: pointer;
-    transition: all 0.15s; white-space: nowrap;
-  }
-  .btn-ver:hover { background: #f0f0f0; border-color: #999; }
-  .btn-ver.open { background: #222; color: #fff; border-color: #222; }
+/* Linha de loja */
+.loja-bloco { border-top: 1px solid #e8e8e8; }
 
-  .detalhe {
-    display: none; background: #f7f7f7;
-    border-top: 1px solid #e8e8e8;
-    padding: 12px 20px 16px;
-    grid-column: 1 / -1;
-  }
-  .detalhe.visible { display: block; }
-  .detalhe-titulo {
-    font-size: 13px; font-weight: bold; color: #333; margin-bottom: 8px;
-  }
-  .tarefas-table {
-    width: 100%; border-collapse: collapse; font-size: 12px;
-  }
-  .tarefas-table thead tr { background: #444; color: #fff; }
-  .tarefas-table thead th { padding: 6px 10px; font-weight: 500; text-align: left; }
-  .tarefas-table tbody tr { border-bottom: 1px solid #e8e8e8; background: #fff; }
-  .tarefas-table tbody td { padding: 6px 10px; color: #333; }
-  .badge {
-    display: inline-block; padding: 2px 7px; border-radius: 4px;
-    font-size: 11px; font-weight: 600;
-  }
-  .badge-p   { background: #e8f5e9; color: #2e7d32; }
-  .badge-np  { background: #fff8e1; color: #c67c00; }
-  .badge-a1  { background: #f0f0f0; color: #555; }
-  .badge-a2  { background: #fff8e1; color: #c67c00; }
-  .badge-a3  { background: #fce8e6; color: #b71c1c; }
+.loja-linha {
+  display: grid;
+  grid-template-columns: 70px 160px 220px 150px 150px 200px 80px;
+  padding: 12px; gap: 8px; align-items: center;
+  cursor: pointer; transition: background 0.12s;
+}
+.loja-linha:hover { background: #fafafa; }
 
-  .tendencia { font-size: 13px; margin-top: 6px; }
-  .up   { color: #c0392b; font-weight: bold; }
-  .down { color: #27ae60; font-weight: bold; }
+/* Células */
+.cel-rank { text-align: center; }
+.rank-num { font-size: 16px; font-weight: bold; }
+.nivel-badge { display: inline-block; padding: 2px 7px; border-radius: 4px; font-size: 11px; font-weight: bold; border: 1px solid; margin-top: 4px; }
+.n1 { color: #27ae60; border-color: #27ae60; }
+.n2 { color: #e65100; border-color: #e65100; }
+.n3 { color: #b71c1c; border-color: #b71c1c; }
 
-  .hist-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 8px; }
-  .hist-table th { background: #444; color: #fff; padding: 4px 8px; text-align: left; }
-  .hist-table td { padding: 4px 8px; border-bottom: 1px solid #e8e8e8; }
-  .hist-atual { background: #f0f0f0; font-weight: bold; }
+.cel-loja .nome { font-size: 14px; font-weight: bold; color: #111; }
+.cel-loja .local { font-size: 12px; color: #666; margin-top: 2px; }
+
+.cel-tarefas { text-align: center; }
+.tarefas-val { font-size: 24px; font-weight: bold; color: #111; }
+.tarefas-sub { font-size: 11px; color: #888; margin-top: 2px; }
+.tarefas-np { font-size: 12px; color: #555; margin-top:4px; }
+
+.cel-pct { text-align: center; }
+.pct-nc { font-size: 20px; font-weight: bold; }
+.pct-lbl { font-size: 11px; color: #888; }
+.pct-c { font-size: 14px; font-weight: bold; color: #27ae60; margin-top: 6px; }
+
+.cel-hist { font-size: 12px; }
+.hist-mini { display: flex; flex-direction: column; gap: 3px; }
+.hist-row { display: flex; justify-content: space-between; gap: 8px; }
+.hist-sem { color: #777; white-space: nowrap; font-size: 11px; }
+.hist-val { font-weight: bold; color: #111; font-size: 11px; }
+.hist-atual { background: #f0f0f0; padding: 2px 4px; border-radius: 3px; }
+.tendencia { margin-top: 5px; font-size: 12px; }
+.up { color: #c0392b; font-weight: bold; }
+.down { color: #27ae60; font-weight: bold; }
+
+.cel-seccoes { text-align: center; }
+.btn-seccoes {
+  background: none; border: 1px solid #ccc; border-radius: 5px;
+  padding: 6px 12px; font-size: 12px; cursor: pointer; color: #444;
+  transition: all 0.15s; display: inline-flex; align-items: center; gap: 6px;
+}
+.btn-seccoes:hover { background: #f0f0f0; border-color: #999; }
+.btn-seccoes.open { background: #222; color: #fff; border-color: #222; }
+.sec-count { font-size: 11px; color: #aaa; margin-top: 4px; }
+
+/* Painel de secções */
+.seccoes-painel {
+  display: none; background: #f7f7f7;
+  border-top: 1px solid #e0e0e0; padding: 0;
+}
+.seccoes-painel.visible { display: block; }
+
+.seccoes-tabela { width: 100%; border-collapse: collapse; font-size: 13px; }
+.seccoes-tabela thead tr { background: #444; color: #fff; }
+.seccoes-tabela thead th { padding: 7px 14px; font-weight: 500; text-align: left; }
+.seccoes-tabela thead th:not(:first-child) { text-align: center; }
+.seccoes-tabela tbody tr { border-bottom: 1px solid #ebebeb; cursor: pointer; background: #fff; }
+.seccoes-tabela tbody tr:hover { background: #f0f0f0; }
+.seccoes-tabela tbody td { padding: 8px 14px; }
+.seccoes-tabela tbody td:not(:first-child) { text-align: center; font-weight: bold; }
+
+/* Detalhe de secção */
+.sec-detalhe { display: none; background: #fff; border-top: 1px solid #e8e8e8; padding: 14px 20px; }
+.sec-detalhe.visible { display: block; }
+.sec-detalhe-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; max-width: 600px; }
+.sec-detalhe-box { background: #f7f7f7; border: 1px solid #e0e0e0; border-radius: 6px; padding: 12px 16px; }
+.sec-detalhe-box h4 { font-size: 12px; color: #555; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.03em; }
+.sec-detalhe-num { font-size: 30px; font-weight: bold; color: #111; }
+.sec-detalhe-sub { font-size: 11px; color: #888; margin-top: 3px; }
 </style>
 </head>
 <body>
@@ -144,247 +118,200 @@
 <div class="header">
   <div>
     <h1>📊 Análise Semanal IM</h1>
-    <div class="sub" id="sub-gerado">A carregar dados...</div>
+    <div class="sub" id="sub-info">A carregar dados...</div>
   </div>
   <div class="periodo" id="periodo-label">—</div>
 </div>
 
 <div class="container">
-  <div id="app"><div class="loading">⏳ A carregar dados do ficheiro...</div></div>
+  <div id="app"><div class="loading">⏳ A carregar dados...</div></div>
 </div>
 
 <script>
-// -------------------------------------------------------
-// Tarefas HACCP de teste por secção
-// (Em produção, estas viriam do dados.json gerado pelo n8n)
-// -------------------------------------------------------
-const TAREFAS_TESTE = {
-  'Frescos LS': [
-    {c:'HACCP-FL-001',d:'Verificação temperatura câmara frio (+2°C a +4°C)',t:'P',a:3},
-    {c:'HACCP-FL-002',d:'Registo temperaturas — entrada de mercadoria',t:'P',a:2},
-    {c:'HACCP-FL-003',d:'Inspeção visual de datas de validade',t:'P',a:5},
-    {c:'HACCP-FL-004',d:'Limpeza e desinfeção de superfícies de corte',t:'NP',a:4},
-    {c:'HACCP-FL-005',d:'Controlo de pragas — verificação armadilhas',t:'NP',a:7},
-  ],
-  'Talho': [
-    {c:'HACCP-TL-001',d:'Verificação temperatura câmara carne (0°C a +2°C)',t:'P',a:4},
-    {c:'HACCP-TL-002',d:'Registo limpeza de equipamentos de corte',t:'P',a:3},
-    {c:'HACCP-TL-003',d:'Controlo de pH da carne fresca',t:'NP',a:5},
-    {c:'HACCP-TL-004',d:'Verificação integridade embalagens a vácuo',t:'P',a:2},
-  ],
-  'Charcutaria e queijo': [
-    {c:'HACCP-CQ-001',d:'Controlo temperatura de exposição (+2°C a +6°C)',t:'P',a:5},
-    {c:'HACCP-CQ-002',d:'Verificação datas de validade após abertura',t:'P',a:3},
-    {c:'HACCP-CQ-003',d:'Registo de limpeza de fatiadora',t:'NP',a:6},
-    {c:'HACCP-CQ-004',d:'Rotação de stocks — FIFO',t:'NP',a:4},
-  ],
-  'Frutas e legumes': [
-    {c:'HACCP-FV-001',d:'Inspeção visual à receção — estado e higiene',t:'P',a:3},
-    {c:'HACCP-FV-002',d:'Verificação temperatura armazenagem (+8°C a +12°C)',t:'P',a:2},
-    {c:'HACCP-FV-003',d:'Registo de desperdício e produto não conforme',t:'NP',a:4},
-  ],
-  'Peixaria': [
-    {c:'HACCP-PX-001',d:'Controlo temperatura câmara peixe fresco (0°C a +2°C)',t:'P',a:4},
-    {c:'HACCP-PX-002',d:'Verificação temperatura do gelo expositores',t:'P',a:5},
-    {c:'HACCP-PX-003',d:'Registo origem e rastreabilidade do produto',t:'P',a:3},
-    {c:'HACCP-PX-004',d:'Limpeza e desinfeção de bancadas e utensílios',t:'NP',a:6},
-  ],
-  'Padaria': [
-    {c:'HACCP-PD-001',d:'Controlo temperatura de fermentação (24°C a 28°C)',t:'P',a:2},
-    {c:'HACCP-PD-002',d:'Verificação temperatura forno (mín. 220°C)',t:'P',a:3},
-    {c:'HACCP-PD-003',d:'Registo limpeza equipamentos de fabrico',t:'NP',a:4},
-  ],
-  'Bar e cafetaria': [
-    {c:'HACCP-BC-001',d:'Temperatura máquina de café (92°C a 96°C)',t:'P',a:3},
-    {c:'HACCP-BC-002',d:'Verificação temperatura vitrine fria (+2°C a +5°C)',t:'P',a:5},
-    {c:'HACCP-BC-003',d:'Limpeza e desinfeção de superfícies de trabalho',t:'NP',a:2},
-  ],
-  'Pronto a comer': [
-    {c:'HACCP-PC-001',d:'Temperatura serviço alimentos quentes (>63°C)',t:'P',a:4},
-    {c:'HACCP-PC-002',d:'Temperatura serviço alimentos frios (<5°C)',t:'P',a:3},
-    {c:'HACCP-PC-003',d:'Registo limpeza de utensílios de serviço',t:'NP',a:2},
-  ],
-  'Armazém': [
-    {c:'HACCP-AZ-001',d:'Verificação temperatura armazém seco (18°C a 22°C)',t:'P',a:2},
-    {c:'HACCP-AZ-002',d:'Controlo de pragas — inspeção visual',t:'NP',a:7},
-  ],
-};
-
-function badgeAtraso(a) {
-  const cls = a >= 5 ? 'badge-a3' : a >= 3 ? 'badge-a2' : 'badge-a1';
-  return '<span class="badge ' + cls + '">' + a + 'd atraso</span>';
-}
-
-function renderTarefas(seccaoNome, pAberto, npAberto) {
-  const tarefas = TAREFAS_TESTE[seccaoNome] || [];
-  if (!tarefas.length) {
-    return '<p style="color:#aaa;font-size:13px">Sem detalhe de tarefas disponível (dados de teste).</p>';
-  }
-  const rows = tarefas.map(function(t) {
-    const tbadge = t.t === 'P'
-      ? '<span class="badge badge-p">Programada</span>'
-      : '<span class="badge badge-np">Não Prog.</span>';
-    return '<tr>'
-      + '<td style="font-family:monospace;color:#888">' + t.c + '</td>'
-      + '<td>' + t.d + '</td>'
-      + '<td style="text-align:center">' + tbadge + '</td>'
-      + '<td style="text-align:center">' + badgeAtraso(t.a) + '</td>'
-      + '</tr>';
-  }).join('');
-  return '<div class="detalhe-titulo">Tarefas não cumpridas em ' + seccaoNome
-    + ' — P em aberto: <b>' + pAberto + '</b> · NP em aberto: <b>' + npAberto + '</b></div>'
-    + '<table class="tarefas-table">'
-    + '<thead><tr><th style="width:110px">Código</th><th>Tarefa HACCP</th><th style="width:120px;text-align:center">Tipo</th><th style="width:100px;text-align:center">Atraso</th></tr></thead>'
-    + '<tbody>' + rows + '</tbody>'
-    + '</table>'
-    + '<p style="font-size:11px;color:#bbb;margin-top:8px;text-align:right">⚠️ Tarefas de teste — não correspondem a dados reais</p>';
-}
-
-const openState = {};
-
-function toggleSeccao(lojaIdx, secIdx, seccaoNome, pAberto, npAberto) {
-  const key = lojaIdx + '-' + secIdx;
-  const det  = document.getElementById('det-' + key);
-  const btn  = document.getElementById('btn-' + key);
-  const arr  = document.getElementById('arr-' + key);
-  if (!det) return;
-  if (openState[key]) {
-    det.classList.remove('visible');
-    btn.classList.remove('open');
-    btn.textContent = '▶ Ver tarefas';
-    if (arr) arr.classList.remove('open');
-    openState[key] = false;
-  } else {
-    if (!det.dataset.loaded) {
-      det.innerHTML = renderTarefas(seccaoNome, pAberto, npAberto);
-      det.dataset.loaded = '1';
-    }
-    det.classList.add('visible');
-    btn.classList.add('open');
-    btn.textContent = '▼ Fechar';
-    if (arr) arr.classList.add('open');
-    openState[key] = true;
-  }
-}
-
-function nivelClass(n) {
-  return n === 1 ? 'n1' : n === 2 ? 'n2' : 'n3';
-}
+var openLojas = {};
+var openSecs  = {};
 
 function corPct(pct) {
-  const v = parseFloat(pct);
+  var v = parseFloat(pct);
   if (v <= 20) return '#27ae60';
   if (v <= 40) return '#e65100';
   return '#b71c1c';
 }
 
+function seta(diff) {
+  if (diff === null || diff === undefined) return '—';
+  if (diff > 0) return '<span class="up">▲ +' + diff + '</span>';
+  if (diff < 0) return '<span class="down">▼ ' + diff + '</span>';
+  return '<span style="color:#888">→</span>';
+}
+
+function toggleSeccoes(li) {
+  var painel = document.getElementById('painel-' + li);
+  var btn    = document.getElementById('btn-' + li);
+  if (!painel) return;
+  if (openLojas[li]) {
+    painel.classList.remove('visible');
+    btn.classList.remove('open');
+    btn.innerHTML = '▶ Secções';
+    openLojas[li] = false;
+  } else {
+    painel.classList.add('visible');
+    btn.classList.add('open');
+    btn.innerHTML = '▼ Secções';
+    openLojas[li] = true;
+  }
+}
+
+function toggleSecDetalhe(li, si) {
+  var id  = li + '-' + si;
+  var det = document.getElementById('secdet-' + id);
+  var row = document.getElementById('secrow-' + id);
+  if (!det) return;
+  if (openSecs[id]) {
+    det.classList.remove('visible');
+    if (row) row.style.background = '';
+    openSecs[id] = false;
+  } else {
+    det.classList.add('visible');
+    if (row) row.style.background = '#f0f7ff';
+    openSecs[id] = true;
+  }
+}
+
 function renderApp(dados) {
-  const lojas = dados.lojas || [];
-  const semana = dados.semana || '—';
-  const gerado = dados.gerado || '—';
+  var lojas  = Array.isArray(dados) ? dados : (dados.lojas || []);
+  var semana = Array.isArray(dados) ? '—' : (dados.semana || '—');
+  var gerado = Array.isArray(dados) ? '—' : (dados.gerado || '—');
 
-  document.getElementById('sub-gerado').textContent = 'Gerado em: ' + gerado;
-  document.getElementById('periodo-label').innerHTML = '📅 Período: <strong>' + semana + '</strong>';
+  document.getElementById('sub-info').textContent = 'Gerado em ' + gerado + ' · ' + lojas.length + ' lojas';
+  document.getElementById('periodo-label').innerHTML = '📅 <strong>' + semana + '</strong>';
 
-  const app = document.getElementById('app');
-
-  const legenda = '<div class="legenda">'
-    + '🔴 Top 3 críticas &nbsp;|&nbsp; 🟡 Em alerta &nbsp;|&nbsp; '
-    + '<span style="color:#27ae60;font-weight:bold">Nível 1</span> = 0–20% P não cumpridas &nbsp;|&nbsp; '
-    + '<span style="color:#e65100;font-weight:bold">Nível 2</span> = 21–40% &nbsp;|&nbsp; '
-    + '<span style="color:#b71c1c;font-weight:bold">Nível 3</span> = 41%+ &nbsp;|&nbsp; '
-    + 'Clique em "Ver tarefas" para expandir o detalhe de cada secção'
+  var legenda = '<div class="legenda">'
+    + '<span>🔴 Top 3 críticas</span>'
+    + '<span>🟡 Em alerta</span>'
+    + '<span style="color:#27ae60;font-weight:bold">Nível 1</span><span style="color:#888">0–20%</span>'
+    + '<span style="color:#e65100;font-weight:bold">Nível 2</span><span style="color:#888">21–40%</span>'
+    + '<span style="color:#b71c1c;font-weight:bold">Nível 3</span><span style="color:#888">41%+</span>'
+    + '<span>▲ A piorar · ▼ A melhorar</span>'
+    + '<span style="color:#888">Clique em "Secções" para expandir</span>'
     + '</div>';
 
-  const cards = lojas.map(function(l, li) {
-    const emoji = li < 3 ? '🔴' : '🟡';
+  var header = '<div class="tabela-header">'
+    + '<div># / Nível</div>'
+    + '<div>Loja / Localidade</div>'
+    + '<div style="text-align:center">Tarefas em aberto<br><span style="font-weight:normal;font-size:11px">P · NP (sem data limite)</span></div>'
+    + '<div style="text-align:center">% P<br><span style="font-weight:normal;font-size:11px">não cumpridas · cumpridas</span></div>'
+    + '<div style="text-align:center">% NP<br><span style="font-weight:normal;font-size:11px">não cumpridas · cumpridas</span></div>'
+    + '<div>Histórico P<br><span style="font-weight:normal;font-size:11px">semanas anteriores</span></div>'
+    + '<div style="text-align:center">Secções</div>'
+    + '</div>';
 
-    // Histórico
-    let histHtml = '';
+  var blocos = lojas.map(function(l, li) {
+    var emoji = li < 3 ? '🔴' : '🟡';
+    var nc    = l.nivel === 1 ? 'n1' : l.nivel === 2 ? 'n2' : 'n3';
+
+    // Histórico mini
+    var histRows = '';
     if (l.historico && l.historico.length > 0) {
-      const hRows = l.historico.map(function(h) {
-        return '<tr><td>' + h.semana + '</td><td style="text-align:center;font-weight:bold">' + h.pAberto + '</td></tr>';
+      histRows = l.historico.map(function(h) {
+        return '<div class="hist-row"><span class="hist-sem">' + h.semana + '</span><span class="hist-val">' + h.pAberto + '</span></div>';
       }).join('');
-      const diffTxt = l.diff === null ? '—'
-        : l.diff > 0 ? '<span class="up">▲ +' + l.diff + '</span>'
-        : l.diff < 0 ? '<span class="down">▼ ' + l.diff + '</span>'
-        : '→';
-      histHtml = '<table class="hist-table">'
-        + '<tr><th>Semana</th><th>P em aberto</th></tr>'
-        + hRows
-        + '<tr class="hist-atual"><td>' + semana + ' (atual)</td><td style="text-align:center">' + l.pAberto + '</td></tr>'
-        + '</table>'
-        + '<div class="tendencia">Tendência: ' + diffTxt + '</div>';
+      histRows += '<div class="hist-row hist-atual"><span class="hist-sem">' + semana + ' (atual)</span><span class="hist-val">' + l.pAberto + '</span></div>';
+      histRows += '<div class="tendencia">Tendência: ' + seta(l.diff) + '</div>';
     } else {
-      histHtml = '<span style="font-size:12px;color:#aaa">Sem histórico anterior</span>';
+      histRows = '<div style="font-size:11px;color:#aaa">Sem histórico</div><div class="hist-row hist-atual" style="margin-top:4px"><span class="hist-sem">Atual</span><span class="hist-val">' + l.pAberto + '</span></div>';
     }
 
-    // Secções
-    const seccoes = l.seccoes || [];
-    const secRows = seccoes.map(function(s, si) {
-      const key = li + '-' + si;
-      return '<div class="seccao-row">'
-        + '<div class="seccao-summary" onclick="toggleSeccao(' + li + ',' + si + ',\'' + s.nome.replace(/'/g, "\\'") + '\',' + s.pAberto + ',' + s.npAberto + ')">'
-        + '<div class="seccao-nome"><span class="seccao-arrow" id="arr-' + key + '">▶</span>' + s.nome + '</div>'
-        + '<div class="seccao-val" style="color:#111">' + (s.pAberto > 0 ? s.pAberto : '<span style="color:#bbb">—</span>') + '</div>'
-        + '<div class="seccao-val" style="color:#555">' + (s.npAberto > 0 ? s.npAberto : '<span style="color:#bbb">—</span>') + '</div>'
-        + '<div class="seccao-btn"><button class="btn-ver" id="btn-' + key + '" onclick="event.stopPropagation();toggleSeccao(' + li + ',' + si + ',\'' + s.nome.replace(/'/g, "\\'") + '\',' + s.pAberto + ',' + s.npAberto + ')">▶ Ver tarefas</button></div>'
-        + '</div>'
-        + '<div class="detalhe" id="det-' + key + '" style="grid-column:1/-1"></div>'
-        + '</div>';
+    // Secções painel
+    var seccoes = l.seccoes || [];
+    var secLinhas = seccoes.map(function(s, si) {
+      var id   = li + '-' + si;
+      var pVal  = s.pAberto  > 0 ? s.pAberto  : '—';
+      var npVal = s.npAberto > 0 ? s.npAberto : '—';
+      return '<tr id="secrow-' + id + '" onclick="toggleSecDetalhe(' + li + ',' + si + ')">'
+        + '<td><b>' + s.nome + '</b></td>'
+        + '<td>' + pVal + '</td>'
+        + '<td>' + npVal + '</td>'
+        + '</tr>'
+        + '<tr><td colspan="3" style="padding:0;border:none">'
+        + '<div class="sec-detalhe" id="secdet-' + id + '">'
+        + '<div class="sec-detalhe-grid">'
+        + '<div class="sec-detalhe-box"><h4>Programadas (P)</h4><div class="sec-detalhe-num">' + s.pAberto + '</div><div class="sec-detalhe-sub">tarefas programadas não cumpridas no período</div></div>'
+        + '<div class="sec-detalhe-box"><h4>Não Programadas (NP)</h4><div class="sec-detalhe-num">' + s.npAberto + '</div><div class="sec-detalhe-sub">tarefas não programadas em aberto (sem data limite)</div></div>'
+        + '</div></div></td></tr>';
     }).join('');
 
-    return '<div class="loja-card">'
-      + '<div class="loja-header">'
-      + '<div class="loja-info">'
-      + '<span class="rank">' + emoji + ' ' + (li + 1) + '</span>'
-      + '<div>'
-      + '<div class="loja-nome">' + l.loja + '</div>'
-      + '<div class="loja-local">' + (l.localidade || '—') + '</div>'
-      + '<span class="nivel-badge ' + nivelClass(l.nivel) + '">Nível ' + l.nivel + '</span>'
+    var painelSeccoes = seccoes.length > 0
+      ? '<div class="seccoes-painel" id="painel-' + li + '">'
+        + '<table class="seccoes-tabela">'
+        + '<thead><tr><th>Secção</th><th>P em aberto</th><th>NP em aberto</th></tr></thead>'
+        + '<tbody>' + secLinhas + '</tbody>'
+        + '</table></div>'
+      : '<div class="seccoes-painel" id="painel-' + li + '" style="padding:12px 20px;font-size:13px;color:#aaa">Sem secções com tarefas em aberto</div>';
+
+    return '<div class="loja-bloco">'
+      + '<div class="loja-linha" onclick="toggleSeccoes(' + li + ')">'
+
+      // Rank / Nível
+      + '<div class="cel-rank">'
+      + '<div class="rank-num">' + emoji + ' ' + (li + 1) + '</div>'
+      + '<span class="nivel-badge ' + nc + '">Nível ' + l.nivel + '</span>'
       + '</div>'
+
+      // Loja
+      + '<div class="cel-loja">'
+      + '<div class="nome">' + l.loja + '</div>'
+      + '<div class="local">' + (l.localidade || '—') + '</div>'
       + '</div>'
-      + '<div class="loja-stats">'
-      + '<div class="stat-box">'
-      + '<div class="stat-val">' + l.pAberto + '</div>'
-      + '<div class="stat-lbl">P em aberto</div>'
-      + '<div class="stat-sub" style="color:' + corPct(l.pctPNaoCumpridas) + ';font-weight:bold">' + l.pctPNaoCumpridas + '% não cumpridas</div>'
-      + '<div class="stat-sub" style="color:#27ae60">' + l.pctPCumpridas + '% cumpridas</div>'
+
+      // Tarefas
+      + '<div class="cel-tarefas">'
+      + '<div class="tarefas-val">' + l.pAberto + '</div>'
+      + '<div class="tarefas-sub">P em aberto de ' + l.pTotal + '</div>'
+      + '<div class="tarefas-np">NP: <b>' + l.npAberto + '</b> de ' + l.npTotal + '<br><span style="font-size:11px;color:#aaa">(sem data limite)</span></div>'
       + '</div>'
-      + '<div class="stat-box">'
-      + '<div class="stat-val">' + l.npAberto + '</div>'
-      + '<div class="stat-lbl">NP em aberto</div>'
-      + '<div class="stat-sub" style="color:' + corPct(l.pctNPNaoCumpridas) + ';font-weight:bold">' + l.pctNPNaoCumpridas + '% não cumpridas</div>'
-      + '<div class="stat-sub" style="color:#27ae60">' + l.pctNPCumpridas + '% cumpridas</div>'
+
+      // % P
+      + '<div class="cel-pct">'
+      + '<div class="pct-nc" style="color:' + corPct(l.pctPNaoCumpridas) + '">' + l.pctPNaoCumpridas + '%</div>'
+      + '<div class="pct-lbl">P não cumpridas</div>'
+      + '<div class="pct-c">' + l.pctPCumpridas + '%</div>'
+      + '<div class="pct-lbl">P cumpridas</div>'
       + '</div>'
-      + '<div class="stat-box" style="min-width:160px">' + histHtml + '</div>'
+
+      // % NP
+      + '<div class="cel-pct">'
+      + '<div class="pct-nc" style="color:' + corPct(l.pctNPNaoCumpridas) + '">' + l.pctNPNaoCumpridas + '%</div>'
+      + '<div class="pct-lbl">NP não cumpridas</div>'
+      + '<div class="pct-c">' + l.pctNPCumpridas + '%</div>'
+      + '<div class="pct-lbl">NP cumpridas</div>'
       + '</div>'
+
+      // Histórico
+      + '<div class="cel-hist"><div class="hist-mini">' + histRows + '</div></div>'
+
+      // Botão secções
+      + '<div class="cel-seccoes">'
+      + '<button class="btn-seccoes" id="btn-' + li + '" onclick="event.stopPropagation();toggleSeccoes(' + li + ')">▶ Secções</button>'
+      + '<div class="sec-count">' + seccoes.length + ' secções</div>'
       + '</div>'
-      + '<div class="seccoes-wrap">'
-      + '<div class="seccoes-header"><span>Secção</span><span style="text-align:center">P em aberto</span><span style="text-align:center">NP em aberto</span><span style="text-align:center">Detalhe</span></div>'
-      + secRows
+
       + '</div>'
+      + painelSeccoes
       + '</div>';
   }).join('');
 
-  app.innerHTML = legenda + cards;
+  document.getElementById('app').innerHTML = legenda
+    + '<div class="tabela-wrap">' + header + blocos + '</div>';
 }
 
-// -------------------------------------------------------
-// Carregar dados.json do GitHub Pages
-// -------------------------------------------------------
 fetch('dados.json?t=' + Date.now())
-  .then(function(r) {
-    if (!r.ok) throw new Error('Ficheiro dados.json não encontrado');
-    return r.json();
-  })
-  .then(function(dados) {
-    renderApp(dados);
-  })
+  .then(function(r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+  .then(function(d) { renderApp(d); })
   .catch(function(err) {
     document.getElementById('app').innerHTML =
-      '<div class="loading" style="color:#c0392b">❌ Erro ao carregar dados: ' + err.message + '<br><br>'
-      + '<span style="font-size:13px;color:#888">Certifica-te que o ficheiro <b>dados.json</b> existe no repositório GitHub.</span></div>';
+      '<div class="loading" style="color:#c0392b">❌ Erro ao carregar dados: ' + err.message
+      + '<br><br><span style="font-size:13px;color:#888">Verifica que o ficheiro <b>dados.json</b> existe no repositório.</span></div>';
   });
 </script>
 </body>
