@@ -45,11 +45,10 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
 }
 
 .container { 
-    max-width: 1320px; 
+    max-width: 1350px; 
     margin: 28px auto; 
     padding: 0 20px; 
 }
@@ -63,7 +62,7 @@ body {
 
 .tabela-header {
     display: grid;
-    grid-template-columns: 100px 200px 210px 160px 160px 100px 100px;
+    grid-template-columns: 100px 260px 200px 160px 160px 100px 100px;   /* ← Coluna da loja mais larga */
     background: #1e2937;
     color: #fff;
     padding: 16px 20px;
@@ -74,7 +73,7 @@ body {
 
 .loja-linha {
     display: grid;
-    grid-template-columns: 100px 200px 210px 160px 160px 100px 100px;
+    grid-template-columns: 100px 260px 200px 160px 160px 100px 100px;
     padding: 16px 20px;
     gap: 8px;
     align-items: center;
@@ -91,7 +90,12 @@ body {
 .n3 { color: #dc2626; border: 1px solid #dc2626; }
 
 .nome { font-weight: 600; font-size: 15.5px; }
-.local { font-size: 13px; color: #64748b; margin-top: 3px; }
+.local { 
+    font-size: 13.2px; 
+    color: #64748b; 
+    margin-top: 4px;
+    font-weight: 400;
+}
 
 .tarefas-val { font-size: 27px; font-weight: 700; }
 .tarefas-sub { font-size: 12.8px; color: #64748b; }
@@ -121,7 +125,6 @@ body {
 }
 .painel.visible { display: block; }
 
-/* Secções */
 .sec-table { width: 100%; border-collapse: collapse; }
 .sec-table th { background: #334155; color: white; padding: 10px 12px; }
 .sec-table td { padding: 11px 12px; border-bottom: 1px solid #e2e8f0; }
@@ -153,11 +156,7 @@ body {
 </div>
 
 <div class="container">
-    <div id="app">
-        <div style="text-align:center; padding:120px 20px; color:#64748b;">
-            ⏳ A carregar dados...
-        </div>
-    </div>
+    <div id="app"></div>
 </div>
 
 <script>
@@ -225,16 +224,13 @@ fetch('dados.json?t=' + Date.now())
         lojas.sort((a, b) => b.pAberto - a.pAberto);
         const topLojas = lojas.slice(0, 10);
 
-        // Histórico
+        // Histórico e Secções (mantido igual)
         const histPorLoja = {};
         data.forEach(item => {
             if (item.Loja && !item.Secção) {
                 const id = String(item.Loja).trim();
                 if (!histPorLoja[id]) histPorLoja[id] = [];
-                histPorLoja[id].push({
-                    semana: String(item.Semana).trim(),
-                    pAberto: Number(item['P Aberto']) || 0
-                });
+                histPorLoja[id].push({ semana: String(item.Semana).trim(), pAberto: Number(item['P Aberto']) || 0 });
             }
         });
 
@@ -242,7 +238,6 @@ fetch('dados.json?t=' + Date.now())
             loja.historico = (histPorLoja[loja.loja] || []).sort((a,b) => b.semana.localeCompare(a.semana));
         });
 
-        // Secções
         data.forEach(item => {
             if (item.Secção && item.Loja) {
                 const loja = topLojas.find(l => l.loja === String(item.Loja).trim());
@@ -261,19 +256,18 @@ fetch('dados.json?t=' + Date.now())
 
         topLojas.forEach(l => l.seccoes.sort((a,b) => b.pAberto - a.pAberto));
 
-        // Render
-        document.getElementById('sub-info').textContent = `Gerado hoje • Top 10 • Última semana disponível`;
+        document.getElementById('sub-info').textContent = `Gerado hoje • Top 10`;
         document.getElementById('semana-atual').textContent = ultimaSemana;
         renderApp(topLojas);
     })
     .catch(err => {
-        document.getElementById('app').innerHTML = `<div style="text-align:center; padding:100px; color:#dc2626">❌ Erro ao carregar: ${err.message}</div>`;
+        document.getElementById('app').innerHTML = `<div style="text-align:center;padding:120px;color:#dc2626">❌ Erro: ${err.message}</div>`;
     });
 
 function renderApp(lojas) {
     const header = `<div class="tabela-header">
         <div># / Nível</div>
-        <div>Loja</div>
+        <div>Loja / Localidade</div>
         <div style="text-align:center">Tarefas em Aberto</div>
         <div style="text-align:center">% Programadas</div>
         <div style="text-align:center">% Não Programadas</div>
@@ -285,67 +279,57 @@ function renderApp(lojas) {
         const emoji = li < 3 ? '🔴' : '🟡';
         const nc = l.nivel === 1 ? 'n1' : l.nivel === 2 ? 'n2' : 'n3';
 
-        // Histórico
-        let histHTML = `<p style="color:#888; text-align:center; padding:30px;">Sem histórico disponível</p>`;
-        if (l.historico && l.historico.length > 0) {
-            histHTML = l.historico.map(h => `
-                <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid #eee;">
-                    <strong>${h.semana}</strong>
-                    <span>${h.pAberto} tarefas abertas</span>
-                </div>
-            `).join('');
-        }
+        let histHTML = l.historico?.length ? l.historico.map(h => `
+            <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eee;">
+                <strong>${h.semana}</strong><span>${h.pAberto} abertas</span>
+            </div>`).join('') : `<p style="color:#888;text-align:center;padding:30px;">Sem histórico</p>`;
 
-        // Secções
         let secHTML = '';
-        if (l.seccoes && l.seccoes.length > 0) {
+        if (l.seccoes?.length) {
             secHTML = l.seccoes.map((s, si) => {
-                const id = li + '-' + si;
+                const id = `${li}-${si}`;
                 return `
-                <tr id="secrow-${id}" onclick="toggleSecDet('${id}')">
+                <tr onclick="toggleSecDet('${id}')">
                     <td><b>${s.nome}</b></td>
                     <td style="text-align:center">${s.pAberto}</td>
                     <td style="text-align:center">${s.npAberto}</td>
-                </tr>
-                <tr><td colspan="3" style="padding:0">
-                    <div class="sec-det" id="secdet-${id}">
-                        <div><strong>P Aberto:</strong> ${s.pAberto} tarefas</div>
-                        <div><strong>NP Aberto:</strong> ${s.npAberto} tarefas</div>
-                    </div>
-                </td></tr>`;
+                </tr>`;
             }).join('');
         }
 
         return `
         <div class="loja-linha">
             <div><div class="rank-num">${emoji} ${li+1}</div><div class="nivel-badge ${nc}">Nível ${l.nivel}</div></div>
-            <div><div class="nome">${l.loja}</div><div class="local">${l.localidade || '—'}</div></div>
+            
+            <div>
+                <div class="nome">${l.loja}</div>
+                <div class="local">${l.localidade || '—'}</div>
+            </div>
+            
             <div style="text-align:center">
                 <div class="tarefas-val">${l.pAberto}</div>
-                <div class="tarefas-sub">de ${l.pTotal} programadas</div>
-                <div style="margin-top:6px">NP: <b>${l.npAberto}</b></div>
+                <div class="tarefas-sub">de ${l.pTotal}</div>
+                <div>NP: <b>${l.npAberto}</b></div>
             </div>
+            
             <div style="text-align:center">
                 <div class="pct-ab" style="color:${corPct(l.pctPAberto)}">${l.pctPAberto}%</div>
-                <div class="pct-lbl">em aberto</div>
-                <div style="margin-top:8px; font-size:13px">${l.pctPFechado}% fechado</div>
+                <div class="pct-lbl">aberto</div>
+                <div style="font-size:13px;margin-top:4px">${l.pctPFechado}% fechado</div>
             </div>
+            
             <div style="text-align:center">
                 <div class="pct-ab" style="color:${corPct(l.pctNPAberto)}">${l.pctNPAberto}%</div>
-                <div class="pct-lbl">em aberto</div>
+                <div class="pct-lbl">aberto</div>
             </div>
-            <div style="text-align:center">
-                <button class="toggle-btn" id="btnhist-${li}" onclick="toggleHist(${li})">▶ Histórico</button>
-            </div>
-            <div style="text-align:center">
-                <button class="toggle-btn" id="btnsec-${li}" onclick="toggleSec(${li})">▶ Secções</button>
-                <div style="font-size:12px; color:#64748b; margin-top:4px">${l.seccoes.length}</div>
-            </div>
+            
+            <div style="text-align:center"><button class="toggle-btn" id="btnhist-${li}" onclick="toggleHist(${li})">▶ Histórico</button></div>
+            <div style="text-align:center"><button class="toggle-btn" id="btnsec-${li}" onclick="toggleSec(${li})">▶ Secções</button></div>
         </div>
 
         <div class="painel" id="hist-${li}">${histHTML}</div>
         <div class="painel" id="sec-${li}">
-            ${l.seccoes.length ? `<table class="sec-table"><thead><tr><th>Secção</th><th>P Aberto</th><th>NP Aberto</th></tr></thead><tbody>${secHTML}</tbody></table>` : '<p style="padding:30px; text-align:center; color:#888">Sem secções com tarefas abertas</p>'}
+            ${l.seccoes?.length ? `<table class="sec-table"><thead><tr><th>Secção</th><th>P Aberto</th><th>NP Aberto</th></tr></thead><tbody>${secHTML}</tbody></table>` : '<p style="padding:40px;text-align:center;color:#888">Sem secções com tarefas abertas</p>'}
         </div>`;
     }).join('');
 
