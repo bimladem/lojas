@@ -18,35 +18,30 @@ body { font-family: Arial, sans-serif; background: #f0f0f0; color: #222; font-si
 .header .sub { font-size: 12px; color: #777; margin-top: 3px; }
 .periodo { padding: 5px 14px; background: #f7f7f7; border-left: 4px solid #555; border-radius: 2px; font-size: 13px; color: #333; }
 
-.container { max-width: 1200px; margin: 24px auto; padding: 0 16px 48px; }
-
+.container { max-width: 1250px; margin: 24px auto; padding: 0 16px 48px; }
 .loading { text-align: center; padding: 60px 20px; color: #888; font-size: 16px; }
 
-/* Legenda */
-.legenda { font-size: 12px; color: #888; margin-bottom: 16px; padding: 10px 16px; background: #fff; border-radius: 6px; border: 1px solid #e8e8e8; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.legenda { font-size: 12px; color: #888; margin-bottom: 16px; padding: 10px 16px; background: #fff; border-radius: 6px; border: 1px solid #e8e8e8; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
 
-/* Tabela principal */
 .tabela-wrap { background: #fff; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,.08); overflow: hidden; }
 
 .tabela-header {
   display: grid;
-  grid-template-columns: 70px 160px 220px 150px 150px 200px 80px;
+  grid-template-columns: 80px 170px 230px 160px 160px 60px 60px;
   background: #222; color: #fff;
-  padding: 10px 12px; gap: 8px; font-size: 13px; font-weight: 500;
+  padding: 10px 14px; gap: 8px; font-size: 13px; font-weight: 500; align-items: center;
 }
 
-/* Linha de loja */
 .loja-bloco { border-top: 1px solid #e8e8e8; }
 
 .loja-linha {
   display: grid;
-  grid-template-columns: 70px 160px 220px 150px 150px 200px 80px;
-  padding: 12px; gap: 8px; align-items: center;
-  cursor: pointer; transition: background 0.12s;
+  grid-template-columns: 80px 170px 230px 160px 160px 60px 60px;
+  padding: 12px 14px; gap: 8px; align-items: center;
+  background: #fff; transition: background 0.12s;
 }
 .loja-linha:hover { background: #fafafa; }
 
-/* Células */
 .cel-rank { text-align: center; }
 .rank-num { font-size: 16px; font-weight: bold; }
 .nivel-badge { display: inline-block; padding: 2px 7px; border-radius: 4px; font-size: 11px; font-weight: bold; border: 1px solid; margin-top: 4px; }
@@ -58,59 +53,58 @@ body { font-family: Arial, sans-serif; background: #f0f0f0; color: #222; font-si
 .cel-loja .local { font-size: 12px; color: #666; margin-top: 2px; }
 
 .cel-tarefas { text-align: center; }
-.tarefas-val { font-size: 24px; font-weight: bold; color: #111; }
+.tarefas-val { font-size: 22px; font-weight: bold; color: #111; }
 .tarefas-sub { font-size: 11px; color: #888; margin-top: 2px; }
-.tarefas-np { font-size: 12px; color: #555; margin-top:4px; }
+.tarefas-np { font-size: 12px; color: #555; margin-top: 6px; }
 
 .cel-pct { text-align: center; }
-.pct-nc { font-size: 20px; font-weight: bold; }
-.pct-lbl { font-size: 11px; color: #888; }
-.pct-c { font-size: 14px; font-weight: bold; color: #27ae60; margin-top: 6px; }
+.pct-ab { font-size: 18px; font-weight: bold; }
+.pct-lbl { font-size: 11px; color: #888; margin-top: 1px; }
+.pct-fech { font-size: 14px; font-weight: bold; color: #27ae60; margin-top: 6px; }
 
-.cel-hist { font-size: 12px; }
-.hist-mini { display: flex; flex-direction: column; gap: 3px; }
-.hist-row { display: flex; justify-content: space-between; gap: 8px; }
-.hist-sem { color: #777; white-space: nowrap; font-size: 11px; }
-.hist-val { font-weight: bold; color: #111; font-size: 11px; }
-.hist-atual { background: #f0f0f0; padding: 2px 4px; border-radius: 3px; }
-.tendencia { margin-top: 5px; font-size: 12px; }
+/* Botão toggle genérico */
+.toggle-btn {
+  background: none; border: 1px solid #ccc; border-radius: 5px;
+  padding: 5px 10px; font-size: 12px; cursor: pointer; color: #444;
+  transition: all 0.15s; white-space: nowrap; width: 100%;
+}
+.toggle-btn:hover { background: #f0f0f0; border-color: #999; }
+.toggle-btn.open { background: #222; color: #fff; border-color: #222; }
+
+/* Painel expansível genérico */
+.painel {
+  display: none; border-top: 1px solid #e0e0e0;
+}
+.painel.visible { display: block; }
+
+/* Histórico */
+.hist-painel { background: #f9f9f9; padding: 14px 20px; }
+.hist-table { width: 100%; border-collapse: collapse; font-size: 13px; max-width: 400px; }
+.hist-table th { background: #444; color: #fff; padding: 6px 12px; text-align: left; }
+.hist-table td { padding: 6px 12px; border-bottom: 1px solid #ebebeb; }
+.hist-atual { background: #f0f0f0; font-weight: bold; }
+.tendencia { margin-top: 10px; font-size: 13px; color: #555; }
 .up { color: #c0392b; font-weight: bold; }
 .down { color: #27ae60; font-weight: bold; }
 
-.cel-seccoes { text-align: center; }
-.btn-seccoes {
-  background: none; border: 1px solid #ccc; border-radius: 5px;
-  padding: 6px 12px; font-size: 12px; cursor: pointer; color: #444;
-  transition: all 0.15s; display: inline-flex; align-items: center; gap: 6px;
-}
-.btn-seccoes:hover { background: #f0f0f0; border-color: #999; }
-.btn-seccoes.open { background: #222; color: #fff; border-color: #222; }
-.sec-count { font-size: 11px; color: #aaa; margin-top: 4px; }
+/* Secções */
+.sec-painel { background: #f7f7f7; }
+.sec-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.sec-table thead tr { background: #444; color: #fff; }
+.sec-table thead th { padding: 7px 16px; font-weight: 500; text-align: left; }
+.sec-table thead th:not(:first-child) { text-align: center; }
+.sec-table tbody tr { border-bottom: 1px solid #ebebeb; background: #fff; cursor: pointer; }
+.sec-table tbody tr:hover { background: #f5f5f5; }
+.sec-table tbody td { padding: 9px 16px; }
+.sec-table tbody td:not(:first-child) { text-align: center; font-weight: bold; }
 
-/* Painel de secções */
-.seccoes-painel {
-  display: none; background: #f7f7f7;
-  border-top: 1px solid #e0e0e0; padding: 0;
-}
-.seccoes-painel.visible { display: block; }
-
-.seccoes-tabela { width: 100%; border-collapse: collapse; font-size: 13px; }
-.seccoes-tabela thead tr { background: #444; color: #fff; }
-.seccoes-tabela thead th { padding: 7px 14px; font-weight: 500; text-align: left; }
-.seccoes-tabela thead th:not(:first-child) { text-align: center; }
-.seccoes-tabela tbody tr { border-bottom: 1px solid #ebebeb; cursor: pointer; background: #fff; }
-.seccoes-tabela tbody tr:hover { background: #f0f0f0; }
-.seccoes-tabela tbody td { padding: 8px 14px; }
-.seccoes-tabela tbody td:not(:first-child) { text-align: center; font-weight: bold; }
-
-/* Detalhe de secção */
-.sec-detalhe { display: none; background: #fff; border-top: 1px solid #e8e8e8; padding: 14px 20px; }
-.sec-detalhe.visible { display: block; }
-.sec-detalhe-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; max-width: 600px; }
-.sec-detalhe-box { background: #f7f7f7; border: 1px solid #e0e0e0; border-radius: 6px; padding: 12px 16px; }
-.sec-detalhe-box h4 { font-size: 12px; color: #555; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.03em; }
-.sec-detalhe-num { font-size: 30px; font-weight: bold; color: #111; }
-.sec-detalhe-sub { font-size: 11px; color: #888; margin-top: 3px; }
+.sec-det { display: none; background: #fff; border-top: 1px solid #f0f0f0; }
+.sec-det.visible { display: block; }
+.sec-det-inner { padding: 14px 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; max-width: 560px; }
+.sec-det-box { background: #f7f7f7; border: 1px solid #e0e0e0; border-radius: 6px; padding: 12px 16px; }
+.sec-det-box h4 { font-size: 11px; color: #777; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px; }
+.sec-det-num { font-size: 28px; font-weight: bold; color: #111; }
+.sec-det-sub { font-size: 11px; color: #888; margin-top: 3px; }
 </style>
 </head>
 <body>
@@ -128,8 +122,9 @@ body { font-family: Arial, sans-serif; background: #f0f0f0; color: #222; font-si
 </div>
 
 <script>
-var openLojas = {};
-var openSecs  = {};
+var stateHist = {};
+var stateSec  = {};
+var stateSecDet = {};
 
 function corPct(pct) {
   var v = parseFloat(pct);
@@ -145,36 +140,36 @@ function seta(diff) {
   return '<span style="color:#888">→</span>';
 }
 
-function toggleSeccoes(li) {
-  var painel = document.getElementById('painel-' + li);
-  var btn    = document.getElementById('btn-' + li);
-  if (!painel) return;
-  if (openLojas[li]) {
-    painel.classList.remove('visible');
-    btn.classList.remove('open');
-    btn.innerHTML = '▶ Secções';
-    openLojas[li] = false;
+function toggle(painelId, btnId, stateObj) {
+  var p = document.getElementById(painelId);
+  var b = document.getElementById(btnId);
+  if (!p || !b) return;
+  if (stateObj[painelId]) {
+    p.classList.remove('visible');
+    b.classList.remove('open');
+    b.textContent = b.dataset.labelClose ? b.dataset.labelOpen : b.textContent;
+    stateObj[painelId] = false;
   } else {
-    painel.classList.add('visible');
-    btn.classList.add('open');
-    btn.innerHTML = '▼ Secções';
-    openLojas[li] = true;
+    p.classList.add('visible');
+    b.classList.add('open');
+    stateObj[painelId] = true;
   }
 }
 
-function toggleSecDetalhe(li, si) {
-  var id  = li + '-' + si;
-  var det = document.getElementById('secdet-' + id);
-  var row = document.getElementById('secrow-' + id);
-  if (!det) return;
-  if (openSecs[id]) {
-    det.classList.remove('visible');
-    if (row) row.style.background = '';
-    openSecs[id] = false;
+function toggleHist(li) { toggle('hist-' + li, 'btnhist-' + li, stateHist); }
+function toggleSec(li)  { toggle('sec-'  + li, 'btnsec-'  + li, stateSec);  }
+function toggleSecDet(id) {
+  var p = document.getElementById('secdet-' + id);
+  var r = document.getElementById('secrow-' + id);
+  if (!p) return;
+  if (stateSecDet[id]) {
+    p.classList.remove('visible');
+    if (r) r.style.background = '';
+    stateSecDet[id] = false;
   } else {
-    det.classList.add('visible');
-    if (row) row.style.background = '#f0f7ff';
-    openSecs[id] = true;
+    p.classList.add('visible');
+    if (r) r.style.background = '#f0f7ff';
+    stateSecDet[id] = true;
   }
 }
 
@@ -187,22 +182,20 @@ function renderApp(dados) {
   document.getElementById('periodo-label').innerHTML = '📅 <strong>' + semana + '</strong>';
 
   var legenda = '<div class="legenda">'
-    + '<span>🔴 Top 3 críticas</span>'
-    + '<span>🟡 Em alerta</span>'
-    + '<span style="color:#27ae60;font-weight:bold">Nível 1</span><span style="color:#888">0–20%</span>'
-    + '<span style="color:#e65100;font-weight:bold">Nível 2</span><span style="color:#888">21–40%</span>'
-    + '<span style="color:#b71c1c;font-weight:bold">Nível 3</span><span style="color:#888">41%+</span>'
-    + '<span>▲ A piorar · ▼ A melhorar</span>'
-    + '<span style="color:#888">Clique em "Secções" para expandir</span>'
+    + '<span>🔴 Top 3 críticas &nbsp;|&nbsp; 🟡 Em alerta</span>'
+    + '<span><span style="color:#27ae60;font-weight:bold">Nível 1</span> = 0–20% aberto</span>'
+    + '<span><span style="color:#e65100;font-weight:bold">Nível 2</span> = 21–40% aberto</span>'
+    + '<span><span style="color:#b71c1c;font-weight:bold">Nível 3</span> = 41%+ aberto</span>'
+    + '<span style="color:#888">▲ A piorar &nbsp;·&nbsp; ▼ A melhorar</span>'
     + '</div>';
 
   var header = '<div class="tabela-header">'
     + '<div># / Nível</div>'
     + '<div>Loja / Localidade</div>'
-    + '<div style="text-align:center">Tarefas em aberto<br><span style="font-weight:normal;font-size:11px">P · NP (sem data limite)</span></div>'
-    + '<div style="text-align:center">% P<br><span style="font-weight:normal;font-size:11px">não cumpridas · cumpridas</span></div>'
-    + '<div style="text-align:center">% NP<br><span style="font-weight:normal;font-size:11px">não cumpridas · cumpridas</span></div>'
-    + '<div>Histórico P<br><span style="font-weight:normal;font-size:11px">semanas anteriores</span></div>'
+    + '<div style="text-align:center">Tarefas<br><span style="font-weight:normal;font-size:11px">P abertas · NP abertas</span></div>'
+    + '<div style="text-align:center">% P<br><span style="font-weight:normal;font-size:11px">aberto · fechado</span></div>'
+    + '<div style="text-align:center">% NP<br><span style="font-weight:normal;font-size:11px">aberto · fechado</span></div>'
+    + '<div style="text-align:center">Histórico</div>'
     + '<div style="text-align:center">Secções</div>'
     + '</div>';
 
@@ -210,94 +203,93 @@ function renderApp(dados) {
     var emoji = li < 3 ? '🔴' : '🟡';
     var nc    = l.nivel === 1 ? 'n1' : l.nivel === 2 ? 'n2' : 'n3';
 
-    // Histórico mini
+    // -- Histórico painel --
     var histRows = '';
     if (l.historico && l.historico.length > 0) {
       histRows = l.historico.map(function(h) {
-        return '<div class="hist-row"><span class="hist-sem">' + h.semana + '</span><span class="hist-val">' + h.pAberto + '</span></div>';
+        return '<tr><td>' + h.semana + '</td><td style="text-align:right;font-weight:bold">' + h.pAberto + '</td></tr>';
       }).join('');
-      histRows += '<div class="hist-row hist-atual"><span class="hist-sem">' + semana + ' (atual)</span><span class="hist-val">' + l.pAberto + '</span></div>';
-      histRows += '<div class="tendencia">Tendência: ' + seta(l.diff) + '</div>';
-    } else {
-      histRows = '<div style="font-size:11px;color:#aaa">Sem histórico</div><div class="hist-row hist-atual" style="margin-top:4px"><span class="hist-sem">Atual</span><span class="hist-val">' + l.pAberto + '</span></div>';
     }
+    var histPainel = '<div class="painel hist-painel" id="hist-' + li + '">'
+      + '<table class="hist-table">'
+      + '<thead><tr><th>Semana</th><th style="text-align:right">P aberto</th></tr></thead>'
+      + '<tbody>'
+      + histRows
+      + '<tr class="hist-atual"><td>' + semana + ' (atual)</td><td style="text-align:right">' + l.pAberto + '</td></tr>'
+      + '</tbody></table>'
+      + '<div class="tendencia">Tendência: ' + seta(l.diff) + '</div>'
+      + '</div>';
 
-    // Secções painel
+    // -- Secções painel --
     var seccoes = l.seccoes || [];
     var secLinhas = seccoes.map(function(s, si) {
       var id   = li + '-' + si;
       var pVal  = s.pAberto  > 0 ? s.pAberto  : '—';
       var npVal = s.npAberto > 0 ? s.npAberto : '—';
-      return '<tr id="secrow-' + id + '" onclick="toggleSecDetalhe(' + li + ',' + si + ')">'
+      return '<tr id="secrow-' + id + '" onclick="toggleSecDet(\'' + id + '\')">'
         + '<td><b>' + s.nome + '</b></td>'
         + '<td>' + pVal + '</td>'
         + '<td>' + npVal + '</td>'
         + '</tr>'
-        + '<tr><td colspan="3" style="padding:0;border:none">'
-        + '<div class="sec-detalhe" id="secdet-' + id + '">'
-        + '<div class="sec-detalhe-grid">'
-        + '<div class="sec-detalhe-box"><h4>Programadas (P)</h4><div class="sec-detalhe-num">' + s.pAberto + '</div><div class="sec-detalhe-sub">tarefas programadas não cumpridas no período</div></div>'
-        + '<div class="sec-detalhe-box"><h4>Não Programadas (NP)</h4><div class="sec-detalhe-num">' + s.npAberto + '</div><div class="sec-detalhe-sub">tarefas não programadas em aberto (sem data limite)</div></div>'
+        + '<tr style="background:#fff"><td colspan="3" style="padding:0;border:none">'
+        + '<div class="sec-det" id="secdet-' + id + '">'
+        + '<div class="sec-det-inner">'
+        + '<div class="sec-det-box"><h4>P — Aberto</h4><div class="sec-det-num">' + s.pAberto + '</div><div class="sec-det-sub">tarefas programadas abertas</div></div>'
+        + '<div class="sec-det-box"><h4>NP — Aberto</h4><div class="sec-det-num">' + s.npAberto + '</div><div class="sec-det-sub">tarefas não programadas abertas</div></div>'
         + '</div></div></td></tr>';
     }).join('');
 
-    var painelSeccoes = seccoes.length > 0
-      ? '<div class="seccoes-painel" id="painel-' + li + '">'
-        + '<table class="seccoes-tabela">'
-        + '<thead><tr><th>Secção</th><th>P em aberto</th><th>NP em aberto</th></tr></thead>'
-        + '<tbody>' + secLinhas + '</tbody>'
-        + '</table></div>'
-      : '<div class="seccoes-painel" id="painel-' + li + '" style="padding:12px 20px;font-size:13px;color:#aaa">Sem secções com tarefas em aberto</div>';
+    var secPainel = '<div class="painel sec-painel" id="sec-' + li + '">'
+      + (seccoes.length > 0
+        ? '<table class="sec-table"><thead><tr><th>Secção</th><th>P aberto</th><th>NP aberto</th></tr></thead><tbody>' + secLinhas + '</tbody></table>'
+        : '<div style="padding:12px 20px;font-size:13px;color:#aaa">Sem secções com tarefas abertas</div>')
+      + '</div>';
 
     return '<div class="loja-bloco">'
-      + '<div class="loja-linha" onclick="toggleSeccoes(' + li + ')">'
+      + '<div class="loja-linha">'
 
-      // Rank / Nível
       + '<div class="cel-rank">'
       + '<div class="rank-num">' + emoji + ' ' + (li + 1) + '</div>'
       + '<span class="nivel-badge ' + nc + '">Nível ' + l.nivel + '</span>'
       + '</div>'
 
-      // Loja
       + '<div class="cel-loja">'
       + '<div class="nome">' + l.loja + '</div>'
       + '<div class="local">' + (l.localidade || '—') + '</div>'
       + '</div>'
 
-      // Tarefas
       + '<div class="cel-tarefas">'
       + '<div class="tarefas-val">' + l.pAberto + '</div>'
-      + '<div class="tarefas-sub">P em aberto de ' + l.pTotal + '</div>'
-      + '<div class="tarefas-np">NP: <b>' + l.npAberto + '</b> de ' + l.npTotal + '<br><span style="font-size:11px;color:#aaa">(sem data limite)</span></div>'
+      + '<div class="tarefas-sub">P abertas de ' + l.pTotal + ' (' + l.pFechado + ' fechadas)</div>'
+      + '<div class="tarefas-np">NP: <b>' + l.npAberto + '</b> abertas de ' + l.npTotal + ' (' + l.npFechado + ' fechadas)</div>'
       + '</div>'
 
-      // % P
       + '<div class="cel-pct">'
-      + '<div class="pct-nc" style="color:' + corPct(l.pctPNaoCumpridas) + '">' + l.pctPNaoCumpridas + '%</div>'
-      + '<div class="pct-lbl">P não cumpridas</div>'
-      + '<div class="pct-c">' + l.pctPCumpridas + '%</div>'
-      + '<div class="pct-lbl">P cumpridas</div>'
+      + '<div class="pct-ab" style="color:' + corPct(l.pctPAberto) + '">' + l.pctPAberto + '%</div>'
+      + '<div class="pct-lbl">P aberto</div>'
+      + '<div class="pct-fech">' + l.pctPFechado + '%</div>'
+      + '<div class="pct-lbl">P fechado</div>'
       + '</div>'
 
-      // % NP
       + '<div class="cel-pct">'
-      + '<div class="pct-nc" style="color:' + corPct(l.pctNPNaoCumpridas) + '">' + l.pctNPNaoCumpridas + '%</div>'
-      + '<div class="pct-lbl">NP não cumpridas</div>'
-      + '<div class="pct-c">' + l.pctNPCumpridas + '%</div>'
-      + '<div class="pct-lbl">NP cumpridas</div>'
+      + '<div class="pct-ab" style="color:' + corPct(l.pctNPAberto) + '">' + l.pctNPAberto + '%</div>'
+      + '<div class="pct-lbl">NP aberto</div>'
+      + '<div class="pct-fech">' + l.pctNPFechado + '%</div>'
+      + '<div class="pct-lbl">NP fechado</div>'
       + '</div>'
 
-      // Histórico
-      + '<div class="cel-hist"><div class="hist-mini">' + histRows + '</div></div>'
+      + '<div style="text-align:center">'
+      + '<button class="toggle-btn" id="btnhist-' + li + '" onclick="toggleHist(' + li + ')">▶ Histórico</button>'
+      + '</div>'
 
-      // Botão secções
-      + '<div class="cel-seccoes">'
-      + '<button class="btn-seccoes" id="btn-' + li + '" onclick="event.stopPropagation();toggleSeccoes(' + li + ')">▶ Secções</button>'
-      + '<div class="sec-count">' + seccoes.length + ' secções</div>'
+      + '<div style="text-align:center">'
+      + '<button class="toggle-btn" id="btnsec-' + li + '" onclick="toggleSec(' + li + ')">▶ Secções</button>'
+      + '<div style="font-size:11px;color:#aaa;margin-top:3px">' + seccoes.length + '</div>'
       + '</div>'
 
       + '</div>'
-      + painelSeccoes
+      + histPainel
+      + secPainel
       + '</div>';
   }).join('');
 
@@ -310,8 +302,7 @@ fetch('dados.json?t=' + Date.now())
   .then(function(d) { renderApp(d); })
   .catch(function(err) {
     document.getElementById('app').innerHTML =
-      '<div class="loading" style="color:#c0392b">❌ Erro ao carregar dados: ' + err.message
-      + '<br><br><span style="font-size:13px;color:#888">Verifica que o ficheiro <b>dados.json</b> existe no repositório.</span></div>';
+      '<div class="loading" style="color:#c0392b">❌ Erro ao carregar dados: ' + err.message + '</div>';
   });
 </script>
 </body>
