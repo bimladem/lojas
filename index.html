@@ -1,223 +1,211 @@
-// ==================== ESTADO GLOBAL ====================
-const stateHist = {};
-const stateSec = {};
-const stateSecDet = {};
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Análise Semanal IM</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f6f9; color: #222; font-size: 14px; line-height: 1.5; }
 
-// ==================== FUNÇÕES UTILITÁRIAS ====================
+.header {
+  background: #fff; padding: 18px 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+}
+.header h1 { font-size: 22px; font-weight: 600; }
+
+.container { max-width: 1280px; margin: 24px auto; padding: 0 16px; }
+
+.loading {
+  text-align: center; padding: 80px 20px; color: #555; font-size: 16px;
+}
+.loading-spinner {
+  display: inline-block; width: 40px; height: 40px; border: 4px solid #e0e0e0;
+  border-top: 4px solid #222; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 16px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.legenda {
+  background: #fff; padding: 12px 20px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  display: flex; flex-wrap: wrap; gap: 16px; font-size: 13px; margin-bottom: 20px;
+}
+
+.tabela-wrap { background: #fff; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); overflow: hidden; }
+
+.tabela-header {
+  display: grid;
+  grid-template-columns: 90px 190px 220px 170px 170px 80px 80px;
+  background: #1f2937; color: #fff; padding: 14px 16px; font-weight: 500; font-size: 13.5px;
+  gap: 8px;
+}
+
+.loja-bloco { border-top: 1px solid #eee; }
+.loja-linha {
+  display: grid;
+  grid-template-columns: 90px 190px 220px 170px 170px 80px 80px;
+  padding: 14px 16px; gap: 8px; align-items: center;
+  transition: background 0.2s;
+}
+.loja-linha:hover { background: #f8fafc; }
+
+.rank-num { font-size: 18px; font-weight: bold; }
+.nivel-badge { padding: 3px 9px; border-radius: 6px; font-size: 11.5px; font-weight: bold; }
+
+.n1 { color: #16a34a; border: 1px solid #16a34a; }
+.n2 { color: #ea580c; border: 1px solid #ea580c; }
+.n3 { color: #dc2626; border: 1px solid #dc2626; }
+
+.nome { font-weight: 600; font-size: 15px; }
+.local { font-size: 12.5px; color: #666; margin-top: 2px; }
+
+.tarefas-val { font-size: 26px; font-weight: 700; }
+.tarefas-sub { font-size: 12px; color: #666; }
+.tarefas-np { font-size: 13px; margin-top: 4px; }
+
+.pct-ab { font-size: 19px; font-weight: 700; }
+.pct-lbl { font-size: 11.5px; color: #888; margin-top: 2px; }
+.pct-fech { font-size: 14px; color: #16a34a; font-weight: 600; }
+
+.toggle-btn {
+  background: #f1f5f9; border: 1px solid #cbd5e1; color: #334155;
+  padding: 7px 12px; border-radius: 6px; cursor: pointer; font-size: 13px; width: 100%;
+  transition: all 0.2s;
+}
+.toggle-btn:hover { background: #e2e8f0; }
+.toggle-btn.open { background: #1f2937; color: white; border-color: #1f2937; }
+
+.painel { display: none; background: #f8fafc; padding: 16px; border-top: 1px solid #e2e8f0; }
+.painel.visible { display: block; }
+
+.sec-table { width: 100%; border-collapse: collapse; }
+.sec-table th { background: #334155; color: white; padding: 8px 12px; text-align: left; }
+.sec-table td { padding: 10px 12px; border-bottom: 1px solid #eee; }
+.sec-table tr:hover { background: #f1f5f9; }
+
+.sec-det { display: none; padding: 16px; background: white; border-radius: 8px; margin: 8px 0; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.sec-det.visible { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <h1>📊 Análise Semanal IM</h1>
+    <div id="sub-info" style="color:#64748b; font-size:13px;">A carregar dados...</div>
+  </div>
+  <div id="periodo-label" style="background:#f1f5f9; padding:8px 16px; border-radius:6px; font-weight:500;"></div>
+</div>
+
+<div class="container">
+  <div id="app">
+    <div class="loading">
+      <div class="loading-spinner"></div>
+      <div>A carregar dados das lojas...</div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ==================== FUNÇÕES ====================
 function corPct(pct) {
-  const v = parseFloat(pct) || 0;
+  const v = parseFloat(pct);
   if (v <= 20) return '#16a34a';
   if (v <= 40) return '#ea580c';
   return '#dc2626';
 }
 
-function normalizarSemana(valor) {
-  return String(valor || '').trim();
-}
-
-function toggle(painelId, btnId, stateObj, titulo) {
-  const painel = document.getElementById(painelId);
-  const btn = document.getElementById(btnId);
-
-  if (!painel || !btn) return;
+function toggle(painelId, btnId, stateObj) {
+  const p = document.getElementById(painelId);
+  const b = document.getElementById(btnId);
+  if (!p || !b) return;
 
   if (stateObj[painelId]) {
-    painel.classList.remove('visible');
-    btn.classList.remove('open');
-    btn.textContent = '▶ ' + titulo;
+    p.classList.remove('visible');
+    b.classList.remove('open');
+    b.textContent = '▶ ' + (painelId.includes('hist') ? 'Histórico' : 'Secções');
     stateObj[painelId] = false;
   } else {
-    painel.classList.add('visible');
-    btn.classList.add('open');
-    btn.textContent = '▼ Fechar';
+    p.classList.add('visible');
+    b.classList.add('open');
+    b.textContent = '▼ Fechar';
     stateObj[painelId] = true;
   }
 }
 
-function toggleHist(index) {
-  toggle(`hist-${index}`, `btnhist-${index}`, stateHist, 'Histórico');
-}
-
-function toggleSec(index) {
-  toggle(`sec-${index}`, `btnsec-${index}`, stateSec, 'Secções');
-}
-
-function toggleSecDet(id) {
-  const el = document.getElementById(`secdet-${id}`);
-  if (!el) return;
-
-  if (stateSecDet[id]) {
-    el.classList.remove('visible');
-    stateSecDet[id] = false;
-  } else {
-    el.classList.add('visible');
-    stateSecDet[id] = true;
-  }
-}
-
-// ==================== CARREGAR DADOS ====================
+// ==================== FETCH E PROCESSAMENTO ====================
 fetch('dados.json?t=' + Date.now())
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Não foi possível carregar dados.json');
-    }
-    return response.json();
-  })
+  .then(r => r.json())
   .then(json => {
-    const data = Array.isArray(json.data) ? json.data : [];
+    const data = json.data || [];
 
-    if (!data.length) {
-      throw new Error('O ficheiro dados.json está vazio.');
-    }
+    // Descobrir semanas disponíveis
+    const semanasSet = new Set(data.map(i => String(i.Semana || "").trim()).filter(s => s));
+    const semanas = Array.from(semanasSet).sort().reverse(); // mais recente primeiro
+    const ultimaSemana = semanas[0] || "";
 
-    // ==================== ÚLTIMA SEMANA DISPONÍVEL ====================
-    const semanas = [...new Set(
-      data
-        .map(item => normalizarSemana(item.Semana))
-        .filter(Boolean)
-    )].sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
-
-    const ultimaSemana = semanas.length ? semanas[semanas.length - 1] : '';
-
-    // ==================== LOJAS DA ÚLTIMA SEMANA ====================
+    // Loja principal da última semana
     let lojas = data
-      .filter(item =>
-        item.Loja &&
-        !item.Secção &&
-        normalizarSemana(item.Semana) === ultimaSemana
-      )
+      .filter(item => item.Loja && !item.Secção && String(item.Semana || "").trim() === ultimaSemana)
       .map(item => {
         const pTotal = Number(item['P Total']) || 0;
         const pAberto = Number(item['P Aberto']) || 0;
-        const pFechado = Number(item['P Fechado']) || 0;
-
-        const npTotal = Number(item['NP Total']) || 0;
-        const npAberto = Number(item['NP Aberto']) || 0;
-        const npFechado = Number(item['NP Fechado']) || 0;
-
-        const pctPAberto = pTotal > 0
-          ? Math.round((pAberto / pTotal) * 100)
-          : 0;
-
-        const pctPFechado = pTotal > 0
-          ? Math.round((pFechado / pTotal) * 100)
-          : 0;
-
-        const pctNPAberto = npTotal > 0
-          ? Math.round((npAberto / npTotal) * 100)
-          : 0;
-
-        const pctNPFechado = npTotal > 0
-          ? Math.round((npFechado / npTotal) * 100)
-          : 0;
+        const pctPAberto = pTotal ? Math.round(pAberto / pTotal * 100) : 0;
 
         return {
           loja: item.Loja,
-          localidade:
-            item['IM.Localidade'] ||
-            item.Localidade ||
-            item.localidade ||
-            '',
+          localidade: item['IM.Localidade'] || '',
           semana: ultimaSemana,
-
-          pTotal,
-          pAberto,
-          pFechado,
-
-          npTotal,
-          npAberto,
-          npFechado,
-
-          pctPAberto,
-          pctPFechado,
-          pctNPAberto,
-          pctNPFechado,
-
-          nivel:
-            pctPAberto <= 20 ? 1 :
-            pctPAberto <= 40 ? 2 : 3,
-
+          pTotal, pAberto,
+          pFechado: Number(item['P Fechado']) || 0,
+          npTotal: Number(item['NP Total']) || 0,
+          npAberto: Number(item['NP Aberto']) || 0,
+          npFechado: Number(item['NP Fechado']) || 0,
+          pctPAberto: pctPAberto.toString(),
+          pctNPAberto: item['NP Total'] ? Math.round(Number(item['NP Aberto'])/Number(item['NP Total'])*100).toString() : "0",
+          pctPFechado: pTotal ? Math.round((Number(item['P Fechado'])/pTotal)*100) : 0,
+          pctNPFechado: 0,
+          nivel: pctPAberto <= 20 ? 1 : pctPAberto <= 40 ? 2 : 3,
           historico: [],
           seccoes: []
         };
       });
 
-    // Ordenar por maior número de P abertas
     lojas.sort((a, b) => b.pAberto - a.pAberto);
-
-    // Top 10
     const topLojas = lojas.slice(0, 10);
 
-    // ==================== HISTÓRICO POR LOJA ====================
+    // === Histórico por loja ===
     topLojas.forEach(loja => {
       loja.historico = data
-        .filter(item =>
-          item.Loja === loja.loja &&
-          !item.Secção &&
-          normalizarSemana(item.Semana)
-        )
-        .sort((a, b) =>
-          normalizarSemana(b.Semana).localeCompare(
-            normalizarSemana(a.Semana),
-            undefined,
-            { numeric: true }
-          )
-        );
+        .filter(item => item.Loja === loja.loja && !item.Secção && String(item.Semana || "").trim())
+        .sort((a,b) => String(b.Semana).localeCompare(String(a.Semana)));
     });
 
-    // ==================== SECÇÕES (APENAS DA ÚLTIMA SEMANA) ====================
+    // === Secções ===
     data.forEach(item => {
-      if (
-        item.Secção &&
-        item.Loja &&
-        normalizarSemana(item.Semana) === ultimaSemana
-      ) {
+      if (item.Secção && item.Loja) {
         const loja = topLojas.find(l => l.loja === item.Loja);
-        if (!loja) return;
-
-        const pAberto = Number(item['P Aberto']) || 0;
-        const npAberto = Number(item['NP Aberto']) || 0;
-
-        if (pAberto === 0 && npAberto === 0) return;
-
-        let nome = String(item.Secção || '')
-          .replace(/^IM\s+\d+\s+/, '')
-          .trim();
-
-        if (!nome) return;
-        if (nome.toLowerCase() === 'admin') return;
-
-        loja.seccoes.push({
-          nome,
-          pAberto,
-          npAberto
-        });
+        if (loja) {
+          const pAberto = Number(item['P Aberto']) || 0;
+          const npAberto = Number(item['NP Aberto']) || 0;
+          if (pAberto > 0 || npAberto > 0) {
+            const nome = String(item.Secção).replace(/^IM\s+\d+\s+/, '').trim();
+            if (nome && nome.toLowerCase() !== 'admin') {
+              loja.seccoes.push({ nome, pAberto, npAberto });
+            }
+          }
+        }
       }
     });
 
-    // Ordenar secções
-    topLojas.forEach(loja => {
-      loja.seccoes.sort((a, b) => b.pAberto - a.pAberto);
-    });
+    topLojas.forEach(l => l.seccoes.sort((a,b) => b.pAberto - a.pAberto));
 
-    // ==================== CABEÇALHO ====================
-    document.getElementById('sub-info').textContent =
-      `Gerado hoje • Top ${topLojas.length} lojas • Última semana disponível`;
-
-    document.getElementById('periodo-label').innerHTML =
-      `📅 <strong>${ultimaSemana || 'Atual'}</strong>`;
-
-    // ==================== RENDER ====================
+    // Render
+    document.getElementById('sub-info').textContent = `Gerado hoje • Top 10 • Última semana disponível`;
+    document.getElementById('periodo-label').innerHTML = `📅 <strong>${ultimaSemana || 'Atual'}</strong>`;
     renderApp(topLojas);
   })
   .catch(err => {
-    console.error(err);
-    document.getElementById('app').innerHTML = `
-      <div class="loading" style="color:#dc2626">
-        ❌ Erro ao carregar dados:<br>
-        ${err.message}
-      </div>
-    `;
+    document.getElementById('app').innerHTML = `<div class="loading" style="color:#dc2626">❌ Erro ao carregar dados: ${err.message}</div>`;
   });
 
 // ==================== RENDER ====================
@@ -229,190 +217,105 @@ function renderApp(lojas) {
       <span><b style="color:#16a34a">Nível 1</b> = 0–20%</span>
       <span><b style="color:#ea580c">Nível 2</b> = 21–40%</span>
       <span><b style="color:#dc2626">Nível 3</b> = 41%+</span>
-    </div>
-  `;
+    </div>`;
 
-  const header = `
-    <div class="tabela-header">
-      <div># / Nível</div>
-      <div>Loja</div>
-      <div style="text-align:center">Tarefas em Aberto</div>
-      <div style="text-align:center">% Programadas</div>
-      <div style="text-align:center">% Não Programadas</div>
-      <div style="text-align:center">Histórico</div>
-      <div style="text-align:center">Secções</div>
-    </div>
-  `;
+  const header = `<div class="tabela-header">
+    <div># / Nível</div>
+    <div>Loja</div>
+    <div style="text-align:center">Tarefas em Aberto</div>
+    <div style="text-align:center">% Programadas</div>
+    <div style="text-align:center">% Não Programadas</div>
+    <div style="text-align:center">Histórico</div>
+    <div style="text-align:center">Secções</div>
+  </div>`;
 
   const blocos = lojas.map((l, li) => {
     const emoji = li < 3 ? '🔴' : '🟡';
-    const classeNivel =
-      l.nivel === 1 ? 'n1' :
-      l.nivel === 2 ? 'n2' : 'n3';
+    const nc = l.nivel === 1 ? 'n1' : l.nivel === 2 ? 'n2' : 'n3';
 
-    // ==================== HISTÓRICO ====================
-    let histContent = `
-      <div style="padding:20px; text-align:center; color:#888;">
-        Sem histórico disponível
-      </div>
-    `;
-
-    if (l.historico.length > 0) {
+    // Histórico
+    let histContent = '<p style="color:#888; text-align:center; padding:20px;">Sem histórico disponível</p>';
+    if (l.historico.length > 1) {
       histContent = l.historico.map(h => `
-        <div style="
-          display:flex;
-          justify-content:space-between;
-          gap:16px;
-          padding:8px 0;
-          border-bottom:1px solid #e5e7eb;
-        ">
-          <div><strong>${h.Semana || ''}</strong></div>
-          <div>
-            <strong>${Number(h['P Aberto']) || 0}</strong> P •
-            <strong>${Number(h['NP Aberto']) || 0}</strong> NP
-          </div>
+        <div style="display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid #eee;">
+          <span><strong>${h.Semana}</strong></span>
+          <span><strong>${h['P Aberto'] || 0}</strong> P • <strong>${h['NP Aberto'] || 0}</strong> NP</span>
         </div>
       `).join('');
     }
 
-    const histPainel = `
-      <div class="painel" id="hist-${li}">
-        ${histContent}
-      </div>
-    `;
+    const histPainel = `<div class="painel" id="hist-${li}">${histContent}</div>`;
 
-    // ==================== SECÇÕES ====================
-    let secContent = `
-      <div style="padding:20px; text-align:center; color:#888;">
-        Sem secções com tarefas abertas
-      </div>
-    `;
-
-    if (l.seccoes.length > 0) {
-      const linhas = l.seccoes.map((s, si) => {
+    // Secções (mantido igual)
+    const seccoes = l.seccoes || [];
+    let secLinhas = '';
+    if (seccoes.length > 0) {
+      secLinhas = seccoes.map((s, si) => {
         const id = `${li}-${si}`;
-
         return `
-          <tr onclick="toggleSecDet('${id}')"
-              style="cursor:pointer;">
-            <td><strong>${s.nome}</strong></td>
+          <tr id="secrow-${id}" onclick="toggleSecDet('${id}')">
+            <td><b>${s.nome}</b></td>
             <td style="text-align:center">${s.pAberto}</td>
             <td style="text-align:center">${s.npAberto}</td>
           </tr>
-          <tr>
-            <td colspan="3" style="padding:0; border:none;">
-              <div class="sec-det" id="secdet-${id}">
+          <tr><td colspan="3" style="padding:0">
+            <div class="sec-det" id="secdet-${id}">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
                 <div><strong>P Aberto:</strong> ${s.pAberto}</div>
                 <div><strong>NP Aberto:</strong> ${s.npAberto}</div>
               </div>
-            </td>
-          </tr>
-        `;
+            </div>
+          </td></tr>`;
       }).join('');
-
-      secContent = `
-        <table class="sec-table">
-          <thead>
-            <tr>
-              <th>Secção</th>
-              <th style="text-align:center">P Aberto</th>
-              <th style="text-align:center">NP Aberto</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${linhas}
-          </tbody>
-        </table>
-      `;
     }
 
-    const secPainel = `
-      <div class="painel" id="sec-${li}">
-        ${secContent}
-      </div>
-    `;
+    const secPainel = `<div class="painel" id="sec-${li}">
+      ${seccoes.length ? `<table class="sec-table"><thead><tr><th>Secção</th><th>P Aberto</th><th>NP Aberto</th></tr></thead><tbody>${secLinhas}</tbody></table>` : '<p style="padding:20px; color:#888; text-align:center">Sem secções com tarefas abertas</p>'}
+    </div>`;
 
     return `
       <div class="loja-bloco">
         <div class="loja-linha">
-
-          <div style="text-align:center">
-            <div class="rank-num">${emoji} ${li + 1}</div>
-            <div class="nivel-badge ${classeNivel}">
-              Nível ${l.nivel}
-            </div>
-          </div>
-
-          <div>
-            <div class="nome">${l.loja}</div>
-            <div class="local">${l.localidade || '—'}</div>
-          </div>
-
+          <div><div class="rank-num">${emoji} ${li+1}</div><div class="nivel-badge ${nc}">Nível ${l.nivel}</div></div>
+          <div><div class="nome">${l.loja}</div><div class="local">${l.localidade || '—'}</div></div>
           <div style="text-align:center">
             <div class="tarefas-val">${l.pAberto}</div>
             <div class="tarefas-sub">de ${l.pTotal} P</div>
-            <div class="tarefas-np">
-              NP: <b>${l.npAberto}</b>
-            </div>
+            <div class="tarefas-np">NP: <b>${l.npAberto}</b></div>
           </div>
-
           <div style="text-align:center">
-            <div class="pct-ab"
-                 style="color:${corPct(l.pctPAberto)}">
-              ${l.pctPAberto}%
-            </div>
+            <div class="pct-ab" style="color:${corPct(l.pctPAberto)}">${l.pctPAberto}%</div>
             <div class="pct-lbl">P Aberto</div>
             <div class="pct-fech">${l.pctPFechado}%</div>
           </div>
-
           <div style="text-align:center">
-            <div class="pct-ab"
-                 style="color:${corPct(l.pctNPAberto)}">
-              ${l.pctNPAberto}%
-            </div>
+            <div class="pct-ab" style="color:${corPct(l.pctNPAberto)}">${l.pctNPAberto}%</div>
             <div class="pct-lbl">NP Aberto</div>
             <div class="pct-fech">${l.pctNPFechado}%</div>
           </div>
-
           <div style="text-align:center">
-            <button
-              class="toggle-btn"
-              id="btnhist-${li}"
-              onclick="toggleHist(${li})"
-            >
-              ▶ Histórico
-            </button>
+            <button class="toggle-btn" id="btnhist-${li}" onclick="toggleHist(${li})">▶ Histórico</button>
           </div>
-
           <div style="text-align:center">
-            <button
-              class="toggle-btn"
-              id="btnsec-${li}"
-              onclick="toggleSec(${li})"
-            >
-              ▶ Secções
-            </button>
-            <div style="
-              font-size:11px;
-              color:#64748b;
-              margin-top:4px;
-            ">
-              ${l.seccoes.length} secções
-            </div>
+            <button class="toggle-btn" id="btnsec-${li}" onclick="toggleSec(${li})">▶ Secções</button>
+            <div style="font-size:11px; color:#64748b; margin-top:4px">${seccoes.length}</div>
           </div>
-
         </div>
-
         ${histPainel}
         ${secPainel}
-      </div>
-    `;
+      </div>`;
   }).join('');
 
-  document.getElementById('app').innerHTML =
-    legenda +
-    '<div class="tabela-wrap">' +
-    header +
-    blocos +
-    '</div>';
+  document.getElementById('app').innerHTML = legenda + '<div class="tabela-wrap">' + header + blocos + '</div>';
 }
+
+// Funções globais para os botões
+window.toggleHist = (li) => toggle(`hist-${li}`, `btnhist-${li}`, {});
+window.toggleSec = (li) => toggle(`sec-${li}`, `btnsec-${li}`, {});
+window.toggleSecDet = (id) => {
+  const el = document.getElementById(`secdet-${id}`);
+  if (el) el.classList.toggle('visible');
+};
+</script>
+</body>
+</html>
