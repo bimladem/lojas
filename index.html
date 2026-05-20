@@ -27,99 +27,85 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f7;color:#1a2233;fo
 
 .tabela-header{
   display:grid;
-  grid-template-columns:60px 140px 120px 120px 120px 120px 100px 100px 100px;
+  grid-template-columns:50px 130px 130px 130px 130px 130px 100px 110px 110px;
   background:#1a2233;color:#fff;
-  padding:13px 16px;gap:10px;font-size:11px;font-weight:600;
+  padding:14px 16px;gap:8px;font-size:12.5px;font-weight:600;
   letter-spacing:.02em;align-items:center;
+  width:100%;
 }
-.th-sub{font-weight:400;font-size:9.5px;color:#94a3b8;margin-top:2px;}
+.th-sub{font-weight:400;font-size:11px;color:#94a3b8;margin-top:3px;}
 
 .loja-bloco{border-top:1px solid #e8edf4;}
 
 .loja-linha{
   display:grid;
-  grid-template-columns:60px 140px 120px 120px 120px 120px 100px 100px 100px;
-  padding:14px 16px;gap:10px;align-items:center;
+  grid-template-columns:50px 130px 130px 130px 130px 130px 100px 110px 110px;
+  padding:14px 16px;gap:8px;align-items:center;
   background:#fff;transition:background .12s;
+  width:100%;
 }
 .loja-linha:hover{background:#f8fafd;}
 
-/* CARD MOBILE */
-.card-mobile{display:none;background:#fff;border-radius:12px;border:1px solid #e2e8f0;margin-bottom:16px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.05);}
-.card-mobile.visible{display:block;}
-
-.card-header{background:#1a2233;color:#fff;padding:16px;display:flex;align-items:center;justify-content:space-between;}
-.card-rank{display:flex;align-items:center;gap:10px;}
-.rank-num{font-size:24px;font-weight:700;}
-.nivel-badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;}
+/* Rank */
+.cel-rank{text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px;}
+.rank-num{font-size:18px;font-weight:700;}
+.nivel-badge{display:inline-block;padding:3px 11px;border-radius:20px;font-size:11px;font-weight:700;}
 .n1{background:#ecfdf5;color:#15803d;border:1px solid #86efac;}
 .n2{background:#fff7ed;color:#c2410c;border:1px solid #fdba74;}
 .n3{background:#fef2f2;color:#b91c1c;border:1px solid #fca5a5;}
 
-.card-loja{flex:1;}
-.card-loja .nome{font-size:15px;font-weight:700;}
-.card-loja .local{font-size:12px;color:#cbd5e1;margin-top:2px;}
+/* Loja */
+.cel-loja{display:flex;flex-direction:column;gap:2px;}
+.cel-loja .nome{font-size:14px;font-weight:700;color:#1a2233;}
+.cel-loja .local{font-size:12px;color:#64748b;}
 
-.card-body{padding:16px;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-.stat-box{background:#f8fafd;border-radius:8px;padding:12px;border:1px solid #e2e8f0;}
-.stat-label{font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;}
-.stat-val{font-size:16px;font-weight:700;color:#1a2233;margin-top:4px;}
-.stat-sub{font-size:12px;color:#64748b;margin-top:4px;}
-.stat-bar{margin-top:6px;}
-.barra-track{height:5px;border-radius:3px;background:#e2e8f0;overflow:hidden;}
-.barra-fill{height:100%;border-radius:3px;}
+/* Tarefas */
+.cel-tarefas{text-align:center;}
+.t-main{font-size:16px;font-weight:700;color:#1a2233;line-height:1;}
+.t-sub{font-size:11px;color:#94a3b8;margin-top:2px;}
 
-.card-buttons{display:flex;gap:8px;padding:0 16px 16px;}
+/* % */
+.cel-pct{text-align:center;}
+.pct-val{font-size:16px;font-weight:700;}
+.pct-lbl{font-size:10px;color:#94a3b8;margin-top:2px;}
+
+/* Tendência */
+.cel-tendencia{display:flex;flex-direction:column;align-items:center;gap:4px;}
+.tendencia-icon{font-size:18px;}
+.tendencia-val{font-size:15px;font-weight:700;color:#b91c1c;}
+.tendencia-sub{font-size:10px;color:#94a3b8;}
+
+/* Botões */
+.cel-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;}
 .toggle-btn{
-  flex:1;background:#f1f5f9;border:1px solid #cbd5e1;
-  border-radius:7px;padding:8px 10px;font-size:12px;font-weight:500;
+  background:#f1f5f9;border:1px solid #cbd5e1;
+  border-radius:7px;padding:7px 10px;font-size:12px;font-weight:500;
   cursor:pointer;color:#334155;transition:all .15s;
   display:flex;align-items:center;justify-content:center;gap:5px;
+  white-space:nowrap;
 }
 .toggle-btn:hover{background:#e2e8f0;border-color:#94a3b8;}
 .toggle-btn.open{background:#1a2233;color:#fff;border-color:#1a2233;}
-.btn-count{font-size:10px;color:#94a3b8;margin-top:2px;text-align:center;}
+.btn-count{font-size:10px;color:#94a3b8;}
 
 /* PAINÉIS */
 .painel{display:none;}
 .painel.visible{display:block;}
 
-/* Rank */
-.cel-rank{text-align:center;display:flex;flex-direction:column;align-items:center;gap:5px;}
-.cel-loja{display:flex;flex-direction:column;gap:3px;}
-.cel-loja .nome{font-size:13px;font-weight:700;color:#1a2233;}
-.cel-loja .local{font-size:11px;color:#64748b;}
-
-/* Tarefas */
-.cel-tarefas{text-align:center;}
-.t-main{font-size:15px;font-weight:700;color:#1a2233;}
-.t-sub{font-size:10px;color:#94a3b8;margin-top:2px;}
-
-/* % */
-.cel-pct{text-align:center;}
-.pct-val{font-size:15px;font-weight:700;}
-.pct-lbl{font-size:10px;color:#94a3b8;margin-top:2px;}
-
-/* Tendência */
-.cel-tendencia{display:flex;flex-direction:column;align-items:center;gap:6px;}
-.tendencia-icon{font-size:18px;}
-.tendencia-val{font-size:13px;font-weight:700;color:#b91c1c;}
-.tendencia-sub{font-size:10px;color:#94a3b8;}
-
 /* Histórico */
 .hist-inner{padding:20px;background:#f8fafd;}
-.panel-title{font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;}
-.hist-table{width:100%;border-collapse:collapse;font-size:12px;}
-.hist-table th{background:#334155;color:#fff;padding:8px 12px;text-align:left;font-size:11px;font-weight:500;}
-.hist-table td{padding:8px 12px;border-bottom:1px solid #edf2f7;background:#fff;font-size:12px;}
+.panel-title{font-size:11.5px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;}
+.hist-table{width:100%;border-collapse:collapse;font-size:13px;}
+.hist-table th{background:#334155;color:#fff;padding:8px 12px;text-align:left;font-size:12px;font-weight:500;}
+.hist-table td{padding:8px 12px;border-bottom:1px solid #edf2f7;background:#fff;font-size:13px;}
 .hist-table tr.atual td{background:#ebf4ff;font-weight:700;}
 .hist-table td:not(:first-child){text-align:center;font-weight:700;}
 
 /* Secções */
 .sec-inner{background:#f8fafd;padding:16px;}
-.sec-table{width:100%;border-collapse:collapse;font-size:12px;}
+.sec-table{width:100%;border-collapse:collapse;font-size:13px;}
 .sec-table thead tr{background:#334155;color:#fff;}
-.sec-table thead th{padding:8px 12px;font-weight:500;font-size:11px;text-align:left;}
+.sec-table thead th{padding:8px 12px;font-weight:500;font-size:12px;text-align:left;}
 .sec-table thead th:not(:first-child){text-align:center;}
 .sec-table tbody tr{border-bottom:1px solid #edf2f7;background:#fff;cursor:pointer;transition:background .1s;}
 .sec-table tbody tr:hover{background:#f0f7ff;}
@@ -136,8 +122,9 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f7;color:#1a2233;fo
 .sdb-num{font-size:24px;font-weight:700;line-height:1;}
 .sdb-pct{font-size:11px;color:#475569;margin-top:4px;}
 .sdb-bar{margin-top:8px;}
+.barra-track{height:5px;border-radius:3px;background:#e2e8f0;overflow:hidden;}
 .barra-track-s{height:5px;border-radius:3px;background:#e2e8f0;overflow:hidden;margin-top:3px;}
-.barra-fill-s{height:100%;border-radius:3px;}
+.barra-fill,.barra-fill-s{height:100%;border-radius:3px;}
 
 .pct-tag{display:inline-block;padding:2px 8px;border-radius:12px;font-size:10px;font-weight:600;}
 .tag-green{background:#ecfdf5;color:#15803d;}
@@ -155,30 +142,35 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f7;color:#1a2233;fo
 .acao-icon{font-size:24px;flex-shrink:0;}
 .acao-text strong{display:block;font-size:14px;color:#b91c1c;margin-bottom:2px;}
 
-/* RESPONSIVO */
-@media(max-width:1024px){
-  .tabela-header,.loja-linha{grid-template-columns:50px 120px 100px 100px 100px 100px 80px 80px 80px;}
-  .cel-loja .nome{font-size:12px;}
-  .cel-loja .local{font-size:10px;}
-}
+/* CARD MOBILE */
+.card-mobile{display:none;background:#fff;border-radius:12px;border:1px solid #e2e8f0;margin-bottom:16px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.05);}
+.card-mobile.visible{display:block;}
 
+.card-header{background:#1a2233;color:#fff;padding:16px;display:flex;align-items:center;justify-content:space-between;}
+.card-rank{display:flex;align-items:center;gap:10px;}
+.card-loja{flex:1;}
+.card-loja .nome{font-size:15px;font-weight:700;}
+.card-loja .local{font-size:12px;color:#cbd5e1;margin-top:2px;}
+
+.card-body{padding:16px;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.stat-box{background:#f8fafd;border-radius:8px;padding:12px;border:1px solid #e2e8f0;}
+.stat-label{font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;}
+.stat-val{font-size:16px;font-weight:700;color:#1a2233;margin-top:4px;}
+.stat-sub{font-size:12px;color:#64748b;margin-top:4px;}
+
+.card-buttons{display:flex;gap:8px;padding:0 16px 16px;}
+.toggle-btn{flex:1;}
+
+/* RESPONSIVO */
 @media(max-width:768px){
   .tabela-wrap{display:none!important;}
   .card-mobile{display:block;}
-  .header{padding:14px 16px;}
-  .header h1{font-size:18px;}
-  .container{padding:0 12px 40px;}
   .card-body{grid-template-columns:1fr;}
   .card-buttons{flex-direction:column;}
 }
 
 @media(max-width:480px){
   .header h1{font-size:16px;}
-  .card-body{gap:12px;}
-  .stat-box{padding:10px;}
-  .stat-label{font-size:10px;}
-  .stat-val{font-size:14px;}
-  .legenda{font-size:11px;gap:8px;padding:10px;}
   .acao-box{flex-direction:column;text-align:center;}
 }
 </style>
@@ -225,8 +217,6 @@ function toggleSecDet(id){
   det.classList.toggle('visible',stateSecDet[id]);
   if(row)row.classList.toggle('sec-open',stateSecDet[id]);
 }
-
-function isMobile(){return window.innerWidth<=768;}
 
 fetch('dados.json?t='+Date.now())
   .then(function(r){return r.json();})
@@ -332,8 +322,8 @@ function renderApp(lojas,ultimaSemana){
     +'<div style="text-align:center">#</div>'
     +'<div>Loja</div>'
     +'<div style="text-align:center">Tarefas P<div class="th-sub">aberto · fechado</div></div>'
-    +'<div style="text-align:center">Tarefas NP<div class="th-sub">aberto · fechado</div></div>'
     +'<div style="text-align:center">% P<div class="th-sub">aberto · fechado</div></div>'
+    +'<div style="text-align:center">Tarefas NP<div class="th-sub">aberto · fechado</div></div>'
     +'<div style="text-align:center">% NP<div class="th-sub">aberto · fechado</div></div>'
     +'<div style="text-align:center">Tendência</div>'
     +'<div style="text-align:center">Histórico</div>'
@@ -395,12 +385,12 @@ function renderApp(lojas,ultimaSemana){
       +'<div class="cel-rank"><div class="rank-num">'+emoji+' '+(li+1)+'</div><span class="nivel-badge '+nc+'">N'+l.nivel+'</span></div>'
       +'<div class="cel-loja"><div class="nome">'+l.loja+'</div><div class="local">'+(l.localidade||'—')+'</div></div>'
       +'<div class="cel-tarefas"><div class="t-main">'+l.pAberto+' / '+l.pFechado+'</div><div class="t-sub">('+l.pTotal+' total)</div></div>'
-      +'<div class="cel-tarefas"><div class="t-main">'+l.npAberto+' / '+l.npFechado+'</div><div class="t-sub">('+l.npTotal+' total)</div></div>'
       +'<div class="cel-pct"><div class="pct-val" style="color:'+corPct(l.pctPA)+'">'+l.pctPA+'% / '+l.pctPF+'%</div></div>'
+      +'<div class="cel-tarefas"><div class="t-main">'+l.npAberto+' / '+l.npFechado+'</div><div class="t-sub">('+l.npTotal+' total)</div></div>'
       +'<div class="cel-pct"><div class="pct-val" style="color:'+corPct(l.pctNA)+'">'+l.pctNA+'% / '+l.pctNF+'%</div></div>'
       +'<div class="cel-tendencia">'+(l.diff===null?'—':l.diff>0?'<div class="tendencia-icon">▲</div><div class="tendencia-val">+'+l.diff+'</div><div class="tendencia-sub">vs semana</div>':'<div class="tendencia-icon">▼</div><div class="tendencia-val">'+l.diff+'</div><div class="tendencia-sub">vs semana</div>')+'</div>'
-      +'<div style="display:flex;flex-direction:column;align-items:center;gap:4px;"><button class="toggle-btn" id="btnhist-'+li+'" onclick="toggleHist('+li+')">▶ Histórico</button></div>'
-      +'<div style="display:flex;flex-direction:column;align-items:center;gap:4px;"><button class="toggle-btn" id="btnsec-'+li+'" onclick="toggleSec('+li+')">▶ Secções</button><div class="btn-count">'+l.seccoes.length+' sec</div></div>'
+      +'<div class="cel-btn"><button class="toggle-btn" id="btnhist-'+li+'" onclick="toggleHist('+li+')">▶ Histórico</button></div>'
+      +'<div class="cel-btn"><button class="toggle-btn" id="btnsec-'+li+'" onclick="toggleSec('+li+')">▶ Secções</button><div class="btn-count">'+l.seccoes.length+' sec</div></div>'
       +'</div>'
       +'<div class="painel" id="hist-'+li+'">'+histContent+'</div>'
       +'<div class="painel" id="sec-'+li+'">'+secContent+'</div>'
