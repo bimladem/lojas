@@ -18,16 +18,8 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f7;color:#1a2233;fo
 .container{max-width:100%;margin:20px auto;padding:0 16px 60px;}
 .loading{text-align:center;padding:60px 20px;color:#94a3b8;font-size:15px;}
 
-/* ABREVIATURAS SIMPLES */
-.abrev-simple{background:#f0f4f9;border-top:3px solid #3b82f6;padding:12px 16px;margin-bottom:12px;border-radius:8px;}
-.abrev-simple-row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;font-size:12.5px;color:#475569;}
-.abrev-simple-item{display:flex;align-items:center;gap:6px;white-space:nowrap;}
-.abrev-simple-label{font-weight:700;color:#1a2233;min-width:28px;}
-.abrev-simple-sep{color:#cbd5e1;margin:0 4px;}
-
 /* LEGENDA */
-.legenda{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;align-items:center;background:#fff;border-radius:10px;border:1px solid #e2e8f0;padding:14px 16px;margin-bottom:16px;font-size:12.5px;color:#64748b;}
-.legenda-item{display:flex;align-items:center;gap:6px;}
+.legenda{display:flex;flex-wrap:wrap;gap:12px;align-items:center;background:#fff;border-radius:10px;border:1px solid #e2e8f0;padding:12px 16px;margin-bottom:16px;font-size:12px;color:#64748b;}
 
 /* TABELA DESKTOP */
 .tabela-wrap{background:#fff;border-radius:12px;box-shadow:0 4px 18px rgba(0,0,0,.09);overflow:hidden;margin-bottom:20px;display:none;}
@@ -35,19 +27,19 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f7;color:#1a2233;fo
 
 .tabela-header{
   display:grid;
-  grid-template-columns:50px 140px 130px 130px 100px 100px 110px 110px 110px;
+  grid-template-columns:50px 130px 130px 130px 130px 130px 100px 110px 110px;
   background:#1a2233;color:#fff;
-  padding:14px 16px;gap:8px;font-size:13px;font-weight:600;
+  padding:14px 16px;gap:8px;font-size:12.5px;font-weight:600;
   letter-spacing:.02em;align-items:center;
   width:100%;
 }
-.th-sub{font-weight:400;font-size:12px;color:#cbd5e1;margin-top:3px;}
+.th-sub{font-weight:400;font-size:11px;color:#94a3b8;margin-top:3px;}
 
 .loja-bloco{border-top:1px solid #e8edf4;}
 
 .loja-linha{
   display:grid;
-  grid-template-columns:50px 140px 130px 130px 100px 100px 110px 110px 110px;
+  grid-template-columns:50px 130px 130px 130px 130px 130px 100px 110px 110px;
   padding:14px 16px;gap:8px;align-items:center;
   background:#fff;transition:background .12s;
   width:100%;
@@ -63,14 +55,14 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f7;color:#1a2233;fo
 .n3{background:#fef2f2;color:#b91c1c;border:1px solid #fca5a5;}
 
 /* Loja */
-.cel-loja{display:flex;flex-direction:column;gap:4px;}
-.cel-loja .nome{font-size:15px;font-weight:700;color:#1a2233;}
-.cel-loja .local{font-size:13px;color:#64748b;font-weight:500;}
+.cel-loja{display:flex;flex-direction:column;gap:2px;}
+.cel-loja .nome{font-size:14px;font-weight:700;color:#1a2233;}
+.cel-loja .local{font-size:12px;color:#64748b;}
 
 /* Tarefas */
 .cel-tarefas{text-align:center;}
 .t-main{font-size:16px;font-weight:700;color:#1a2233;line-height:1;}
-.t-sub{font-size:12px;color:#64748b;margin-top:3px;font-weight:500;}
+.t-sub{font-size:11px;color:#94a3b8;margin-top:2px;}
 
 /* % */
 .cel-pct{text-align:center;}
@@ -81,7 +73,7 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f7;color:#1a2233;fo
 .cel-tendencia{display:flex;flex-direction:column;align-items:center;gap:4px;}
 .tendencia-icon{font-size:18px;}
 .tendencia-val{font-size:15px;font-weight:700;color:#b91c1c;}
-.tendencia-sub{font-size:11px;color:#94a3b8;font-weight:500;}
+.tendencia-sub{font-size:10px;color:#94a3b8;}
 
 /* Botões */
 .cel-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;}
@@ -94,7 +86,7 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f7;color:#1a2233;fo
 }
 .toggle-btn:hover{background:#e2e8f0;border-color:#94a3b8;}
 .toggle-btn.open{background:#1a2233;color:#fff;border-color:#1a2233;}
-.btn-count{font-size:11px;color:#64748b;font-weight:500;}
+.btn-count{font-size:10px;color:#94a3b8;}
 
 /* PAINÉIS */
 .painel{display:none;}
@@ -143,15 +135,12 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f7;color:#1a2233;fo
 .acao-box{
   background:#fff;border-radius:10px;border:1px solid #fca5a5;
   border-left:5px solid #b91c1c;padding:16px 20px;
-  display:flex;align-items:center;gap:14px;
+  display:flex;align-items:center;gap:12px;
   font-size:13px;color:#1a2233;
   box-shadow:0 2px 8px rgba(185,28,28,.08);
 }
 .acao-icon{font-size:24px;flex-shrink:0;}
-.acao-text{flex:1;}
-.acao-text strong{display:block;font-size:14px;color:#b91c1c;margin-bottom:8px;}
-.acao-linhas{display:flex;flex-direction:column;gap:6px;}
-.acao-linha{display:flex;align-items:center;gap:8px;}
+.acao-text strong{display:block;font-size:14px;color:#b91c1c;margin-bottom:2px;}
 
 /* CARD MOBILE */
 .card-mobile{display:none;background:#fff;border-radius:12px;border:1px solid #e2e8f0;margin-bottom:16px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.05);}
@@ -178,17 +167,11 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f7;color:#1a2233;fo
   .card-mobile{display:block;}
   .card-body{grid-template-columns:1fr;}
   .card-buttons{flex-direction:column;}
-  .legenda{flex-direction:column;gap:8px;}
-  .legenda-item{justify-content:center;}
-  .abrev-simple-row{flex-direction:column;gap:8px;}
-  .abrev-simple-item{justify-content:center;}
-  .acao-box{flex-direction:column;text-align:center;}
-  .acao-linhas{align-items:center;}
 }
 
 @media(max-width:480px){
   .header h1{font-size:16px;}
-  .abrev-simple{font-size:12px;}
+  .acao-box{flex-direction:column;text-align:center;}
 }
 </style>
 </head>
@@ -235,123 +218,103 @@ function toggleSecDet(id){
   if(row)row.classList.toggle('sec-open',stateSecDet[id]);
 }
 
-// Carregar dados do JSON
-Promise.all([
-  fetch('dados.json?t='+Date.now()).then(r=>r.json()),
-  fetch('localizacoes.json?t='+Date.now()).then(r=>r.json())
-]).then(function([dados,localizacoes]){
-  var data=dados.data||[];
-  var localMap={};
-  
-  // Construir mapa de localizações (Código Loja -> Localidade)
-  if(localizacoes.lojas&&Array.isArray(localizacoes.lojas)){
-    localizacoes.lojas.forEach(function(loja){
-      var codigo=String(loja.codigo||'').trim();
-      var localidade=String(loja.localidade||'').trim();
-      if(codigo)localMap[codigo]=localidade;
+fetch('dados.json?t='+Date.now())
+  .then(function(r){return r.json();})
+  .then(function(json){
+    var data=json.data||[];
+
+    // última semana
+    var semanas=[];
+    data.forEach(function(item){var s=String(item.Semana||'').trim();if(s&&semanas.indexOf(s)===-1)semanas.push(s);});
+    var ultimaSemana=semanas.length>0?semanas[semanas.length-1]:'';
+
+    // lojas
+    var lojas=data
+      .filter(function(item){return item.Loja&&!item.Secção&&String(item.Semana||'').trim()===ultimaSemana;})
+      .map(function(item){
+        var pTotal=Number(item['P Total'])||0;
+        var pAberto=Number(item['P Aberto'])||0;
+        var pFechado=Number(item['P Fechado'])||0;
+        var npTotal=Number(item['NP Total'])||0;
+        var npAberto=Number(item['NP Aberto'])||0;
+        var npFechado=Number(item['NP Fechado'])||0;
+        var pctPA=pTotal>0?(pAberto/pTotal*100).toFixed(1):'0.0';
+        var pctPF=pTotal>0?(pFechado/pTotal*100).toFixed(1):'0.0';
+        var pctNA=npTotal>0?(npAberto/npTotal*100).toFixed(1):'0.0';
+        var pctNF=npTotal>0?(npFechado/npTotal*100).toFixed(1):'0.0';
+        var nivel=parseFloat(pctPA)<=20?1:parseFloat(pctPA)<=40?2:3;
+        var loc=String(item['Resumo contactos.Localidade']||item['IM.Localidade']||'').trim();
+        return{loja:String(item.Loja).trim(),localidade:loc,pTotal,pAberto,pFechado,npTotal,npAberto,npFechado,pctPA,pctPF,pctNA,pctNF,nivel,historico:[],seccoes:[]};
+      })
+      .filter(function(l){return l.pAberto>0;});
+
+    lojas.sort(function(a,b){return b.pAberto-a.pAberto;});
+    var topLojas=lojas.slice(0,10);
+    var topIds={};topLojas.forEach(function(l){topIds[l.loja]=true;});
+
+    // histórico
+    var histPorLoja={};
+    data.forEach(function(item){
+      if(!item.Secção&&item.Loja&&item.Semana&&topIds[String(item.Loja).trim()]){
+        var id=String(item.Loja).trim();
+        if(!histPorLoja[id])histPorLoja[id]=[];
+        histPorLoja[id].push({
+          semana:String(item.Semana).trim(),
+          pAberto:Number(item['P Aberto'])||0,
+          pFechado:Number(item['P Fechado'])||0,
+          npAberto:Number(item['NP Aberto'])||0,
+          npFechado:Number(item['NP Fechado'])||0
+        });
+      }
     });
-  }
+    topLojas.forEach(function(l){
+      var hist=histPorLoja[l.loja]||[];
+      l.historico=hist.filter(function(h){return h.semana!==ultimaSemana;}).slice(-8);
+      var ult=hist.slice(-2);
+      l.diff=ult.length===2?ult[1].pAberto-ult[0].pAberto:null;
+    });
 
-  // última semana
-  var semanas=[];
-  data.forEach(function(item){var s=String(item.Semana||'').trim();if(s&&semanas.indexOf(s)===-1)semanas.push(s);});
-  var ultimaSemana=semanas.length>0?semanas[semanas.length-1]:'';
-
-  // lojas
-  var lojas=data
-    .filter(function(item){return item.Loja&&!item.Secção&&String(item.Semana||'').trim()===ultimaSemana;})
-    .map(function(item){
-      var pTotal=Number(item['P Total'])||0;
-      var pAberto=Number(item['P Aberto'])||0;
-      var pFechado=Number(item['P Fechado'])||0;
-      var npTotal=Number(item['NP Total'])||0;
-      var npAberto=Number(item['NP Aberto'])||0;
-      var npFechado=Number(item['NP Fechado'])||0;
-      var pctPA=pTotal>0?(pAberto/pTotal*100).toFixed(1):'0.0';
-      var pctPF=pTotal>0?(pFechado/pTotal*100).toFixed(1):'0.0';
-      var pctNA=npTotal>0?(npAberto/npTotal*100).toFixed(1):'0.0';
-      var pctNF=npTotal>0?(npFechado/npTotal*100).toFixed(1):'0.0';
-      var nivel=parseFloat(pctPA)<=20?1:parseFloat(pctPA)<=40?2:3;
-      var lojaCode=String(item.Loja).trim();
-      var localidade=localMap[lojaCode]||'';
-      return{loja:lojaCode,localidade:localidade,pTotal,pAberto,pFechado,npTotal,npAberto,npFechado,pctPA,pctPF,pctNA,pctNF,nivel,historico:[],seccoes:[]};
-    })
-    .filter(function(l){return l.pAberto>0;});
-
-  lojas.sort(function(a,b){return b.pAberto-a.pAberto;});
-  var topLojas=lojas.slice(0,10);
-  var topIds={};topLojas.forEach(function(l){topIds[l.loja]=true;});
-
-  // histórico
-  var histPorLoja={};
-  data.forEach(function(item){
-    if(!item.Secção&&item.Loja&&item.Semana&&topIds[String(item.Loja).trim()]){
-      var id=String(item.Loja).trim();
-      if(!histPorLoja[id])histPorLoja[id]=[];
-      histPorLoja[id].push({
-        semana:String(item.Semana).trim(),
-        pAberto:Number(item['P Aberto'])||0,
-        pFechado:Number(item['P Fechado'])||0,
-        npAberto:Number(item['NP Aberto'])||0,
-        npFechado:Number(item['NP Fechado'])||0
-      });
-    }
-  });
-  topLojas.forEach(function(l){
-    var hist=histPorLoja[l.loja]||[];
-    l.historico=hist.filter(function(h){return h.semana!==ultimaSemana;}).slice(-8);
-    var ult=hist.slice(-2);
-    l.diff=ult.length===2?ult[1].pAberto-ult[0].pAberto:null;
-  });
-
-  // secções
-  data.forEach(function(item){
-    if(item.Secção&&item.Loja&&topIds[String(item.Loja).trim()]){
-      var loja=topLojas.find(function(l){return l.loja===String(item.Loja).trim();});
-      if(loja){
-        var pAb=Number(item['P Aberto'])||0,npAb=Number(item['NP Aberto'])||0;
-        var pFe=Number(item['P Fechado'])||0,npFe=Number(item['NP Fechado'])||0;
-        var pTo=Number(item['P Total'])||0,npTo=Number(item['NP Total'])||0;
-        if(pAb>0||npAb>0||pFe>0||npFe>0){
-          var nome=String(item.Secção).replace(/^IM\s+\d+\s+/,'').trim();
-          if(nome.toLowerCase()!=='admin'){
-            loja.seccoes.push({
-              nome,pAberto:pAb,pFechado:pFe,npAberto:npAb,npFechado:npFe,pTotal:pTo,npTotal:npTo,
-              pctPA:pTo>0?(pAb/pTo*100).toFixed(0):'0',
-              pctPF:pTo>0?(pFe/pTo*100).toFixed(0):'0',
-              pctNA:npTo>0?(npAb/npTo*100).toFixed(0):'0',
-              pctNF:npTo>0?(npFe/npTo*100).toFixed(0):'0'
-            });
+    // secções
+    data.forEach(function(item){
+      if(item.Secção&&item.Loja&&topIds[String(item.Loja).trim()]){
+        var loja=topLojas.find(function(l){return l.loja===String(item.Loja).trim();});
+        if(loja){
+          var pAb=Number(item['P Aberto'])||0,npAb=Number(item['NP Aberto'])||0;
+          var pFe=Number(item['P Fechado'])||0,npFe=Number(item['NP Fechado'])||0;
+          var pTo=Number(item['P Total'])||0,npTo=Number(item['NP Total'])||0;
+          if(pAb>0||npAb>0||pFe>0||npFe>0){
+            var nome=String(item.Secção).replace(/^IM\s+\d+\s+/,'').trim();
+            if(nome.toLowerCase()!=='admin'){
+              loja.seccoes.push({
+                nome,pAberto:pAb,pFechado:pFe,npAberto:npAb,npFechado:npFe,pTotal:pTo,npTotal:npTo,
+                pctPA:pTo>0?(pAb/pTo*100).toFixed(0):'0',
+                pctPF:pTo>0?(pFe/pTo*100).toFixed(0):'0',
+                pctNA:npTo>0?(npAb/npTo*100).toFixed(0):'0',
+                pctNF:npTo>0?(npFe/npTo*100).toFixed(0):'0'
+              });
+            }
           }
         }
       }
-    }
-  });
-  topLojas.forEach(function(l){l.seccoes.sort(function(a,b){return b.pAberto-a.pAberto;});});
+    });
+    topLojas.forEach(function(l){l.seccoes.sort(function(a,b){return b.pAberto-a.pAberto;});});
 
-  document.getElementById('sub-info').textContent='Gerado hoje · '+topLojas.length+' lojas · semana '+ultimaSemana;
-  document.getElementById('periodo-label').innerHTML=ultimaSemana?'📅 <strong>'+ultimaSemana+'</strong>':'📅 —';
-  renderApp(topLojas,ultimaSemana);
-}).catch(function(err){
-  document.getElementById('app').innerHTML='<div style="color:#b91c1c;padding:40px;text-align:center">❌ Erro ao carregar dados: '+err.message+'</div>';
-});
+    document.getElementById('sub-info').textContent='Gerado hoje · '+topLojas.length+' lojas · semana '+ultimaSemana;
+    document.getElementById('periodo-label').innerHTML=ultimaSemana?'📅 <strong>'+ultimaSemana+'</strong>':'📅 —';
+    renderApp(topLojas,ultimaSemana);
+  })
+  .catch(function(err){
+    document.getElementById('app').innerHTML='<div style="color:#b91c1c;padding:40px;text-align:center">❌ Erro ao carregar dados: '+err.message+'</div>';
+  });
 
 function renderApp(lojas,ultimaSemana){
-  // ABREVIATURAS SIMPLES
-  var abreviaturas='<div class="abrev-simple">'
-    +'<div class="abrev-simple-row">'
-    +'<div class="abrev-simple-item"><span class="abrev-simple-label">P:</span> Programadas <span class="abrev-simple-sep">|</span> <span class="abrev-simple-label">NP:</span> Não Programadas <span class="abrev-simple-sep">|</span> <span class="abrev-simple-label">Ab:</span> Abertas <span class="abrev-simple-sep">|</span> <span class="abrev-simple-label">Fe:</span> Fechadas</div>'
-    +'</div>'
-    +'</div>';
-
   var legenda='<div class="legenda">'
-    +'<div class="legenda-item"><span style="color:#b91c1c;font-weight:700">●</span> <span>Top 3 críticas</span></div>'
-    +'<div class="legenda-item"><span style="color:#f59e0b;font-weight:700">●</span> <span>Em alerta</span></div>'
-    +'<div class="legenda-item"><span style="color:#15803d;font-weight:700">N1</span> <span>0–20%</span></div>'
-    +'<div class="legenda-item"><span style="color:#c2410c;font-weight:700">N2</span> <span>21–40%</span></div>'
-    +'<div class="legenda-item"><span style="color:#b91c1c;font-weight:700">N3</span> <span>41%+</span></div>'
-    +'<div class="legenda-item"><span style="color:#b91c1c;font-weight:700">▲</span> <span>Piorar</span></div>'
-    +'<div class="legenda-item"><span style="color:#15803d;font-weight:700">▼</span> <span>Melhorar</span></div>'
+    +'<span>🔴 Top 3 críticas &nbsp;|&nbsp; 🟡 Em alerta</span>'
+    +'<span><span style="color:#15803d;font-weight:700">N1</span> = 0–20%</span>'
+    +'<span><span style="color:#c2410c;font-weight:700">N2</span> = 21–40%</span>'
+    +'<span><span style="color:#b91c1c;font-weight:700">N3</span> = 41%+</span>'
+    +'<span style="color:#b91c1c">▲ Piorar</span>'
+    +'<span style="color:#15803d">▼ Melhorar</span>'
     +'</div>';
 
   // DESKTOP
@@ -458,15 +421,11 @@ function renderApp(lojas,ultimaSemana){
     +'<div class="acao-icon">⚠️</div>'
     +'<div class="acao-text">'
     +'<strong>Ação recomendada</strong>'
-    +'<div class="acao-linhas">'
-    +'<div class="acao-linha">Contactar urgentemente os responsáveis das <strong>lojas críticas</strong></div>'
-    +'<div class="acao-linha">Para lojas com <strong>tendência crescente</strong>, escalar para supervisor de zona</div>'
-    +'<div class="acao-linha">Acompanhamento semanal do desempenho das lojas em alerta</div>'
-    +'</div>'
+    +'Contactar urgentemente os responsáveis das lojas 🔴. Para 🔴 com tendência ▲, escalar para supervisor.'
     +'</div>'
     +'</div>';
 
-  document.getElementById('app').innerHTML=abreviaturasHtml+legenda
+  document.getElementById('app').innerHTML=legenda
     +'<div class="tabela-wrap desktop">'+headerDesk+blocos+'</div>'
     +cards
     +acao;
