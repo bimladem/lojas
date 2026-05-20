@@ -6,157 +6,338 @@
 <title>Análise Semanal IM</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f7;color:#1a2233;font-size:14px;line-height:1.5;}
+body{
+  font-family:'Segoe UI',Arial,sans-serif;
+  background:linear-gradient(135deg,#0a0e27 0%,#1a1f3a 50%,#2d1b4e 100%);
+  color:#e0e0e0;
+  font-size:14px;
+  line-height:1.5;
+  min-height:100vh;
+}
 
 /* HEADER */
-.header{background:#fff;border-bottom:3px solid #1a2233;padding:16px 20px;position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(0,0,0,.09);}
-.header h1{font-size:20px;font-weight:700;color:#1a2233;}
-.header .sub{font-size:12px;color:#64748b;margin-top:3px;}
-.header-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:12px;}
-.periodo{background:#f1f5fb;border:1px solid #d1dbe8;border-left:4px solid #1a2233;border-radius:6px;padding:7px 18px;font-size:13px;font-weight:600;color:#1a2233;}
+.header{
+  background:rgba(10,14,39,0.95);
+  border-bottom:1px solid rgba(139,92,246,0.2);
+  padding:18px 24px;
+  position:sticky;
+  top:0;
+  z-index:100;
+  backdrop-filter:blur(10px);
+}
+.header-content{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;}
+.header-left{display:flex;align-items:center;gap:12px;}
+.header-logo{font-size:24px;}
+.header-title h1{font-size:18px;font-weight:700;color:#fff;margin:0;}
+.header-title .sub{font-size:12px;color:#8b9dc3;margin-top:2px;}
+.header-nav{display:flex;gap:32px;}
+.header-nav a{color:#b0b8d4;text-decoration:none;font-size:14px;font-weight:500;transition:color 0.3s;}
+.header-nav a:hover{color:#fff;}
+.periodo{
+  background:rgba(139,92,246,0.15);
+  border:1px solid rgba(139,92,246,0.3);
+  border-radius:8px;
+  padding:8px 16px;
+  font-size:13px;
+  font-weight:600;
+  color:#c4b5fd;
+}
 
-.container{max-width:100%;margin:20px auto;padding:0 16px 60px;}
-.loading{text-align:center;padding:60px 20px;color:#94a3b8;font-size:15px;}
+.container{max-width:1400px;margin:0 auto;padding:0 24px 60px;}
+.loading{text-align:center;padding:80px 24px;color:#8b9dc3;font-size:15px;}
+
+/* ABREVIATURAS */
+.abrev-simple{
+  background:rgba(139,92,246,0.1);
+  border:1px solid rgba(139,92,246,0.3);
+  border-radius:12px;
+  padding:14px 20px;
+  margin-bottom:16px;
+  backdrop-filter:blur(10px);
+}
+.abrev-simple-row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;font-size:13px;color:#b0b8d4;}
+.abrev-simple-item{display:flex;align-items:center;gap:6px;white-space:nowrap;}
+.abrev-simple-label{font-weight:700;color:#c4b5fd;min-width:32px;}
+.abrev-simple-sep{color:rgba(180,167,255,0.4);margin:0 4px;}
 
 /* LEGENDA */
-.legenda{display:flex;flex-wrap:wrap;gap:12px;align-items:center;background:#fff;border-radius:10px;border:1px solid #e2e8f0;padding:12px 16px;margin-bottom:16px;font-size:12px;color:#64748b;}
+.legenda{
+  display:flex;
+  flex-wrap:wrap;
+  gap:16px;
+  justify-content:center;
+  background:rgba(139,92,246,0.08);
+  border:1px solid rgba(139,92,246,0.2);
+  border-radius:12px;
+  padding:16px 20px;
+  margin-bottom:20px;
+  font-size:13px;
+  color:#b0b8d4;
+  backdrop-filter:blur(10px);
+}
+.legenda-item{display:flex;align-items:center;gap:6px;}
 
 /* TABELA DESKTOP */
-.tabela-wrap{background:#fff;border-radius:12px;box-shadow:0 4px 18px rgba(0,0,0,.09);overflow:hidden;margin-bottom:20px;display:none;}
+.tabela-wrap{
+  background:rgba(26,31,58,0.6);
+  border:1px solid rgba(139,92,246,0.2);
+  border-radius:16px;
+  box-shadow:0 8px 32px rgba(0,0,0,0.3);
+  overflow:hidden;
+  margin-bottom:20px;
+  display:none;
+  backdrop-filter:blur(10px);
+}
 .tabela-wrap.desktop{display:block;}
 
 .tabela-header{
   display:grid;
-  grid-template-columns:50px 130px 130px 130px 130px 130px 100px 110px 110px;
-  background:#1a2233;color:#fff;
-  padding:14px 16px;gap:8px;font-size:12.5px;font-weight:600;
-  letter-spacing:.02em;align-items:center;
-  width:100%;
+  grid-template-columns:50px 140px 130px 130px 100px 100px 110px 110px 110px;
+  background:rgba(139,92,246,0.15);
+  color:#c4b5fd;
+  padding:14px 16px;
+  gap:8px;
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:.05em;
+  align-items:center;
+  border-bottom:1px solid rgba(139,92,246,0.2);
 }
-.th-sub{font-weight:400;font-size:11px;color:#94a3b8;margin-top:3px;}
+.th-sub{font-weight:400;font-size:11px;color:#8b9dc3;margin-top:3px;}
 
-.loja-bloco{border-top:1px solid #e8edf4;}
+.loja-bloco{border-top:1px solid rgba(139,92,246,0.1);}
 
 .loja-linha{
   display:grid;
-  grid-template-columns:50px 130px 130px 130px 130px 130px 100px 110px 110px;
-  padding:14px 16px;gap:8px;align-items:center;
-  background:#fff;transition:background .12s;
-  width:100%;
+  grid-template-columns:50px 140px 130px 130px 100px 100px 110px 110px 110px;
+  padding:14px 16px;
+  gap:8px;
+  align-items:center;
+  background:rgba(26,31,58,0.4);
+  transition:all 0.3s;
 }
-.loja-linha:hover{background:#f8fafd;}
+.loja-linha:hover{background:rgba(139,92,246,0.12);}
 
 /* Rank */
 .cel-rank{text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px;}
-.rank-num{font-size:18px;font-weight:700;}
-.nivel-badge{display:inline-block;padding:3px 11px;border-radius:20px;font-size:11px;font-weight:700;}
-.n1{background:#ecfdf5;color:#15803d;border:1px solid #86efac;}
-.n2{background:#fff7ed;color:#c2410c;border:1px solid #fdba74;}
-.n3{background:#fef2f2;color:#b91c1c;border:1px solid #fca5a5;}
+.rank-num{font-size:18px;font-weight:700;color:#fff;}
+.nivel-badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;}
+.n1{background:rgba(74,222,128,0.2);color:#86efac;border:1px solid rgba(74,222,128,0.4);}
+.n2{background:rgba(251,146,60,0.2);color:#fdba74;border:1px solid rgba(251,146,60,0.4);}
+.n3{background:rgba(239,68,68,0.2);color:#fca5a5;border:1px solid rgba(239,68,68,0.4);}
 
 /* Loja */
-.cel-loja{display:flex;flex-direction:column;gap:2px;}
-.cel-loja .nome{font-size:14px;font-weight:700;color:#1a2233;}
-.cel-loja .local{font-size:12px;color:#64748b;}
+.cel-loja{display:flex;flex-direction:column;gap:4px;}
+.cel-loja .nome{font-size:15px;font-weight:700;color:#fff;}
+.cel-loja .local{font-size:13px;color:#8b9dc3;font-weight:500;}
 
 /* Tarefas */
 .cel-tarefas{text-align:center;}
-.t-main{font-size:16px;font-weight:700;color:#1a2233;line-height:1;}
-.t-sub{font-size:11px;color:#94a3b8;margin-top:2px;}
+.t-main{font-size:16px;font-weight:700;color:#fff;line-height:1;}
+.t-sub{font-size:12px;color:#8b9dc3;margin-top:3px;font-weight:500;}
 
 /* % */
 .cel-pct{text-align:center;}
-.pct-val{font-size:16px;font-weight:700;}
-.pct-lbl{font-size:10px;color:#94a3b8;margin-top:2px;}
+.pct-val{font-size:16px;font-weight:700;color:#fff;}
 
 /* Tendência */
 .cel-tendencia{display:flex;flex-direction:column;align-items:center;gap:4px;}
 .tendencia-icon{font-size:18px;}
-.tendencia-val{font-size:15px;font-weight:700;color:#b91c1c;}
-.tendencia-sub{font-size:10px;color:#94a3b8;}
+.tendencia-val{font-size:15px;font-weight:700;color:#ff6b9d;}
+.tendencia-sub{font-size:11px;color:#8b9dc3;font-weight:500;}
 
 /* Botões */
 .cel-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;}
 .toggle-btn{
-  background:#f1f5f9;border:1px solid #cbd5e1;
-  border-radius:7px;padding:7px 10px;font-size:12px;font-weight:500;
-  cursor:pointer;color:#334155;transition:all .15s;
-  display:flex;align-items:center;justify-content:center;gap:5px;
+  background:rgba(139,92,246,0.15);
+  border:1px solid rgba(139,92,246,0.4);
+  border-radius:8px;
+  padding:7px 12px;
+  font-size:12px;
+  font-weight:500;
+  cursor:pointer;
+  color:#b0b8d4;
+  transition:all 0.3s;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
   white-space:nowrap;
 }
-.toggle-btn:hover{background:#e2e8f0;border-color:#94a3b8;}
-.toggle-btn.open{background:#1a2233;color:#fff;border-color:#1a2233;}
-.btn-count{font-size:10px;color:#94a3b8;}
+.toggle-btn:hover{
+  background:rgba(139,92,246,0.25);
+  border-color:rgba(139,92,246,0.6);
+  color:#c4b5fd;
+}
+.toggle-btn.open{
+  background:linear-gradient(135deg,#8b5cf6 0%,#d946ef 100%);
+  color:#fff;
+  border-color:rgba(217,91,239,0.5);
+}
+.btn-count{font-size:11px;color:#8b9dc3;font-weight:500;}
 
 /* PAINÉIS */
 .painel{display:none;}
 .painel.visible{display:block;}
 
 /* Histórico */
-.hist-inner{padding:20px;background:#f8fafd;}
-.panel-title{font-size:11.5px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;}
+.hist-inner{
+  padding:20px;
+  background:rgba(139,92,246,0.08);
+  border:1px solid rgba(139,92,246,0.2);
+  border-radius:12px;
+}
+.panel-title{
+  font-size:11px;
+  font-weight:700;
+  color:#c4b5fd;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  margin-bottom:12px;
+}
 .hist-table{width:100%;border-collapse:collapse;font-size:13px;}
-.hist-table th{background:#334155;color:#fff;padding:8px 12px;text-align:left;font-size:12px;font-weight:500;}
-.hist-table td{padding:8px 12px;border-bottom:1px solid #edf2f7;background:#fff;font-size:13px;}
-.hist-table tr.atual td{background:#ebf4ff;font-weight:700;}
+.hist-table th{
+  background:rgba(139,92,246,0.2);
+  color:#c4b5fd;
+  padding:8px 12px;
+  text-align:left;
+  font-size:12px;
+  font-weight:600;
+  border-bottom:1px solid rgba(139,92,246,0.2);
+}
+.hist-table td{
+  padding:8px 12px;
+  border-bottom:1px solid rgba(139,92,246,0.1);
+  background:transparent;
+  font-size:13px;
+  color:#b0b8d4;
+}
+.hist-table tr.atual td{
+  background:rgba(139,92,246,0.15);
+  color:#c4b5fd;
+  font-weight:700;
+}
 .hist-table td:not(:first-child){text-align:center;font-weight:700;}
 
 /* Secções */
-.sec-inner{background:#f8fafd;padding:16px;}
+.sec-inner{
+  background:rgba(139,92,246,0.08);
+  padding:16px;
+  border:1px solid rgba(139,92,246,0.2);
+  border-radius:12px;
+}
 .sec-table{width:100%;border-collapse:collapse;font-size:13px;}
-.sec-table thead tr{background:#334155;color:#fff;}
-.sec-table thead th{padding:8px 12px;font-weight:500;font-size:12px;text-align:left;}
+.sec-table thead tr{background:rgba(139,92,246,0.15);}
+.sec-table thead th{
+  padding:8px 12px;
+  font-weight:600;
+  font-size:12px;
+  text-align:left;
+  color:#c4b5fd;
+  border-bottom:1px solid rgba(139,92,246,0.2);
+}
 .sec-table thead th:not(:first-child){text-align:center;}
-.sec-table tbody tr{border-bottom:1px solid #edf2f7;background:#fff;cursor:pointer;transition:background .1s;}
-.sec-table tbody tr:hover{background:#f0f7ff;}
-.sec-table tbody tr.sec-open{background:#ebf4ff;}
-.sec-table tbody td{padding:10px 12px;}
-.sec-table tbody td.sec-nome{font-weight:600;color:#1a2233;}
-.sec-table tbody td:not(.sec-nome){text-align:center;font-weight:700;font-size:13px;}
+.sec-table tbody tr{
+  border-bottom:1px solid rgba(139,92,246,0.1);
+  background:transparent;
+  cursor:pointer;
+  transition:all 0.2s;
+}
+.sec-table tbody tr:hover{background:rgba(139,92,246,0.12);}
+.sec-table tbody tr.sec-open{background:rgba(139,92,246,0.15);}
+.sec-table tbody td{
+  padding:10px 12px;
+  color:#b0b8d4;
+}
+.sec-table tbody td.sec-nome{font-weight:600;color:#c4b5fd;}
+.sec-table tbody td:not(.sec-nome){text-align:center;font-weight:700;}
 
-.sec-det-row td{padding:0!important;border:none!important;background:#fff!important;cursor:default;}
+.sec-det-row td{padding:0!important;border:none!important;background:transparent!important;cursor:default;}
 .sec-det-inner{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:14px;}
 @media(max-width:640px){.sec-det-inner{grid-template-columns:1fr;}}
-.sec-det-box{background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:12px;}
-.sdb-label{font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px;}
-.sdb-num{font-size:24px;font-weight:700;line-height:1;}
-.sdb-pct{font-size:11px;color:#475569;margin-top:4px;}
+.sec-det-box{
+  background:rgba(139,92,246,0.1);
+  border:1px solid rgba(139,92,246,0.3);
+  border-radius:8px;
+  padding:12px;
+}
+.sdb-label{
+  font-size:10px;
+  font-weight:700;
+  color:#8b9dc3;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  margin-bottom:6px;
+}
+.sdb-num{font-size:24px;font-weight:700;line-height:1;color:#c4b5fd;}
+.sdb-pct{font-size:11px;color:#8b9dc3;margin-top:4px;}
 .sdb-bar{margin-top:8px;}
-.barra-track{height:5px;border-radius:3px;background:#e2e8f0;overflow:hidden;}
-.barra-track-s{height:5px;border-radius:3px;background:#e2e8f0;overflow:hidden;margin-top:3px;}
+.barra-track{height:5px;border-radius:3px;background:rgba(139,92,246,0.3);overflow:hidden;}
+.barra-track-s{height:5px;border-radius:3px;background:rgba(139,92,246,0.3);overflow:hidden;margin-top:3px;}
 .barra-fill,.barra-fill-s{height:100%;border-radius:3px;}
 
 .pct-tag{display:inline-block;padding:2px 8px;border-radius:12px;font-size:10px;font-weight:600;}
-.tag-green{background:#ecfdf5;color:#15803d;}
-.tag-orange{background:#fff7ed;color:#c2410c;}
-.tag-red{background:#fef2f2;color:#b91c1c;}
+.tag-green{background:rgba(74,222,128,0.2);color:#86efac;}
+.tag-orange{background:rgba(251,146,60,0.2);color:#fdba74;}
+.tag-red{background:rgba(239,68,68,0.2);color:#fca5a5;}
 
 /* ACÇÃO */
 .acao-box{
-  background:#fff;border-radius:10px;border:1px solid #fca5a5;
-  border-left:5px solid #b91c1c;padding:16px 20px;
-  display:flex;align-items:center;gap:12px;
-  font-size:13px;color:#1a2233;
-  box-shadow:0 2px 8px rgba(185,28,28,.08);
+  background:linear-gradient(135deg,rgba(236,72,153,0.15),rgba(139,92,246,0.15));
+  border:1px solid rgba(236,72,153,0.3);
+  border-radius:16px;
+  padding:20px 24px;
+  display:flex;
+  align-items:flex-start;
+  gap:16px;
+  font-size:13px;
+  color:#b0b8d4;
+  box-shadow:0 8px 32px rgba(236,72,153,0.1);
+  backdrop-filter:blur(10px);
 }
-.acao-icon{font-size:24px;flex-shrink:0;}
-.acao-text strong{display:block;font-size:14px;color:#b91c1c;margin-bottom:2px;}
+.acao-icon{font-size:28px;flex-shrink:0;margin-top:2px;}
+.acao-text{flex:1;}
+.acao-text strong{display:block;font-size:15px;color:#ff6b9d;margin-bottom:10px;font-weight:700;}
+.acao-linhas{display:flex;flex-direction:column;gap:8px;}
+.acao-linha{display:flex;align-items:center;gap:8px;color:#b0b8d4;}
 
 /* CARD MOBILE */
-.card-mobile{display:none;background:#fff;border-radius:12px;border:1px solid #e2e8f0;margin-bottom:16px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.05);}
+.card-mobile{
+  display:none;
+  background:rgba(26,31,58,0.6);
+  border:1px solid rgba(139,92,246,0.2);
+  border-radius:16px;
+  margin-bottom:16px;
+  overflow:hidden;
+  box-shadow:0 8px 32px rgba(0,0,0,0.3);
+  backdrop-filter:blur(10px);
+}
 .card-mobile.visible{display:block;}
 
-.card-header{background:#1a2233;color:#fff;padding:16px;display:flex;align-items:center;justify-content:space-between;}
+.card-header{
+  background:linear-gradient(135deg,rgba(139,92,246,0.2),rgba(217,91,239,0.2));
+  color:#fff;
+  padding:16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid rgba(139,92,246,0.2);
+}
 .card-rank{display:flex;align-items:center;gap:10px;}
 .card-loja{flex:1;}
-.card-loja .nome{font-size:15px;font-weight:700;}
-.card-loja .local{font-size:12px;color:#cbd5e1;margin-top:2px;}
+.card-loja .nome{font-size:15px;font-weight:700;color:#fff;}
+.card-loja .local{font-size:12px;color:#8b9dc3;margin-top:2px;}
 
 .card-body{padding:16px;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-.stat-box{background:#f8fafd;border-radius:8px;padding:12px;border:1px solid #e2e8f0;}
-.stat-label{font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;}
-.stat-val{font-size:16px;font-weight:700;color:#1a2233;margin-top:4px;}
-.stat-sub{font-size:12px;color:#64748b;margin-top:4px;}
+.stat-box{
+  background:rgba(139,92,246,0.1);
+  border-radius:8px;
+  padding:12px;
+  border:1px solid rgba(139,92,246,0.3);
+}
+.stat-label{font-size:11px;font-weight:700;color:#8b9dc3;text-transform:uppercase;letter-spacing:.05em;}
+.stat-val{font-size:16px;font-weight:700;color:#c4b5fd;margin-top:4px;}
+.stat-sub{font-size:12px;color:#8b9dc3;margin-top:4px;}
 
 .card-buttons{display:flex;gap:8px;padding:0 16px 16px;}
 .toggle-btn{flex:1;}
@@ -167,22 +348,40 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f7;color:#1a2233;fo
   .card-mobile{display:block;}
   .card-body{grid-template-columns:1fr;}
   .card-buttons{flex-direction:column;}
+  .legenda{flex-direction:column;gap:8px;}
+  .legenda-item{justify-content:center;}
+  .abrev-simple-row{flex-direction:column;gap:8px;}
+  .abrev-simple-item{justify-content:center;}
+  .acao-box{flex-direction:column;text-align:center;}
+  .acao-linhas{align-items:center;}
+  .header-nav{display:none;}
+  .header-content{flex-direction:column;gap:12px;}
 }
 
 @media(max-width:480px){
+  .header{padding:12px 16px;}
   .header h1{font-size:16px;}
-  .acao-box{flex-direction:column;text-align:center;}
+  .container{padding:0 16px 40px;}
+  .abrev-simple{font-size:12px;}
 }
 </style>
 </head>
 <body>
 
 <div class="header">
-  <div>
-    <h1>📊 Análise Semanal IM</h1>
-    <div class="sub" id="sub-info">A carregar dados...</div>
-  </div>
-  <div class="header-bottom">
+  <div class="header-content">
+    <div class="header-left">
+      <div class="header-logo">📊</div>
+      <div class="header-title">
+        <h1>Análise Semanal IM</h1>
+        <div class="sub" id="sub-info">A carregar dados...</div>
+      </div>
+    </div>
+    <nav class="header-nav">
+      <a href="#home">Análise</a>
+      <a href="#historico">Histórico</a>
+      <a href="#relatorios">Relatórios</a>
+    </nav>
     <div class="periodo" id="periodo-label">—</div>
   </div>
 </div>
@@ -194,7 +393,7 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f7;color:#1a2233;fo
 <script>
 var stateHist={},stateSec={},stateSecDet={};
 
-function corPct(v){v=parseFloat(v);if(v<=20)return'#15803d';if(v<=40)return'#c2410c';return'#b91c1c';}
+function corPct(v){v=parseFloat(v);if(v<=20)return'#86efac';if(v<=40)return'#fdba74';return'#fca5a5';}
 function tagClass(v){v=parseFloat(v);if(v<=20)return'tag-green';if(v<=40)return'tag-orange';return'tag-red';}
 function barra(pct,cor){return'<div class="barra-track"><div class="barra-fill" style="width:'+Math.min(100,parseFloat(pct)||0)+'%;background:'+cor+'"></div></div>';}
 function barraS(pct,cor){return'<div class="barra-track-s"><div class="barra-fill-s" style="width:'+Math.min(100,parseFloat(pct)||0)+'%;background:'+cor+'"></div></div>';}
@@ -218,106 +417,119 @@ function toggleSecDet(id){
   if(row)row.classList.toggle('sec-open',stateSecDet[id]);
 }
 
-fetch('dados.json?t='+Date.now())
-  .then(function(r){return r.json();})
-  .then(function(json){
-    var data=json.data||[];
-
-    // última semana
-    var semanas=[];
-    data.forEach(function(item){var s=String(item.Semana||'').trim();if(s&&semanas.indexOf(s)===-1)semanas.push(s);});
-    var ultimaSemana=semanas.length>0?semanas[semanas.length-1]:'';
-
-    // lojas
-    var lojas=data
-      .filter(function(item){return item.Loja&&!item.Secção&&String(item.Semana||'').trim()===ultimaSemana;})
-      .map(function(item){
-        var pTotal=Number(item['P Total'])||0;
-        var pAberto=Number(item['P Aberto'])||0;
-        var pFechado=Number(item['P Fechado'])||0;
-        var npTotal=Number(item['NP Total'])||0;
-        var npAberto=Number(item['NP Aberto'])||0;
-        var npFechado=Number(item['NP Fechado'])||0;
-        var pctPA=pTotal>0?(pAberto/pTotal*100).toFixed(1):'0.0';
-        var pctPF=pTotal>0?(pFechado/pTotal*100).toFixed(1):'0.0';
-        var pctNA=npTotal>0?(npAberto/npTotal*100).toFixed(1):'0.0';
-        var pctNF=npTotal>0?(npFechado/npTotal*100).toFixed(1):'0.0';
-        var nivel=parseFloat(pctPA)<=20?1:parseFloat(pctPA)<=40?2:3;
-        var loc=String(item['Resumo contactos.Localidade']||item['IM.Localidade']||'').trim();
-        return{loja:String(item.Loja).trim(),localidade:loc,pTotal,pAberto,pFechado,npTotal,npAberto,npFechado,pctPA,pctPF,pctNA,pctNF,nivel,historico:[],seccoes:[]};
-      })
-      .filter(function(l){return l.pAberto>0;});
-
-    lojas.sort(function(a,b){return b.pAberto-a.pAberto;});
-    var topLojas=lojas.slice(0,10);
-    var topIds={};topLojas.forEach(function(l){topIds[l.loja]=true;});
-
-    // histórico
-    var histPorLoja={};
-    data.forEach(function(item){
-      if(!item.Secção&&item.Loja&&item.Semana&&topIds[String(item.Loja).trim()]){
-        var id=String(item.Loja).trim();
-        if(!histPorLoja[id])histPorLoja[id]=[];
-        histPorLoja[id].push({
-          semana:String(item.Semana).trim(),
-          pAberto:Number(item['P Aberto'])||0,
-          pFechado:Number(item['P Fechado'])||0,
-          npAberto:Number(item['NP Aberto'])||0,
-          npFechado:Number(item['NP Fechado'])||0
-        });
-      }
+// Carregar dados do JSON
+Promise.all([
+  fetch('dados.json?t='+Date.now()).then(r=>r.json()),
+  fetch('localizacoes.json?t='+Date.now()).then(r=>r.json())
+]).then(function([dados,localizacoes]){
+  var data=dados.data||[];
+  var localMap={};
+  
+  if(localizacoes.lojas&&Array.isArray(localizacoes.lojas)){
+    localizacoes.lojas.forEach(function(loja){
+      var codigo=String(loja.codigo||'').trim();
+      var localidade=String(loja.localidade||'').trim();
+      if(codigo)localMap[codigo]=localidade;
     });
-    topLojas.forEach(function(l){
-      var hist=histPorLoja[l.loja]||[];
-      l.historico=hist.filter(function(h){return h.semana!==ultimaSemana;}).slice(-8);
-      var ult=hist.slice(-2);
-      l.diff=ult.length===2?ult[1].pAberto-ult[0].pAberto:null;
-    });
+  }
 
-    // secções
-    data.forEach(function(item){
-      if(item.Secção&&item.Loja&&topIds[String(item.Loja).trim()]){
-        var loja=topLojas.find(function(l){return l.loja===String(item.Loja).trim();});
-        if(loja){
-          var pAb=Number(item['P Aberto'])||0,npAb=Number(item['NP Aberto'])||0;
-          var pFe=Number(item['P Fechado'])||0,npFe=Number(item['NP Fechado'])||0;
-          var pTo=Number(item['P Total'])||0,npTo=Number(item['NP Total'])||0;
-          if(pAb>0||npAb>0||pFe>0||npFe>0){
-            var nome=String(item.Secção).replace(/^IM\s+\d+\s+/,'').trim();
-            if(nome.toLowerCase()!=='admin'){
-              loja.seccoes.push({
-                nome,pAberto:pAb,pFechado:pFe,npAberto:npAb,npFechado:npFe,pTotal:pTo,npTotal:npTo,
-                pctPA:pTo>0?(pAb/pTo*100).toFixed(0):'0',
-                pctPF:pTo>0?(pFe/pTo*100).toFixed(0):'0',
-                pctNA:npTo>0?(npAb/npTo*100).toFixed(0):'0',
-                pctNF:npTo>0?(npFe/npTo*100).toFixed(0):'0'
-              });
-            }
+  var semanas=[];
+  data.forEach(function(item){var s=String(item.Semana||'').trim();if(s&&semanas.indexOf(s)===-1)semanas.push(s);});
+  var ultimaSemana=semanas.length>0?semanas[semanas.length-1]:'';
+
+  var lojas=data
+    .filter(function(item){return item.Loja&&!item.Secção&&String(item.Semana||'').trim()===ultimaSemana;})
+    .map(function(item){
+      var pTotal=Number(item['P Total'])||0;
+      var pAberto=Number(item['P Aberto'])||0;
+      var pFechado=Number(item['P Fechado'])||0;
+      var npTotal=Number(item['NP Total'])||0;
+      var npAberto=Number(item['NP Aberto'])||0;
+      var npFechado=Number(item['NP Fechado'])||0;
+      var pctPA=pTotal>0?(pAberto/pTotal*100).toFixed(1):'0.0';
+      var pctPF=pTotal>0?(pFechado/pTotal*100).toFixed(1):'0.0';
+      var pctNA=npTotal>0?(npAberto/npTotal*100).toFixed(1):'0.0';
+      var pctNF=npTotal>0?(npFechado/npTotal*100).toFixed(1):'0.0';
+      var nivel=parseFloat(pctPA)<=20?1:parseFloat(pctPA)<=40?2:3;
+      var lojaCode=String(item.Loja).trim();
+      var localidade=localMap[lojaCode]||'';
+      return{loja:lojaCode,localidade:localidade,pTotal,pAberto,pFechado,npTotal,npAberto,npFechado,pctPA,pctPF,pctNA,pctNF,nivel,historico:[],seccoes:[]};
+    })
+    .filter(function(l){return l.pAberto>0;});
+
+  lojas.sort(function(a,b){return b.pAberto-a.pAberto;});
+  var topLojas=lojas.slice(0,10);
+  var topIds={};topLojas.forEach(function(l){topIds[l.loja]=true;});
+
+  var histPorLoja={};
+  data.forEach(function(item){
+    if(!item.Secção&&item.Loja&&item.Semana&&topIds[String(item.Loja).trim()]){
+      var id=String(item.Loja).trim();
+      if(!histPorLoja[id])histPorLoja[id]=[];
+      histPorLoja[id].push({
+        semana:String(item.Semana).trim(),
+        pAberto:Number(item['P Aberto'])||0,
+        pFechado:Number(item['P Fechado'])||0,
+        npAberto:Number(item['NP Aberto'])||0,
+        npFechado:Number(item['NP Fechado'])||0
+      });
+    }
+  });
+  topLojas.forEach(function(l){
+    var hist=histPorLoja[l.loja]||[];
+    l.historico=hist.filter(function(h){return h.semana!==ultimaSemana;}).slice(-8);
+    var ult=hist.slice(-2);
+    l.diff=ult.length===2?ult[1].pAberto-ult[0].pAberto:null;
+  });
+
+  data.forEach(function(item){
+    if(item.Secção&&item.Loja&&topIds[String(item.Loja).trim()]){
+      var loja=topLojas.find(function(l){return l.loja===String(item.Loja).trim();});
+      if(loja){
+        var pAb=Number(item['P Aberto'])||0,npAb=Number(item['NP Aberto'])||0;
+        var pFe=Number(item['P Fechado'])||0,npFe=Number(item['NP Fechado'])||0;
+        var pTo=Number(item['P Total'])||0,npTo=Number(item['NP Total'])||0;
+        if(pAb>0||npAb>0||pFe>0||npFe>0){
+          var nome=String(item.Secção).replace(/^IM\s+\d+\s+/,'').trim();
+          if(nome.toLowerCase()!=='admin'){
+            loja.seccoes.push({
+              nome,pAberto:pAb,pFechado:pFe,npAberto:npAb,npFechado:npFe,pTotal:pTo,npTotal:npTo,
+              pctPA:pTo>0?(pAb/pTo*100).toFixed(0):'0',
+              pctPF:pTo>0?(pFe/pTo*100).toFixed(0):'0',
+              pctNA:npTo>0?(npAb/npTo*100).toFixed(0):'0',
+              pctNF:npTo>0?(npFe/npTo*100).toFixed(0):'0'
+            });
           }
         }
       }
-    });
-    topLojas.forEach(function(l){l.seccoes.sort(function(a,b){return b.pAberto-a.pAberto;});});
-
-    document.getElementById('sub-info').textContent='Gerado hoje · '+topLojas.length+' lojas · semana '+ultimaSemana;
-    document.getElementById('periodo-label').innerHTML=ultimaSemana?'📅 <strong>'+ultimaSemana+'</strong>':'📅 —';
-    renderApp(topLojas,ultimaSemana);
-  })
-  .catch(function(err){
-    document.getElementById('app').innerHTML='<div style="color:#b91c1c;padding:40px;text-align:center">❌ Erro ao carregar dados: '+err.message+'</div>';
+    }
   });
+  topLojas.forEach(function(l){l.seccoes.sort(function(a,b){return b.pAberto-a.pAberto;});});
+
+  document.getElementById('sub-info').textContent='Gerado hoje · '+topLojas.length+' lojas · semana '+ultimaSemana;
+  document.getElementById('periodo-label').innerHTML=ultimaSemana?'📅 '+ultimaSemana:'📅 —';
+  renderApp(topLojas,ultimaSemana);
+}).catch(function(err){
+  document.getElementById('app').innerHTML='<div style="color:#ff6b9d;padding:40px;text-align:center">❌ Erro ao carregar dados: '+err.message+'</div>';
+});
 
 function renderApp(lojas,ultimaSemana){
-  var legenda='<div class="legenda">'
-    +'<span>🔴 Top 3 críticas &nbsp;|&nbsp; 🟡 Em alerta</span>'
-    +'<span><span style="color:#15803d;font-weight:700">N1</span> = 0–20%</span>'
-    +'<span><span style="color:#c2410c;font-weight:700">N2</span> = 21–40%</span>'
-    +'<span><span style="color:#b91c1c;font-weight:700">N3</span> = 41%+</span>'
-    +'<span style="color:#b91c1c">▲ Piorar</span>'
-    +'<span style="color:#15803d">▼ Melhorar</span>'
+  var abreviaturasHtml='<div class="abrev-simple">'
+    +'<div class="abrev-simple-row">'
+    +'<div class="abrev-simple-item"><span class="abrev-simple-label">P:</span> Programadas <span class="abrev-simple-sep">|</span> <span class="abrev-simple-label">NP:</span> Não Programadas <span class="abrev-simple-sep">|</span> <span class="abrev-simple-label">Ab:</span> Abertas <span class="abrev-simple-sep">|</span> <span class="abrev-simple-label">Fe:</span> Fechadas</div>'
+    +'</div>'
     +'</div>';
 
-  // DESKTOP
+  var legenda='<div class="legenda">'
+    +'<div class="legenda-item"><span style="color:#ff6b9d;font-weight:700">●</span> <span>Top 3 críticas</span></div>'
+    +'<div class="legenda-item"><span style="color:#f59e0b;font-weight:700">●</span> <span>Em alerta</span></div>'
+    +'<div class="legenda-item"><span style="color:#86efac;font-weight:700">N1</span> <span>0–20%</span></div>'
+    +'<div class="legenda-item"><span style="color:#fdba74;font-weight:700">N2</span> <span>21–40%</span></div>'
+    +'<div class="legenda-item"><span style="color:#fca5a5;font-weight:700">N3</span> <span>41%+</span></div>'
+    +'<div class="legenda-item"><span style="color:#ff6b9d;font-weight:700">▲</span> <span>Piorar</span></div>'
+    +'<div class="legenda-item"><span style="color:#86efac;font-weight:700">▼</span> <span>Melhorar</span></div>'
+    +'</div>';
+
   var headerDesk='<div class="tabela-header">'
     +'<div style="text-align:center">#</div>'
     +'<div>Loja</div>'
@@ -337,26 +549,24 @@ function renderApp(lojas,ultimaSemana){
     var emoji=li<3?'🔴':'🟡';
     var nc=l.nivel===1?'n1':l.nivel===2?'n2':'n3';
 
-    // Histórico
     var histContent='<div class="hist-inner"><div class="panel-title">Evolução semanal</div>';
     if(l.historico&&l.historico.length>0){
       var hRows=l.historico.map(function(h){return'<tr><td>'+h.semana+'</td><td>'+h.pAberto+'</td><td>'+h.pFechado+'</td><td>'+h.npAberto+'</td><td>'+h.npFechado+'</td></tr>';}).join('');
-      var diffTxt=l.diff===null?'—':l.diff>0?'<span style="color:#b91c1c;font-weight:700">▲ +'+l.diff+' vs semana anterior</span>':l.diff<0?'<span style="color:#15803d;font-weight:700">▼ '+l.diff+' vs semana anterior</span>':'<span style="color:#64748b">→ sem alteração</span>';
+      var diffTxt=l.diff===null?'—':l.diff>0?'<span style="color:#ff6b9d;font-weight:700">▲ +'+l.diff+' vs semana anterior</span>':l.diff<0?'<span style="color:#86efac;font-weight:700">▼ '+l.diff+' vs semana anterior</span>':'<span style="color:#8b9dc3">→ sem alteração</span>';
       histContent+='<table class="hist-table"><thead><tr><th>Semana</th><th>P Ab</th><th>P Fe</th><th>NP Ab</th><th>NP Fe</th></tr></thead><tbody>'
         +hRows+'<tr class="atual"><td>'+ultimaSemana+'</td><td>'+l.pAberto+'</td><td>'+l.pFechado+'</td><td>'+l.npAberto+'</td><td>'+l.npFechado+'</td></tr></tbody></table>'
-        +'<div style="margin-top:10px;font-size:12px;color:#475569">Tendência: '+diffTxt+'</div>';
+        +'<div style="margin-top:10px;font-size:12px;color:#8b9dc3">Tendência: '+diffTxt+'</div>';
     }else{
-      histContent+='<p style="color:#94a3b8;font-size:12px">Sem histórico disponível.</p>';
+      histContent+='<p style="color:#8b9dc3;font-size:12px">Sem histórico disponível.</p>';
     }
     histContent+='</div>';
 
-    // Secções
     var secContent='';
     if(l.seccoes.length>0){
       var secRows=l.seccoes.map(function(s,si){
         var id=li+'-'+si;
-        var pVal=s.pAberto>0||s.pFechado>0?s.pAberto+' / '+s.pFechado:'<span style="color:#cbd5e1">—</span>';
-        var npVal=s.npAberto>0||s.npFechado>0?s.npAberto+' / '+s.npFechado:'<span style="color:#cbd5e1">—</span>';
+        var pVal=s.pAberto>0||s.pFechado>0?s.pAberto+' / '+s.pFechado:'<span style="color:#8b9dc3">—</span>';
+        var npVal=s.npAberto>0||s.npFechado>0?s.npAberto+' / '+s.npFechado:'<span style="color:#8b9dc3">—</span>';
         var tag='<span class="pct-tag '+tagClass(s.pctPA)+'">'+s.pctPA+'%</span>';
         return'<tr id="secrow-'+id+'" onclick="toggleSecDet(\''+id+'\')">'
           +'<td class="sec-nome">'+s.nome+tag+'</td>'
@@ -366,9 +576,9 @@ function renderApp(lojas,ultimaSemana){
           +'<div class="painel" id="secdet-'+id+'">'
           +'<div class="sec-det-inner">'
           +'<div class="sec-det-box"><div class="sdb-label">P Abertas</div><div class="sdb-num" style="color:'+corPct(s.pctPA)+'">'+s.pAberto+'</div><div class="sdb-pct">'+s.pctPA+'%</div>'+barraS(s.pctPA,corPct(s.pctPA))+'</div>'
-          +'<div class="sec-det-box"><div class="sdb-label">P Fechadas</div><div class="sdb-num" style="color:#15803d">'+s.pFechado+'</div><div class="sdb-pct">'+s.pctPF+'%</div>'+barraS(s.pctPF,'#15803d')+'</div>'
+          +'<div class="sec-det-box"><div class="sdb-label">P Fechadas</div><div class="sdb-num" style="color:#86efac">'+s.pFechado+'</div><div class="sdb-pct">'+s.pctPF+'%</div>'+barraS(s.pctPF,'#86efac')+'</div>'
           +'<div class="sec-det-box"><div class="sdb-label">NP Abertas</div><div class="sdb-num" style="color:'+corPct(s.pctNA)+'">'+s.npAberto+'</div><div class="sdb-pct">'+s.pctNA+'%</div>'+barraS(s.pctNA,corPct(s.pctNA))+'</div>'
-          +'<div class="sec-det-box"><div class="sdb-label">NP Fechadas</div><div class="sdb-num" style="color:#15803d">'+s.npFechado+'</div><div class="sdb-pct">'+s.pctNF+'%</div>'+barraS(s.pctNF,'#15803d')+'</div>'
+          +'<div class="sec-det-box"><div class="sdb-label">NP Fechadas</div><div class="sdb-num" style="color:#86efac">'+s.npFechado+'</div><div class="sdb-pct">'+s.pctNF+'%</div>'+barraS(s.pctNF,'#86efac')+'</div>'
           +'</div></div>'
           +'</td></tr>';
       }).join('');
@@ -376,10 +586,9 @@ function renderApp(lojas,ultimaSemana){
         +'<thead><tr><th>Secção</th><th>P (Ab/Fe)</th><th>NP (Ab/Fe)</th></tr></thead>'
         +'<tbody>'+secRows+'</tbody></table></div>';
     }else{
-      secContent='<div style="padding:16px;color:#94a3b8;font-size:12px;background:#f8fafd">Sem secções com tarefas.</div>';
+      secContent='<div style="padding:16px;color:#8b9dc3;font-size:12px;background:rgba(139,92,246,0.08)">Sem secções com tarefas.</div>';
     }
 
-    // DESKTOP
     blocos+='<div class="loja-bloco">'
       +'<div class="loja-linha">'
       +'<div class="cel-rank"><div class="rank-num">'+emoji+' '+(li+1)+'</div><span class="nivel-badge '+nc+'">N'+l.nivel+'</span></div>'
@@ -396,7 +605,6 @@ function renderApp(lojas,ultimaSemana){
       +'<div class="painel" id="sec-'+li+'">'+secContent+'</div>'
       +'</div>';
 
-    // MOBILE
     cards+='<div class="card-mobile">'
       +'<div class="card-header">'
       +'<div class="card-rank"><div class="rank-num">'+emoji+'</div><div><div style="font-size:14px;font-weight:700;">'+(li+1)+'º</div><span class="nivel-badge '+nc+'">N'+l.nivel+'</span></div></div>'
@@ -421,11 +629,15 @@ function renderApp(lojas,ultimaSemana){
     +'<div class="acao-icon">⚠️</div>'
     +'<div class="acao-text">'
     +'<strong>Ação recomendada</strong>'
-    +'Contactar urgentemente os responsáveis das lojas 🔴. Para 🔴 com tendência ▲, escalar para supervisor.'
+    +'<div class="acao-linhas">'
+    +'<div class="acao-linha">Contactar urgentemente os responsáveis das <strong>lojas críticas</strong></div>'
+    +'<div class="acao-linha">Para lojas com <strong>tendência crescente</strong>, escalar para supervisor de zona</div>'
+    +'<div class="acao-linha">Acompanhamento semanal do desempenho das lojas em alerta</div>'
+    +'</div>'
     +'</div>'
     +'</div>';
 
-  document.getElementById('app').innerHTML=legenda
+  document.getElementById('app').innerHTML=abreviaturasHtml+legenda
     +'<div class="tabela-wrap desktop">'+headerDesk+blocos+'</div>'
     +cards
     +acao;
