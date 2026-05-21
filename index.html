@@ -86,7 +86,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);fon
 
 .tabela-header{
   display:grid;
-  grid-template-columns:72px 140px 110px 110px 110px 110px 90px 90px 90px;
+  grid-template-columns:72px 140px 110px 100px 110px 100px 90px 90px 90px;
   background:rgba(99,102,241,0.12);
   padding:13px 20px;gap:10px;
   font-size:11px;font-weight:600;color:#a5b4fc;
@@ -100,7 +100,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);fon
 .loja-bloco{border-top:1px solid var(--border);}
 .loja-linha{
   display:grid;
-  grid-template-columns:72px 140px 110px 110px 110px 110px 90px 90px 90px;
+  grid-template-columns:72px 140px 110px 100px 110px 100px 90px 90px 90px;
   padding:14px 20px;gap:10px;align-items:center;
   transition:background .15s;
 }
@@ -125,20 +125,21 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);fon
 .tar-sub{font-size:10.5px;color:var(--muted);}
 
 /* PCT P */
-.cel-pct-p{text-align:center;display:flex;flex-direction:column;gap:3px;}
-.pct-main{font-size:15px;font-weight:700;}
-.pct-label{font-size:10px;color:var(--muted);}
+.cel-pct-p{text-align:center;display:flex;flex-direction:column;gap:2px;}
+.pct-row{display:flex;align-items:center;justify-content:center;gap:4px;font-size:14px;font-weight:700;color:#fff;}
+.pct-label{font-size:9px;color:var(--muted);margin-top:2px;}
 
 /* TAREFAS NP */
 .cel-tar-np{text-align:center;display:flex;flex-direction:column;gap:3px;}
 
 /* PCT NP */
-.cel-pct-np{text-align:center;display:flex;flex-direction:column;gap:3px;}
+.cel-pct-np{text-align:center;display:flex;flex-direction:column;gap:2px;}
 
 /* TEND */
 .cel-tend{text-align:center;}
+.tend-title{font-size:10px;font-weight:700;color:#a5b4fc;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;}
 .tend-val{font-size:16px;font-weight:700;}
-.tend-sub{font-size:10.5px;color:var(--muted);margin-top:2px;}
+.tend-sub{font-size:10px;color:var(--muted);margin-top:2px;}
 
 /* BTNS */
 .cel-btn{display:flex;flex-direction:column;align-items:center;gap:4px;}
@@ -439,7 +440,7 @@ function renderApp(lojas,ultima){
     +'<div class="th-group">% P<div class="th-sub">ab · fe</div></div>'
     +'<div class="th-group">Tarefas NP<div class="th-sub">ab · fe</div></div>'
     +'<div class="th-group">% NP<div class="th-sub">ab · fe</div></div>'
-    +'<div style="text-align:center">Tend.</div>'
+    +'<div style="text-align:center">Tendência</div>'
     +'<div style="text-align:center">Histórico</div>'
     +'<div style="text-align:center">Secções</div>'
     +'</div>';
@@ -467,15 +468,15 @@ function renderApp(lojas,ultima){
       +'<div class="cel-tar-p"><div class="tar-main">'+l.pA+' / '+l.pF+'</div><div class="tar-sub">('+l.pT+')</div>'+prog(l.pctPA,corPct(l.pctPA))+'</div>'
 
       // % P
-      +'<div class="cel-pct-p"><div class="pct-main" style="color:'+corPct(l.pctPA)+'">'+l.pctPA+'%</div><div class="pct-label">ab · '+l.pctPF+'% fe</div></div>'
+      +'<div class="cel-pct-p"><div class="pct-row"><span style="color:'+corPct(l.pctPA)+'">'+l.pctPA+'%</span><span style="color:var(--muted);font-size:12px">·</span><span style="color:#fff">'+l.pctPF+'%</span></div><div class="pct-label">ab · fe</div></div>'
 
       // Tarefas NP
       +'<div class="cel-tar-np"><div class="tar-main">'+l.nA+' / '+l.nF+'</div><div class="tar-sub">('+l.nT+')</div>'+prog(l.pctNA,corPct(l.pctNA))+'</div>'
 
       // % NP
-      +'<div class="cel-pct-np"><div class="pct-main" style="color:'+corPct(l.pctNA)+'">'+l.pctNA+'%</div><div class="pct-label">ab · '+l.pctNF+'% fe</div></div>'
+      +'<div class="cel-pct-np"><div class="pct-row"><span style="color:'+corPct(l.pctNA)+'">'+l.pctNA+'%</span><span style="color:var(--muted);font-size:12px">·</span><span style="color:#fff">'+l.pctNF+'%</span></div><div class="pct-label">ab · fe</div></div>'
 
-      +'<div class="cel-tend"><div class="tend-val">'+diffTxt+'</div><div class="tend-sub">vs ant.</div></div>'
+      +'<div class="cel-tend"><div class="tend-title">Tendência</div><div class="tend-val">'+diffTxt+'</div><div class="tend-sub">vs ant.</div></div>'
       +'<div class="cel-btn"><button class="toggle-btn" id="btnhist-'+li+'" onclick="toggleHist('+li+')">▶ Histórico</button></div>'
       +'<div class="cel-btn"><button class="toggle-btn" id="btnsec-'+li+'" onclick="toggleSec('+li+')">▶ Secções</button><div class="btn-count">'+l.seccoes.length+'</div></div>'
       +'</div>'
@@ -490,8 +491,8 @@ function renderApp(lojas,ultima){
       +'<div><div class="card-m-nome">'+l.loja+'</div><div class="card-m-local">'+(l.local||'—')+'</div></div>'
       +'</div>'
       +'<div class="card-m-body">'
-      +'<div class="card-stat"><div class="card-stat-label">P Abertas / Fechadas</div><div class="card-stat-val" style="color:'+corPct(l.pctPA)+'">'+l.pA+' / <span style="color:#4ade80">'+l.pF+'</span></div><div class="card-stat-sub">'+l.pctPA+'% ab · '+l.pctPF+'% fe ('+l.pT+')</div>'+prog(l.pctPA,corPct(l.pctPA))+'</div>'
-      +'<div class="card-stat"><div class="card-stat-label">NP Abertas / Fechadas</div><div class="card-stat-val" style="color:'+corPct(l.pctNA)+'">'+l.nA+' / <span style="color:#4ade80">'+l.nF+'</span></div><div class="card-stat-sub">'+l.pctNA+'% ab · '+l.pctNF+'% fe ('+l.nT+')</div>'+prog(l.pctNA,corPct(l.pctNA))+'</div>'
+      +'<div class="card-stat"><div class="card-stat-label">P Abertas / Fechadas</div><div class="card-stat-val" style="color:'+corPct(l.pctPA)+'">'+l.pA+' / <span style="color:#fff">'+l.pF+'</span></div><div class="card-stat-sub">'+l.pctPA+'% ab · '+l.pctPF+'% fe ('+l.pT+')</div>'+prog(l.pctPA,corPct(l.pctPA))+'</div>'
+      +'<div class="card-stat"><div class="card-stat-label">NP Abertas / Fechadas</div><div class="card-stat-val" style="color:'+corPct(l.pctNA)+'">'+l.nA+' / <span style="color:#fff">'+l.nF+'</span></div><div class="card-stat-sub">'+l.pctNA+'% ab · '+l.pctNF+'% fe ('+l.nT+')</div>'+prog(l.pctNA,corPct(l.pctNA))+'</div>'
       +'<div class="card-stat"><div class="card-stat-label">Tendência</div><div class="card-stat-val">'+diffTxt+'</div><div class="card-stat-sub">vs semana anterior</div></div>'
       +'<div class="card-stat"><div class="card-stat-label">Período</div><div class="card-stat-val" style="font-size:12px;color:#a5b4fc">'+ultima+'</div></div>'
       +'</div>'
