@@ -48,7 +48,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);fon
 }
 
 /* PAGE */
-.page{max-width:1380px;margin:0 auto;padding:28px 24px 72px;display:flex;flex-direction:column;align-items:center;}
+.page{max-width:1480px;margin:0 auto;padding:28px 24px 72px;display:flex;flex-direction:column;align-items:center;}
 
 /* INFO BAR */
 .info-bar{
@@ -86,20 +86,21 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);fon
 
 .tabela-header{
   display:grid;
-  grid-template-columns:72px 160px 1fr 150px 150px 90px 100px 100px;
+  grid-template-columns:72px 140px 110px 110px 110px 110px 90px 90px 90px;
   background:rgba(99,102,241,0.12);
   padding:13px 20px;gap:10px;
-  font-size:11.5px;font-weight:600;color:#a5b4fc;
+  font-size:11px;font-weight:600;color:#a5b4fc;
   letter-spacing:.04em;text-transform:uppercase;
   align-items:center;border-bottom:1px solid var(--border);
 }
-.th-sub{font-weight:400;font-size:10px;color:var(--muted);margin-top:2px;text-transform:none;letter-spacing:0;}
+.th-sub{font-weight:400;font-size:9.5px;color:var(--muted);margin-top:2px;text-transform:none;letter-spacing:0;}
+.th-group{text-align:center;}
 
 /* LOJA */
 .loja-bloco{border-top:1px solid var(--border);}
 .loja-linha{
   display:grid;
-  grid-template-columns:72px 160px 1fr 150px 150px 90px 100px 100px;
+  grid-template-columns:72px 140px 110px 110px 110px 110px 90px 90px 90px;
   padding:14px 20px;gap:10px;align-items:center;
   transition:background .15s;
 }
@@ -118,29 +119,21 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);fon
 .cel-loja .nome{font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;color:#fff;}
 .cel-loja .local{font-size:11.5px;color:var(--muted);}
 
-/* TAREFAS */
-.cel-tarefas{}
-.t-periodo{font-size:10.5px;color:var(--muted);margin-bottom:5px;}
-.t-group{display:flex;flex-direction:column;gap:4px;}
-.t-row{display:flex;align-items:center;justify-content:space-between;gap:8px;}
-.t-label{font-size:11px;color:var(--muted);min-width:24px;}
-.t-vals{display:flex;gap:8px;align-items:center;}
-.t-ab{font-size:16px;font-weight:700;color:#fff;}
-.t-fe{font-size:13px;font-weight:600;color:var(--green);}
-.t-slash{color:var(--muted);font-size:12px;}
-.t-total{font-size:10.5px;color:var(--muted);}
-.prog{height:3px;border-radius:2px;background:rgba(99,102,241,0.2);margin-top:2px;overflow:hidden;}
-.prog-fill{height:100%;border-radius:2px;}
+/* TAREFAS P */
+.cel-tar-p{text-align:center;display:flex;flex-direction:column;gap:3px;}
+.tar-main{font-size:15px;font-weight:700;color:#fff;}
+.tar-sub{font-size:10.5px;color:var(--muted);}
 
-/* PCT */
-.cel-pct{}
-.pct-group{display:flex;flex-direction:column;gap:5px;}
-.pct-row2{display:flex;align-items:center;gap:6px;}
-.pct-lbl2{font-size:10.5px;color:var(--muted);min-width:22px;}
-.pct-pair{display:flex;align-items:center;gap:4px;}
-.pct-ab2{font-size:14px;font-weight:700;}
-.pct-fe2{font-size:12px;font-weight:600;color:var(--green);}
-.pct-div2{color:var(--muted);font-size:11px;}
+/* PCT P */
+.cel-pct-p{text-align:center;display:flex;flex-direction:column;gap:3px;}
+.pct-main{font-size:15px;font-weight:700;}
+.pct-label{font-size:10px;color:var(--muted);}
+
+/* TAREFAS NP */
+.cel-tar-np{text-align:center;display:flex;flex-direction:column;gap:3px;}
+
+/* PCT NP */
+.cel-pct-np{text-align:center;display:flex;flex-direction:column;gap:3px;}
 
 /* TEND */
 .cel-tend{text-align:center;}
@@ -150,11 +143,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);fon
 /* BTNS */
 .cel-btn{display:flex;flex-direction:column;align-items:center;gap:4px;}
 .toggle-btn{
-  width:90px;
+  width:85px;
   background:rgba(99,102,241,0.12);
   border:1px solid var(--border2);
   border-radius:7px;padding:7px 8px;
-  font-size:11.5px;font-weight:600;
+  font-size:11px;font-weight:600;
   cursor:pointer;color:#a5b4fc;
   transition:all .15s;
   display:flex;align-items:center;justify-content:center;gap:4px;
@@ -281,7 +274,7 @@ var stateHist={},stateSec={},stateSecDet={};
 
 function corPct(v){v=parseFloat(v);if(v<=20)return'#4ade80';if(v<=40)return'#fb923c';return'#f87171';}
 function tagClass(v){v=parseFloat(v);if(v<=20)return'tag-green';if(v<=40)return'tag-orange';return'tag-red';}
-function prog(pct,cor){return'<div class="prog"><div class="prog-fill" style="width:'+Math.min(100,parseFloat(pct)||0)+'%;background:'+cor+'"></div></div>';}
+function prog(pct,cor){return'<div style="height:3px;border-radius:2px;background:rgba(99,102,241,0.2);margin-top:4px;overflow:hidden"><div style="height:100%;border-radius:2px;width:'+Math.min(100,parseFloat(pct)||0)+'%;background:'+cor+'"></div></div>';}
 function sdbBar(pct,cor){return'<div class="sdb-bar"><div class="sdb-bar-fill" style="width:'+Math.min(100,parseFloat(pct)||0)+'%;background:'+cor+'"></div></div>';}
 
 function toggleHist(li){
@@ -302,7 +295,6 @@ function toggleSecDet(id){
   det.classList.toggle('visible',stateSecDet[id]);
   if(row)row.classList.toggle('sec-open',stateSecDet[id]);
 }
-// Mobile toggles with prefix
 function toggleHistM(li){
   var p=document.getElementById('histm-'+li),b=document.getElementById('btnhistm-'+li);
   stateHist['m'+li]=!stateHist['m'+li];
@@ -410,10 +402,10 @@ function secContent(l){
       +'<tr class="sec-det-row"><td colspan="3">'
       +'<div class="painel" id="secdet-'+id+'">'
       +'<div class="sec-det-grid">'
-      +'<div class="sec-det-box"><div class="sdb-label">P Abertas</div><div class="sdb-num" style="color:'+corPct(s.pctPA)+'">'+s.pA+'</div><div class="sdb-pct">'+s.pctPA+'% do total</div>'+sdbBar(s.pctPA,corPct(s.pctPA))+'</div>'
-      +'<div class="sec-det-box"><div class="sdb-label">P Fechadas</div><div class="sdb-num" style="color:#4ade80">'+s.pF+'</div><div class="sdb-pct">'+s.pctPF+'% do total</div>'+sdbBar(s.pctPF,'#4ade80')+'</div>'
-      +'<div class="sec-det-box"><div class="sdb-label">NP Abertas</div><div class="sdb-num" style="color:'+corPct(s.pctNA)+'">'+s.nA+'</div><div class="sdb-pct">'+s.pctNA+'% do total</div>'+sdbBar(s.pctNA,corPct(s.pctNA))+'</div>'
-      +'<div class="sec-det-box"><div class="sdb-label">NP Fechadas</div><div class="sdb-num" style="color:#4ade80">'+s.nF+'</div><div class="sdb-pct">'+s.pctNF+'% do total</div>'+sdbBar(s.pctNF,'#4ade80')+'</div>'
+      +'<div class="sec-det-box"><div class="sdb-label">P Abertas</div><div class="sdb-num" style="color:'+corPct(s.pctPA)+'">'+s.pA+'</div><div class="sdb-pct">'+s.pctPA+'%</div>'+sdbBar(s.pctPA,corPct(s.pctPA))+'</div>'
+      +'<div class="sec-det-box"><div class="sdb-label">P Fechadas</div><div class="sdb-num" style="color:#4ade80">'+s.pF+'</div><div class="sdb-pct">'+s.pctPF+'%</div>'+sdbBar(s.pctPF,'#4ade80')+'</div>'
+      +'<div class="sec-det-box"><div class="sdb-label">NP Abertas</div><div class="sdb-num" style="color:'+corPct(s.pctNA)+'">'+s.nA+'</div><div class="sdb-pct">'+s.pctNA+'%</div>'+sdbBar(s.pctNA,corPct(s.pctNA))+'</div>'
+      +'<div class="sec-det-box"><div class="sdb-label">NP Fechadas</div><div class="sdb-num" style="color:#4ade80">'+s.nF+'</div><div class="sdb-pct">'+s.pctNF+'%</div>'+sdbBar(s.pctNF,'#4ade80')+'</div>'
       +'</div></div></td></tr>';
   }).join('');
   return'<div class="painel-inner"><table class="sec-table">'
@@ -443,9 +435,10 @@ function renderApp(lojas,ultima){
   var header='<div class="tabela-header">'
     +'<div style="text-align:center"># / Nível</div>'
     +'<div>Loja</div>'
-    +'<div>Tarefas<div class="th-sub">período: '+ultima+'</div></div>'
-    +'<div style="text-align:center">% P<div class="th-sub">abertas · fechadas</div></div>'
-    +'<div style="text-align:center">% NP<div class="th-sub">abertas · fechadas</div></div>'
+    +'<div class="th-group">Tarefas P<div class="th-sub">ab · fe</div></div>'
+    +'<div class="th-group">% P<div class="th-sub">ab · fe</div></div>'
+    +'<div class="th-group">Tarefas NP<div class="th-sub">ab · fe</div></div>'
+    +'<div class="th-group">% NP<div class="th-sub">ab · fe</div></div>'
     +'<div style="text-align:center">Tend.</div>'
     +'<div style="text-align:center">Histórico</div>'
     +'<div style="text-align:center">Secções</div>'
@@ -470,27 +463,17 @@ function renderApp(lojas,ultima){
       +'<div class="cel-rank"><div class="rank-num">'+emoji+' '+(li+1)+'</div><span class="nivel-badge '+nc+'">N'+l.nivel+'</span></div>'
       +'<div class="cel-loja"><div class="nome">'+l.loja+'</div><div class="local">'+(l.local||'—')+'</div></div>'
 
-      // Tarefas
-      +'<div class="cel-tarefas">'
-      +'<div class="t-periodo">📅 '+ultima+'</div>'
-      +'<div class="t-group">'
-      +'<div class="t-row"><span class="t-label">P</span><div class="t-vals"><span class="t-ab">'+l.pA+'</span><span class="t-slash">/</span><span class="t-fe">'+l.pF+'</span><span class="t-total">('+l.pT+')</span></div></div>'
-      +prog(l.pctPA,corPct(l.pctPA))
-      +'<div class="t-row" style="margin-top:4px"><span class="t-label">NP</span><div class="t-vals"><span class="t-ab">'+l.nA+'</span><span class="t-slash">/</span><span class="t-fe">'+l.nF+'</span><span class="t-total">('+l.nT+')</span></div></div>'
-      +prog(l.pctNA,corPct(l.pctNA))
-      +'</div></div>'
+      // Tarefas P
+      +'<div class="cel-tar-p"><div class="tar-main">'+l.pA+' / '+l.pF+'</div><div class="tar-sub">('+l.pT+')</div>'+prog(l.pctPA,corPct(l.pctPA))+'</div>'
 
       // % P
-      +'<div class="cel-pct"><div class="pct-group">'
-      +'<div class="pct-row2"><span class="pct-lbl2">Ab</span><div class="pct-pair"><span class="pct-ab2" style="color:'+corPct(l.pctPA)+'">'+l.pctPA+'%</span></div></div>'
-      +'<div class="pct-row2"><span class="pct-lbl2">Fe</span><div class="pct-pair"><span class="pct-fe2">'+l.pctPF+'%</span></div></div>'
-      +'</div></div>'
+      +'<div class="cel-pct-p"><div class="pct-main" style="color:'+corPct(l.pctPA)+'">'+l.pctPA+'%</div><div class="pct-label">ab · '+l.pctPF+'% fe</div></div>'
+
+      // Tarefas NP
+      +'<div class="cel-tar-np"><div class="tar-main">'+l.nA+' / '+l.nF+'</div><div class="tar-sub">('+l.nT+')</div>'+prog(l.pctNA,corPct(l.pctNA))+'</div>'
 
       // % NP
-      +'<div class="cel-pct"><div class="pct-group">'
-      +'<div class="pct-row2"><span class="pct-lbl2">Ab</span><div class="pct-pair"><span class="pct-ab2" style="color:'+corPct(l.pctNA)+'">'+l.pctNA+'%</span></div></div>'
-      +'<div class="pct-row2"><span class="pct-lbl2">Fe</span><div class="pct-pair"><span class="pct-fe2">'+l.pctNF+'%</span></div></div>'
-      +'</div></div>'
+      +'<div class="cel-pct-np"><div class="pct-main" style="color:'+corPct(l.pctNA)+'">'+l.pctNA+'%</div><div class="pct-label">ab · '+l.pctNF+'% fe</div></div>'
 
       +'<div class="cel-tend"><div class="tend-val">'+diffTxt+'</div><div class="tend-sub">vs ant.</div></div>'
       +'<div class="cel-btn"><button class="toggle-btn" id="btnhist-'+li+'" onclick="toggleHist('+li+')">▶ Histórico</button></div>'
@@ -507,8 +490,8 @@ function renderApp(lojas,ultima){
       +'<div><div class="card-m-nome">'+l.loja+'</div><div class="card-m-local">'+(l.local||'—')+'</div></div>'
       +'</div>'
       +'<div class="card-m-body">'
-      +'<div class="card-stat"><div class="card-stat-label">P Abertas / Fechadas</div><div class="card-stat-val" style="color:'+corPct(l.pctPA)+'">'+l.pA+' / <span style="color:#4ade80">'+l.pF+'</span></div><div class="card-stat-sub">'+l.pctPA+'% ab · '+l.pctPF+'% fe (total: '+l.pT+')</div>'+prog(l.pctPA,corPct(l.pctPA))+'</div>'
-      +'<div class="card-stat"><div class="card-stat-label">NP Abertas / Fechadas</div><div class="card-stat-val" style="color:'+corPct(l.pctNA)+'">'+l.nA+' / <span style="color:#4ade80">'+l.nF+'</span></div><div class="card-stat-sub">'+l.pctNA+'% ab · '+l.pctNF+'% fe (total: '+l.nT+')</div>'+prog(l.pctNA,corPct(l.pctNA))+'</div>'
+      +'<div class="card-stat"><div class="card-stat-label">P Abertas / Fechadas</div><div class="card-stat-val" style="color:'+corPct(l.pctPA)+'">'+l.pA+' / <span style="color:#4ade80">'+l.pF+'</span></div><div class="card-stat-sub">'+l.pctPA+'% ab · '+l.pctPF+'% fe ('+l.pT+')</div>'+prog(l.pctPA,corPct(l.pctPA))+'</div>'
+      +'<div class="card-stat"><div class="card-stat-label">NP Abertas / Fechadas</div><div class="card-stat-val" style="color:'+corPct(l.pctNA)+'">'+l.nA+' / <span style="color:#4ade80">'+l.nF+'</span></div><div class="card-stat-sub">'+l.pctNA+'% ab · '+l.pctNF+'% fe ('+l.nT+')</div>'+prog(l.pctNA,corPct(l.pctNA))+'</div>'
       +'<div class="card-stat"><div class="card-stat-label">Tendência</div><div class="card-stat-val">'+diffTxt+'</div><div class="card-stat-sub">vs semana anterior</div></div>'
       +'<div class="card-stat"><div class="card-stat-label">Período</div><div class="card-stat-val" style="font-size:12px;color:#a5b4fc">'+ultima+'</div></div>'
       +'</div>'
@@ -525,7 +508,7 @@ function renderApp(lojas,ultima){
     +'<div class="acao-icon">⚠️</div>'
     +'<div class="acao-text">'
     +'<strong>Ação recomendada</strong>'
-    +'<p>Contactar urgentemente os responsáveis das lojas críticas.</p>'
+    +'<p>Contactar urgentemente os responsáveis das lojas críticas. Para lojas com tendência crescente, escalar para supervisor de zona.</p>'
     +'</div></div>';
 
   document.getElementById('app').innerHTML=infoBar+leg
