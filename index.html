@@ -4,431 +4,285 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Análise Semanal IM</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-body{
-  font-family:'Segoe UI',Arial,sans-serif;
-  background:linear-gradient(135deg,#0a0e27 0%,#1a1f3a 50%,#2d1b4e 100%);
-  color:#e0e0e0;
-  font-size:14px;
-  line-height:1.5;
-  min-height:100vh;
+:root {
+  --bg: #080b1a;
+  --bg2: #0d1128;
+  --bg3: #141830;
+  --card: rgba(20,24,48,0.85);
+  --border: rgba(99,102,241,0.18);
+  --border2: rgba(99,102,241,0.32);
+  --accent: #6366f1;
+  --accent2: #ec4899;
+  --grad: linear-gradient(135deg,#6366f1,#ec4899);
+  --text: #e2e8f0;
+  --muted: #7c8db5;
+  --green: #4ade80;
+  --orange: #fb923c;
+  --red: #f87171;
 }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.5;min-height:100vh;}
 
 /* HEADER */
 .header{
-  background:rgba(10,14,39,0.95);
-  border-bottom:1px solid rgba(139,92,246,0.2);
-  padding:18px 24px;
-  position:sticky;
-  top:0;
-  z-index:100;
-  backdrop-filter:blur(10px);
+  background:rgba(8,11,26,0.96);
+  border-bottom:1px solid var(--border);
+  padding:0 32px;
+  height:60px;
+  position:sticky;top:0;z-index:100;
+  backdrop-filter:blur(16px);
+  display:flex;align-items:center;justify-content:space-between;
 }
-.header-content{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;}
-.header-left{display:flex;align-items:center;gap:12px;}
-.header-logo{font-size:24px;}
-.header-title h1{font-size:18px;font-weight:700;color:#fff;margin:0;}
-.header-title .sub{font-size:12px;color:#8b9dc3;margin-top:2px;}
-.header-nav{display:flex;gap:32px;}
-.header-nav a{color:#b0b8d4;text-decoration:none;font-size:14px;font-weight:500;transition:color 0.3s;}
-.header-nav a:hover{color:#fff;}
+.header-brand{display:flex;align-items:center;gap:10px;}
+.header-brand .logo{width:30px;height:30px;background:var(--grad);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;}
+.header-brand h1{font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:700;color:#fff;letter-spacing:-.3px;}
+.header-brand .sub{font-size:11px;color:var(--muted);margin-top:1px;}
 .periodo{
-  background:rgba(139,92,246,0.15);
-  border:1px solid rgba(139,92,246,0.3);
-  border-radius:8px;
-  padding:8px 16px;
-  font-size:13px;
-  font-weight:600;
-  color:#c4b5fd;
+  background:rgba(99,102,241,0.12);
+  border:1px solid var(--border2);
+  border-radius:8px;padding:6px 14px;
+  font-size:12px;font-weight:600;color:#a5b4fc;
+  white-space:nowrap;
 }
 
-.container{max-width:1400px;margin:0 auto;padding:0 24px 60px;}
-.loading{text-align:center;padding:80px 24px;color:#8b9dc3;font-size:15px;}
+/* PAGE */
+.page{max-width:1380px;margin:0 auto;padding:28px 24px 72px;display:flex;flex-direction:column;align-items:center;}
 
-/* ABREVIATURAS */
-.abrev-simple{
-  background:rgba(139,92,246,0.1);
-  border:1px solid rgba(139,92,246,0.3);
+/* INFO BAR */
+.info-bar{
+  width:100%;
+  background:var(--card);
+  border:1px solid var(--border);
   border-radius:12px;
-  padding:14px 20px;
+  padding:12px 20px;
   margin-bottom:16px;
-  backdrop-filter:blur(10px);
+  display:flex;flex-wrap:wrap;gap:0;
+  backdrop-filter:blur(12px);
 }
-.abrev-simple-row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;font-size:13px;color:#b0b8d4;}
-.abrev-simple-item{display:flex;align-items:center;gap:6px;white-space:nowrap;}
-.abrev-simple-label{font-weight:700;color:#c4b5fd;min-width:32px;}
-.abrev-simple-sep{color:rgba(180,167,255,0.4);margin:0 4px;}
+.info-row{display:flex;flex-wrap:wrap;gap:20px;width:100%;justify-content:center;}
+.info-item{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--muted);white-space:nowrap;}
+.info-key{font-weight:700;color:#a5b4fc;}
+.info-sep{color:rgba(99,102,241,0.3);margin:0 2px;}
 
 /* LEGENDA */
-.legenda-wrapper{
-  background:rgba(139,92,246,0.08);
-  border:1px solid rgba(139,92,246,0.2);
-  border-radius:12px;
-  padding:16px 20px;
-  margin-bottom:20px;
-  backdrop-filter:blur(10px);
-}
-
 .legenda{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:16px;
-}
-
-.legenda-section{
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-}
-
-.legenda-section-title{
-  font-size:11px;
-  font-weight:700;
-  color:#c4b5fd;
-  text-transform:uppercase;
-  letter-spacing:.1em;
-  margin-bottom:4px;
-  padding-bottom:8px;
-  border-bottom:1px solid rgba(139,92,246,0.2);
-}
-
-.legenda-item{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  font-size:13px;
-  color:#b0b8d4;
-}
-
-.legenda-item span:first-child{
-  font-weight:700;
-  min-width:24px;
-}
-
-/* TABELA DESKTOP */
-.tabela-wrap{
-  background:rgba(26,31,58,0.6);
-  border:1px solid rgba(139,92,246,0.2);
-  border-radius:16px;
-  box-shadow:0 8px 32px rgba(0,0,0,0.3);
-  overflow:hidden;
+  width:100%;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:12px 20px;
   margin-bottom:20px;
-  display:none;
-  backdrop-filter:blur(10px);
+  backdrop-filter:blur(12px);
+  display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:center;
+  font-size:12.5px;color:var(--muted);
 }
-.tabela-wrap.desktop{display:block;}
+.leg{display:flex;align-items:center;gap:6px;}
+.leg-sep{width:1px;height:14px;background:var(--border);margin:0 4px;}
+
+/* TABLE WRAP */
+.tabela-wrap{width:100%;background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;backdrop-filter:blur(12px);margin-bottom:20px;}
 
 .tabela-header{
   display:grid;
-  grid-template-columns:50px 100px 130px 130px 100px 100px 110px 110px 110px;
-  background:rgba(139,92,246,0.15);
-  color:#c4b5fd;
-  padding:14px 16px;
-  gap:8px;
-  font-size:12px;
-  font-weight:600;
-  letter-spacing:.05em;
-  align-items:center;
-  border-bottom:1px solid rgba(139,92,246,0.2);
+  grid-template-columns:72px 160px 1fr 150px 150px 90px 100px 100px;
+  background:rgba(99,102,241,0.12);
+  padding:13px 20px;gap:10px;
+  font-size:11.5px;font-weight:600;color:#a5b4fc;
+  letter-spacing:.04em;text-transform:uppercase;
+  align-items:center;border-bottom:1px solid var(--border);
 }
-.th-sub{font-weight:400;font-size:11px;color:#8b9dc3;margin-top:3px;}
+.th-sub{font-weight:400;font-size:10px;color:var(--muted);margin-top:2px;text-transform:none;letter-spacing:0;}
 
-.loja-bloco{border-top:1px solid rgba(139,92,246,0.1);}
-
+/* LOJA */
+.loja-bloco{border-top:1px solid var(--border);}
 .loja-linha{
   display:grid;
-  grid-template-columns:50px 100px 130px 130px 100px 100px 110px 110px 110px;
-  padding:14px 16px;
-  gap:8px;
-  align-items:center;
-  background:rgba(26,31,58,0.4);
-  transition:all 0.3s;
+  grid-template-columns:72px 160px 1fr 150px 150px 90px 100px 100px;
+  padding:14px 20px;gap:10px;align-items:center;
+  transition:background .15s;
 }
-.loja-linha:hover{background:rgba(139,92,246,0.12);}
+.loja-linha:hover{background:rgba(99,102,241,0.07);}
 
-/* Rank */
+/* RANK */
 .cel-rank{text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px;}
-.rank-num{font-size:18px;font-weight:700;}
-.nivel-badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;}
-.n1{background:rgba(74,222,128,0.2);color:#86efac;border:1px solid rgba(74,222,128,0.4);}
-.n2{background:rgba(251,146,60,0.2);color:#fdba74;border:1px solid rgba(251,146,60,0.4);}
-.n3{background:rgba(239,68,68,0.2);color:#fca5a5;border:1px solid rgba(239,68,68,0.4);}
+.rank-num{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;color:#fff;}
+.nivel-badge{display:inline-block;padding:3px 9px;border-radius:20px;font-size:10.5px;font-weight:700;}
+.n1{background:rgba(74,222,128,0.15);color:#4ade80;border:1px solid rgba(74,222,128,0.3);}
+.n2{background:rgba(251,146,60,0.15);color:#fb923c;border:1px solid rgba(251,146,60,0.3);}
+.n3{background:rgba(248,113,113,0.15);color:#f87171;border:1px solid rgba(248,113,113,0.3);}
 
-/* Loja */
-.cel-loja{display:flex;flex-direction:column;gap:4px;}
-.cel-loja .nome{font-size:15px;font-weight:700;color:#fff;}
+/* LOJA */
+.cel-loja{display:flex;flex-direction:column;gap:3px;}
+.cel-loja .nome{font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;color:#fff;}
+.cel-loja .local{font-size:11.5px;color:var(--muted);}
 
-/* Tarefas */
-.cel-tarefas{text-align:center;}
-.t-main{font-size:16px;font-weight:700;color:#fff;line-height:1;}
-.t-sub{font-size:12px;color:#8b9dc3;margin-top:3px;font-weight:500;}
+/* TAREFAS */
+.cel-tarefas{}
+.t-periodo{font-size:10.5px;color:var(--muted);margin-bottom:5px;}
+.t-group{display:flex;flex-direction:column;gap:4px;}
+.t-row{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.t-label{font-size:11px;color:var(--muted);min-width:24px;}
+.t-vals{display:flex;gap:8px;align-items:center;}
+.t-ab{font-size:16px;font-weight:700;color:#fff;}
+.t-fe{font-size:13px;font-weight:600;color:var(--green);}
+.t-slash{color:var(--muted);font-size:12px;}
+.t-total{font-size:10.5px;color:var(--muted);}
+.prog{height:3px;border-radius:2px;background:rgba(99,102,241,0.2);margin-top:2px;overflow:hidden;}
+.prog-fill{height:100%;border-radius:2px;}
 
-/* % */
-.cel-pct{text-align:center;}
-.pct-val{font-size:16px;font-weight:700;color:#fff;}
+/* PCT */
+.cel-pct{}
+.pct-group{display:flex;flex-direction:column;gap:5px;}
+.pct-row2{display:flex;align-items:center;gap:6px;}
+.pct-lbl2{font-size:10.5px;color:var(--muted);min-width:22px;}
+.pct-pair{display:flex;align-items:center;gap:4px;}
+.pct-ab2{font-size:14px;font-weight:700;}
+.pct-fe2{font-size:12px;font-weight:600;color:var(--green);}
+.pct-div2{color:var(--muted);font-size:11px;}
 
-/* Tendência */
-.cel-tendencia{display:flex;flex-direction:column;align-items:center;gap:4px;}
-.tendencia-icon{font-size:18px;}
-.tendencia-val{font-size:15px;font-weight:700;color:#ff6b9d;}
-.tendencia-sub{font-size:11px;color:#8b9dc3;font-weight:500;}
+/* TEND */
+.cel-tend{text-align:center;}
+.tend-val{font-size:16px;font-weight:700;}
+.tend-sub{font-size:10.5px;color:var(--muted);margin-top:2px;}
 
-/* Botões */
-.cel-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;}
+/* BTNS */
+.cel-btn{display:flex;flex-direction:column;align-items:center;gap:4px;}
 .toggle-btn{
-  background:rgba(139,92,246,0.15);
-  border:1px solid rgba(139,92,246,0.4);
-  border-radius:8px;
-  padding:7px 12px;
-  font-size:12px;
-  font-weight:500;
-  cursor:pointer;
-  color:#b0b8d4;
-  transition:all 0.3s;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:5px;
-  white-space:nowrap;
+  width:90px;
+  background:rgba(99,102,241,0.12);
+  border:1px solid var(--border2);
+  border-radius:7px;padding:7px 8px;
+  font-size:11.5px;font-weight:600;
+  cursor:pointer;color:#a5b4fc;
+  transition:all .15s;
+  display:flex;align-items:center;justify-content:center;gap:4px;
 }
-.toggle-btn:hover{
-  background:rgba(139,92,246,0.25);
-  border-color:rgba(139,92,246,0.6);
-  color:#c4b5fd;
-}
-.toggle-btn.open{
-  background:linear-gradient(135deg,#8b5cf6 0%,#d946ef 100%);
-  color:#fff;
-  border-color:rgba(217,91,239,0.5);
-}
-.btn-count{font-size:11px;color:#8b9dc3;font-weight:500;}
+.toggle-btn:hover{background:rgba(99,102,241,0.22);border-color:rgba(99,102,241,0.5);color:#c7d2fe;}
+.toggle-btn.open{background:var(--grad);color:#fff;border-color:transparent;}
+.btn-count{font-size:10px;color:var(--muted);}
 
 /* PAINÉIS */
 .painel{display:none;}
 .painel.visible{display:block;}
+.painel-inner{padding:20px;background:rgba(8,11,26,0.6);border-top:1px solid var(--border);}
+.panel-title{font-size:11px;font-weight:700;color:#a5b4fc;text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px;}
 
-/* Histórico */
-.hist-inner{
-  padding:20px;
-  background:rgba(139,92,246,0.08);
-  border:1px solid rgba(139,92,246,0.2);
-  border-radius:12px;
-}
-.panel-title{
-  font-size:11px;
-  font-weight:700;
-  color:#c4b5fd;
-  text-transform:uppercase;
-  letter-spacing:.1em;
-  margin-bottom:12px;
-}
-.hist-table{width:100%;border-collapse:collapse;font-size:13px;}
-.hist-table th{
-  background:rgba(139,92,246,0.2);
-  color:#c4b5fd;
-  padding:8px 12px;
-  text-align:left;
-  font-size:12px;
-  font-weight:600;
-  border-bottom:1px solid rgba(139,92,246,0.2);
-}
-.hist-table td{
-  padding:8px 12px;
-  border-bottom:1px solid rgba(139,92,246,0.1);
-  background:transparent;
-  font-size:13px;
-  color:#b0b8d4;
-}
-.hist-table tr.atual td{
-  background:rgba(139,92,246,0.15);
-  color:#c4b5fd;
-  font-weight:700;
-}
-.hist-table td:not(:first-child){text-align:center;font-weight:700;}
+/* HISTÓRICO */
+.hist-table{width:100%;border-collapse:collapse;font-size:12.5px;}
+.hist-table th{background:rgba(99,102,241,0.15);color:#a5b4fc;padding:7px 12px;text-align:left;font-size:11px;font-weight:600;border-bottom:1px solid var(--border);}
+.hist-table th:not(:first-child){text-align:center;}
+.hist-table td{padding:7px 12px;border-bottom:1px solid var(--border);color:var(--muted);}
+.hist-table td:not(:first-child){text-align:center;font-weight:600;color:var(--text);}
+.hist-table tr.atual td{background:rgba(99,102,241,0.1);color:#a5b4fc;font-weight:700;}
+.tend-txt{margin-top:10px;font-size:12px;color:var(--muted);}
 
-/* Secções */
-.sec-inner{
-  background:rgba(139,92,246,0.08);
-  padding:16px;
-  border:1px solid rgba(139,92,246,0.2);
-  border-radius:12px;
-}
-.sec-table{width:100%;border-collapse:collapse;font-size:13px;}
-.sec-table thead tr{background:rgba(139,92,246,0.15);}
-.sec-table thead th{
-  padding:8px 12px;
-  font-weight:600;
-  font-size:12px;
-  text-align:left;
-  color:#c4b5fd;
-  border-bottom:1px solid rgba(139,92,246,0.2);
-}
+/* SECÇÕES */
+.sec-table{width:100%;border-collapse:collapse;font-size:12.5px;}
+.sec-table thead th{background:rgba(99,102,241,0.12);color:#a5b4fc;padding:8px 12px;font-size:11px;font-weight:600;border-bottom:1px solid var(--border);text-align:left;}
 .sec-table thead th:not(:first-child){text-align:center;}
-.sec-table tbody tr{
-  border-bottom:1px solid rgba(139,92,246,0.1);
-  background:transparent;
-  cursor:pointer;
-  transition:all 0.2s;
-}
-.sec-table tbody tr:hover{background:rgba(139,92,246,0.12);}
-.sec-table tbody tr.sec-open{background:rgba(139,92,246,0.15);}
-.sec-table tbody td{
-  padding:10px 12px;
-  color:#b0b8d4;
-}
-.sec-table tbody td.sec-nome{font-weight:600;color:#c4b5fd;}
-.sec-table tbody td:not(.sec-nome){text-align:center;font-weight:700;}
+.sec-table tbody tr{border-bottom:1px solid var(--border);cursor:pointer;transition:background .12s;}
+.sec-table tbody tr:hover{background:rgba(99,102,241,0.08);}
+.sec-table tbody tr.sec-open{background:rgba(99,102,241,0.1);}
+.sec-table tbody td{padding:9px 12px;color:var(--muted);}
+.sec-table tbody td.sec-nome{font-weight:600;color:var(--text);}
+.sec-table tbody td:not(.sec-nome){text-align:center;font-weight:600;color:var(--text);}
+.pct-tag{display:inline-block;padding:1px 7px;border-radius:10px;font-size:10px;font-weight:600;margin-left:6px;}
+.tag-green{background:rgba(74,222,128,0.15);color:#4ade80;}
+.tag-orange{background:rgba(251,146,60,0.15);color:#fb923c;}
+.tag-red{background:rgba(248,113,113,0.15);color:#f87171;}
 
-.sec-det-row td{padding:0 !important;border:none !important;background:transparent !important;cursor:default;}
-.sec-det-inner{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:14px;}
-@media(max-width:640px){.sec-det-inner{grid-template-columns:1fr;}}
-.sec-det-box{
-  background:rgba(139,92,246,0.1);
-  border:1px solid rgba(139,92,246,0.3);
-  border-radius:8px;
-  padding:12px;
-}
-.sdb-label{
-  font-size:10px;
-  font-weight:700;
-  color:#8b9dc3;
-  text-transform:uppercase;
-  letter-spacing:.1em;
-  margin-bottom:6px;
-}
-.sdb-num{font-size:24px;font-weight:700;line-height:1;color:#c4b5fd;}
-.sdb-pct{font-size:11px;color:#8b9dc3;margin-top:4px;}
-.sdb-bar{margin-top:8px;}
-.barra-track{height:5px;border-radius:3px;background:rgba(139,92,246,0.3);overflow:hidden;}
-.barra-track-s{height:5px;border-radius:3px;background:rgba(139,92,246,0.3);overflow:hidden;margin-top:3px;}
-.barra-fill,.barra-fill-s{height:100%;border-radius:3px;}
+/* SEC DET */
+.sec-det-row td{padding:0!important;border:none!important;background:transparent!important;cursor:default;}
+.sec-det-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:14px;}
+.sec-det-box{background:rgba(99,102,241,0.08);border:1px solid var(--border);border-radius:10px;padding:14px;}
+.sdb-label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;}
+.sdb-num{font-size:24px;font-weight:700;line-height:1;}
+.sdb-pct{font-size:11px;color:var(--muted);margin-top:4px;}
+.sdb-bar{height:4px;border-radius:2px;background:rgba(99,102,241,0.2);margin-top:7px;overflow:hidden;}
+.sdb-bar-fill{height:100%;border-radius:2px;}
 
-.pct-tag{display:inline-block;padding:2px 8px;border-radius:12px;font-size:10px;font-weight:600;}
-.tag-green{background:rgba(74,222,128,0.2);color:#86efac;}
-.tag-orange{background:rgba(251,146,60,0.2);color:#fdba74;}
-.tag-red{background:rgba(239,68,68,0.2);color:#fca5a5;}
-
-/* ACÇÃO */
+/* AÇÃO */
 .acao-box{
-  background:linear-gradient(135deg,rgba(236,72,153,0.15),rgba(139,92,246,0.15));
-  border:1px solid rgba(236,72,153,0.3);
-  border-radius:16px;
-  padding:20px 24px;
-  display:flex;
-  align-items:flex-start;
-  gap:16px;
-  font-size:13px;
-  color:#b0b8d4;
-  box-shadow:0 8px 32px rgba(236,72,153,0.1);
-  backdrop-filter:blur(10px);
+  width:100%;
+  background:linear-gradient(135deg,rgba(236,72,153,0.12),rgba(99,102,241,0.12));
+  border:1px solid rgba(236,72,153,0.25);
+  border-radius:14px;padding:20px 24px;
+  display:flex;align-items:center;gap:16px;
+  backdrop-filter:blur(12px);
 }
-.acao-icon{font-size:28px;flex-shrink:0;margin-top:2px;}
-.acao-text{flex:1;}
-.acao-text strong{display:block;font-size:15px;color:#ff6b9d;margin-bottom:10px;font-weight:700;}
-.acao-linhas{display:flex;flex-direction:column;gap:8px;}
-.acao-linha{display:flex;align-items:center;gap:8px;color:#b0b8d4;}
+.acao-icon{font-size:26px;flex-shrink:0;}
+.acao-text strong{font-family:'Space Grotesk',sans-serif;font-size:15px;color:#f9a8d4;display:block;margin-bottom:4px;}
+.acao-text p{font-size:13px;color:var(--muted);}
 
-/* CARD MOBILE */
-.card-mobile{
-  display:none;
-  background:rgba(26,31,58,0.6);
-  border:1px solid rgba(139,92,246,0.2);
-  border-radius:16px;
-  margin-bottom:16px;
-  overflow:hidden;
-  box-shadow:0 8px 32px rgba(0,0,0,0.3);
-  backdrop-filter:blur(10px);
+/* LOADING */
+.loading{text-align:center;padding:80px 20px;color:var(--muted);font-size:15px;}
+
+/* MOBILE */
+.cards-mobile{display:none;width:100%;}
+.card-m{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:14px;overflow:hidden;margin-bottom:14px;
+  backdrop-filter:blur(12px);
 }
-.card-mobile.visible{display:block;}
-
-.card-header{
-  background:linear-gradient(135deg,rgba(139,92,246,0.2),rgba(217,91,239,0.2));
-  color:#fff;
-  padding:16px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  border-bottom:1px solid rgba(139,92,246,0.2);
+.card-m-head{
+  background:rgba(99,102,241,0.12);
+  padding:14px 16px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid var(--border);
 }
-.card-rank{display:flex;align-items:center;gap:10px;}
-.card-loja{flex:1;}
-.card-loja .nome{font-size:15px;font-weight:700;color:#fff;}
+.card-m-rank{display:flex;align-items:center;gap:10px;}
+.card-m-nome{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;color:#fff;}
+.card-m-local{font-size:11.5px;color:var(--muted);margin-top:2px;}
+.card-m-body{padding:14px;display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.card-stat{background:rgba(99,102,241,0.08);border:1px solid var(--border);border-radius:8px;padding:10px 12px;}
+.card-stat-label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px;}
+.card-stat-val{font-size:15px;font-weight:700;color:#fff;}
+.card-stat-sub{font-size:11px;color:var(--muted);margin-top:3px;}
+.card-btns{display:flex;gap:8px;padding:0 14px 14px;}
+.card-btns .toggle-btn{flex:1;width:auto;}
+.card-m .painel-inner{padding:14px;}
 
-.card-body{padding:16px;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-.stat-box{
-  background:rgba(139,92,246,0.1);
-  border-radius:8px;
-  padding:12px;
-  border:1px solid rgba(139,92,246,0.3);
+@media(max-width:900px){
+  .tabela-wrap{display:none;}
+  .cards-mobile{display:block;}
+  .page{padding:20px 14px 60px;}
+  .header{padding:0 16px;}
+  .info-row{gap:12px;}
+  .sec-det-grid{grid-template-columns:1fr 1fr;}
 }
-.stat-label{font-size:11px;font-weight:700;color:#8b9dc3;text-transform:uppercase;letter-spacing:.05em;}
-.stat-val{font-size:16px;font-weight:700;color:#c4b5fd;margin-top:4px;}
-.stat-sub{font-size:12px;color:#8b9dc3;margin-top:4px;}
-
-.card-buttons{display:flex;flex-direction:column;gap:8px;padding:0 16px 16px;}
-.card-buttons .toggle-btn{width:100%;}
-
-/* RESPONSIVO */
-@media(max-width:768px){
-  .tabela-wrap{display:none !important;}
-  .card-mobile{display:block;}
-  .card-body{grid-template-columns:1fr;}
-  .header-nav{display:none;}
-  .header-content{flex-direction:column;gap:12px;}
-  
-  .legenda{
-    grid-template-columns:1fr;
-  }
-  
-  .legenda-section{
-    gap:6px;
-  }
-}
-
 @media(max-width:480px){
-  .header{padding:12px 16px;}
-  .header h1{font-size:16px;}
-  .container{padding:0 16px 40px;}
-  .abrev-simple{font-size:12px;}
-  
-  .legenda-item{
-    font-size:12px;
-  }
+  .header-brand h1{font-size:14px;}
+  .periodo{font-size:11px;padding:5px 10px;}
+  .sec-det-grid{grid-template-columns:1fr 1fr;}
 }
 </style>
 </head>
 <body>
 
 <div class="header">
-  <div class="header-content">
-    <div class="header-left">
-      <div class="header-logo">📊</div>
-      <div class="header-title">
-        <h1>Análise Semanal IM</h1>
-        <div class="sub" id="sub-info">A carregar dados...</div>
-      </div>
+  <div class="header-brand">
+    <div class="logo">📊</div>
+    <div>
+      <h1>Análise Semanal IM</h1>
+      <div class="sub" id="sub-info">A carregar dados...</div>
     </div>
-    <nav class="header-nav">
-      <a href="#home">Análise</a>
-      <a href="#historico">Histórico</a>
-      <a href="#relatorios">Relatórios</a>
-    </nav>
-    <div class="periodo" id="periodo-label">—</div>
   </div>
+  <div class="periodo" id="periodo-label">—</div>
 </div>
 
-<div class="container">
-  <div id="app"><div class="loading">Carregando dados...</div></div>
+<div class="page">
+  <div id="app"><div class="loading">⏳ A carregar dados...</div></div>
 </div>
 
 <script>
 var stateHist={},stateSec={},stateSecDet={};
 
-function corPct(v){v=parseFloat(v);if(v<=20)return'#86efac';if(v<=40)return'#fdba74';return'#fca5a5';}
+function corPct(v){v=parseFloat(v);if(v<=20)return'#4ade80';if(v<=40)return'#fb923c';return'#f87171';}
 function tagClass(v){v=parseFloat(v);if(v<=20)return'tag-green';if(v<=40)return'tag-orange';return'tag-red';}
-function barra(pct,cor){return'<div class="barra-track"><div class="barra-fill" style="width:'+Math.min(100,parseFloat(pct)||0)+'%;background:'+cor+'"></div></div>';}
-function barraS(pct,cor){return'<div class="barra-track-s"><div class="barra-fill-s" style="width:'+Math.min(100,parseFloat(pct)||0)+'%;background:'+cor+'"></div></div>';}
+function prog(pct,cor){return'<div class="prog"><div class="prog-fill" style="width:'+Math.min(100,parseFloat(pct)||0)+'%;background:'+cor+'"></div></div>';}
+function sdbBar(pct,cor){return'<div class="sdb-bar"><div class="sdb-bar-fill" style="width:'+Math.min(100,parseFloat(pct)||0)+'%;background:'+cor+'"></div></div>';}
 
 function toggleHist(li){
   var p=document.getElementById('hist-'+li),b=document.getElementById('btnhist-'+li);
@@ -448,212 +302,222 @@ function toggleSecDet(id){
   det.classList.toggle('visible',stateSecDet[id]);
   if(row)row.classList.toggle('sec-open',stateSecDet[id]);
 }
+// Mobile toggles with prefix
+function toggleHistM(li){
+  var p=document.getElementById('histm-'+li),b=document.getElementById('btnhistm-'+li);
+  stateHist['m'+li]=!stateHist['m'+li];
+  p.classList.toggle('visible',stateHist['m'+li]);b.classList.toggle('open',stateHist['m'+li]);
+  b.innerHTML=stateHist['m'+li]?'▼ Fechar':'▶ Histórico';
+}
+function toggleSecM(li){
+  var p=document.getElementById('secm-'+li),b=document.getElementById('btnsecm-'+li);
+  stateSec['m'+li]=!stateSec['m'+li];
+  p.classList.toggle('visible',stateSec['m'+li]);b.classList.toggle('open',stateSec['m'+li]);
+  b.innerHTML=stateSec['m'+li]?'▼ Fechar':'▶ Secções';
+}
 
 fetch('dados.json?t='+Date.now())
   .then(function(r){return r.json();})
   .then(function(json){
     var data=json.data||[];
-
     var semanas=[];
-    data.forEach(function(item){var s=String(item.Semana||'').trim();if(s&&semanas.indexOf(s)===-1)semanas.push(s);});
-    var ultimaSemana=semanas.length>0?semanas[semanas.length-1]:'';
+    data.forEach(function(i){var s=String(i.Semana||'').trim();if(s&&semanas.indexOf(s)===-1)semanas.push(s);});
+    var ultima=semanas.length>0?semanas[semanas.length-1]:'';
 
     var lojas=data
-      .filter(function(item){return item.Loja&&!item.Secção&&String(item.Semana||'').trim()===ultimaSemana;})
-      .map(function(item){
-        var pTotal=Number(item['P Total'])||0;
-        var pAberto=Number(item['P Aberto'])||0;
-        var pFechado=Number(item['P Fechado'])||0;
-        var npTotal=Number(item['NP Total'])||0;
-        var npAberto=Number(item['NP Aberto'])||0;
-        var npFechado=Number(item['NP Fechado'])||0;
-        var pctPA=pTotal>0?(pAberto/pTotal*100).toFixed(1):'0.0';
-        var pctPF=pTotal>0?(pFechado/pTotal*100).toFixed(1):'0.0';
-        var pctNA=npTotal>0?(npAberto/npTotal*100).toFixed(1):'0.0';
-        var pctNF=npTotal>0?(npFechado/npTotal*100).toFixed(1):'0.0';
-        var nivel=parseFloat(pctPA)<=20?1:parseFloat(pctPA)<=40?2:3;
-        var lojaCode=String(item.Loja).trim();
-        return{loja:lojaCode,pTotal,pAberto,pFechado,npTotal,npAberto,npFechado,pctPA,pctPF,pctNA,pctNF,nivel,historico:[],seccoes:[]};
-      })
-      .filter(function(l){return l.pAberto>0;});
+      .filter(function(i){return i.Loja&&!i.Secção&&String(i.Semana||'').trim()===ultima;})
+      .map(function(i){
+        var pT=Number(i['P Total'])||0,pA=Number(i['P Aberto'])||0,pF=Number(i['P Fechado'])||0;
+        var nT=Number(i['NP Total'])||0,nA=Number(i['NP Aberto'])||0,nF=Number(i['NP Fechado'])||0;
+        var pctPA=pT>0?(pA/pT*100).toFixed(1):'0.0',pctPF=pT>0?(pF/pT*100).toFixed(1):'0.0';
+        var pctNA=nT>0?(nA/nT*100).toFixed(1):'0.0',pctNF=nT>0?(nF/nT*100).toFixed(1):'0.0';
+        var loc=String(i['Resumo contactos.Localidade']||i['IM.Localidade']||'').trim();
+        return{loja:String(i.Loja).trim(),local:loc,pT,pA,pF,nT,nA,nF,pctPA,pctPF,pctNA,pctNF,
+               nivel:parseFloat(pctPA)<=20?1:parseFloat(pctPA)<=40?2:3,historico:[],seccoes:[]};
+      }).filter(function(l){return l.pA>0;});
 
-    lojas.sort(function(a,b){return b.pAberto-a.pAberto;});
-    var topLojas=lojas.slice(0,10);
-    var topIds={};topLojas.forEach(function(l){topIds[l.loja]=true;});
+    lojas.sort(function(a,b){return b.pA-a.pA;});
+    var top=lojas.slice(0,10);
+    var ids={};top.forEach(function(l){ids[l.loja]=true;});
 
-    var histPorLoja={};
-    data.forEach(function(item){
-      if(!item.Secção&&item.Loja&&item.Semana&&topIds[String(item.Loja).trim()]){
-        var id=String(item.Loja).trim();
-        if(!histPorLoja[id])histPorLoja[id]=[];
-        histPorLoja[id].push({
-          semana:String(item.Semana).trim(),
-          pAberto:Number(item['P Aberto'])||0,
-          pFechado:Number(item['P Fechado'])||0,
-          npAberto:Number(item['NP Aberto'])||0,
-          npFechado:Number(item['NP Fechado'])||0
-        });
+    var hpl={};
+    data.forEach(function(i){
+      if(!i.Secção&&i.Loja&&i.Semana&&ids[String(i.Loja).trim()]){
+        var id=String(i.Loja).trim();
+        if(!hpl[id])hpl[id]=[];
+        hpl[id].push({semana:String(i.Semana).trim(),pA:Number(i['P Aberto'])||0,pF:Number(i['P Fechado'])||0,nA:Number(i['NP Aberto'])||0,nF:Number(i['NP Fechado'])||0});
       }
     });
-    topLojas.forEach(function(l){
-      var hist=histPorLoja[l.loja]||[];
-      l.historico=hist.filter(function(h){return h.semana!==ultimaSemana;}).slice(-8);
-      var ult=hist.slice(-2);
-      l.diff=ult.length===2?ult[1].pAberto-ult[0].pAberto:null;
+    top.forEach(function(l){
+      var h=hpl[l.loja]||[];
+      l.historico=h.filter(function(x){return x.semana!==ultima;}).slice(-8);
+      var u=h.slice(-2);l.diff=u.length===2?u[1].pA-u[0].pA:null;
     });
 
-    data.forEach(function(item){
-      if(item.Secção&&item.Loja&&topIds[String(item.Loja).trim()]){
-        var loja=topLojas.find(function(l){return l.loja===String(item.Loja).trim();});
+    data.forEach(function(i){
+      if(i.Secção&&i.Loja&&ids[String(i.Loja).trim()]){
+        var loja=top.find(function(l){return l.loja===String(i.Loja).trim();});
         if(loja){
-          var pAb=Number(item['P Aberto'])||0,npAb=Number(item['NP Aberto'])||0;
-          var pFe=Number(item['P Fechado'])||0,npFe=Number(item['NP Fechado'])||0;
-          var pTo=Number(item['P Total'])||0,npTo=Number(item['NP Total'])||0;
-          if(pAb>0||npAb>0||pFe>0||npFe>0){
-            var nome=String(item.Secção).replace(/^IM\s+\d+\s+/,'').trim();
+          var pA=Number(i['P Aberto'])||0,pF=Number(i['P Fechado'])||0;
+          var nA=Number(i['NP Aberto'])||0,nF=Number(i['NP Fechado'])||0;
+          var pT=Number(i['P Total'])||0,nT=Number(i['NP Total'])||0;
+          if(pA>0||pF>0||nA>0||nF>0){
+            var nome=String(i.Secção).replace(/^IM\s+\d+\s+/,'').trim();
             if(nome.toLowerCase()!=='admin'){
-              loja.seccoes.push({
-                nome,pAberto:pAb,pFechado:pFe,npAberto:npAb,npFechado:npFe,pTotal:pTo,npTotal:npTo,
-                pctPA:pTo>0?(pAb/pTo*100).toFixed(0):'0',
-                pctPF:pTo>0?(pFe/pTo*100).toFixed(0):'0',
-                pctNA:npTo>0?(npAb/npTo*100).toFixed(0):'0',
-                pctNF:npTo>0?(npFe/npTo*100).toFixed(0):'0'
-              });
+              loja.seccoes.push({nome,pA,pF,nA,nF,pT,nT,
+                pctPA:pT>0?(pA/pT*100).toFixed(0):'0',pctPF:pT>0?(pF/pT*100).toFixed(0):'0',
+                pctNA:nT>0?(nA/nT*100).toFixed(0):'0',pctNF:nT>0?(nF/nT*100).toFixed(0):'0'});
             }
           }
         }
       }
     });
-    topLojas.forEach(function(l){l.seccoes.sort(function(a,b){return b.pAberto-a.pAberto;});});
+    top.forEach(function(l){l.seccoes.sort(function(a,b){return b.pA-a.pA;});});
 
-    document.getElementById('sub-info').textContent='Gerado hoje · '+topLojas.length+' lojas · semana '+ultimaSemana;
-    document.getElementById('periodo-label').innerHTML=ultimaSemana?'Semana '+ultimaSemana:'—';
-    renderApp(topLojas,ultimaSemana);
+    document.getElementById('sub-info').textContent='Gerado hoje · '+top.length+' lojas · semana '+ultima;
+    document.getElementById('periodo-label').innerHTML='📅 '+ultima;
+    renderApp(top,ultima);
   })
   .catch(function(err){
-    document.getElementById('app').innerHTML='<div style="color:#ff6b9d;padding:40px;text-align:center">Erro ao carregar dados</div>';
+    document.getElementById('app').innerHTML='<div style="color:#f87171;padding:60px;text-align:center">❌ Erro ao carregar dados: '+err.message+'</div>';
   });
 
-function renderApp(lojas,ultimaSemana){
-  var abreviaturasHtml='<div class="abrev-simple">'
-    +'<div class="abrev-simple-row">'
-    +'<div class="abrev-simple-item"><span class="abrev-simple-label">P:</span> Programadas <span class="abrev-simple-sep">|</span> <span class="abrev-simple-label">NP:</span> Não Programadas <span class="abrev-simple-sep">|</span> <span class="abrev-simple-label">Ab:</span> Abertas <span class="abrev-simple-sep">|</span> <span class="abrev-simple-label">Fe:</span> Fechadas</div>'
-    +'</div>'
+function histContent(l,ultima){
+  var c='<div class="painel-inner"><div class="panel-title">Evolução Semanal</div>';
+  if(l.historico&&l.historico.length>0){
+    var rows=l.historico.map(function(h){return'<tr><td>'+h.semana+'</td><td>'+h.pA+'</td><td>'+h.pF+'</td><td>'+h.nA+'</td><td>'+h.nF+'</td></tr>';}).join('');
+    var d=l.diff===null?'—':l.diff>0?'<span style="color:#f87171;font-weight:700">▲ +'+l.diff+'</span>':l.diff<0?'<span style="color:#4ade80;font-weight:700">▼ '+l.diff+'</span>':'<span style="color:var(--muted)">→</span>';
+    c+='<table class="hist-table"><thead><tr><th>Semana</th><th>P Ab</th><th>P Fe</th><th>NP Ab</th><th>NP Fe</th></tr></thead><tbody>'
+      +rows+'<tr class="atual"><td>'+ultima+' (atual)</td><td>'+l.pA+'</td><td>'+l.pF+'</td><td>'+l.nA+'</td><td>'+l.nF+'</td></tr></tbody></table>'
+      +'<div class="tend-txt">Tendência P: '+d+'</div>';
+  }else{
+    c+='<p style="color:var(--muted);font-size:12px">Sem semanas anteriores. Atual: <strong style="color:#fff">'+l.pA+'</strong></p>';
+  }
+  return c+'</div>';
+}
+
+function secContent(l){
+  if(!l.seccoes.length)return'<div style="padding:14px;color:var(--muted);font-size:12px">Sem secções com tarefas.</div>';
+  var rows=l.seccoes.map(function(s,si){
+    var id=l.loja.replace(/\s/g,'')+'-'+si;
+    var tag='<span class="pct-tag '+tagClass(s.pctPA)+'">'+s.pctPA+'%</span>';
+    var pVal=s.pA+' / '+s.pF;
+    var nVal=s.nA+' / '+s.nF;
+    return'<tr id="secrow-'+id+'" onclick="toggleSecDet(\''+id+'\')">'
+      +'<td class="sec-nome">'+s.nome+tag+'</td>'
+      +'<td>'+pVal+'</td><td>'+nVal+'</td>'
+      +'</tr>'
+      +'<tr class="sec-det-row"><td colspan="3">'
+      +'<div class="painel" id="secdet-'+id+'">'
+      +'<div class="sec-det-grid">'
+      +'<div class="sec-det-box"><div class="sdb-label">P Abertas</div><div class="sdb-num" style="color:'+corPct(s.pctPA)+'">'+s.pA+'</div><div class="sdb-pct">'+s.pctPA+'% do total</div>'+sdbBar(s.pctPA,corPct(s.pctPA))+'</div>'
+      +'<div class="sec-det-box"><div class="sdb-label">P Fechadas</div><div class="sdb-num" style="color:#4ade80">'+s.pF+'</div><div class="sdb-pct">'+s.pctPF+'% do total</div>'+sdbBar(s.pctPF,'#4ade80')+'</div>'
+      +'<div class="sec-det-box"><div class="sdb-label">NP Abertas</div><div class="sdb-num" style="color:'+corPct(s.pctNA)+'">'+s.nA+'</div><div class="sdb-pct">'+s.pctNA+'% do total</div>'+sdbBar(s.pctNA,corPct(s.pctNA))+'</div>'
+      +'<div class="sec-det-box"><div class="sdb-label">NP Fechadas</div><div class="sdb-num" style="color:#4ade80">'+s.nF+'</div><div class="sdb-pct">'+s.pctNF+'% do total</div>'+sdbBar(s.pctNF,'#4ade80')+'</div>'
+      +'</div></div></td></tr>';
+  }).join('');
+  return'<div class="painel-inner"><table class="sec-table">'
+    +'<thead><tr><th>Secção</th><th>P (Ab/Fe)</th><th>NP (Ab/Fe)</th></tr></thead>'
+    +'<tbody>'+rows+'</tbody></table></div>';
+}
+
+function renderApp(lojas,ultima){
+  var infoBar='<div class="info-bar">'
+    +'<div class="info-row"><div class="info-item"><span class="info-key">P:</span>Programadas<span class="info-sep">|</span><span class="info-key">NP:</span>Não Programadas</div></div>'
+    +'<div class="info-row" style="margin-top:4px"><div class="info-item"><span class="info-key">Ab:</span>Abertas<span class="info-sep">|</span><span class="info-key">Fe:</span>Fechadas</div></div>'
     +'</div>';
 
-  var legenda='<div class="legenda-wrapper">'
-    +'<div class="legenda">'
-    +'<div class="legenda-section">'
-    +'<div class="legenda-section-title">Estado</div>'
-    +'<div class="legenda-item"><span style="color:#ff6b9d">●</span> <span>Top 3 críticas</span></div>'
-    +'<div class="legenda-item"><span style="color:#f59e0b">●</span> <span>Em alerta</span></div>'
-    +'</div>'
-    +'<div class="legenda-section">'
-    +'<div class="legenda-section-title">Níveis</div>'
-    +'<div class="legenda-item"><span style="color:#86efac;font-weight:700">N1</span> <span>0–20%</span></div>'
-    +'<div class="legenda-item"><span style="color:#fdba74;font-weight:700">N2</span> <span>21–40%</span></div>'
-    +'<div class="legenda-item"><span style="color:#fca5a5;font-weight:700">N3</span> <span>41%+</span></div>'
-    +'</div>'
-    +'<div class="legenda-section">'
-    +'<div class="legenda-section-title">Tendência</div>'
-    +'<div class="legenda-item"><span style="color:#ff6b9d">▲</span> <span>Piorar</span></div>'
-    +'<div class="legenda-item"><span style="color:#86efac">▼</span> <span>Melhorar</span></div>'
-    +'</div>'
-    +'</div>'
+  var leg='<div class="legenda">'
+    +'<span class="leg"><span style="color:#f87171">●</span>&nbsp;Top 3 críticas</span>'
+    +'<div class="leg-sep"></div>'
+    +'<span class="leg"><span style="color:#fb923c">●</span>&nbsp;Em alerta</span>'
+    +'<div class="leg-sep"></div>'
+    +'<span class="leg"><span style="color:#4ade80;font-weight:700">N1</span>&nbsp;0–20%</span>'
+    +'<span class="leg"><span style="color:#fb923c;font-weight:700">N2</span>&nbsp;21–40%</span>'
+    +'<span class="leg"><span style="color:#f87171;font-weight:700">N3</span>&nbsp;41%+</span>'
+    +'<div class="leg-sep"></div>'
+    +'<span class="leg" style="color:#f87171">▲ A piorar</span>'
+    +'<span class="leg" style="color:#4ade80">▼ A melhorar</span>'
     +'</div>';
 
-  var headerDesk='<div class="tabela-header">'
-    +'<div style="text-align:center">#</div>'
+  var header='<div class="tabela-header">'
+    +'<div style="text-align:center"># / Nível</div>'
     +'<div>Loja</div>'
-    +'<div style="text-align:center">Tarefas P<div class="th-sub">aberto · fechado</div></div>'
-    +'<div style="text-align:center">% P<div class="th-sub">aberto · fechado</div></div>'
-    +'<div style="text-align:center">Tarefas NP<div class="th-sub">aberto · fechado</div></div>'
-    +'<div style="text-align:center">% NP<div class="th-sub">aberto · fechado</div></div>'
-    +'<div style="text-align:center">Tendência</div>'
+    +'<div>Tarefas<div class="th-sub">período: '+ultima+'</div></div>'
+    +'<div style="text-align:center">% P<div class="th-sub">abertas · fechadas</div></div>'
+    +'<div style="text-align:center">% NP<div class="th-sub">abertas · fechadas</div></div>'
+    +'<div style="text-align:center">Tend.</div>'
     +'<div style="text-align:center">Histórico</div>'
     +'<div style="text-align:center">Secções</div>'
     +'</div>';
 
-  var blocos='';
-  var cards='';
+  var blocos='',cards='';
 
   lojas.forEach(function(l,li){
     var emoji=li<3?'🔴':'🟡';
     var nc=l.nivel===1?'n1':l.nivel===2?'n2':'n3';
+    var hc=histContent(l,ultima);
+    var sc=secContent(l);
 
-    var histContent='<div class="hist-inner"><div class="panel-title">Evolução semanal</div>';
-    if(l.historico&&l.historico.length>0){
-      var hRows=l.historico.map(function(h){return'<tr><td>'+h.semana+'</td><td>'+h.pAberto+'</td><td>'+h.pFechado+'</td><td>'+h.npAberto+'</td><td>'+h.npFechado+'</td></tr>';}).join('');
-      var diffTxt=l.diff===null?'—':l.diff>0?'<span style="color:#ff6b9d;font-weight:700">▲ +'+l.diff+'</span>':l.diff<0?'<span style="color:#86efac;font-weight:700">▼ '+l.diff+'</span>':'<span style="color:#8b9dc3">→</span>';
-      histContent+='<table class="hist-table"><thead><tr><th>Semana</th><th>P Ab</th><th>P Fe</th><th>NP Ab</th><th>NP Fe</th></tr></thead><tbody>'
-        +hRows+'<tr class="atual"><td>'+ultimaSemana+'</td><td>'+l.pAberto+'</td><td>'+l.pFechado+'</td><td>'+l.npAberto+'</td><td>'+l.npFechado+'</td></tr></tbody></table>'
-        +'<div style="margin-top:10px;font-size:12px;color:#8b9dc3">Tendência: '+diffTxt+'</div>';
-    }else{
-      histContent+='<p style="color:#8b9dc3;font-size:12px">Sem histórico disponível.</p>';
-    }
-    histContent+='</div>';
+    var diffTxt=l.diff===null?'<span style="color:var(--muted)">—</span>'
+      :l.diff>0?'<span style="color:#f87171">▲ +'+l.diff+'</span>'
+      :l.diff<0?'<span style="color:#4ade80">▼ '+l.diff+'</span>'
+      :'<span style="color:var(--muted)">→</span>';
 
-    var secContent='';
-    if(l.seccoes.length>0){
-      var secRows=l.seccoes.map(function(s,si){
-        var id=li+'-'+si;
-        var pVal=s.pAberto>0||s.pFechado>0?s.pAberto+' / '+s.pFechado:'<span style="color:#8b9dc3">—</span>';
-        var npVal=s.npAberto>0||s.npFechado>0?s.npAberto+' / '+s.npFechado:'<span style="color:#8b9dc3">—</span>';
-        var tag='<span class="pct-tag '+tagClass(s.pctPA)+'">'+s.pctPA+'%</span>';
-        return'<tr id="secrow-'+id+'" onclick="toggleSecDet(\''+id+'\')">'
-          +'<td class="sec-nome">'+s.nome+tag+'</td>'
-          +'<td>'+pVal+'</td><td>'+npVal+'</td>'
-          +'</tr>'
-          +'<tr class="sec-det-row"><td colspan="3">'
-          +'<div class="painel" id="secdet-'+id+'">'
-          +'<div class="sec-det-inner">'
-          +'<div class="sec-det-box"><div class="sdb-label">P Abertas</div><div class="sdb-num" style="color:'+corPct(s.pctPA)+'">'+s.pAberto+'</div><div class="sdb-pct">'+s.pctPA+'%</div>'+barraS(s.pctPA,corPct(s.pctPA))+'</div>'
-          +'<div class="sec-det-box"><div class="sdb-label">P Fechadas</div><div class="sdb-num" style="color:#86efac">'+s.pFechado+'</div><div class="sdb-pct">'+s.pctPF+'%</div>'+barraS(s.pctPF,'#86efac')+'</div>'
-          +'<div class="sec-det-box"><div class="sdb-label">NP Abertas</div><div class="sdb-num" style="color:'+corPct(s.pctNA)+'">'+s.npAberto+'</div><div class="sdb-pct">'+s.pctNA+'%</div>'+barraS(s.pctNA,corPct(s.pctNA))+'</div>'
-          +'<div class="sec-det-box"><div class="sdb-label">NP Fechadas</div><div class="sdb-num" style="color:#86efac">'+s.npFechado+'</div><div class="sdb-pct">'+s.pctNF+'%</div>'+barraS(s.pctNF,'#86efac')+'</div>'
-          +'</div></div>'
-          +'</td></tr>';
-      }).join('');
-      secContent='<div class="sec-inner"><table class="sec-table">'
-        +'<thead><tr><th>Secção</th><th>P (Ab/Fe)</th><th>NP (Ab/Fe)</th></tr></thead>'
-        +'<tbody>'+secRows+'</tbody></table></div>';
-    }else{
-      secContent='<div style="padding:16px;color:#8b9dc3;font-size:12px;background:rgba(139,92,246,0.08)">Sem secções com tarefas.</div>';
-    }
-
+    // Desktop row
     blocos+='<div class="loja-bloco">'
       +'<div class="loja-linha">'
       +'<div class="cel-rank"><div class="rank-num">'+emoji+' '+(li+1)+'</div><span class="nivel-badge '+nc+'">N'+l.nivel+'</span></div>'
-      +'<div class="cel-loja"><div class="nome">'+l.loja+'</div></div>'
-      +'<div class="cel-tarefas"><div class="t-main">'+l.pAberto+' / '+l.pFechado+'</div><div class="t-sub">('+l.pTotal+')</div></div>'
-      +'<div class="cel-pct"><div class="pct-val" style="color:'+corPct(l.pctPA)+'">'+l.pctPA+'% / '+l.pctPF+'%</div></div>'
-      +'<div class="cel-tarefas"><div class="t-main">'+l.npAberto+' / '+l.npFechado+'</div><div class="t-sub">('+l.npTotal+')</div></div>'
-      +'<div class="cel-pct"><div class="pct-val" style="color:'+corPct(l.pctNA)+'">'+l.pctNA+'% / '+l.pctNF+'%</div></div>'
-      +'<div class="cel-tendencia">'+(l.diff===null?'—':l.diff>0?'<div class="tendencia-icon">▲</div><div class="tendencia-val">+'+l.diff+'</div>':'<div class="tendencia-icon">▼</div><div class="tendencia-val">'+l.diff+'</div>')+'</div>'
+      +'<div class="cel-loja"><div class="nome">'+l.loja+'</div><div class="local">'+(l.local||'—')+'</div></div>'
+
+      // Tarefas
+      +'<div class="cel-tarefas">'
+      +'<div class="t-periodo">📅 '+ultima+'</div>'
+      +'<div class="t-group">'
+      +'<div class="t-row"><span class="t-label">P</span><div class="t-vals"><span class="t-ab">'+l.pA+'</span><span class="t-slash">/</span><span class="t-fe">'+l.pF+'</span><span class="t-total">('+l.pT+')</span></div></div>'
+      +prog(l.pctPA,corPct(l.pctPA))
+      +'<div class="t-row" style="margin-top:4px"><span class="t-label">NP</span><div class="t-vals"><span class="t-ab">'+l.nA+'</span><span class="t-slash">/</span><span class="t-fe">'+l.nF+'</span><span class="t-total">('+l.nT+')</span></div></div>'
+      +prog(l.pctNA,corPct(l.pctNA))
+      +'</div></div>'
+
+      // % P
+      +'<div class="cel-pct"><div class="pct-group">'
+      +'<div class="pct-row2"><span class="pct-lbl2">Ab</span><div class="pct-pair"><span class="pct-ab2" style="color:'+corPct(l.pctPA)+'">'+l.pctPA+'%</span></div></div>'
+      +'<div class="pct-row2"><span class="pct-lbl2">Fe</span><div class="pct-pair"><span class="pct-fe2">'+l.pctPF+'%</span></div></div>'
+      +'</div></div>'
+
+      // % NP
+      +'<div class="cel-pct"><div class="pct-group">'
+      +'<div class="pct-row2"><span class="pct-lbl2">Ab</span><div class="pct-pair"><span class="pct-ab2" style="color:'+corPct(l.pctNA)+'">'+l.pctNA+'%</span></div></div>'
+      +'<div class="pct-row2"><span class="pct-lbl2">Fe</span><div class="pct-pair"><span class="pct-fe2">'+l.pctNF+'%</span></div></div>'
+      +'</div></div>'
+
+      +'<div class="cel-tend"><div class="tend-val">'+diffTxt+'</div><div class="tend-sub">vs ant.</div></div>'
       +'<div class="cel-btn"><button class="toggle-btn" id="btnhist-'+li+'" onclick="toggleHist('+li+')">▶ Histórico</button></div>'
       +'<div class="cel-btn"><button class="toggle-btn" id="btnsec-'+li+'" onclick="toggleSec('+li+')">▶ Secções</button><div class="btn-count">'+l.seccoes.length+'</div></div>'
       +'</div>'
-      +'<div class="painel" id="hist-'+li+'">'+histContent+'</div>'
-      +'<div class="painel" id="sec-'+li+'">'+secContent+'</div>'
+      +'<div class="painel" id="hist-'+li+'">'+hc+'</div>'
+      +'<div class="painel" id="sec-'+li+'">'+sc+'</div>'
       +'</div>';
 
-    cards+='<div class="card-mobile">'
-      +'<div class="card-header">'
-      +'<div class="card-rank"><div class="rank-num">'+emoji+'</div><div><div style="font-size:14px;font-weight:700;">'+(li+1)+'</div><span class="nivel-badge '+nc+'">N'+l.nivel+'</span></div></div>'
-      +'<div class="card-loja"><div class="nome">'+l.loja+'</div></div>'
+    // Mobile card
+    cards+='<div class="card-m">'
+      +'<div class="card-m-head">'
+      +'<div class="card-m-rank"><div class="rank-num">'+emoji+' '+(li+1)+'</div><span class="nivel-badge '+nc+'">N'+l.nivel+'</span></div>'
+      +'<div><div class="card-m-nome">'+l.loja+'</div><div class="card-m-local">'+(l.local||'—')+'</div></div>'
       +'</div>'
-      +'<div class="card-body">'
-      +'<div class="stat-box"><div class="stat-label">P Abertas / Fechadas</div><div class="stat-val">'+l.pAberto+' / '+l.pFechado+'</div><div class="stat-sub">('+l.pTotal+') · '+l.pctPA+'%</div>'+barra(l.pctPA,corPct(l.pctPA))+'</div>'
-      +'<div class="stat-box"><div class="stat-label">NP Abertas / Fechadas</div><div class="stat-val">'+l.npAberto+' / '+l.npFechado+'</div><div class="stat-sub">('+l.npTotal+') · '+l.pctNA+'%</div>'+barra(l.pctNA,corPct(l.pctNA))+'</div>'
-      +'<div class="stat-box"><div class="stat-label">Tendência</div><div class="stat-val">'+(l.diff===null?'—':l.diff>0?'▲ +'+l.diff:'▼ '+l.diff)+'</div><div class="stat-sub">vs semana</div></div>'
-      +'<div class="stat-box"><div class="stat-label">Semana</div><div class="stat-val">'+ultimaSemana+'</div></div>'
+      +'<div class="card-m-body">'
+      +'<div class="card-stat"><div class="card-stat-label">P Abertas / Fechadas</div><div class="card-stat-val" style="color:'+corPct(l.pctPA)+'">'+l.pA+' / <span style="color:#4ade80">'+l.pF+'</span></div><div class="card-stat-sub">'+l.pctPA+'% ab · '+l.pctPF+'% fe (total: '+l.pT+')</div>'+prog(l.pctPA,corPct(l.pctPA))+'</div>'
+      +'<div class="card-stat"><div class="card-stat-label">NP Abertas / Fechadas</div><div class="card-stat-val" style="color:'+corPct(l.pctNA)+'">'+l.nA+' / <span style="color:#4ade80">'+l.nF+'</span></div><div class="card-stat-sub">'+l.pctNA+'% ab · '+l.pctNF+'% fe (total: '+l.nT+')</div>'+prog(l.pctNA,corPct(l.pctNA))+'</div>'
+      +'<div class="card-stat"><div class="card-stat-label">Tendência</div><div class="card-stat-val">'+diffTxt+'</div><div class="card-stat-sub">vs semana anterior</div></div>'
+      +'<div class="card-stat"><div class="card-stat-label">Período</div><div class="card-stat-val" style="font-size:12px;color:#a5b4fc">'+ultima+'</div></div>'
       +'</div>'
-      +'<div class="card-buttons">'
-      +'<button class="toggle-btn" id="btnhist-'+li+'" onclick="toggleHist('+li+')">▶ Histórico</button>'
-      +'<button class="toggle-btn" id="btnsec-'+li+'" onclick="toggleSec('+li+')">▶ Secções ('+l.seccoes.length+')</button>'
+      +'<div class="card-btns">'
+      +'<button class="toggle-btn" id="btnhistm-'+li+'" onclick="toggleHistM('+li+')">▶ Histórico</button>'
+      +'<button class="toggle-btn" id="btnsecm-'+li+'" onclick="toggleSecM('+li+')">▶ Secções ('+l.seccoes.length+')</button>'
       +'</div>'
-      +'<div class="painel" id="hist-'+li+'">'+histContent+'</div>'
-      +'<div class="painel" id="sec-'+li+'">'+secContent+'</div>'
+      +'<div class="painel" id="histm-'+li+'">'+hc+'</div>'
+      +'<div class="painel" id="secm-'+li+'">'+sc+'</div>'
       +'</div>';
   });
 
@@ -661,17 +525,12 @@ function renderApp(lojas,ultimaSemana){
     +'<div class="acao-icon">⚠️</div>'
     +'<div class="acao-text">'
     +'<strong>Ação recomendada</strong>'
-    +'<div class="acao-linhas">'
-    +'<div class="acao-linha">Contactar urgentemente os responsáveis das lojas críticas</div>'
-    +'<div class="acao-linha">Para lojas com tendência crescente, escalar para supervisor de zona</div>'
-    +'<div class="acao-linha">Acompanhamento semanal do desempenho das lojas em alerta</div>'
-    +'</div>'
-    +'</div>'
-    +'</div>';
+    +'<p>Contactar urgentemente os responsáveis das lojas críticas.</p>'
+    +'</div></div>';
 
-  document.getElementById('app').innerHTML=abreviaturasHtml+legenda
-    +'<div class="tabela-wrap desktop">'+headerDesk+blocos+'</div>'
-    +cards
+  document.getElementById('app').innerHTML=infoBar+leg
+    +'<div class="tabela-wrap">'+header+blocos+'</div>'
+    +'<div class="cards-mobile">'+cards+'</div>'
     +acao;
 }
 </script>
