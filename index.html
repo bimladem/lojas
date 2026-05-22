@@ -150,65 +150,143 @@ html, body {
 .kpi-success .kpi-value { color: #22c55e; }
 .kpi-pending .kpi-value { color: #94a3b8; }
 
-/* LEGEND */
+/* LEGEND & LEVELS SECTION */
+.legend-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+/* LEGEND BOX */
 .legend-box {
   background: linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, rgba(236, 72, 153, 0.05) 100%);
   border: 1px solid var(--border);
   border-radius: 14px;
   padding: 24px;
-  margin-bottom: 40px;
 }
 
-.legend-content {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 40px;
+.legend-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .legend-items {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-}
-
-.legend-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 13px;
-  color: var(--text-secondary);
-}
-
-.legend-icon {
-  font-size: 16px;
-  min-width: 20px;
-}
-
-.legend-notes {
-  border-left: 1px solid var(--border);
-  padding-left: 30px;
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.legend-note-title {
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  padding: 8px 0;
+}
+
+.legend-icon {
+  font-size: 18px;
+  min-width: 24px;
+  text-align: center;
+  line-height: 1;
+}
+
+/* LEVELS TABLE */
+.levels-table {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, rgba(236, 72, 153, 0.05) 100%);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.levels-header {
+  background: linear-gradient(180deg, rgba(139, 92, 246, 0.15) 0%, rgba(139, 92, 246, 0.08) 100%);
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.levels-title {
   font-size: 12px;
   font-weight: 700;
-  color: var(--text-tertiary);
+  color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
-.legend-note-item {
-  font-size: 12px;
-  color: var(--text-secondary);
-  line-height: 1.5;
+.levels-content {
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
-.legend-note-item strong {
+.level-row {
+  display: grid;
+  grid-template-columns: 40px 1fr auto auto;
+  gap: 16px;
+  align-items: center;
+  padding: 14px;
+  background: rgba(139, 92, 246, 0.06);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.level-row:hover {
+  background: rgba(139, 92, 246, 0.12);
+}
+
+.level-badge {
+  font-size: 24px;
+  text-align: center;
+  line-height: 1;
+}
+
+.level-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.level-name {
+  font-size: 14px;
+  font-weight: 700;
   color: var(--text-primary);
+}
+
+.level-range {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  font-weight: 500;
+}
+
+.level-desc {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.level-label {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
   font-weight: 600;
+}
+
+.level-value {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
 }
 
 /* TABLE */
@@ -715,6 +793,10 @@ html, body {
   .detail-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .legend-section {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 900px) {
@@ -736,16 +818,8 @@ html, body {
     grid-template-columns: 1fr 1fr;
   }
 
-  .legend-content {
+  .legend-section {
     grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
-  .legend-notes {
-    border-left: none;
-    border-top: 1px solid var(--border);
-    padding-left: 0;
-    padding-top: 20px;
   }
 }
 </style>
@@ -934,22 +1008,77 @@ function renderApp(lojas, ultima) {
   `;
 
   var legendHtml = `
-    <div class="legend-box">
-      <div class="legend-content">
-        <div class="legend-items">
-          <div class="legend-item"><span class="legend-icon">🔴</span> Top 3 críticas</div>
-          <div class="legend-item"><span class="legend-icon">🟡</span> Em alerta</div>
-          <div class="legend-item"><span class="legend-icon" style="color:#22c55e">N1</span> 0–20%</div>
-          <div class="legend-item"><span class="legend-icon" style="color:#f59e0b">N2</span> 21–40%</div>
-          <div class="legend-item"><span class="legend-icon" style="color:#ef4444">N3</span> 41%+</div>
-          <div class="legend-item"><span class="legend-icon" style="color:#ef4444">▲</span> A piorar</div>
-          <div class="legend-item"><span class="legend-icon" style="color:#22c55e">▼</span> A melhorar</div>
+    <div class="legend-section">
+      <div class="legend-box">
+        <div class="legend-title">
+          <span>📊</span> Indicadores de Estado
         </div>
-        <div class="legend-notes">
-          <div class="legend-note-title">Níveis de Incumprimento</div>
-          <div class="legend-note-item"><strong>N1:</strong> Desempenho Excelente</div>
-          <div class="legend-note-item"><strong>N2:</strong> Desempenho Aceitável</div>
-          <div class="legend-note-item"><strong>N3:</strong> Desempenho Crítico</div>
+        <div class="legend-items">
+          <div class="legend-item">
+            <span class="legend-icon">🔴</span>
+            <span>Top 3 críticas</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-icon">🟡</span>
+            <span>Em alerta</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="legend-box">
+        <div class="legend-title">
+          <span>↕️</span> Indicadores de Tendência
+        </div>
+        <div class="legend-items">
+          <div class="legend-item">
+            <span class="legend-icon" style="color:#ef4444">▲</span>
+            <span>A piorar vs semana</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-icon" style="color:#22c55e">▼</span>
+            <span>A melhorar vs semana</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="levels-table">
+        <div class="levels-header">
+          <div class="levels-title">🎯 Níveis de Incumprimento</div>
+        </div>
+        <div class="levels-content">
+          <div class="level-row">
+            <div class="level-badge">🟢</div>
+            <div class="level-info">
+              <div class="level-name">N1</div>
+              <div class="level-range">0–20%</div>
+            </div>
+            <div class="level-desc">
+              <div class="level-label">Desempenho</div>
+              <div class="level-value">Excelente</div>
+            </div>
+          </div>
+          <div class="level-row">
+            <div class="level-badge">🟡</div>
+            <div class="level-info">
+              <div class="level-name">N2</div>
+              <div class="level-range">21–40%</div>
+            </div>
+            <div class="level-desc">
+              <div class="level-label">Desempenho</div>
+              <div class="level-value">Aceitável</div>
+            </div>
+          </div>
+          <div class="level-row">
+            <div class="level-badge">🔴</div>
+            <div class="level-info">
+              <div class="level-name">N3</div>
+              <div class="level-range">41%+</div>
+            </div>
+            <div class="level-desc">
+              <div class="level-label">Desempenho</div>
+              <div class="level-value">Crítico</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
