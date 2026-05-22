@@ -477,7 +477,7 @@ html, body {
 .cell-percent {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
   justify-content: center;
   height: 100%;
 }
@@ -491,15 +491,8 @@ html, body {
 
 .pct-primary {
   font-size: 16px;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--text-primary);
-  line-height: 1;
-  white-space: nowrap;
-}
-
-.pct-primary-colored {
-  font-size: 16px;
-  font-weight: 800;
   line-height: 1;
   white-space: nowrap;
 }
@@ -512,16 +505,16 @@ html, body {
 }
 
 .pct-secondary {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text-tertiary);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
   line-height: 1;
   white-space: nowrap;
 }
 
 .pct-label {
-  font-size: 13px;
-  color: var(--text-tertiary);
+  font-size: 14px;
+  color: var(--text-secondary);
   font-weight: 600;
 }
 
@@ -831,6 +824,10 @@ html, body {
     font-size: 15px;
   }
 
+  .pct-secondary {
+    font-size: 15px;
+  }
+
   .trend-value {
     font-size: 14px;
   }
@@ -885,6 +882,10 @@ html, body {
   }
 
   .pct-primary {
+    font-size: 14px;
+  }
+
+  .pct-secondary {
     font-size: 14px;
   }
 
@@ -1326,7 +1327,7 @@ function renderApp(lojas, ultima) {
         </div>
         <div class="cell-percent">
           <div class="pct-container">
-            <span class="pct-primary" style="color:var(--text-primary)">${l.pctPA}%</span>
+            <span class="pct-primary">${l.pctPA}%</span>
             <span class="pct-separator">·</span>
             <span class="pct-secondary">${l.pctPF}%</span>
           </div>
@@ -1342,7 +1343,7 @@ function renderApp(lojas, ultima) {
         </div>
         <div class="cell-percent">
           <div class="pct-container">
-            <span class="pct-primary" style="color:var(--text-primary)">${l.pctNA}%</span>
+            <span class="pct-primary">${l.pctNA}%</span>
             <span class="pct-separator">·</span>
             <span class="pct-secondary">${l.pctNF}%</span>
           </div>
