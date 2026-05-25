@@ -25,9 +25,9 @@
 }
 
 *{
-  box-sizing:border-box;
   margin:0;
   padding:0;
+  box-sizing:border-box;
 }
 
 html,body{
@@ -35,10 +35,7 @@ html,body{
   background:#fff;
   color:var(--text-primary);
   font-size:14px;
-  min-height:100vh;
 }
-
-/* HEADER */
 
 .header{
   position:sticky;
@@ -96,38 +93,6 @@ html,body{
   padding:30px;
 }
 
-/* LEGENDA */
-
-.legend{
-  display:flex;
-  gap:14px;
-  margin-bottom:20px;
-  flex-wrap:wrap;
-}
-
-.legend-item{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  border:1px solid var(--border);
-  padding:10px 14px;
-  border-radius:12px;
-  background:#fff;
-  font-weight:700;
-}
-
-.legend-color{
-  width:14px;
-  height:14px;
-  border-radius:50%;
-}
-
-.green{ background:#22c55e; }
-.orange{ background:#fb923c; }
-.red{ background:#ef4444; }
-
-/* TABLE */
-
 .table-container{
   border:1px solid var(--border);
   border-radius:18px;
@@ -137,12 +102,7 @@ html,body{
 
 .table-header{
   display:grid;
-  grid-template-columns:
-  .6fr
-  1.2fr
-  2.5fr
-  .7fr
-  1fr;
+  grid-template-columns:.5fr 1.2fr 2.3fr .7fr .8fr .8fr;
   padding:18px;
   background:#fafafa;
   border-bottom:1px solid var(--border);
@@ -154,12 +114,7 @@ html,body{
 
 .table-row{
   display:grid;
-  grid-template-columns:
-  .6fr
-  1.2fr
-  2.5fr
-  .7fr
-  1fr;
+  grid-template-columns:.5fr 1.2fr 2.3fr .7fr .8fr .8fr;
   border-bottom:1px solid var(--border);
   transition:.2s;
 }
@@ -174,12 +129,10 @@ html,body{
   align-items:center;
 }
 
-/* RANK */
-
 .cell-rank{
   flex-direction:column;
   justify-content:center;
-  gap:10px;
+  gap:8px;
 }
 
 .rank-number{
@@ -188,10 +141,10 @@ html,body{
 }
 
 .rank-badge{
-  padding:5px 10px;
-  border-radius:10px;
+  padding:4px 8px;
+  border-radius:8px;
   font-size:11px;
-  font-weight:800;
+  font-weight:700;
 }
 
 .badge-n1{
@@ -209,11 +162,8 @@ html,body{
   color:#ef4444;
 }
 
-/* LOJA */
-
 .cell-loja{
   flex-direction:column;
-  align-items:flex-start;
   justify-content:center;
   gap:6px;
 }
@@ -225,9 +175,8 @@ html,body{
 
 .loja-local{
   color:var(--text-tertiary);
+  font-size:13px;
 }
-
-/* TAREFAS */
 
 .tasks-wrapper{
   width:100%;
@@ -257,6 +206,7 @@ html,body{
   display:flex;
   justify-content:space-between;
   margin-bottom:8px;
+  font-size:13px;
 }
 
 .task-bar{
@@ -270,20 +220,18 @@ html,body{
   height:100%;
 }
 
-.fill-red{
+.red{
   background:#ef4444;
 }
 
-.fill-green{
+.green{
   background:#22c55e;
 }
-
-/* TENDENCIA */
 
 .cell-trend{
   flex-direction:column;
   justify-content:center;
-  gap:6px;
+  gap:8px;
   font-size:28px;
   font-weight:800;
 }
@@ -296,15 +244,12 @@ html,body{
   color:#22c55e;
 }
 
-.trend-flat{
-  color:#808080;
+.trend-neutral{
+  color:#999;
 }
-
-/* BUTTONS */
 
 .cell-actions{
   justify-content:center;
-  gap:10px;
 }
 
 .btn-action{
@@ -322,8 +267,6 @@ html,body{
   background:rgba(139,92,246,.08);
 }
 
-/* PANELS */
-
 .panel{
   display:none;
 }
@@ -337,8 +280,6 @@ html,body{
   background:rgba(139,92,246,.03);
   border-top:1px solid var(--border);
 }
-
-/* HIST */
 
 .detail-table{
   width:100%;
@@ -360,11 +301,9 @@ html,body{
   border-bottom:1px solid var(--border);
 }
 
-/* SECCOES */
-
 .sections-panel{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
   gap:20px;
 }
 
@@ -378,31 +317,60 @@ html,body{
 .section-block-title{
   font-size:16px;
   font-weight:800;
-  margin-bottom:20px;
+  margin-bottom:18px;
 }
 
 .section-category{
-  margin-bottom:25px;
+  margin-bottom:24px;
 }
 
 .section-category-title{
   font-size:12px;
   font-weight:800;
   color:#777;
-  margin-bottom:14px;
   text-transform:uppercase;
+  margin-bottom:14px;
 }
 
 .section-metric{
   display:flex;
   justify-content:space-between;
   margin-bottom:8px;
+  font-size:13px;
+}
+
+.legend{
+  margin-top:25px;
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+.legend-item{
+  padding:10px 16px;
+  border-radius:12px;
+  font-weight:700;
+  font-size:13px;
+}
+
+.legend-n1{
+  background:rgba(34,197,94,.12);
+  color:#22c55e;
+}
+
+.legend-n2{
+  background:rgba(251,146,60,.12);
+  color:#fb923c;
+}
+
+.legend-n3{
+  background:rgba(239,68,68,.12);
+  color:#ef4444;
 }
 
 .loading{
   padding:100px;
   text-align:center;
-  font-size:20px;
 }
 
 @media(max-width:1200px){
@@ -448,25 +416,6 @@ html,body{
 </header>
 
 <main class="main">
-
-  <div class="legend">
-
-    <div class="legend-item">
-      <div class="legend-color green"></div>
-      N1 → Até 20 tarefas abertas
-    </div>
-
-    <div class="legend-item">
-      <div class="legend-color orange"></div>
-      N2 → Entre 21 e 40 tarefas abertas
-    </div>
-
-    <div class="legend-item">
-      <div class="legend-color red"></div>
-      N3 → Mais de 40 tarefas abertas
-    </div>
-
-  </div>
 
   <div id="app">
 
@@ -556,11 +505,8 @@ fetch('dados.json?t=' + Date.now())
       loja:String(i.Loja).trim(),
 
       local:String(
-        i['Resumo contactos.Localidade']
-        ||
         i['IM.Localidade']
-        ||
-        ''
+        || ''
       ).trim(),
 
       pA,pF,nA,nF,pT,nT,
@@ -583,7 +529,9 @@ fetch('dados.json?t=' + Date.now())
 
     };
 
-  });
+  })
+
+  .filter(l => l.pA > 0);
 
   lojas.sort((a,b)=>b.pA-a.pA);
 
@@ -710,13 +658,12 @@ function renderApp(lojas,ultima){
   <div class="table-container">
 
     <div class="table-header">
-
       <div>RANK</div>
       <div>LOJA</div>
       <div>TAREFAS</div>
       <div>TENDÊNCIA</div>
-      <div>AÇÕES</div>
-
+      <div>HISTÓRICO</div>
+      <div>SECÇÕES</div>
     </div>
 
   `;
@@ -730,18 +677,19 @@ function renderApp(lojas,ultima){
       ? 'badge-n2'
       : 'badge-n3';
 
-    var trend = '→';
-    var trendClass = 'trend-flat';
+    var trend =
+      l.diff > 0
+      ? '▲'
+      : l.diff < 0
+      ? '▼'
+      : '→';
 
-    if(l.diff > 0){
-      trend = '▲';
-      trendClass = 'trend-up';
-    }
-
-    if(l.diff < 0){
-      trend = '▼';
-      trendClass = 'trend-down';
-    }
+    var trendClass =
+      l.diff > 0
+      ? 'trend-up'
+      : l.diff < 0
+      ? 'trend-down'
+      : 'trend-neutral';
 
     html += `
 
@@ -789,8 +737,7 @@ function renderApp(lojas,ultima){
               </div>
 
               <div class="task-bar">
-                <div class="task-fill fill-red"
-                style="width:${l.pctPA}%"></div>
+                <div class="task-fill red" style="width:${l.pctPA}%"></div>
               </div>
 
             </div>
@@ -803,8 +750,7 @@ function renderApp(lojas,ultima){
               </div>
 
               <div class="task-bar">
-                <div class="task-fill fill-green"
-                style="width:${l.pctPF}%"></div>
+                <div class="task-fill green" style="width:${l.pctPF}%"></div>
               </div>
 
             </div>
@@ -825,8 +771,7 @@ function renderApp(lojas,ultima){
               </div>
 
               <div class="task-bar">
-                <div class="task-fill fill-red"
-                style="width:${l.pctNA}%"></div>
+                <div class="task-fill red" style="width:${l.pctNA}%"></div>
               </div>
 
             </div>
@@ -839,8 +784,7 @@ function renderApp(lojas,ultima){
               </div>
 
               <div class="task-bar">
-                <div class="task-fill fill-green"
-                style="width:${l.pctNF}%"></div>
+                <div class="task-fill green" style="width:${l.pctNF}%"></div>
               </div>
 
             </div>
@@ -852,13 +796,10 @@ function renderApp(lojas,ultima){
       </div>
 
       <div class="cell cell-trend ${trendClass}">
-
         ${trend}
-
         <div style="font-size:18px">
           ${Math.abs(l.diff)}
         </div>
-
       </div>
 
       <div class="cell cell-actions">
@@ -869,6 +810,10 @@ function renderApp(lojas,ultima){
           onclick="toggleHist(${li})">
           ▶ Histórico
         </button>
+
+      </div>
+
+      <div class="cell cell-actions">
 
         <button
           class="btn-action"
@@ -888,7 +833,6 @@ function renderApp(lojas,ultima){
         <table class="detail-table">
 
           <thead>
-
             <tr>
               <th>Semana</th>
               <th>P Aberto</th>
@@ -896,7 +840,6 @@ function renderApp(lojas,ultima){
               <th>NP Aberto</th>
               <th>NP Fechado</th>
             </tr>
-
           </thead>
 
           <tbody>
@@ -904,13 +847,11 @@ function renderApp(lojas,ultima){
             ${l.historico.map(h=>`
 
               <tr>
-
                 <td>${h.semana}</td>
                 <td>${h.pA}</td>
                 <td>${h.pF}</td>
                 <td>${h.nA}</td>
                 <td>${h.nF}</td>
-
               </tr>
 
             `).join('')}
@@ -955,24 +896,22 @@ function renderApp(lojas,ultima){
 
                 <div class="section-metric">
                   <span>Abertas</span>
-                  <strong>${s.pctPA}% (${s.pA})</strong>
+                  <strong>${s.pA} (${s.pctPA}%)</strong>
                 </div>
 
                 <div class="task-bar">
-                  <div class="task-fill fill-red"
-                  style="width:${s.pctPA}%"></div>
+                  <div class="task-fill red" style="width:${s.pctPA}%"></div>
                 </div>
 
                 <br>
 
                 <div class="section-metric">
                   <span>Fechadas</span>
-                  <strong>${s.pctPF}% (${s.pF})</strong>
+                  <strong>${s.pF} (${s.pctPF}%)</strong>
                 </div>
 
                 <div class="task-bar">
-                  <div class="task-fill fill-green"
-                  style="width:${s.pctPF}%"></div>
+                  <div class="task-fill green" style="width:${s.pctPF}%"></div>
                 </div>
 
               </div>
@@ -985,24 +924,22 @@ function renderApp(lojas,ultima){
 
                 <div class="section-metric">
                   <span>Abertas</span>
-                  <strong>${s.pctNA}% (${s.nA})</strong>
+                  <strong>${s.nA} (${s.pctNA}%)</strong>
                 </div>
 
                 <div class="task-bar">
-                  <div class="task-fill fill-red"
-                  style="width:${s.pctNA}%"></div>
+                  <div class="task-fill red" style="width:${s.pctNA}%"></div>
                 </div>
 
                 <br>
 
                 <div class="section-metric">
                   <span>Fechadas</span>
-                  <strong>${s.pctNF}% (${s.nF})</strong>
+                  <strong>${s.nF} (${s.pctNF}%)</strong>
                 </div>
 
                 <div class="task-bar">
-                  <div class="task-fill fill-green"
-                  style="width:${s.pctNF}%"></div>
+                  <div class="task-fill green" style="width:${s.pctNF}%"></div>
                 </div>
 
               </div>
@@ -1021,7 +958,27 @@ function renderApp(lojas,ultima){
 
   });
 
-  html += `</div>`;
+  html += `
+
+  </div>
+
+  <div class="legend">
+
+    <div class="legend-item legend-n1">
+      N1 → Até 20 tarefas abertas
+    </div>
+
+    <div class="legend-item legend-n2">
+      N2 → Entre 21 e 40 tarefas abertas
+    </div>
+
+    <div class="legend-item legend-n3">
+      N3 → Mais de 40 tarefas abertas
+    </div>
+
+  </div>
+
+  `;
 
   document.getElementById('app').innerHTML = html;
 
