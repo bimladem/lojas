@@ -3,21 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Análise Semanal IM</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-
 :root{
   --bg:#ffffff;
-  --border:#e5e7eb;
+  --card:#ffffff;
+  --border:#e9e9ee;
+  --border-hover:#d7d7e0;
+
   --text:#111827;
-  --muted:#6b7280;
+  --text-2:#4b5563;
+  --text-3:#8b95a7;
+
   --purple:#8b5cf6;
-  --red:#ef4444;
+  --pink:#ec4899;
+
   --green:#22c55e;
+  --red:#ef4444;
+  --orange:#f59e0b;
+
+  --grad:linear-gradient(135deg,#8b5cf6 0%,#ec4899 100%);
 }
 
 *{
@@ -26,10 +34,11 @@
   box-sizing:border-box;
 }
 
-body{
+html,body{
+  background:linear-gradient(to bottom,#fafafa,#ffffff);
   font-family:'Inter',sans-serif;
-  background:#fff;
   color:var(--text);
+  min-height:100vh;
 }
 
 /* HEADER */
@@ -37,238 +46,473 @@ body{
 .header{
   position:sticky;
   top:0;
-  z-index:999;
-  background:#fff;
-  border-bottom:1px solid var(--border);
-  padding:20px 30px;
+  z-index:100;
+  background:rgba(255,255,255,.88);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(0,0,0,.06);
 
   display:flex;
   align-items:center;
   justify-content:space-between;
+  gap:20px;
+
+  padding:20px 34px;
 }
 
-.header-left{
+.header-brand{
   display:flex;
   align-items:center;
   gap:16px;
 }
 
-.logo{
-  width:46px;
-  height:46px;
-  border-radius:14px;
-  background:linear-gradient(135deg,#8b5cf6,#ec4899);
+.header-logo{
+  width:52px;
+  height:52px;
+  border-radius:16px;
+  background:var(--grad);
 
   display:flex;
   align-items:center;
   justify-content:center;
 
-  color:#fff;
-  font-size:20px;
+  font-size:24px;
+  box-shadow:0 12px 30px rgba(139,92,246,.25);
 }
 
 .header-title h1{
-  font-size:26px;
+  font-size:25px;
   font-weight:800;
+  letter-spacing:-1px;
 }
 
-.header-title p{
-  margin-top:4px;
-  color:var(--muted);
+.header-title .sub{
+  color:var(--text-3);
+  font-size:13px;
+  margin-top:3px;
 }
 
-.periodo{
-  padding:10px 16px;
-  border-radius:12px;
+.header-period{
   background:rgba(139,92,246,.08);
+  border:1px solid rgba(139,92,246,.15);
+
   color:var(--purple);
   font-weight:700;
-  border:1px solid rgba(139,92,246,.15);
+
+  border-radius:12px;
+
+  padding:10px 16px;
+  white-space:nowrap;
 }
 
 /* MAIN */
 
 .main{
-  padding:30px;
-  max-width:1800px;
+  max-width:1650px;
   margin:auto;
+  padding:36px;
+}
+
+/* KPI */
+
+.kpi-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:22px;
+  margin-bottom:34px;
+}
+
+.kpi-card{
+  background:var(--card);
+  border:1px solid var(--border);
+
+  border-radius:22px;
+  padding:26px;
+
+  position:relative;
+  overflow:hidden;
+
+  transition:.25s ease;
+}
+
+.kpi-card:hover{
+  transform:translateY(-4px);
+  border-color:var(--border-hover);
+  box-shadow:0 18px 40px rgba(0,0,0,.06);
+}
+
+.kpi-card::before{
+  content:'';
+  position:absolute;
+  left:0;
+  top:0;
+  width:5px;
+  height:100%;
+  background:var(--grad);
+}
+
+.kpi-label{
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.6px;
+  color:var(--text-3);
+  font-weight:700;
+}
+
+.kpi-value{
+  font-size:42px;
+  font-weight:800;
+  margin-top:12px;
+  line-height:1;
+}
+
+.kpi-sublabel{
+  margin-top:10px;
+  color:var(--text-3);
+  font-size:13px;
+}
+
+/* TOP INFO */
+
+.top-layout{
+  display:grid;
+  grid-template-columns:1fr 420px;
+  gap:26px;
+  margin-bottom:30px;
+}
+
+.legend-card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:26px;
+}
+
+.legend-title{
+  font-size:14px;
+  font-weight:800;
+  margin-bottom:20px;
+}
+
+.legend-list{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.legend-item{
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+  color:var(--text-2);
+  font-size:14px;
+}
+
+.legend-icon{
+  width:34px;
+  height:34px;
+  border-radius:10px;
+  background:#f6f5ff;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:16px;
+}
+
+/* LEVELS */
+
+.levels-box{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:22px;
+  overflow:hidden;
+}
+
+.levels-head{
+  padding:20px 24px;
+  border-bottom:1px solid var(--border);
+  font-weight:800;
+  font-size:14px;
+}
+
+.levels-content{
+  padding:18px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.level-row{
+  display:grid;
+  grid-template-columns:48px 1fr auto;
+  gap:16px;
+
+  align-items:center;
+
+  background:#fafafa;
+  border-radius:14px;
+  padding:14px;
+}
+
+.level-badge{
+  width:48px;
+  height:48px;
+  border-radius:14px;
+  background:#fff;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:24px;
+}
+
+.level-name{
+  font-weight:800;
+  font-size:15px;
+}
+
+.level-range{
+  font-size:13px;
+  color:var(--text-3);
+  margin-top:2px;
+}
+
+.level-right{
+  text-align:right;
+}
+
+.level-right span{
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+  color:var(--text-3);
+}
+
+.level-right strong{
+  display:block;
+  margin-top:3px;
+  font-size:14px;
 }
 
 /* TABLE */
 
-.table-container{
+.table-wrapper{
+  background:#fff;
   border:1px solid var(--border);
-  border-radius:20px;
+  border-radius:24px;
   overflow:hidden;
 }
 
 .table-header{
   display:grid;
   grid-template-columns:
-  120px
-  260px
+  110px
+  1.5fr
   1fr
-  220px;
+  120px
+  120px
+  200px;
+
+  gap:0;
+
+  padding:18px 22px;
+
+  border-bottom:1px solid var(--border);
 
   background:#fafafa;
-  border-bottom:1px solid var(--border);
+}
 
-  font-size:13px;
+.th{
+  font-size:12px;
   font-weight:800;
-  color:#555;
+  color:var(--text-3);
   text-transform:uppercase;
+  letter-spacing:.5px;
 }
 
-.table-header div{
-  padding:20px;
-  text-align:center;
-}
-
-.table-row{
+.row{
   display:grid;
   grid-template-columns:
-  120px
-  260px
+  110px
+  1.5fr
   1fr
-  220px;
+  120px
+  120px
+  200px;
 
-  border-bottom:1px solid var(--border);
+  align-items:center;
+
+  padding:24px 22px;
+
+  border-bottom:1px solid #f1f1f4;
+
+  transition:.2s ease;
 }
 
-.cell{
-  padding:24px;
+.row:hover{
+  background:#fcfbff;
+}
+
+.row:last-child{
+  border-bottom:none;
 }
 
 /* RANK */
 
-.rank-cell{
+.rank{
   display:flex;
   flex-direction:column;
   align-items:center;
-  justify-content:center;
-  gap:10px;
+  gap:8px;
+}
+
+.rank-emoji{
+  font-size:25px;
 }
 
 .rank-number{
-  font-size:34px;
+  font-size:22px;
   font-weight:800;
 }
 
 .rank-badge{
-  padding:5px 10px;
-  border-radius:10px;
+  padding:5px 12px;
+  border-radius:999px;
   font-size:11px;
   font-weight:800;
 }
 
-.n1{
+.badge-n1{
   background:rgba(34,197,94,.12);
-  color:#22c55e;
+  color:var(--green);
 }
 
-.n2{
-  background:rgba(251,146,60,.12);
-  color:#fb923c;
+.badge-n2{
+  background:rgba(245,158,11,.12);
+  color:var(--orange);
 }
 
-.n3{
+.badge-n3{
   background:rgba(239,68,68,.12);
-  color:#ef4444;
+  color:var(--red);
 }
 
 /* LOJA */
 
-.loja-cell{
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  gap:8px;
-}
-
 .loja{
-  font-size:28px;
+  min-width:0;
+}
+
+.loja h3{
+  font-size:17px;
   font-weight:800;
-}
 
-.local{
-  color:var(--muted);
-  font-size:14px;
-}
-
-/* TAREFAS */
-
-.tasks-grid{
-  display:grid;
-  grid-template-columns:repeat(6,1fr);
-  gap:14px;
-}
-
-.task-card{
-  border:1px solid var(--border);
-  border-radius:16px;
-  padding:18px;
-  background:#fafafa;
-}
-
-.task-title{
-  font-size:12px;
-  font-weight:800;
-  color:#666;
-  margin-bottom:16px;
-  text-transform:uppercase;
-}
-
-.task-value{
-  font-size:30px;
-  font-weight:800;
-  margin-bottom:10px;
-}
-
-.task-bar{
-  height:8px;
-  background:#e5e7eb;
-  border-radius:999px;
   overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
 }
 
-.task-fill{
-  height:100%;
+.loja p{
+  margin-top:5px;
+  font-size:13px;
+  color:var(--text-3);
+
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
 }
 
-.red{
-  background:#ef4444;
-}
+/* SUMMARY */
 
-.green{
-  background:#22c55e;
-}
-
-.gray{
-  background:#8b5cf6;
-}
-
-/* ACTIONS */
-
-.actions{
+.summary{
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:12px;
+  gap:22px;
+}
+
+.summary-box{
+  text-align:center;
+}
+
+.summary-box strong{
+  display:block;
+  font-size:24px;
+  font-weight:800;
+}
+
+.summary-box span{
+  color:var(--text-3);
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.4px;
+}
+
+/* TREND */
+
+.trend{
+  text-align:center;
+}
+
+.trend-icon{
+  font-size:22px;
+  font-weight:800;
+}
+
+.trend-value{
+  margin-top:5px;
+  font-size:14px;
+  font-weight:800;
+}
+
+.up{
+  color:var(--red);
+}
+
+.down{
+  color:var(--green);
+}
+
+.none{
+  color:var(--text-3);
+}
+
+/* BUTTONS */
+
+.actions{
+  display:flex;
+  gap:10px;
+  justify-content:center;
 }
 
 .btn{
-  border:1px solid rgba(139,92,246,.25);
-  background:#fff;
-  color:#8b5cf6;
-  border-radius:12px;
-  padding:12px 18px;
+  border:none;
+  background:#f7f5ff;
+  color:var(--purple);
+
   font-weight:700;
+  font-size:12px;
+
+  border-radius:12px;
+
+  padding:11px 14px;
+
   cursor:pointer;
-  transition:.2s;
+
+  transition:.2s ease;
 }
 
 .btn:hover{
-  background:rgba(139,92,246,.08);
+  transform:translateY(-1px);
+  background:#ede9fe;
+}
+
+.btn.active{
+  background:var(--grad);
+  color:#fff;
 }
 
 /* PANELS */
@@ -277,117 +521,312 @@ body{
   display:none;
 }
 
-.panel.show{
+.panel.visible{
   display:block;
 }
 
 .panel-inner{
-  padding:28px;
   background:#fafafa;
+  padding:30px;
   border-top:1px solid var(--border);
+  animation:fade .25s ease;
 }
 
-/* HISTORICO */
+@keyframes fade{
+  from{
+    opacity:0;
+    transform:translateY(-6px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
 
-.hist-info{
+.panel-title{
+  font-size:15px;
+  font-weight:800;
   margin-bottom:22px;
-  padding:18px;
-  border-radius:14px;
+}
+
+/* TASKS */
+
+.tasks-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:24px;
+}
+
+.task-card{
   background:#fff;
   border:1px solid var(--border);
+  border-radius:18px;
+  padding:22px;
 }
 
-.hist-info strong{
-  display:block;
+.task-head{
+  font-weight:800;
+  font-size:14px;
+  margin-bottom:20px;
+}
+
+.task-item{
+  margin-bottom:18px;
+}
+
+.task-line{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
   margin-bottom:10px;
-  font-size:15px;
 }
 
-.hist-info p{
-  color:#555;
-  line-height:1.6;
+.task-left{
+  font-size:13px;
+  font-weight:700;
+  color:var(--text-2);
 }
+
+.task-right{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.task-number{
+  font-size:17px;
+  font-weight:800;
+}
+
+.task-percent{
+  font-size:12px;
+  font-weight:800;
+  color:var(--text-3);
+}
+
+.bar{
+  width:100%;
+  height:8px;
+  background:#f1f1f4;
+  border-radius:999px;
+  overflow:hidden;
+}
+
+.bar-fill{
+  height:100%;
+  border-radius:999px;
+  transition:.6s ease;
+}
+
+/* HIST */
 
 .hist-table{
   width:100%;
   border-collapse:collapse;
-  background:#fff;
-  border-radius:16px;
-  overflow:hidden;
 }
 
 .hist-table th{
-  background:#f3f4f6;
-  padding:16px;
-  text-align:center;
-  font-size:12px;
+  text-align:left;
+  padding:14px;
+  font-size:11px;
   text-transform:uppercase;
+  color:var(--text-3);
+  border-bottom:1px solid var(--border);
 }
 
 .hist-table td{
-  padding:16px;
-  text-align:center;
-  border-top:1px solid var(--border);
-  font-weight:600;
+  padding:16px 14px;
+  border-bottom:1px solid #f0f0f0;
+  font-size:14px;
 }
 
-/* SECCOES */
-
-.sections-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-  gap:18px;
-}
-
-.section-card{
-  border:1px solid var(--border);
-  border-radius:16px;
-  padding:20px;
+.hist-table tr:hover td{
   background:#fff;
 }
 
-.section-title{
-  font-size:18px;
-  font-weight:800;
-  margin-bottom:20px;
-}
-
-.metric{
-  margin-bottom:18px;
-}
-
-.metric-top{
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:8px;
-  font-size:13px;
+.current-row td{
+  background:#f5f3ff;
   font-weight:700;
 }
 
-@media(max-width:1400px){
+/* SECÇÕES */
 
-  .tasks-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
+.sec-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:18px;
 }
 
-@media(max-width:1000px){
+.sec-card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:18px;
+  overflow:hidden;
+}
+
+.sec-head{
+  padding:18px;
+  cursor:pointer;
+  font-weight:800;
+  border-bottom:1px solid transparent;
+}
+
+.sec-head:hover{
+  background:#fafafa;
+}
+
+.sec-content{
+  display:none;
+  padding:18px;
+  border-top:1px solid var(--border);
+}
+
+.sec-content.visible{
+  display:block;
+}
+
+.metric-group{
+  margin-bottom:20px;
+}
+
+.metric-group:last-child{
+  margin-bottom:0;
+}
+
+.metric-title{
+  font-size:11px;
+  color:var(--text-3);
+  text-transform:uppercase;
+  letter-spacing:.4px;
+  margin-bottom:12px;
+  font-weight:800;
+}
+
+.metric{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:10px;
+  font-size:13px;
+}
+
+.metric span:last-child{
+  font-weight:800;
+}
+
+/* ALERT */
+
+.alert-box{
+  margin-top:28px;
+
+  background:rgba(239,68,68,.06);
+  border:1px solid rgba(239,68,68,.14);
+
+  border-radius:24px;
+  padding:26px;
+
+  display:flex;
+  gap:18px;
+}
+
+.alert-icon{
+  font-size:28px;
+}
+
+.alert-box h3{
+  font-size:15px;
+  color:var(--red);
+  margin-bottom:8px;
+}
+
+.alert-box p{
+  color:var(--text-2);
+  line-height:1.7;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1200px){
+
+  .top-layout{
+    grid-template-columns:1fr;
+  }
+
+  .table-header,
+  .row{
+    grid-template-columns:
+    100px
+    1.2fr
+    .9fr
+    110px
+    100px
+    180px;
+  }
+}
+
+@media(max-width:950px){
+
+  .header{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .main{
+    padding:20px;
+  }
+
+  .tasks-grid{
+    grid-template-columns:1fr;
+  }
 
   .table-header{
     display:none;
   }
 
-  .table-row{
+  .row{
     grid-template-columns:1fr;
+    gap:20px;
   }
 
-  .tasks-grid{
-    grid-template-columns:1fr;
+  .rank{
+    flex-direction:row;
+    justify-content:flex-start;
   }
 
+  .summary{
+    justify-content:flex-start;
+  }
+
+  .actions{
+    justify-content:flex-start;
+    flex-wrap:wrap;
+  }
 }
 
+@media(max-width:600px){
+
+  .main{
+    padding:16px;
+  }
+
+  .header{
+    padding:18px;
+  }
+
+  .kpi-grid{
+    grid-template-columns:1fr;
+  }
+
+  .detail-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+.loading{
+  text-align:center;
+  padding:100px 20px;
+  color:var(--text-3);
+  font-size:15px;
+}
 </style>
 </head>
 
@@ -395,20 +834,20 @@ body{
 
 <header class="header">
 
-  <div class="header-left">
+  <div class="header-brand">
 
-    <div class="logo">
+    <div class="header-logo">
       📊
     </div>
 
     <div class="header-title">
       <h1>Análise Semanal</h1>
-      <p id="subinfo">Carregando...</p>
+      <div class="sub" id="sub-info">Carregando dados...</div>
     </div>
 
   </div>
 
-  <div class="periodo" id="periodo">
+  <div class="header-period" id="periodo">
     —
   </div>
 
@@ -417,11 +856,9 @@ body{
 <main class="main">
 
   <div id="app">
-
-    <div style="padding:100px;text-align:center">
+    <div class="loading">
       ⏳ Carregando dados...
     </div>
-
   </div>
 
 </main>
@@ -429,26 +866,77 @@ body{
 <script>
 
 var stateHist = {};
+var stateTasks = {};
 var stateSec = {};
+var stateSecDet = {};
 
-function toggleHist(i){
+function toggleHist(id){
 
-  var panel = document.getElementById('hist-' + i);
+  var panel = document.getElementById('hist-'+id);
+  var btn = document.getElementById('btnhist-'+id);
 
-  stateHist[i] = !stateHist[i];
+  stateHist[id] = !stateHist[id];
 
-  panel.classList.toggle('show',stateHist[i]);
+  panel.classList.toggle('visible',stateHist[id]);
+  btn.classList.toggle('active',stateHist[id]);
+
+  btn.innerHTML = stateHist[id]
+  ? '▼ Fechar'
+  : '▶ Histórico';
+}
+
+function toggleTasks(id){
+
+  var panel = document.getElementById('tasks-'+id);
+  var btn = document.getElementById('btntasks-'+id);
+
+  stateTasks[id] = !stateTasks[id];
+
+  panel.classList.toggle('visible',stateTasks[id]);
+  btn.classList.toggle('active',stateTasks[id]);
+
+  btn.innerHTML = stateTasks[id]
+  ? '▼ Fechar'
+  : '▶ Tarefas';
+
+  if(stateTasks[id]){
+
+    setTimeout(()=>{
+
+      document
+      .querySelectorAll('#tasks-'+id+' .bar-fill')
+      .forEach(el=>{
+
+        el.style.width = el.getAttribute('data-width');
+
+      });
+
+    },50);
+
+  }
 
 }
 
-function toggleSec(i){
+function toggleSec(id){
 
-  var panel = document.getElementById('sec-' + i);
+  var panel = document.getElementById('sec-'+id);
+  var btn = document.getElementById('btnsec-'+id);
 
-  stateSec[i] = !stateSec[i];
+  stateSec[id] = !stateSec[id];
 
-  panel.classList.toggle('show',stateSec[i]);
+  panel.classList.toggle('visible',stateSec[id]);
+  btn.classList.toggle('active',stateSec[id]);
 
+  btn.innerHTML = stateSec[id]
+  ? '▼ Fechar'
+  : '▶ Secções';
+}
+
+function toggleSecDet(id){
+
+  var el = document.getElementById('secdet-'+id);
+
+  el.classList.toggle('visible');
 }
 
 fetch('dados.json?t=' + Date.now())
@@ -483,13 +971,29 @@ fetch('dados.json?t=' + Date.now())
 
   .map(i=>{
 
-    var pTotal = Number(i['P Total']) || 0;
-    var pAberto = Number(i['P Aberto']) || 0;
-    var pFechado = Number(i['P Fechado']) || 0;
+    var pT = Number(i['P Total']) || 0;
+    var pA = Number(i['P Aberto']) || 0;
+    var pF = Number(i['P Fechado']) || 0;
 
-    var npTotal = Number(i['NP Total']) || 0;
-    var npAberto = Number(i['NP Aberto']) || 0;
-    var npFechado = Number(i['NP Fechado']) || 0;
+    var nT = Number(i['NP Total']) || 0;
+    var nA = Number(i['NP Aberto']) || 0;
+    var nF = Number(i['NP Fechado']) || 0;
+
+    var pctPA = pT > 0
+    ? (pA/pT*100).toFixed(1)
+    : '0.0';
+
+    var pctPF = pT > 0
+    ? (pF/pT*100).toFixed(1)
+    : '0.0';
+
+    var pctNA = nT > 0
+    ? (nA/nT*100).toFixed(1)
+    : '0.0';
+
+    var pctNF = nT > 0
+    ? (nF/nT*100).toFixed(1)
+    : '0.0';
 
     return{
 
@@ -497,72 +1001,84 @@ fetch('dados.json?t=' + Date.now())
 
       local:String(
         i['Resumo contactos.Localidade']
-        ||
-        i['IM.Localidade']
-        ||
-        ''
+        || i['IM.Localidade']
+        || ''
       ).trim(),
 
-      pTotal,
-      pAberto,
-      pFechado,
+      pT,pA,pF,
+      nT,nA,nF,
 
-      npTotal,
-      npAberto,
-      npFechado,
-
-      historico:[],
-      seccoes:[],
+      pctPA,pctPF,
+      pctNA,pctNF,
 
       nivel:
-      pAberto <= 20 ? 1 :
-      pAberto <= 40 ? 2 : 3
+      parseFloat(pctPA)<=20 ? 1 :
+      parseFloat(pctPA)<=40 ? 2 :
+      3,
+
+      historico:[],
+      seccoes:[]
 
     };
 
   })
 
-  .filter(l=>l.pAberto > 0);
+  .filter(l=>l.pA > 0);
 
-  lojas.sort((a,b)=>b.pAberto-a.pAberto);
+  lojas.sort((a,b)=>b.pA-a.pA);
 
   var top = lojas.slice(0,10);
 
   var ids = {};
 
-  top.forEach(l=>{
-    ids[l.loja] = true;
-  });
+  top.forEach(l=>ids[l.loja]=true);
+
+  var historicos = {};
 
   data.forEach(i=>{
 
     if(
       !i.Secção &&
       i.Loja &&
+      i.Semana &&
       ids[String(i.Loja).trim()]
     ){
 
-      var loja = top.find(
-        l=>l.loja === String(i.Loja).trim()
-      );
+      var id = String(i.Loja).trim();
 
-      if(loja){
-
-        loja.historico.push({
-
-          semana:String(i.Semana).trim(),
-
-          pAberto:Number(i['P Aberto']) || 0,
-          pFechado:Number(i['P Fechado']) || 0,
-
-          npAberto:Number(i['NP Aberto']) || 0,
-          npFechado:Number(i['NP Fechado']) || 0
-
-        });
-
+      if(!historicos[id]){
+        historicos[id] = [];
       }
 
+      historicos[id].push({
+
+        semana:String(i.Semana).trim(),
+
+        pA:Number(i['P Aberto']) || 0,
+        pF:Number(i['P Fechado']) || 0,
+
+        nA:Number(i['NP Aberto']) || 0,
+        nF:Number(i['NP Fechado']) || 0
+
+      });
+
     }
+
+  });
+
+  top.forEach(l=>{
+
+    var h = historicos[l.loja] || [];
+
+    l.historico = h
+    .filter(x=>x.semana !== ultima)
+    .slice(-8);
+
+    var ultimas = h.slice(-2);
+
+    l.diff = ultimas.length === 2
+    ? ultimas[1].pA - ultimas[0].pA
+    : null;
 
   });
 
@@ -586,15 +1102,39 @@ fetch('dados.json?t=' + Date.now())
 
         if(nome.toLowerCase() !== 'admin'){
 
+          var pT = Number(i['P Total']) || 0;
+          var pA = Number(i['P Aberto']) || 0;
+          var pF = Number(i['P Fechado']) || 0;
+
+          var nT = Number(i['NP Total']) || 0;
+          var nA = Number(i['NP Aberto']) || 0;
+          var nF = Number(i['NP Fechado']) || 0;
+
           loja.seccoes.push({
 
             nome,
 
-            pAberto:Number(i['P Aberto']) || 0,
-            pFechado:Number(i['P Fechado']) || 0,
+            pA,pF,nA,nF,
 
-            npAberto:Number(i['NP Aberto']) || 0,
-            npFechado:Number(i['NP Fechado']) || 0
+            pctPA:
+            pT>0
+            ? (pA/pT*100).toFixed(1)
+            : '0.0',
+
+            pctPF:
+            pT>0
+            ? (pF/pT*100).toFixed(1)
+            : '0.0',
+
+            pctNA:
+            nT>0
+            ? (nA/nT*100).toFixed(1)
+            : '0.0',
+
+            pctNF:
+            nT>0
+            ? (nF/nT*100).toFixed(1)
+            : '0.0'
 
           });
 
@@ -606,82 +1146,383 @@ fetch('dados.json?t=' + Date.now())
 
   });
 
-  document.getElementById('subinfo').innerHTML =
-  'Gerado hoje · ' + top.length + ' lojas';
+  top.forEach(
+    l=>l.seccoes.sort((a,b)=>b.pA-a.pA)
+  );
+
+  document.getElementById('sub-info').innerHTML =
+  'Gerado hoje • ' + top.length + ' lojas';
 
   document.getElementById('periodo').innerHTML =
   '📅 ' + ultima;
 
-  render(top);
+  renderApp(top,ultima);
+
+})
+
+.catch(()=>{
+
+  document.getElementById('app').innerHTML = `
+    <div class="loading" style="color:#ef4444">
+      ❌ Erro ao carregar dados
+    </div>
+  `;
 
 });
 
-function render(lojas){
+function renderApp(lojas,ultima){
 
-  var html = `
+  var criticas = lojas.filter((l,i)=>i<3).length;
 
-  <div class="table-container">
+  var alertas = lojas.filter((l,i)=>i>=3).length;
 
-    <div class="table-header">
+  var piorando = lojas.filter(l=>l.diff > 0).length;
 
-      <div>Rank</div>
+  var melhorando = lojas.filter(l=>l.diff < 0).length;
 
-      <div>Loja</div>
+  var kpis = `
 
-      <div>Tarefas</div>
+    <div class="kpi-grid">
 
-      <div>Ações</div>
+      <div class="kpi-card">
+        <div class="kpi-label">
+          🔴 Lojas Críticas
+        </div>
+
+        <div class="kpi-value">
+          ${criticas}
+        </div>
+
+        <div class="kpi-sublabel">
+          Top 3 com mais abertas
+        </div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-label">
+          ⚠️ Em Alerta
+        </div>
+
+        <div class="kpi-value">
+          ${alertas}
+        </div>
+
+        <div class="kpi-sublabel">
+          Necessitam acompanhamento
+        </div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-label">
+          ▲ A Piorar
+        </div>
+
+        <div class="kpi-value">
+          ${piorando}
+        </div>
+
+        <div class="kpi-sublabel">
+          Mais abertas vs semana anterior
+        </div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-label">
+          ▼ A Melhorar
+        </div>
+
+        <div class="kpi-value">
+          ${melhorando}
+        </div>
+
+        <div class="kpi-sublabel">
+          Menos abertas vs semana anterior
+        </div>
+      </div>
 
     </div>
 
   `;
 
-  lojas.forEach((l,i)=>{
+  var topInfo = `
+
+    <div class="top-layout">
+
+      <div class="legend-card">
+
+        <div class="legend-title">
+          📊 Indicadores
+        </div>
+
+        <div class="legend-list">
+
+          <div class="legend-item">
+            <div class="legend-icon">
+              🔴
+            </div>
+            <div>
+              Top 3 lojas críticas
+            </div>
+          </div>
+
+          <div class="legend-item">
+            <div class="legend-icon">
+              ▲
+            </div>
+            <div>
+              Tendência de piora
+            </div>
+          </div>
+
+          <div class="legend-item">
+            <div class="legend-icon">
+              ▼
+            </div>
+            <div>
+              Tendência de melhoria
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="levels-box">
+
+        <div class="levels-head">
+          🎯 Níveis de Incumprimento
+        </div>
+
+        <div class="levels-content">
+
+          <div class="level-row">
+
+            <div class="level-badge">
+              🟢
+            </div>
+
+            <div>
+              <div class="level-name">
+                N1
+              </div>
+
+              <div class="level-range">
+                0–20%
+              </div>
+            </div>
+
+            <div class="level-right">
+              <span>Estado</span>
+              <strong>Excelente</strong>
+            </div>
+
+          </div>
+
+          <div class="level-row">
+
+            <div class="level-badge">
+              🟠
+            </div>
+
+            <div>
+              <div class="level-name">
+                N2
+              </div>
+
+              <div class="level-range">
+                21–40%
+              </div>
+            </div>
+
+            <div class="level-right">
+              <span>Estado</span>
+              <strong>Aceitável</strong>
+            </div>
+
+          </div>
+
+          <div class="level-row">
+
+            <div class="level-badge">
+              🔴
+            </div>
+
+            <div>
+              <div class="level-name">
+                N3
+              </div>
+
+              <div class="level-range">
+                41%+
+              </div>
+            </div>
+
+            <div class="level-right">
+              <span>Estado</span>
+              <strong>Crítico</strong>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  `;
+
+  var header = `
+
+    <div class="table-header">
+
+      <div class="th">
+        Rank
+      </div>
+
+      <div class="th">
+        Loja
+      </div>
+
+      <div class="th">
+        Resumo
+      </div>
+
+      <div class="th">
+        Tarefas
+      </div>
+
+      <div class="th">
+        Tendência
+      </div>
+
+      <div class="th">
+        Ações
+      </div>
+
+    </div>
+
+  `;
+
+  var rows = '';
+
+  lojas.forEach((l,li)=>{
+
+    var total = l.pA + l.pF + l.nA + l.nF;
+
+    var abertas = l.pA + l.nA;
 
     var badge =
-    l.nivel === 1 ? 'n1' :
-    l.nivel === 2 ? 'n2' : 'n3';
+    l.nivel===1 ? 'badge-n1' :
+    l.nivel===2 ? 'badge-n2' :
+    'badge-n3';
 
-    var explicacao = '';
+    var diffIcon =
+    l.diff === null ? '—' :
+    l.diff > 0 ? '▲' :
+    l.diff < 0 ? '▼' :
+    '→';
 
-    if(l.historico.length >= 2){
+    var diffClass =
+    l.diff === null ? 'none' :
+    l.diff > 0 ? 'up' :
+    l.diff < 0 ? 'down' :
+    'none';
 
-      var ult = l.historico[l.historico.length-1].pAberto;
-      var pen = l.historico[l.historico.length-2].pAberto;
+    var histRows = '';
 
-      var dif = ult - pen;
+    l.historico.forEach(h=>{
 
-      if(dif > 0){
+      histRows += `
 
-        explicacao =
-        'As tarefas programadas abertas aumentaram em ' +
-        dif +
-        ' em comparação com a semana anterior.';
+      <tr>
+        <td>${h.semana}</td>
+        <td>${h.pA}</td>
+        <td>${h.pF}</td>
+        <td>${h.nA}</td>
+        <td>${h.nF}</td>
+      </tr>
 
-      }else if(dif < 0){
+      `;
 
-        explicacao =
-        'As tarefas programadas abertas diminuíram em ' +
-        Math.abs(dif) +
-        ' em comparação com a semana anterior.';
+    });
 
-      }else{
+    var secHtml = '';
 
-        explicacao =
-        'Não houve alteração nas tarefas programadas abertas em comparação com a semana anterior.';
+    l.seccoes.forEach((s,si)=>{
 
-      }
+      var id = l.loja.replace(/\s/g,'') + '-' + si;
 
-    }
+      secHtml += `
 
-    html += `
+      <div class="sec-card">
 
-    <div class="table-row">
+        <div class="sec-head"
+        onclick="toggleSecDet('${id}')">
 
-      <div class="cell rank-cell">
+          ${s.nome}
+
+        </div>
+
+        <div class="sec-content"
+        id="secdet-${id}">
+
+          <div class="metric-group">
+
+            <div class="metric-title">
+              Programadas
+            </div>
+
+            <div class="metric">
+              <span>Abertas</span>
+              <span>${s.pA} • ${s.pctPA}%</span>
+            </div>
+
+            <div class="metric">
+              <span>Fechadas</span>
+              <span>${s.pF} • ${s.pctPF}%</span>
+            </div>
+
+          </div>
+
+          <div class="metric-group">
+
+            <div class="metric-title">
+              Não Programadas
+            </div>
+
+            <div class="metric">
+              <span>Abertas</span>
+              <span>${s.nA} • ${s.pctNA}%</span>
+            </div>
+
+            <div class="metric">
+              <span>Fechadas</span>
+              <span>${s.nF} • ${s.pctNF}%</span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      `;
+
+    });
+
+    rows += `
+
+    <div class="row">
+
+      <div class="rank">
+
+        <div class="rank-emoji">
+          ${li < 3 ? '🔴' : '🟠'}
+        </div>
 
         <div class="rank-number">
-          ${i+1}
+          ${li+1}
         </div>
 
         <div class="rank-badge ${badge}">
@@ -690,154 +1531,88 @@ function render(lojas){
 
       </div>
 
-      <div class="cell loja-cell">
+      <div class="loja">
 
-        <div class="loja">
+        <h3>
           ${l.loja}
+        </h3>
+
+        <p>
+          ${l.local || '—'}
+        </p>
+
+      </div>
+
+      <div class="summary">
+
+        <div class="summary-box">
+          <strong>${total}</strong>
+          <span>Tarefas</span>
         </div>
 
-        <div class="local">
-          ${l.local}
+        <div class="summary-box">
+          <strong>${abertas}</strong>
+          <span>Abertas</span>
         </div>
 
       </div>
 
-      <div class="cell">
+      <div>
+        <button
+        class="btn"
+        id="btntasks-${li}"
+        onclick="toggleTasks(${li})">
 
-        <div class="tasks-grid">
+          ▶ Tarefas
 
-          <div class="task-card">
+        </button>
+      </div>
 
-            <div class="task-title">
-              Programadas Total
-            </div>
+      <div class="trend">
 
-            <div class="task-value">
-              ${l.pTotal}
-            </div>
+        <div class="trend-icon ${diffClass}">
+          ${diffIcon}
+        </div>
 
-            <div class="task-bar">
-              <div class="task-fill gray" style="width:100%"></div>
-            </div>
-
-          </div>
-
-          <div class="task-card">
-
-            <div class="task-title">
-              Programadas Abertas
-            </div>
-
-            <div class="task-value">
-              ${l.pAberto}
-            </div>
-
-            <div class="task-bar">
-              <div class="task-fill red" style="width:${l.pTotal ? (l.pAberto/l.pTotal*100) : 0}%"></div>
-            </div>
-
-          </div>
-
-          <div class="task-card">
-
-            <div class="task-title">
-              Programadas Fechadas
-            </div>
-
-            <div class="task-value">
-              ${l.pFechado}
-            </div>
-
-            <div class="task-bar">
-              <div class="task-fill green" style="width:${l.pTotal ? (l.pFechado/l.pTotal*100) : 0}%"></div>
-            </div>
-
-          </div>
-
-          <div class="task-card">
-
-            <div class="task-title">
-              Não Programadas Total
-            </div>
-
-            <div class="task-value">
-              ${l.npTotal}
-            </div>
-
-            <div class="task-bar">
-              <div class="task-fill gray" style="width:100%"></div>
-            </div>
-
-          </div>
-
-          <div class="task-card">
-
-            <div class="task-title">
-              Não Programadas Abertas
-            </div>
-
-            <div class="task-value">
-              ${l.npAberto}
-            </div>
-
-            <div class="task-bar">
-              <div class="task-fill red" style="width:${l.npTotal ? (l.npAberto/l.npTotal*100) : 0}%"></div>
-            </div>
-
-          </div>
-
-          <div class="task-card">
-
-            <div class="task-title">
-              Não Programadas Fechadas
-            </div>
-
-            <div class="task-value">
-              ${l.npFechado}
-            </div>
-
-            <div class="task-bar">
-              <div class="task-fill green" style="width:${l.npTotal ? (l.npFechado/l.npTotal*100) : 0}%"></div>
-            </div>
-
-          </div>
-
+        <div class="trend-value ${diffClass}">
+          ${l.diff === null ? '—' : Math.abs(l.diff)}
         </div>
 
       </div>
 
-      <div class="cell actions">
+      <div class="actions">
 
         <button
         class="btn"
-        onclick="toggleHist(${i})">
-          Histórico
+        id="btnhist-${li}"
+        onclick="toggleHist(${li})">
+
+          ▶ Histórico
+
         </button>
 
         <button
         class="btn"
-        onclick="toggleSec(${i})">
-          Secções
+        id="btnsec-${li}"
+        onclick="toggleSec(${li})">
+
+          ▶ Secções
+
         </button>
 
       </div>
 
     </div>
 
-    <div class="panel" id="hist-${i}">
+    <!-- HISTÓRICO -->
+
+    <div class="panel"
+    id="hist-${li}">
 
       <div class="panel-inner">
 
-        <div class="hist-info">
-
-          <strong>
-            Evolução das tarefas
-          </strong>
-
-          <p>
-            ${explicacao}
-          </p>
-
+        <div class="panel-title">
+          📈 Evolução Semanal
         </div>
 
         <table class="hist-table">
@@ -845,40 +1620,28 @@ function render(lojas){
           <thead>
 
             <tr>
-
               <th>Semana</th>
-
-              <th>Programadas Abertas</th>
-
-              <th>Programadas Fechadas</th>
-
-              <th>Não Programadas Abertas</th>
-
-              <th>Não Programadas Fechadas</th>
-
+              <th>P Aberto</th>
+              <th>P Fechado</th>
+              <th>NP Aberto</th>
+              <th>NP Fechado</th>
             </tr>
 
           </thead>
 
           <tbody>
 
-            ${l.historico.map(h=>`
+            ${histRows}
 
-              <tr>
+            <tr class="current-row">
 
-                <td>${h.semana}</td>
+              <td>${ultima}</td>
+              <td>${l.pA}</td>
+              <td>${l.pF}</td>
+              <td>${l.nA}</td>
+              <td>${l.nF}</td>
 
-                <td>${h.pAberto}</td>
-
-                <td>${h.pFechado}</td>
-
-                <td>${h.npAberto}</td>
-
-                <td>${h.npFechado}</td>
-
-              </tr>
-
-            `).join('')}
+            </tr>
 
           </tbody>
 
@@ -888,75 +1651,195 @@ function render(lojas){
 
     </div>
 
-    <div class="panel" id="sec-${i}">
+    <!-- TASKS -->
+
+    <div class="panel"
+    id="tasks-${li}">
 
       <div class="panel-inner">
 
-        <div class="sections-grid">
+        <div class="panel-title">
+          📋 Análise de Tarefas
+        </div>
 
-          ${l.seccoes.map(s=>`
+        <div class="tasks-grid">
 
-            <div class="section-card">
+          <div class="task-card">
 
-              <div class="section-title">
-                ${s.nome}
-              </div>
+            <div class="task-head">
+              Programadas
+            </div>
 
-              <div class="metric">
+            <div class="task-item">
 
-                <div class="metric-top">
-                  <span>Programadas Abertas</span>
-                  <strong>${s.pAberto}</strong>
+              <div class="task-line">
+
+                <div class="task-left">
+                  Abertas
                 </div>
 
-                <div class="task-bar">
-                  <div class="task-fill red" style="width:100%"></div>
-                </div>
+                <div class="task-right">
 
-              </div>
+                  <div class="task-number">
+                    ${l.pA}
+                  </div>
 
-              <div class="metric">
+                  <div class="task-percent">
+                    ${l.pctPA}%
+                  </div>
 
-                <div class="metric-top">
-                  <span>Programadas Fechadas</span>
-                  <strong>${s.pFechado}</strong>
-                </div>
-
-                <div class="task-bar">
-                  <div class="task-fill green" style="width:100%"></div>
-                </div>
-
-              </div>
-
-              <div class="metric">
-
-                <div class="metric-top">
-                  <span>Não Programadas Abertas</span>
-                  <strong>${s.npAberto}</strong>
-                </div>
-
-                <div class="task-bar">
-                  <div class="task-fill red" style="width:100%"></div>
                 </div>
 
               </div>
 
-              <div class="metric">
+              <div class="bar">
 
-                <div class="metric-top">
-                  <span>Não Programadas Fechadas</span>
-                  <strong>${s.npFechado}</strong>
-                </div>
+                <div
+                class="bar-fill"
+                style="width:0;background:#ef4444"
+                data-width="${l.pctPA}%">
 
-                <div class="task-bar">
-                  <div class="task-fill green" style="width:100%"></div>
                 </div>
 
               </div>
 
             </div>
 
-          `).join('')}
+            <div class="task-item">
+
+              <div class="task-line">
+
+                <div class="task-left">
+                  Fechadas
+                </div>
+
+                <div class="task-right">
+
+                  <div class="task-number">
+                    ${l.pF}
+                  </div>
+
+                  <div class="task-percent">
+                    ${l.pctPF}%
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="bar">
+
+                <div
+                class="bar-fill"
+                style="width:0;background:#22c55e"
+                data-width="${l.pctPF}%">
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="task-card">
+
+            <div class="task-head">
+              Não Programadas
+            </div>
+
+            <div class="task-item">
+
+              <div class="task-line">
+
+                <div class="task-left">
+                  Abertas
+                </div>
+
+                <div class="task-right">
+
+                  <div class="task-number">
+                    ${l.nA}
+                  </div>
+
+                  <div class="task-percent">
+                    ${l.pctNA}%
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="bar">
+
+                <div
+                class="bar-fill"
+                style="width:0;background:#ef4444"
+                data-width="${l.pctNA}%">
+
+                </div>
+
+              </div>
+
+            </div>
+
+            <div class="task-item">
+
+              <div class="task-line">
+
+                <div class="task-left">
+                  Fechadas
+                </div>
+
+                <div class="task-right">
+
+                  <div class="task-number">
+                    ${l.nF}
+                  </div>
+
+                  <div class="task-percent">
+                    ${l.pctNF}%
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="bar">
+
+                <div
+                class="bar-fill"
+                style="width:0;background:#22c55e"
+                data-width="${l.pctNF}%">
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- SECÇÕES -->
+
+    <div class="panel"
+    id="sec-${li}">
+
+      <div class="panel-inner">
+
+        <div class="panel-title">
+          🏬 Detalhes por Secção
+        </div>
+
+        <div class="sec-grid">
+
+          ${secHtml}
 
         </div>
 
@@ -968,9 +1851,51 @@ function render(lojas){
 
   });
 
-  html += `</div>`;
+  var alert = `
 
-  document.getElementById('app').innerHTML = html;
+  <div class="alert-box">
+
+    <div class="alert-icon">
+      ⚠️
+    </div>
+
+    <div>
+
+      <h3>
+        Ação Recomendada
+      </h3>
+
+      <p>
+        Contactar imediatamente os responsáveis das lojas críticas e acompanhar semanalmente as lojas com tendência crescente de tarefas abertas.
+      </p>
+
+    </div>
+
+  </div>
+
+  `;
+
+  document.getElementById('app').innerHTML =
+
+  kpis +
+
+  topInfo +
+
+  `
+
+  <div class="table-wrapper">
+
+    ${header}
+
+    ${rows}
+
+  </div>
+
+  `
+
+  +
+
+  alert;
 
 }
 
