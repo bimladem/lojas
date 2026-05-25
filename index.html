@@ -145,7 +145,7 @@ body{
     .6fr
     1.5fr
     2.8fr
-    .8fr
+    1.2fr
     1fr;
   background:#fafafa;
   border-bottom:1px solid var(--border);
@@ -166,7 +166,7 @@ body{
     .6fr
     1.5fr
     2.8fr
-    .8fr
+    1.2fr
     1fr;
   border-bottom:1px solid var(--border);
   transition:.2s;
@@ -297,20 +297,20 @@ body{
 
 .cell-trend{
   flex-direction:column;
-  gap:6px;
+  gap:8px;
   font-weight:800;
 }
 
 .trend-icon{
-  font-size:30px;
+  font-size:34px;
 }
 
 .trend-up{
-  color:#ef4444;
+  color:#22c55e;
 }
 
 .trend-down{
-  color:#22c55e;
+  color:#ef4444;
 }
 
 .trend-neutral{
@@ -318,7 +318,14 @@ body{
 }
 
 .trend-value{
-  font-size:18px;
+  font-size:22px;
+}
+
+.trend-text{
+  font-size:12px;
+  line-height:1.5;
+  font-weight:600;
+  max-width:220px;
 }
 
 /* BUTTONS */
@@ -378,6 +385,21 @@ body{
 
 .detail-table th{
   background:#fafafa;
+}
+
+.hist-up{
+  color:#22c55e;
+  font-weight:800;
+}
+
+.hist-down{
+  color:#ef4444;
+  font-weight:800;
+}
+
+.hist-neutral{
+  color:#666;
+  font-weight:800;
 }
 
 /* SECCOES */
@@ -619,7 +641,7 @@ fetch('dados.json?t=' + Date.now())
 
   });
 
-  lojas.sort((a,b)=>b.pA-a.pA);
+  lojas.sort((a,b)=>b.pF-a.pF);
 
   var ids = {};
 
@@ -664,15 +686,13 @@ fetch('dados.json?t=' + Date.now())
 
     var h = hpl[l.loja] || [];
 
-    l.historico = h
-      .filter(x => x.semana !== ultima)
-      .slice(-8);
+    l.historico = h.slice(-8);
 
     var u = h.slice(-2);
 
     l.diff =
       u.length === 2
-      ? u[1].pA - u[0].pA
+      ? u[1].pF - u[0].pF
       : 0;
 
   });
@@ -778,6 +798,13 @@ function renderApp(lojas,ultima){
       : l.diff < 0
       ? 'trend-down'
       : 'trend-neutral';
+
+    var trendText =
+      l.diff > 0
+      ? 'A loja fechou mais tarefas programadas que na semana anterior.'
+      : l.diff < 0
+      ? 'A loja fechou menos tarefas programadas que na semana anterior.'
+      : 'A loja manteve o mesmo número de tarefas fechadas.';
 
     html += `
 
@@ -902,7 +929,11 @@ function renderApp(lojas,ultima){
         </div>
 
         <div class="trend-value">
-          ${Math.abs(l.diff)}
+          ${l.diff > 0 ? '+' : ''}${l.diff}
+        </div>
+
+        <div class="trend-text">
+          ${trendText}
         </div>
 
       </div>
@@ -939,6 +970,7 @@ function renderApp(lojas,ultima){
               <th>Semana</th>
               <th>P Aberto</th>
               <th>P Fechado</th>
+              <th>Tendência</th>
               <th>NP Aberto</th>
               <th>NP Fechado</th>
             </tr>
@@ -947,27 +979,54 @@ function renderApp(lojas,ultima){
 
           <tbody>
 
-            ${l.historico.map(h=>`
+            ${l.historico.map((h,index)=>{
+
+              var prev = l.historico[index-1];
+
+              var dif = prev
+                ? h.pF - prev.pF
+                : 0;
+
+              var seta =
+                dif > 0
+                ? '▲'
+                : dif < 0
+                ? '▼'
+                : '→';
+
+              var classe =
+                dif > 0
+                ? 'hist-up'
+                : dif < 0
+                ? 'hist-down'
+                : 'hist-neutral';
+
+              return `
 
               <tr>
+
                 <td>${h.semana}</td>
+
                 <td>${h.pA}</td>
-                <td>${h.pF}</td>
+
+                <td>
+                  <strong>${h.pF}</strong>
+                </td>
+
+                <td class="${classe}">
+                  ${seta}
+                  ${dif > 0 ? '+' : ''}${dif}
+                </td>
+
                 <td>${h.nA}</td>
+
                 <td>${h.nF}</td>
+
               </tr>
 
-            `).join('')}
+              `;
 
-            <tr style="font-weight:800;background:#fafafa">
-
-              <td>${ultima}</td>
-              <td>${l.pA}</td>
-              <td>${l.pF}</td>
-              <td>${l.nA}</td>
-              <td>${l.nF}</td>
-
-            </tr>
+            }).join('')}
 
           </tbody>
 
@@ -1081,8 +1140,8 @@ function renderApp(lojas,ultima){
 
     <strong>Legenda da Tendência:</strong><br><br>
 
-    ▲ Aumentou o número de tarefas abertas comparando com a semana anterior.<br>
-    ▼ Diminuiu o número de tarefas abertas comparando com a semana anterior.<br>
+    ▲ A loja aumentou o número de tarefas fechadas comparando com a semana anterior.<br>
+    ▼ A loja diminuiu o número de tarefas fechadas comparando com a semana anterior.<br>
     → Sem alterações comparando com a semana anterior.
 
   </div>
