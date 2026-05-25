@@ -305,13 +305,12 @@ html, body {
 
 .table-header {
   display: grid;
-  grid-template-columns: 60px minmax(160px, 1fr) minmax(140px, 1fr) 110px 110px minmax(160px, 1fr);
+  grid-template-columns: 1fr 1.2fr 1fr 0.8fr 0.8fr 0.9fr;
   background: transparent;
   border-bottom: 1px solid var(--border);
   padding: 16px 0;
-  gap: 24px;
+  gap: 0;
   align-items: center;
-  margin-bottom: 0;
 }
 
 .th-cell {
@@ -323,6 +322,13 @@ html, body {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  text-align: center;
+  padding: 0 12px;
+}
+
+.th-cell:first-child {
+  text-align: left;
+  padding-left: 0;
 }
 
 .th-sublabel {
@@ -336,9 +342,9 @@ html, body {
 /* TABLE ROWS */
 .table-row {
   display: grid;
-  grid-template-columns: 60px minmax(160px, 1fr) minmax(140px, 1fr) 110px 110px minmax(160px, 1fr);
+  grid-template-columns: 1fr 1.2fr 1fr 0.8fr 0.8fr 0.9fr;
   padding: 28px 0;
-  gap: 24px;
+  gap: 0;
   align-items: center;
   border-bottom: 1px solid var(--border);
   transition: all 0.2s ease;
@@ -361,6 +367,8 @@ html, body {
   justify-content: center;
   gap: 6px;
   height: 100%;
+  padding: 0 12px;
+  text-align: center;
 }
 
 .rank-emoji {
@@ -410,6 +418,8 @@ html, body {
   justify-content: center;
   min-width: 0;
   overflow: hidden;
+  padding: 0 12px;
+  text-align: left;
 }
 
 .loja-nome {
@@ -435,7 +445,10 @@ html, body {
   flex-direction: column;
   gap: 8px;
   justify-content: center;
+  align-items: center;
   text-align: center;
+  padding: 0 12px;
+  height: 100%;
 }
 
 .summary-stat {
@@ -466,6 +479,7 @@ html, body {
   justify-content: center;
   align-items: center;
   height: 100%;
+  padding: 0 12px;
 }
 
 /* TREND CELL */
@@ -476,6 +490,8 @@ html, body {
   justify-content: center;
   gap: 4px;
   height: 100%;
+  padding: 0 12px;
+  text-align: center;
 }
 
 .trend-icon {
@@ -496,14 +512,15 @@ html, body {
 /* ACTION CELLS */
 .cell-actions {
   display: flex;
-  gap: 8px;
-  justify-content: flex-end;
+  gap: 6px;
+  justify-content: center;
   height: 100%;
   align-items: center;
+  padding: 0 12px;
 }
 
 .btn-action {
-  min-width: 85px;
+  min-width: 75px;
   background: transparent;
   border: 1px solid rgba(139, 92, 246, 0.25);
   border-radius: 6px;
@@ -529,7 +546,7 @@ html, body {
 }
 
 .btn-tasks {
-  min-width: 85px;
+  min-width: 75px;
   background: transparent;
   border: 1px solid rgba(139, 92, 246, 0.25);
   border-radius: 6px;
@@ -895,8 +912,8 @@ html, body {
 
   .table-header,
   .table-row {
-    grid-template-columns: 50px minmax(130px, 1fr) minmax(110px, 1fr) 90px 90px minmax(110px, 1fr);
-    gap: 16px;
+    grid-template-columns: 0.9fr 1.1fr 0.9fr 0.7fr 0.7fr 0.8fr;
+    gap: 0;
     padding: 20px 0;
   }
 
@@ -928,8 +945,8 @@ html, body {
 
   .table-header,
   .table-row {
-    grid-template-columns: 45px minmax(110px, 1fr) minmax(100px, 1fr) 80px 80px minmax(100px, 1fr);
-    gap: 12px;
+    grid-template-columns: 0.8fr 1fr 0.8fr 0.65fr 0.65fr 0.75fr;
+    gap: 0;
     padding: 16px 0;
   }
 
@@ -943,7 +960,7 @@ html, body {
 
   .btn-action,
   .btn-tasks {
-    min-width: 75px;
+    min-width: 65px;
     padding: 6px 10px;
     font-size: 11px;
   }
@@ -951,6 +968,19 @@ html, body {
   .panel-inner {
     margin: 0 -16px;
     padding: 20px 16px;
+  }
+
+  .th-cell {
+    padding: 0 8px;
+  }
+
+  .cell-rank,
+  .cell-loja,
+  .cell-summary,
+  .cell-tasks-btn,
+  .cell-trend,
+  .cell-actions {
+    padding: 0 8px;
   }
 }
 
@@ -965,7 +995,7 @@ html, body {
 
   .table-row {
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: 0;
     padding: 20px 0;
   }
 
@@ -988,6 +1018,8 @@ html, body {
     gap: 12px;
     align-items: center;
     justify-content: flex-start;
+    text-align: left;
+    padding: 0;
   }
 
   .rank-number,
@@ -997,6 +1029,15 @@ html, body {
 
   .legend-section {
     grid-template-columns: 1fr;
+  }
+
+  .th-cell,
+  .cell-loja,
+  .cell-summary,
+  .cell-tasks-btn,
+  .cell-trend,
+  .cell-actions {
+    padding: 0;
   }
 }
 </style>
@@ -1273,7 +1314,7 @@ function renderApp(lojas, ultima) {
 
   var tableHeader = `
     <div class="table-header">
-      <div class="th-cell">#</div>
+      <div class="th-cell" style="grid-column: 1;">Rank</div>
       <div class="th-cell">Loja</div>
       <div class="th-cell">Resumo</div>
       <div class="th-cell" style="text-align: center;">Tarefas</div>
