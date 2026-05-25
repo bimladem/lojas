@@ -1,17 +1,13 @@
-<!-- SUBSTITUIR ESTE BLOCO -->
 <div class="panel-inner">
-  <div class="panel-title">Detalhes por Secção</div>
-  <div class="sections-panel">
-    ${secItems}
+
+  <div class="panel-title">
+    Detalhes por Secção
   </div>
-</div>
-
-<!-- POR ESTE -->
-<div class="panel-inner">
-  <div class="panel-title">Detalhes por Secção</div>
 
   <div class="sections-panel">
+
     ${l.seccoes.map(s => `
+
       <div class="section-block">
 
         <div class="section-block-title">
@@ -21,88 +17,185 @@
         <div class="section-details visible">
 
           <div class="section-category">
-            <div class="section-category-title">Programadas</div>
+
+            <div class="section-category-title">
+              Programadas
+            </div>
 
             <div class="section-metric">
-              <span class="section-metric-label">Abertas</span>
+              <span class="section-metric-label">
+                Abertas
+              </span>
+
               <div class="section-metric-values">
-                <span class="section-metric-number">${s.pA}</span>
-                <span class="section-metric-percent">${s.pctPA}%</span>
+                <span class="section-metric-number">
+                  ${s.pA}
+                </span>
+
+                <span class="section-metric-percent">
+                  ${s.pctPA}%
+                </span>
               </div>
             </div>
 
             <div class="section-metric">
-              <span class="section-metric-label">Fechadas</span>
+              <span class="section-metric-label">
+                Fechadas
+              </span>
+
               <div class="section-metric-values">
-                <span class="section-metric-number">${s.pF}</span>
-                <span class="section-metric-percent">${s.pctPF}%</span>
+                <span class="section-metric-number">
+                  ${s.pF}
+                </span>
+
+                <span class="section-metric-percent">
+                  ${s.pctPF}%
+                </span>
               </div>
             </div>
+
           </div>
 
           <div class="section-category">
-            <div class="section-category-title">Não Programadas</div>
+
+            <div class="section-category-title">
+              Não Programadas
+            </div>
 
             <div class="section-metric">
-              <span class="section-metric-label">Abertas</span>
+              <span class="section-metric-label">
+                Abertas
+              </span>
+
               <div class="section-metric-values">
-                <span class="section-metric-number">${s.nA}</span>
-                <span class="section-metric-percent">${s.pctNA}%</span>
+                <span class="section-metric-number">
+                  ${s.nA}
+                </span>
+
+                <span class="section-metric-percent">
+                  ${s.pctNA}%
+                </span>
               </div>
             </div>
 
             <div class="section-metric">
-              <span class="section-metric-label">Fechadas</span>
+              <span class="section-metric-label">
+                Fechadas
+              </span>
+
               <div class="section-metric-values">
-                <span class="section-metric-number">${s.nF}</span>
-                <span class="section-metric-percent">${s.pctNF}%</span>
+                <span class="section-metric-number">
+                  ${s.nF}
+                </span>
+
+                <span class="section-metric-percent">
+                  ${s.pctNF}%
+                </span>
               </div>
             </div>
+
           </div>
 
         </div>
 
       </div>
+
     `).join('')}
+
   </div>
 
-  <!-- VOLTAR ISTO -->
   <div class="detail-grid">
 
     <div class="detail-box">
-      <div class="detail-label">Programadas Abertas</div>
-      <div class="detail-value">${l.pA}</div>
-      <div class="detail-percent">${l.pctPA}%</div>
-      <div class="detail-bar">
-        <div class="detail-bar-fill" style="width:${l.pctPA}%; background:#ef4444;"></div>
+
+      <div class="detail-label">
+        Programadas Abertas
       </div>
+
+      <div class="detail-value">
+        ${l.pA}
+      </div>
+
+      <div class="detail-percent">
+        ${l.pctPA}%
+      </div>
+
+      <div class="detail-bar">
+        <div 
+          class="detail-bar-fill"
+          style="width:${l.pctPA}%; background:#ef4444;">
+        </div>
+      </div>
+
     </div>
 
     <div class="detail-box">
-      <div class="detail-label">Programadas Fechadas</div>
-      <div class="detail-value">${l.pF}</div>
-      <div class="detail-percent">${l.pctPF}%</div>
-      <div class="detail-bar">
-        <div class="detail-bar-fill" style="width:${l.pctPF}%; background:#22c55e;"></div>
+
+      <div class="detail-label">
+        Programadas Fechadas
       </div>
+
+      <div class="detail-value">
+        ${l.pF}
+      </div>
+
+      <div class="detail-percent">
+        ${l.pctPF}%
+      </div>
+
+      <div class="detail-bar">
+        <div 
+          class="detail-bar-fill"
+          style="width:${l.pctPF}%; background:#22c55e;">
+        </div>
+      </div>
+
     </div>
 
     <div class="detail-box">
-      <div class="detail-label">Não Programadas Abertas</div>
-      <div class="detail-value">${l.nA}</div>
-      <div class="detail-percent">${l.pctNA}%</div>
-      <div class="detail-bar">
-        <div class="detail-bar-fill" style="width:${l.pctNA}%; background:#ef4444;"></div>
+
+      <div class="detail-label">
+        Não Programadas Abertas
       </div>
+
+      <div class="detail-value">
+        ${l.nA}
+      </div>
+
+      <div class="detail-percent">
+        ${l.pctNA}%
+      </div>
+
+      <div class="detail-bar">
+        <div 
+          class="detail-bar-fill"
+          style="width:${l.pctNA}%; background:#ef4444;">
+        </div>
+      </div>
+
     </div>
 
     <div class="detail-box">
-      <div class="detail-label">Não Programadas Fechadas</div>
-      <div class="detail-value">${l.nF}</div>
-      <div class="detail-percent">${l.pctNF}%</div>
-      <div class="detail-bar">
-        <div class="detail-bar-fill" style="width:${l.pctNF}%; background:#22c55e;"></div>
+
+      <div class="detail-label">
+        Não Programadas Fechadas
       </div>
+
+      <div class="detail-value">
+        ${l.nF}
+      </div>
+
+      <div class="detail-percent">
+        ${l.pctNF}%
+      </div>
+
+      <div class="detail-bar">
+        <div 
+          class="detail-bar-fill"
+          style="width:${l.pctNF}%; background:#22c55e;">
+        </div>
+      </div>
+
     </div>
 
   </div>
