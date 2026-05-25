@@ -387,21 +387,6 @@ body{
   background:#fafafa;
 }
 
-.hist-up{
-  color:#22c55e;
-  font-weight:800;
-}
-
-.hist-down{
-  color:#ef4444;
-  font-weight:800;
-}
-
-.hist-neutral{
-  color:#666;
-  font-weight:800;
-}
-
 /* SECCOES */
 
 .sections-panel{
@@ -970,7 +955,6 @@ function renderApp(lojas,ultima){
               <th>Semana</th>
               <th>P Aberto</th>
               <th>P Fechado</th>
-              <th>Tendência</th>
               <th>NP Aberto</th>
               <th>NP Fechado</th>
             </tr>
@@ -980,26 +964,6 @@ function renderApp(lojas,ultima){
           <tbody>
 
             ${l.historico.map((h,index)=>{
-
-              var prev = l.historico[index-1];
-
-              var dif = prev
-                ? h.pF - prev.pF
-                : 0;
-
-              var seta =
-                dif > 0
-                ? '▲'
-                : dif < 0
-                ? '▼'
-                : '→';
-
-              var classe =
-                dif > 0
-                ? 'hist-up'
-                : dif < 0
-                ? 'hist-down'
-                : 'hist-neutral';
 
               return `
 
@@ -1011,11 +975,6 @@ function renderApp(lojas,ultima){
 
                 <td>
                   <strong>${h.pF}</strong>
-                </td>
-
-                <td class="${classe}">
-                  ${seta}
-                  ${dif > 0 ? '+' : ''}${dif}
                 </td>
 
                 <td>${h.nA}</td>
