@@ -150,7 +150,7 @@ html,body{
 
 .table-header{
   display:grid;
-  grid-template-columns:.7fr 1.1fr 2.3fr .7fr .9fr;
+  grid-template-columns:.7fr 1.1fr 2.3fr .9fr;
   padding:18px;
   background:#fafafa;
   border-bottom:1px solid var(--border);
@@ -162,7 +162,7 @@ html,body{
 
 .table-row{
   display:grid;
-  grid-template-columns:.7fr 1.1fr 2.3fr .7fr .9fr;
+  grid-template-columns:.7fr 1.1fr 2.3fr .9fr;
   border-bottom:1px solid var(--border);
   transition:.2s;
 }
@@ -292,26 +292,6 @@ html,body{
 
 .green{
   background:#22c55e;
-}
-
-/* TENDENCIA */
-
-.cell-trend{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  font-weight:800;
-  font-size:28px;
-}
-
-.trend-up{
-  color:#ef4444;
-}
-
-.trend-down{
-  color:#22c55e;
 }
 
 /* ACTIONS */
@@ -676,12 +656,6 @@ fetch('dados.json?t=' + Date.now())
       .filter(x => x.semana !== ultima)
       .slice(-8);
 
-    var u = h.slice(-2);
-
-    l.diff = u.length === 2
-      ? u[1].pA - u[0].pA
-      : 0;
-
   });
 
   data.forEach(i => {
@@ -750,9 +724,6 @@ function renderApp(lojas,ultima){
   var criticas = lojas.filter((l,i)=>i<3).length;
   var alertas = lojas.filter((l,i)=>i>=3).length;
 
-  var piorando = lojas.filter(l=>l.diff>0).length;
-  var melhorando = lojas.filter(l=>l.diff<0).length;
-
   var html = `
 
   <div class="kpi-grid">
@@ -769,18 +740,6 @@ function renderApp(lojas,ultima){
       <div class="kpi-sublabel">Em observação</div>
     </div>
 
-    <div class="kpi-card">
-      <div class="kpi-label">▲ A Piorar</div>
-      <div class="kpi-value" style="color:#ef4444">${piorando}</div>
-      <div class="kpi-sublabel">comparando semanas</div>
-    </div>
-
-    <div class="kpi-card kpi-success">
-      <div class="kpi-label">▼ A Melhorar</div>
-      <div class="kpi-value">${melhorando}</div>
-      <div class="kpi-sublabel">comparando semanas</div>
-    </div>
-
   </div>
 
   <div class="table-container">
@@ -789,7 +748,6 @@ function renderApp(lojas,ultima){
       <div>RANK</div>
       <div>LOJA</div>
       <div>TAREFAS</div>
-      <div>TENDÊNCIA</div>
       <div>AÇÕES</div>
     </div>
 
@@ -803,18 +761,6 @@ function renderApp(lojas,ultima){
       : l.nivel === 2
       ? 'badge-n2'
       : 'badge-n3';
-
-    var trend =
-      l.diff > 0
-      ? '▲'
-      : l.diff < 0
-      ? '▼'
-      : '→';
-
-    var trendClass =
-      l.diff > 0
-      ? 'trend-up'
-      : 'trend-down';
 
     html += `
 
@@ -932,13 +878,6 @@ function renderApp(lojas,ultima){
 
       </div>
 
-      <div class="cell cell-trend ${trendClass}">
-        ${trend}
-        <div style="font-size:20px">
-          ${Math.abs(l.diff)}
-        </div>
-      </div>
-
       <div class="cell cell-actions">
 
         <button 
@@ -954,242 +893,6 @@ function renderApp(lojas,ultima){
           onclick="toggleSec(${li})">
           ▶ Secções
         </button>
-
-      </div>
-
-    </div>
-
-    <div class="panel" id="hist-${li}">
-
-      <div class="panel-inner">
-
-        <table class="detail-table">
-
-          <thead>
-            <tr>
-              <th>Semana</th>
-              <th>P Aberto</th>
-              <th>P Fechado</th>
-              <th>NP Aberto</th>
-              <th>NP Fechado</th>
-            </tr>
-          </thead>
-
-          <tbody>
-
-            ${l.historico.map(h=>`
-
-              <tr>
-                <td>${h.semana}</td>
-                <td>${h.pA}</td>
-                <td>${h.pF}</td>
-                <td>${h.nA}</td>
-                <td>${h.nF}</td>
-              </tr>
-
-            `).join('')}
-
-            <tr style="font-weight:800;background:#fafafa">
-
-              <td>${ultima}</td>
-              <td>${l.pA}</td>
-              <td>${l.pF}</td>
-              <td>${l.nA}</td>
-              <td>${l.nF}</td>
-
-            </tr>
-
-          </tbody>
-
-        </table>
-
-      </div>
-
-    </div>
-
-    <div class="panel" id="sec-${li}">
-
-      <div class="panel-inner">
-
-        <div class="sections-panel">
-
-          ${l.seccoes.map(s=>`
-
-            <div class="section-block">
-
-              <div class="section-block-title">
-                ${s.nome}
-              </div>
-
-              <div class="section-category">
-
-                <div class="section-category-title">
-                  Programadas
-                </div>
-
-                <div class="section-metric">
-                  <span>Abertas</span>
-                  <strong>${s.pA} (${s.pctPA}%)</strong>
-                </div>
-
-                <div class="task-bar">
-                  <div 
-                    class="task-fill red"
-                    style="width:${s.pctPA}%">
-                  </div>
-                </div>
-
-                <br>
-
-                <div class="section-metric">
-                  <span>Fechadas</span>
-                  <strong>${s.pF} (${s.pctPF}%)</strong>
-                </div>
-
-                <div class="task-bar">
-                  <div 
-                    class="task-fill green"
-                    style="width:${s.pctPF}%">
-                  </div>
-                </div>
-
-              </div>
-
-              <div class="section-category">
-
-                <div class="section-category-title">
-                  Não Programadas
-                </div>
-
-                <div class="section-metric">
-                  <span>Abertas</span>
-                  <strong>${s.nA} (${s.pctNA}%)</strong>
-                </div>
-
-                <div class="task-bar">
-                  <div 
-                    class="task-fill red"
-                    style="width:${s.pctNA}%">
-                  </div>
-                </div>
-
-                <br>
-
-                <div class="section-metric">
-                  <span>Fechadas</span>
-                  <strong>${s.nF} (${s.pctNF}%)</strong>
-                </div>
-
-                <div class="task-bar">
-                  <div 
-                    class="task-fill green"
-                    style="width:${s.pctNF}%">
-                  </div>
-                </div>
-
-              </div>
-
-            </div>
-
-          `).join('')}
-
-        </div>
-
-        <div class="detail-grid">
-
-          <div class="detail-box">
-
-            <div class="detail-label">
-              Programadas Abertas
-            </div>
-
-            <div class="detail-value">
-              ${l.pA}
-            </div>
-
-            <div class="detail-percent">
-              ${l.pctPA}%
-            </div>
-
-            <div class="detail-bar">
-              <div 
-                class="detail-bar-fill red"
-                style="width:${l.pctPA}%">
-              </div>
-            </div>
-
-          </div>
-
-          <div class="detail-box">
-
-            <div class="detail-label">
-              Programadas Fechadas
-            </div>
-
-            <div class="detail-value">
-              ${l.pF}
-            </div>
-
-            <div class="detail-percent">
-              ${l.pctPF}%
-            </div>
-
-            <div class="detail-bar">
-              <div 
-                class="detail-bar-fill green"
-                style="width:${l.pctPF}%">
-              </div>
-            </div>
-
-          </div>
-
-          <div class="detail-box">
-
-            <div class="detail-label">
-              Não Programadas Abertas
-            </div>
-
-            <div class="detail-value">
-              ${l.nA}
-            </div>
-
-            <div class="detail-percent">
-              ${l.pctNA}%
-            </div>
-
-            <div class="detail-bar">
-              <div 
-                class="detail-bar-fill red"
-                style="width:${l.pctNA}%">
-              </div>
-            </div>
-
-          </div>
-
-          <div class="detail-box">
-
-            <div class="detail-label">
-              Não Programadas Fechadas
-            </div>
-
-            <div class="detail-value">
-              ${l.nF}
-            </div>
-
-            <div class="detail-percent">
-              ${l.pctNF}%
-            </div>
-
-            <div class="detail-bar">
-              <div 
-                class="detail-bar-fill green"
-                style="width:${l.pctNF}%">
-              </div>
-            </div>
-
-          </div>
-
-        </div>
 
       </div>
 
