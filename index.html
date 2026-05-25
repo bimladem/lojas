@@ -40,8 +40,6 @@ html,body{
   min-height:100vh;
 }
 
-/* HEADER */
-
 .header{
   position:sticky;
   top:0;
@@ -98,8 +96,6 @@ html,body{
   padding:30px;
 }
 
-/* KPI */
-
 .kpi-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
@@ -139,8 +135,6 @@ html,body{
   color:#22c55e;
 }
 
-/* TABLE */
-
 .table-container{
   border:1px solid var(--border);
   border-radius:18px;
@@ -150,7 +144,7 @@ html,body{
 
 .table-header{
   display:grid;
-  grid-template-columns:.7fr 1.1fr 2.3fr .9fr;
+  grid-template-columns:.7fr 1.1fr 2.6fr 1fr;
   padding:18px;
   background:#fafafa;
   border-bottom:1px solid var(--border);
@@ -162,7 +156,7 @@ html,body{
 
 .table-row{
   display:grid;
-  grid-template-columns:.7fr 1.1fr 2.3fr .9fr;
+  grid-template-columns:.7fr 1.1fr 2.6fr 1fr;
   border-bottom:1px solid var(--border);
   transition:.2s;
 }
@@ -176,8 +170,6 @@ html,body{
   display:flex;
   align-items:center;
 }
-
-/* RANK */
 
 .cell-rank{
   display:flex;
@@ -214,8 +206,6 @@ html,body{
   color:#ef4444;
 }
 
-/* LOJA */
-
 .cell-loja{
   display:flex;
   flex-direction:column;
@@ -231,8 +221,6 @@ html,body{
 .loja-local{
   color:var(--text-tertiary);
 }
-
-/* TAREFAS */
 
 .cell-tarefas{
   padding:18px;
@@ -294,8 +282,6 @@ html,body{
   background:#22c55e;
 }
 
-/* ACTIONS */
-
 .cell-actions{
   display:flex;
   justify-content:center;
@@ -318,8 +304,6 @@ html,body{
   background:rgba(139,92,246,.08);
 }
 
-/* PANELS */
-
 .panel{
   display:none;
 }
@@ -334,25 +318,17 @@ html,body{
   border-top:1px solid var(--border);
 }
 
-/* HIST TABLE */
-
 .detail-table{
   width:100%;
   border-collapse:collapse;
 }
 
-.detail-table th{
+.detail-table th,
+.detail-table td{
   text-align:left;
   padding:12px;
   border-bottom:1px solid var(--border);
 }
-
-.detail-table td{
-  padding:12px;
-  border-bottom:1px solid var(--border);
-}
-
-/* SECCOES */
 
 .sections-panel{
   display:grid;
@@ -508,7 +484,7 @@ function toggleHist(li){
 
   stateHist[li] = !stateHist[li];
 
-  p.classList.toggle('visible', stateHist[li]);
+  p.classList.toggle('visible');
 
   b.innerHTML = stateHist[li]
     ? '▼ Histórico'
@@ -522,7 +498,7 @@ function toggleSec(li){
 
   stateSec[li] = !stateSec[li];
 
-  p.classList.toggle('visible', stateSec[li]);
+  p.classList.toggle('visible');
 
   b.innerHTML = stateSec[li]
     ? '▼ Secções'
@@ -808,10 +784,7 @@ function renderApp(lojas,ultima){
               </div>
 
               <div class="task-bar">
-                <div 
-                  class="task-fill red"
-                  style="width:${l.pctPA}%">
-                </div>
+                <div class="task-fill red" style="width:${l.pctPA}%"></div>
               </div>
 
             </div>
@@ -824,10 +797,7 @@ function renderApp(lojas,ultima){
               </div>
 
               <div class="task-bar">
-                <div 
-                  class="task-fill green"
-                  style="width:${l.pctPF}%">
-                </div>
+                <div class="task-fill green" style="width:${l.pctPF}%"></div>
               </div>
 
             </div>
@@ -848,10 +818,7 @@ function renderApp(lojas,ultima){
               </div>
 
               <div class="task-bar">
-                <div 
-                  class="task-fill red"
-                  style="width:${l.pctNA}%">
-                </div>
+                <div class="task-fill red" style="width:${l.pctNA}%"></div>
               </div>
 
             </div>
@@ -864,10 +831,7 @@ function renderApp(lojas,ultima){
               </div>
 
               <div class="task-bar">
-                <div 
-                  class="task-fill green"
-                  style="width:${l.pctNF}%">
-                </div>
+                <div class="task-fill green" style="width:${l.pctNF}%"></div>
               </div>
 
             </div>
@@ -893,6 +857,134 @@ function renderApp(lojas,ultima){
           onclick="toggleSec(${li})">
           ▶ Secções
         </button>
+
+      </div>
+
+    </div>
+
+    <div class="panel" id="hist-${li}">
+
+      <div class="panel-inner">
+
+        <table class="detail-table">
+
+          <thead>
+            <tr>
+              <th>Semana</th>
+              <th>P Aberto</th>
+              <th>P Fechado</th>
+              <th>NP Aberto</th>
+              <th>NP Fechado</th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            ${l.historico.map(h=>`
+
+              <tr>
+                <td>${h.semana}</td>
+                <td>${h.pA}</td>
+                <td>${h.pF}</td>
+                <td>${h.nA}</td>
+                <td>${h.nF}</td>
+              </tr>
+
+            `).join('')}
+
+            <tr style="font-weight:800;background:#fafafa">
+
+              <td>${ultima}</td>
+              <td>${l.pA}</td>
+              <td>${l.pF}</td>
+              <td>${l.nA}</td>
+              <td>${l.nF}</td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+    <div class="panel" id="sec-${li}">
+
+      <div class="panel-inner">
+
+        <div class="sections-panel">
+
+          ${l.seccoes.map(s=>`
+
+            <div class="section-block">
+
+              <div class="section-block-title">
+                ${s.nome}
+              </div>
+
+              <div class="section-category">
+
+                <div class="section-category-title">
+                  Programadas
+                </div>
+
+                <div class="section-metric">
+                  <span>Abertas</span>
+                  <strong>${s.pA} (${s.pctPA}%)</strong>
+                </div>
+
+                <div class="task-bar">
+                  <div class="task-fill red" style="width:${s.pctPA}%"></div>
+                </div>
+
+                <br>
+
+                <div class="section-metric">
+                  <span>Fechadas</span>
+                  <strong>${s.pF} (${s.pctPF}%)</strong>
+                </div>
+
+                <div class="task-bar">
+                  <div class="task-fill green" style="width:${s.pctPF}%"></div>
+                </div>
+
+              </div>
+
+              <div class="section-category">
+
+                <div class="section-category-title">
+                  Não Programadas
+                </div>
+
+                <div class="section-metric">
+                  <span>Abertas</span>
+                  <strong>${s.nA} (${s.pctNA}%)</strong>
+                </div>
+
+                <div class="task-bar">
+                  <div class="task-fill red" style="width:${s.pctNA}%"></div>
+                </div>
+
+                <br>
+
+                <div class="section-metric">
+                  <span>Fechadas</span>
+                  <strong>${s.nF} (${s.pctNF}%)</strong>
+                </div>
+
+                <div class="task-bar">
+                  <div class="task-fill green" style="width:${s.pctNF}%"></div>
+                </div>
+
+              </div>
+
+            </div>
+
+          `).join('')}
+
+        </div>
 
       </div>
 
