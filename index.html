@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Análise Semanal IM</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -12,9 +13,9 @@
 :root{
   --bg-primary:#ffffff;
   --bg-secondary:#f8f9fa;
-  --bg-tertiary:#f0f2f5;
   --border:rgba(0,0,0,0.08);
   --text-primary:#1a1a1a;
+  --text-secondary:#4a4a4a;
   --text-tertiary:#808080;
   --accent-purple:#8b5cf6;
   --accent-pink:#ec4899;
@@ -30,21 +31,23 @@
   box-sizing:border-box;
 }
 
-html,body{
+body{
   font-family:'Inter',sans-serif;
   background:#fff;
   color:var(--text-primary);
-  font-size:14px;
 }
+
+/* HEADER */
 
 .header{
   position:sticky;
   top:0;
   z-index:100;
-  background:rgba(255,255,255,.95);
-  backdrop-filter:blur(20px);
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(16px);
   border-bottom:1px solid rgba(0,0,0,.06);
   padding:20px 40px;
+
   display:flex;
   justify-content:space-between;
   align-items:center;
@@ -57,41 +60,76 @@ html,body{
 }
 
 .header-logo{
-  width:42px;
-  height:42px;
+  width:44px;
+  height:44px;
   border-radius:12px;
   background:var(--grad);
+
   display:flex;
   align-items:center;
   justify-content:center;
+
   color:#fff;
-  font-size:20px;
+  font-size:22px;
 }
 
 .header-title h1{
-  font-size:24px;
+  font-size:26px;
   font-weight:800;
 }
 
 .header-title .sub{
-  color:var(--text-tertiary);
   margin-top:4px;
+  color:var(--text-tertiary);
 }
 
 .header-period{
   background:rgba(139,92,246,.08);
   border:1px solid rgba(139,92,246,.15);
-  padding:10px 16px;
-  border-radius:10px;
-  font-weight:700;
   color:#8b5cf6;
+  padding:12px 18px;
+  border-radius:12px;
+  font-weight:700;
 }
 
 .main{
-  max-width:1800px;
+  max-width:1900px;
   margin:auto;
   padding:30px;
 }
+
+/* LEGENDA */
+
+.legend{
+  margin-bottom:25px;
+  display:flex;
+  justify-content:center;
+  gap:18px;
+  flex-wrap:wrap;
+}
+
+.legend-item{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:10px 16px;
+  font-weight:700;
+}
+
+.legend-box{
+  width:16px;
+  height:16px;
+  border-radius:6px;
+}
+
+.n1{ background:#22c55e; }
+.n2{ background:#fb923c; }
+.n3{ background:#ef4444; }
+
+/* TABLE */
 
 .table-container{
   border:1px solid var(--border);
@@ -102,19 +140,36 @@ html,body{
 
 .table-header{
   display:grid;
-  grid-template-columns:.5fr 1.2fr 2.3fr .7fr .8fr .8fr;
-  padding:18px;
+  grid-template-columns:
+  .5fr
+  1.4fr
+  3fr
+  .9fr
+  1fr;
+
   background:#fafafa;
   border-bottom:1px solid var(--border);
+
+  text-align:center;
   font-size:12px;
   font-weight:800;
   text-transform:uppercase;
   color:#666;
 }
 
+.table-header div{
+  padding:18px;
+}
+
 .table-row{
   display:grid;
-  grid-template-columns:.5fr 1.2fr 2.3fr .7fr .8fr .8fr;
+  grid-template-columns:
+  .5fr
+  1.4fr
+  3fr
+  .9fr
+  1fr;
+
   border-bottom:1px solid var(--border);
   transition:.2s;
 }
@@ -124,24 +179,27 @@ html,body{
 }
 
 .cell{
-  padding:20px;
+  padding:22px;
   display:flex;
   align-items:center;
+  justify-content:center;
+  text-align:center;
 }
+
+/* RANK */
 
 .cell-rank{
   flex-direction:column;
-  justify-content:center;
-  gap:8px;
+  gap:10px;
 }
 
 .rank-number{
-  font-size:28px;
+  font-size:30px;
   font-weight:800;
 }
 
 .rank-badge{
-  padding:4px 8px;
+  padding:5px 10px;
   border-radius:8px;
   font-size:11px;
   font-weight:700;
@@ -162,10 +220,11 @@ html,body{
   color:#ef4444;
 }
 
+/* LOJA */
+
 .cell-loja{
   flex-direction:column;
-  justify-content:center;
-  gap:6px;
+  gap:8px;
 }
 
 .loja-nome{
@@ -176,7 +235,10 @@ html,body{
 .loja-local{
   color:var(--text-tertiary);
   font-size:13px;
+  font-weight:600;
 }
+
+/* TASKS */
 
 .tasks-wrapper{
   width:100%;
@@ -188,25 +250,30 @@ html,body{
 .task-box{
   border:1px solid var(--border);
   border-radius:14px;
-  padding:16px;
+  padding:18px;
   background:#fafafa;
 }
 
 .task-title{
-  font-size:13px;
+  font-size:14px;
   font-weight:800;
-  margin-bottom:14px;
+  margin-bottom:16px;
 }
 
 .task-line{
-  margin-bottom:14px;
+  margin-bottom:16px;
 }
 
 .task-head{
   display:flex;
   justify-content:space-between;
+  align-items:center;
   margin-bottom:8px;
   font-size:13px;
+}
+
+.task-head strong{
+  font-size:14px;
 }
 
 .task-bar{
@@ -228,11 +295,12 @@ html,body{
   background:#22c55e;
 }
 
+/* TENDENCIA */
+
 .cell-trend{
   flex-direction:column;
-  justify-content:center;
   gap:8px;
-  font-size:28px;
+  font-size:30px;
   font-weight:800;
 }
 
@@ -248,8 +316,15 @@ html,body{
   color:#999;
 }
 
+.trend-number{
+  font-size:18px;
+}
+
+/* ACTIONS */
+
 .cell-actions{
-  justify-content:center;
+  gap:12px;
+  flex-direction:column;
 }
 
 .btn-action{
@@ -261,11 +336,14 @@ html,body{
   cursor:pointer;
   font-weight:700;
   transition:.2s;
+  min-width:140px;
 }
 
 .btn-action:hover{
   background:rgba(139,92,246,.08);
 }
+
+/* PANELS */
 
 .panel{
   display:none;
@@ -281,6 +359,8 @@ html,body{
   border-top:1px solid var(--border);
 }
 
+/* HISTORICO */
+
 .detail-table{
   width:100%;
   border-collapse:collapse;
@@ -290,16 +370,19 @@ html,body{
 }
 
 .detail-table th{
-  text-align:left;
-  padding:14px;
   background:#fafafa;
+  padding:14px;
   border-bottom:1px solid var(--border);
+  text-align:center;
 }
 
 .detail-table td{
   padding:14px;
   border-bottom:1px solid var(--border);
+  text-align:center;
 }
+
+/* SECCOES */
 
 .sections-panel{
   display:grid;
@@ -308,27 +391,29 @@ html,body{
 }
 
 .section-block{
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:18px;
   background:#fff;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
 }
 
 .section-block-title{
-  font-size:16px;
+  font-size:18px;
   font-weight:800;
-  margin-bottom:18px;
+  margin-bottom:20px;
+  text-align:center;
 }
 
 .section-category{
-  margin-bottom:24px;
+  margin-bottom:22px;
 }
 
 .section-category-title{
+  text-align:center;
   font-size:12px;
   font-weight:800;
-  color:#777;
   text-transform:uppercase;
+  color:#777;
   margin-bottom:14px;
 }
 
@@ -337,43 +422,24 @@ html,body{
   justify-content:space-between;
   margin-bottom:8px;
   font-size:13px;
+  font-weight:600;
 }
 
-.legend{
-  margin-top:25px;
-  display:flex;
-  gap:14px;
-  flex-wrap:wrap;
-}
+/* NOTA */
 
-.legend-item{
-  padding:10px 16px;
-  border-radius:12px;
-  font-weight:700;
-  font-size:13px;
-}
-
-.legend-n1{
-  background:rgba(34,197,94,.12);
-  color:#22c55e;
-}
-
-.legend-n2{
-  background:rgba(251,146,60,.12);
-  color:#fb923c;
-}
-
-.legend-n3{
-  background:rgba(239,68,68,.12);
-  color:#ef4444;
-}
-
-.loading{
-  padding:100px;
+.note{
+  margin-top:30px;
+  border:1px solid var(--border);
+  background:#fafafa;
+  padding:18px;
+  border-radius:14px;
   text-align:center;
+  color:#555;
+  line-height:1.7;
+  font-size:14px;
 }
 
-@media(max-width:1200px){
+@media(max-width:1400px){
 
   .table-header{
     display:none;
@@ -404,7 +470,9 @@ html,body{
 
     <div class="header-title">
       <h1>Análise Semanal</h1>
-      <div class="sub" id="sub-info">Carregando...</div>
+      <div class="sub" id="sub-info">
+        Carregando...
+      </div>
     </div>
 
   </div>
@@ -417,11 +485,40 @@ html,body{
 
 <main class="main">
 
+  <div class="legend">
+
+    <div class="legend-item">
+      <div class="legend-box n1"></div>
+      N1 • Até 20 tarefas abertas
+    </div>
+
+    <div class="legend-item">
+      <div class="legend-box n2"></div>
+      N2 • Entre 21 e 40 tarefas abertas
+    </div>
+
+    <div class="legend-item">
+      <div class="legend-box n3"></div>
+      N3 • Mais de 40 tarefas abertas
+    </div>
+
+  </div>
+
   <div id="app">
 
-    <div class="loading">
+    <div style="padding:100px;text-align:center;">
       ⏳ Carregando dados...
     </div>
+
+  </div>
+
+  <div class="note">
+
+    <strong>Nota sobre a coluna Tendência:</strong><br><br>
+
+    ▲ Vermelho = aumento de tarefas programadas abertas comparando com a semana anterior.<br>
+    ▼ Verde = redução de tarefas programadas abertas comparando com a semana anterior.<br>
+    → Cinza = sem alterações entre semanas.
 
   </div>
 
@@ -474,7 +571,7 @@ fetch('dados.json?t=' + Date.now())
 
     var s = String(i.Semana || '').trim();
 
-    if(s && semanas.indexOf(s) === -1){
+    if(s && !semanas.includes(s)){
       semanas.push(s);
     }
 
@@ -505,11 +602,10 @@ fetch('dados.json?t=' + Date.now())
       loja:String(i.Loja).trim(),
 
       local:String(
-        i['IM.Localidade']
-        || ''
+        i['IM.Localidade'] || ''
       ).trim(),
 
-      pA,pF,nA,nF,pT,nT,
+      pA,pF,nA,nF,
 
       pctPA:pT > 0 ? (pA/pT*100).toFixed(1) : '0.0',
       pctPF:pT > 0 ? (pF/pT*100).toFixed(1) : '0.0',
@@ -529,9 +625,7 @@ fetch('dados.json?t=' + Date.now())
 
     };
 
-  })
-
-  .filter(l => l.pA > 0);
+  });
 
   lojas.sort((a,b)=>b.pA-a.pA);
 
@@ -642,7 +736,7 @@ fetch('dados.json?t=' + Date.now())
   });
 
   document.getElementById('sub-info').textContent =
-    'Gerado hoje · ' + lojas.length + ' lojas';
+    'Última semana • ' + lojas.length + ' lojas';
 
   document.getElementById('periodo').textContent =
     '📅 ' + ultima;
@@ -658,12 +752,13 @@ function renderApp(lojas,ultima){
   <div class="table-container">
 
     <div class="table-header">
+
       <div>RANK</div>
       <div>LOJA</div>
       <div>TAREFAS</div>
       <div>TENDÊNCIA</div>
-      <div>HISTÓRICO</div>
-      <div>SECÇÕES</div>
+      <div>HISTÓRICO / SECÇÕES</div>
+
     </div>
 
   `;
@@ -733,11 +828,12 @@ function renderApp(lojas,ultima){
 
               <div class="task-head">
                 <span>Abertas</span>
-                <strong>${l.pctPA}% (${l.pA})</strong>
+                <strong>${l.pA} (${l.pctPA}%)</strong>
               </div>
 
               <div class="task-bar">
-                <div class="task-fill red" style="width:${l.pctPA}%"></div>
+                <div class="task-fill red"
+                style="width:${l.pctPA}%"></div>
               </div>
 
             </div>
@@ -746,11 +842,12 @@ function renderApp(lojas,ultima){
 
               <div class="task-head">
                 <span>Fechadas</span>
-                <strong>${l.pctPF}% (${l.pF})</strong>
+                <strong>${l.pF} (${l.pctPF}%)</strong>
               </div>
 
               <div class="task-bar">
-                <div class="task-fill green" style="width:${l.pctPF}%"></div>
+                <div class="task-fill green"
+                style="width:${l.pctPF}%"></div>
               </div>
 
             </div>
@@ -767,11 +864,12 @@ function renderApp(lojas,ultima){
 
               <div class="task-head">
                 <span>Abertas</span>
-                <strong>${l.pctNA}% (${l.nA})</strong>
+                <strong>${l.nA} (${l.pctNA}%)</strong>
               </div>
 
               <div class="task-bar">
-                <div class="task-fill red" style="width:${l.pctNA}%"></div>
+                <div class="task-fill red"
+                style="width:${l.pctNA}%"></div>
               </div>
 
             </div>
@@ -780,11 +878,12 @@ function renderApp(lojas,ultima){
 
               <div class="task-head">
                 <span>Fechadas</span>
-                <strong>${l.pctNF}% (${l.nF})</strong>
+                <strong>${l.nF} (${l.pctNF}%)</strong>
               </div>
 
               <div class="task-bar">
-                <div class="task-fill green" style="width:${l.pctNF}%"></div>
+                <div class="task-fill green"
+                style="width:${l.pctNF}%"></div>
               </div>
 
             </div>
@@ -796,10 +895,13 @@ function renderApp(lojas,ultima){
       </div>
 
       <div class="cell cell-trend ${trendClass}">
+
         ${trend}
-        <div style="font-size:18px">
+
+        <div class="trend-number">
           ${Math.abs(l.diff)}
         </div>
+
       </div>
 
       <div class="cell cell-actions">
@@ -810,10 +912,6 @@ function renderApp(lojas,ultima){
           onclick="toggleHist(${li})">
           ▶ Histórico
         </button>
-
-      </div>
-
-      <div class="cell cell-actions">
 
         <button
           class="btn-action"
@@ -833,6 +931,7 @@ function renderApp(lojas,ultima){
         <table class="detail-table">
 
           <thead>
+
             <tr>
               <th>Semana</th>
               <th>P Aberto</th>
@@ -840,6 +939,7 @@ function renderApp(lojas,ultima){
               <th>NP Aberto</th>
               <th>NP Fechado</th>
             </tr>
+
           </thead>
 
           <tbody>
@@ -900,7 +1000,8 @@ function renderApp(lojas,ultima){
                 </div>
 
                 <div class="task-bar">
-                  <div class="task-fill red" style="width:${s.pctPA}%"></div>
+                  <div class="task-fill red"
+                  style="width:${s.pctPA}%"></div>
                 </div>
 
                 <br>
@@ -911,7 +1012,8 @@ function renderApp(lojas,ultima){
                 </div>
 
                 <div class="task-bar">
-                  <div class="task-fill green" style="width:${s.pctPF}%"></div>
+                  <div class="task-fill green"
+                  style="width:${s.pctPF}%"></div>
                 </div>
 
               </div>
@@ -928,7 +1030,8 @@ function renderApp(lojas,ultima){
                 </div>
 
                 <div class="task-bar">
-                  <div class="task-fill red" style="width:${s.pctNA}%"></div>
+                  <div class="task-fill red"
+                  style="width:${s.pctNA}%"></div>
                 </div>
 
                 <br>
@@ -939,7 +1042,8 @@ function renderApp(lojas,ultima){
                 </div>
 
                 <div class="task-bar">
-                  <div class="task-fill green" style="width:${s.pctNF}%"></div>
+                  <div class="task-fill green"
+                  style="width:${s.pctNF}%"></div>
                 </div>
 
               </div>
@@ -958,27 +1062,7 @@ function renderApp(lojas,ultima){
 
   });
 
-  html += `
-
-  </div>
-
-  <div class="legend">
-
-    <div class="legend-item legend-n1">
-      N1 → Até 20 tarefas abertas
-    </div>
-
-    <div class="legend-item legend-n2">
-      N2 → Entre 21 e 40 tarefas abertas
-    </div>
-
-    <div class="legend-item legend-n3">
-      N3 → Mais de 40 tarefas abertas
-    </div>
-
-  </div>
-
-  `;
+  html += `</div>`;
 
   document.getElementById('app').innerHTML = html;
 
