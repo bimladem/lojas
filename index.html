@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Análise Semanal IM</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -11,6 +10,9 @@
 <style>
 
 :root{
+  --bg-primary:#ffffff;
+  --bg-secondary:#f8f9fa;
+  --bg-tertiary:#f0f2f5;
   --border:rgba(0,0,0,0.08);
   --text-primary:#1a1a1a;
   --text-tertiary:#808080;
@@ -18,27 +20,33 @@
   --accent-pink:#ec4899;
   --success:#22c55e;
   --danger:#ef4444;
+  --warning:#fb923c;
   --grad:linear-gradient(135deg,#8b5cf6 0%,#ec4899 100%);
 }
 
 *{
+  box-sizing:border-box;
   margin:0;
   padding:0;
-  box-sizing:border-box;
 }
 
-body{
+html,body{
   font-family:'Inter',sans-serif;
   background:#fff;
   color:var(--text-primary);
+  font-size:14px;
+  min-height:100vh;
 }
+
+/* HEADER */
 
 .header{
   position:sticky;
   top:0;
   z-index:100;
-  background:#fff;
-  border-bottom:1px solid var(--border);
+  background:rgba(255,255,255,.95);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(0,0,0,.06);
   padding:20px 40px;
   display:flex;
   justify-content:space-between;
@@ -88,15 +96,53 @@ body{
   padding:30px;
 }
 
+/* LEGENDA */
+
+.legend{
+  display:flex;
+  gap:14px;
+  margin-bottom:20px;
+  flex-wrap:wrap;
+}
+
+.legend-item{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  border:1px solid var(--border);
+  padding:10px 14px;
+  border-radius:12px;
+  background:#fff;
+  font-weight:700;
+}
+
+.legend-color{
+  width:14px;
+  height:14px;
+  border-radius:50%;
+}
+
+.green{ background:#22c55e; }
+.orange{ background:#fb923c; }
+.red{ background:#ef4444; }
+
+/* TABLE */
+
 .table-container{
   border:1px solid var(--border);
   border-radius:18px;
   overflow:hidden;
+  background:#fff;
 }
 
 .table-header{
   display:grid;
-  grid-template-columns:.5fr 1fr 2.6fr .8fr;
+  grid-template-columns:
+  .6fr
+  1.2fr
+  2.5fr
+  .7fr
+  1fr;
   padding:18px;
   background:#fafafa;
   border-bottom:1px solid var(--border);
@@ -108,8 +154,18 @@ body{
 
 .table-row{
   display:grid;
-  grid-template-columns:.5fr 1fr 2.6fr .8fr;
+  grid-template-columns:
+  .6fr
+  1.2fr
+  2.5fr
+  .7fr
+  1fr;
   border-bottom:1px solid var(--border);
+  transition:.2s;
+}
+
+.table-row:hover{
+  background:rgba(139,92,246,.03);
 }
 
 .cell{
@@ -118,11 +174,42 @@ body{
   align-items:center;
 }
 
+/* RANK */
+
 .cell-rank{
+  flex-direction:column;
   justify-content:center;
-  font-size:26px;
+  gap:10px;
+}
+
+.rank-number{
+  font-size:28px;
   font-weight:800;
 }
+
+.rank-badge{
+  padding:5px 10px;
+  border-radius:10px;
+  font-size:11px;
+  font-weight:800;
+}
+
+.badge-n1{
+  background:rgba(34,197,94,.12);
+  color:#22c55e;
+}
+
+.badge-n2{
+  background:rgba(251,146,60,.12);
+  color:#fb923c;
+}
+
+.badge-n3{
+  background:rgba(239,68,68,.12);
+  color:#ef4444;
+}
+
+/* LOJA */
 
 .cell-loja{
   flex-direction:column;
@@ -139,6 +226,8 @@ body{
 .loja-local{
   color:var(--text-tertiary);
 }
+
+/* TAREFAS */
 
 .tasks-wrapper{
   width:100%;
@@ -167,13 +256,7 @@ body{
 .task-head{
   display:flex;
   justify-content:space-between;
-  align-items:center;
   margin-bottom:8px;
-  font-size:13px;
-}
-
-.task-head strong{
-  font-size:14px;
 }
 
 .task-bar{
@@ -187,13 +270,37 @@ body{
   height:100%;
 }
 
-.red{
+.fill-red{
   background:#ef4444;
 }
 
-.green{
+.fill-green{
   background:#22c55e;
 }
+
+/* TENDENCIA */
+
+.cell-trend{
+  flex-direction:column;
+  justify-content:center;
+  gap:6px;
+  font-size:28px;
+  font-weight:800;
+}
+
+.trend-up{
+  color:#ef4444;
+}
+
+.trend-down{
+  color:#22c55e;
+}
+
+.trend-flat{
+  color:#808080;
+}
+
+/* BUTTONS */
 
 .cell-actions{
   justify-content:center;
@@ -208,11 +315,14 @@ body{
   padding:10px 14px;
   cursor:pointer;
   font-weight:700;
+  transition:.2s;
 }
 
 .btn-action:hover{
   background:rgba(139,92,246,.08);
 }
+
+/* PANELS */
 
 .panel{
   display:none;
@@ -228,22 +338,33 @@ body{
   border-top:1px solid var(--border);
 }
 
+/* HIST */
+
 .detail-table{
   width:100%;
   border-collapse:collapse;
   background:#fff;
+  border-radius:14px;
+  overflow:hidden;
 }
 
-.detail-table th,
-.detail-table td{
-  padding:12px;
-  border-bottom:1px solid var(--border);
+.detail-table th{
   text-align:left;
+  padding:14px;
+  background:#fafafa;
+  border-bottom:1px solid var(--border);
 }
+
+.detail-table td{
+  padding:14px;
+  border-bottom:1px solid var(--border);
+}
+
+/* SECCOES */
 
 .sections-panel{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
   gap:20px;
 }
 
@@ -257,31 +378,31 @@ body{
 .section-block-title{
   font-size:16px;
   font-weight:800;
-  margin-bottom:18px;
+  margin-bottom:20px;
 }
 
 .section-category{
-  margin-bottom:24px;
+  margin-bottom:25px;
 }
 
 .section-category-title{
   font-size:12px;
   font-weight:800;
   color:#777;
-  text-transform:uppercase;
   margin-bottom:14px;
+  text-transform:uppercase;
 }
 
 .section-metric{
   display:flex;
   justify-content:space-between;
   margin-bottom:8px;
-  font-size:13px;
 }
 
 .loading{
   padding:100px;
   text-align:center;
+  font-size:20px;
 }
 
 @media(max-width:1200px){
@@ -327,6 +448,25 @@ body{
 </header>
 
 <main class="main">
+
+  <div class="legend">
+
+    <div class="legend-item">
+      <div class="legend-color green"></div>
+      N1 → Até 20 tarefas abertas
+    </div>
+
+    <div class="legend-item">
+      <div class="legend-color orange"></div>
+      N2 → Entre 21 e 40 tarefas abertas
+    </div>
+
+    <div class="legend-item">
+      <div class="legend-color red"></div>
+      N3 → Mais de 40 tarefas abertas
+    </div>
+
+  </div>
 
   <div id="app">
 
@@ -431,6 +571,13 @@ fetch('dados.json?t=' + Date.now())
       pctNA:nT > 0 ? (nA/nT*100).toFixed(1) : '0.0',
       pctNF:nT > 0 ? (nF/nT*100).toFixed(1) : '0.0',
 
+      nivel:
+        pA <= 20
+        ? 1
+        : pA <= 40
+        ? 2
+        : 3,
+
       historico:[],
       seccoes:[]
 
@@ -486,6 +633,12 @@ fetch('dados.json?t=' + Date.now())
     l.historico = h
       .filter(x => x.semana !== ultima)
       .slice(-8);
+
+    var u = h.slice(-2);
+
+    l.diff = u.length === 2
+      ? u[1].pA - u[0].pA
+      : 0;
 
   });
 
@@ -557,22 +710,53 @@ function renderApp(lojas,ultima){
   <div class="table-container">
 
     <div class="table-header">
-      <div>#</div>
+
+      <div>RANK</div>
       <div>LOJA</div>
       <div>TAREFAS</div>
+      <div>TENDÊNCIA</div>
       <div>AÇÕES</div>
+
     </div>
 
   `;
 
   lojas.forEach((l,li)=>{
 
+    var badge =
+      l.nivel === 1
+      ? 'badge-n1'
+      : l.nivel === 2
+      ? 'badge-n2'
+      : 'badge-n3';
+
+    var trend = '→';
+    var trendClass = 'trend-flat';
+
+    if(l.diff > 0){
+      trend = '▲';
+      trendClass = 'trend-up';
+    }
+
+    if(l.diff < 0){
+      trend = '▼';
+      trendClass = 'trend-down';
+    }
+
     html += `
 
     <div class="table-row">
 
       <div class="cell cell-rank">
-        ${li+1}
+
+        <div class="rank-number">
+          ${li+1}
+        </div>
+
+        <div class="rank-badge ${badge}">
+          N${l.nivel}
+        </div>
+
       </div>
 
       <div class="cell cell-loja">
@@ -601,11 +785,12 @@ function renderApp(lojas,ultima){
 
               <div class="task-head">
                 <span>Abertas</span>
-                <strong>${l.pA} (${l.pctPA}%)</strong>
+                <strong>${l.pctPA}% (${l.pA})</strong>
               </div>
 
               <div class="task-bar">
-                <div class="task-fill red" style="width:${l.pctPA}%"></div>
+                <div class="task-fill fill-red"
+                style="width:${l.pctPA}%"></div>
               </div>
 
             </div>
@@ -614,11 +799,12 @@ function renderApp(lojas,ultima){
 
               <div class="task-head">
                 <span>Fechadas</span>
-                <strong>${l.pF} (${l.pctPF}%)</strong>
+                <strong>${l.pctPF}% (${l.pF})</strong>
               </div>
 
               <div class="task-bar">
-                <div class="task-fill green" style="width:${l.pctPF}%"></div>
+                <div class="task-fill fill-green"
+                style="width:${l.pctPF}%"></div>
               </div>
 
             </div>
@@ -635,11 +821,12 @@ function renderApp(lojas,ultima){
 
               <div class="task-head">
                 <span>Abertas</span>
-                <strong>${l.nA} (${l.pctNA}%)</strong>
+                <strong>${l.pctNA}% (${l.nA})</strong>
               </div>
 
               <div class="task-bar">
-                <div class="task-fill red" style="width:${l.pctNA}%"></div>
+                <div class="task-fill fill-red"
+                style="width:${l.pctNA}%"></div>
               </div>
 
             </div>
@@ -648,11 +835,12 @@ function renderApp(lojas,ultima){
 
               <div class="task-head">
                 <span>Fechadas</span>
-                <strong>${l.nF} (${l.pctNF}%)</strong>
+                <strong>${l.pctNF}% (${l.nF})</strong>
               </div>
 
               <div class="task-bar">
-                <div class="task-fill green" style="width:${l.pctNF}%"></div>
+                <div class="task-fill fill-green"
+                style="width:${l.pctNF}%"></div>
               </div>
 
             </div>
@@ -663,16 +851,26 @@ function renderApp(lojas,ultima){
 
       </div>
 
+      <div class="cell cell-trend ${trendClass}">
+
+        ${trend}
+
+        <div style="font-size:18px">
+          ${Math.abs(l.diff)}
+        </div>
+
+      </div>
+
       <div class="cell cell-actions">
 
-        <button 
+        <button
           class="btn-action"
           id="btnhist-${li}"
           onclick="toggleHist(${li})">
           ▶ Histórico
         </button>
 
-        <button 
+        <button
           class="btn-action"
           id="btnsec-${li}"
           onclick="toggleSec(${li})">
@@ -690,6 +888,7 @@ function renderApp(lojas,ultima){
         <table class="detail-table">
 
           <thead>
+
             <tr>
               <th>Semana</th>
               <th>P Aberto</th>
@@ -697,6 +896,7 @@ function renderApp(lojas,ultima){
               <th>NP Aberto</th>
               <th>NP Fechado</th>
             </tr>
+
           </thead>
 
           <tbody>
@@ -704,21 +904,25 @@ function renderApp(lojas,ultima){
             ${l.historico.map(h=>`
 
               <tr>
+
                 <td>${h.semana}</td>
                 <td>${h.pA}</td>
                 <td>${h.pF}</td>
                 <td>${h.nA}</td>
                 <td>${h.nF}</td>
+
               </tr>
 
             `).join('')}
 
             <tr style="font-weight:800;background:#fafafa">
+
               <td>${ultima}</td>
               <td>${l.pA}</td>
               <td>${l.pF}</td>
               <td>${l.nA}</td>
               <td>${l.nF}</td>
+
             </tr>
 
           </tbody>
@@ -751,22 +955,24 @@ function renderApp(lojas,ultima){
 
                 <div class="section-metric">
                   <span>Abertas</span>
-                  <strong>${s.pA} (${s.pctPA}%)</strong>
+                  <strong>${s.pctPA}% (${s.pA})</strong>
                 </div>
 
                 <div class="task-bar">
-                  <div class="task-fill red" style="width:${s.pctPA}%"></div>
+                  <div class="task-fill fill-red"
+                  style="width:${s.pctPA}%"></div>
                 </div>
 
                 <br>
 
                 <div class="section-metric">
                   <span>Fechadas</span>
-                  <strong>${s.pF} (${s.pctPF}%)</strong>
+                  <strong>${s.pctPF}% (${s.pF})</strong>
                 </div>
 
                 <div class="task-bar">
-                  <div class="task-fill green" style="width:${s.pctPF}%"></div>
+                  <div class="task-fill fill-green"
+                  style="width:${s.pctPF}%"></div>
                 </div>
 
               </div>
@@ -779,22 +985,24 @@ function renderApp(lojas,ultima){
 
                 <div class="section-metric">
                   <span>Abertas</span>
-                  <strong>${s.nA} (${s.pctNA}%)</strong>
+                  <strong>${s.pctNA}% (${s.nA})</strong>
                 </div>
 
                 <div class="task-bar">
-                  <div class="task-fill red" style="width:${s.pctNA}%"></div>
+                  <div class="task-fill fill-red"
+                  style="width:${s.pctNA}%"></div>
                 </div>
 
                 <br>
 
                 <div class="section-metric">
                   <span>Fechadas</span>
-                  <strong>${s.nF} (${s.pctNF}%)</strong>
+                  <strong>${s.pctNF}% (${s.nF})</strong>
                 </div>
 
                 <div class="task-bar">
-                  <div class="task-fill green" style="width:${s.pctNF}%"></div>
+                  <div class="task-fill fill-green"
+                  style="width:${s.pctNF}%"></div>
                 </div>
 
               </div>
