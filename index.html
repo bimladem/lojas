@@ -442,7 +442,7 @@ body{
   color:#000;
 }
 
-/* MOBILE */
+/* MOBILE MELHORADO */
 
 @media(max-width:1200px){
 
@@ -450,21 +450,44 @@ body{
     display:none;
   }
 
+  .table-row{
+    padding:14px;
+    border-bottom:1px solid rgba(0,0,0,.08);
+  }
+
   .row-main{
-    grid-template-columns:1fr;
-    gap:18px;
-    padding:26px;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+    padding:0;
   }
 
   .cell{
-    justify-content:center;
+    background:#fff;
+    border:1px solid rgba(0,0,0,.06);
+    border-radius:16px;
+    padding:16px;
+    min-height:110px;
+    flex-direction:column;
+  }
+
+  .loja{
+    grid-column:1 / -1;
+  }
+
+  .trend{
+    grid-column:1 / -1;
+  }
+
+  .trend-box{
+    width:100%;
   }
 
   .metric strong{
     font-size:24px;
   }
 
-  .trend-box{
+  .btn{
     width:100%;
   }
 
@@ -487,16 +510,29 @@ body{
   }
 
   .main{
-    padding:14px;
+    padding:12px;
   }
 
   .row-main{
-    padding:18px 14px;
-    gap:16px;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+  }
+
+  .cell{
+    padding:14px 10px;
+    min-height:95px;
+  }
+
+  .rank-num{
+    font-size:26px;
   }
 
   .loja strong{
-    font-size:20px;
+    font-size:18px;
+  }
+
+  .loja span{
+    font-size:13px;
   }
 
   .metric strong{
@@ -504,15 +540,15 @@ body{
   }
 
   .metric span{
-    font-size:13px;
+    font-size:12px;
   }
 
   .trend-value{
-    font-size:20px;
+    font-size:18px;
   }
 
   .trend-icon{
-    font-size:22px;
+    font-size:20px;
   }
 
   .trend-text{
@@ -520,13 +556,19 @@ body{
   }
 
   .btn{
-    width:100%;
     font-size:13px;
+    padding:10px;
+  }
+
+  .detail-table{
+    display:block;
+    overflow-x:auto;
+    white-space:nowrap;
   }
 
   .detail-table th,
   .detail-table td{
-    padding:10px 6px;
+    padding:10px;
     font-size:12px;
   }
 
@@ -864,32 +906,32 @@ function render(lojas,ultima){
 
     html+='<div class="cell metric">';
     html+='<strong>'+l.pT+'</strong>';
-    html+='<span class="gray">Total</span>';
+    html+='<span class="gray">P Total</span>';
     html+='</div>';
 
     html+='<div class="cell metric">';
     html+='<strong class="red">'+l.pA+'</strong>';
-    html+='<span class="red">'+l.pctPA+'%</span>';
+    html+='<span class="red">P Aberto</span>';
     html+='</div>';
 
     html+='<div class="cell metric">';
     html+='<strong class="green">'+l.pF+'</strong>';
-    html+='<span class="green">'+l.pctPF+'%</span>';
+    html+='<span class="green">P Fechado</span>';
     html+='</div>';
 
     html+='<div class="cell metric">';
     html+='<strong>'+l.nT+'</strong>';
-    html+='<span class="gray">Total</span>';
+    html+='<span class="gray">NP Total</span>';
     html+='</div>';
 
     html+='<div class="cell metric">';
     html+='<strong class="red">'+l.nA+'</strong>';
-    html+='<span class="red">'+l.pctNA+'%</span>';
+    html+='<span class="red">NP Aberto</span>';
     html+='</div>';
 
     html+='<div class="cell metric">';
     html+='<strong class="green">'+l.nF+'</strong>';
-    html+='<span class="green">'+l.pctNF+'%</span>';
+    html+='<span class="green">NP Fechado</span>';
     html+='</div>';
 
     html+='<div class="cell trend">';
@@ -909,8 +951,6 @@ function render(lojas,ultima){
     html+='</div>';
 
     html+='</div>';
-
-    /* HIST */
 
     html+='<div class="panel" id="hist-'+li+'">';
     html+='<div class="panel-inner">';
@@ -954,8 +994,6 @@ function render(lojas,ultima){
 
     html+='</div>';
     html+='</div>';
-
-    /* SEC */
 
     html+='<div class="panel" id="sec-'+li+'">';
     html+='<div class="panel-inner">';
