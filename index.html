@@ -450,41 +450,22 @@ body{
     display:none;
   }
 
-  .table-row{
-    padding:14px;
-    border-bottom:1px solid rgba(0,0,0,.08);
-  }
-
   .row-main{
     display:grid;
     grid-template-columns:repeat(2,1fr);
     gap:14px;
-    padding:0;
+    padding:20px;
   }
 
   .cell{
-    background:#fff;
-    border:1px solid rgba(0,0,0,.06);
-    border-radius:16px;
-    padding:16px;
-    min-height:110px;
+    background:#fafafa;
+    border-radius:14px;
+    padding:14px;
     flex-direction:column;
-  }
-
-  .loja{
-    grid-column:1 / -1;
-  }
-
-  .trend{
-    grid-column:1 / -1;
   }
 
   .trend-box{
     width:100%;
-  }
-
-  .metric strong{
-    font-size:24px;
   }
 
   .btn{
@@ -510,33 +491,29 @@ body{
   }
 
   .main{
-    padding:12px;
+    padding:14px;
   }
 
   .row-main{
     grid-template-columns:repeat(2,1fr);
     gap:12px;
+    padding:14px;
   }
 
   .cell{
-    padding:14px 10px;
-    min-height:95px;
+    padding:12px;
   }
 
-  .rank-num{
-    font-size:26px;
+  .loja{
+    grid-column:1/3;
   }
 
-  .loja strong{
-    font-size:18px;
-  }
-
-  .loja span{
-    font-size:13px;
+  .trend{
+    grid-column:1/3;
   }
 
   .metric strong{
-    font-size:20px;
+    font-size:22px;
   }
 
   .metric span{
@@ -544,11 +521,11 @@ body{
   }
 
   .trend-value{
-    font-size:18px;
+    font-size:20px;
   }
 
   .trend-icon{
-    font-size:20px;
+    font-size:22px;
   }
 
   .trend-text{
@@ -564,12 +541,6 @@ body{
     display:block;
     overflow-x:auto;
     white-space:nowrap;
-  }
-
-  .detail-table th,
-  .detail-table td{
-    padding:10px;
-    font-size:12px;
   }
 
   .sections-grid{
@@ -835,6 +806,243 @@ fetch('dados.json?t='+Date.now())
   render(lojas,ultima);
 
 });
+
+function render(lojas,ultima){
+
+  var html='';
+
+  html+='<div class="table-container">';
+
+  html+='<div class="table-header">';
+  html+='<div>Rank</div>';
+  html+='<div>Loja</div>';
+  html+='<div>P Total</div>';
+  html+='<div>P Aberto</div>';
+  html+='<div>P Fechado</div>';
+  html+='<div>NP Total</div>';
+  html+='<div>NP Aberto</div>';
+  html+='<div>NP Fechado</div>';
+  html+='<div>Tendência</div>';
+  html+='<div>Histórico</div>';
+  html+='<div>Secções</div>';
+  html+='</div>';
+
+  lojas.forEach((l,li)=>{
+
+    var badge=
+      l.nivel===1?'n1':
+      l.nivel===2?'n2':'n3';
+
+    var trendClass=
+      l.diff>0
+      ?'trend-positive'
+      :l.diff<0
+      ?'trend-negative'
+      :'trend-neutral';
+
+    var icon=
+      l.diff>0
+      ?'▲'
+      :l.diff<0
+      ?'▼'
+      :'→';
+
+    var color=
+      l.diff>0
+      ?'green'
+      :l.diff<0
+      ?'red'
+      :'gray';
+
+    var texto=
+      l.diff>0
+      ?'A loja fechou mais tarefas programadas que na semana anterior'
+      :l.diff<0
+      ?'A loja fechou menos tarefas programadas que na semana anterior'
+      :'Sem alterações';
+
+    html+='<div class="table-row">';
+
+    html+='<div class="row-main">';
+
+    html+='<div class="cell rank">';
+    html+='<div class="rank-num">'+(li+1)+'</div>';
+    html+='<div class="rank-badge '+badge+'">N'+l.nivel+'</div>';
+    html+='</div>';
+
+    html+='<div class="cell loja">';
+    html+='<strong>'+l.loja+'</strong>';
+    html+='<span>'+l.local+'</span>';
+    html+='</div>';
+
+    html+='<div class="cell metric">';
+    html+='<strong>'+l.pT+'</strong>';
+    html+='<span class="gray">Total</span>';
+    html+='</div>';
+
+    html+='<div class="cell metric">';
+    html+='<strong class="red">'+l.pA+'</strong>';
+    html+='<span class="red">'+l.pctPA+'%</span>';
+    html+='</div>';
+
+    html+='<div class="cell metric">';
+    html+='<strong class="green">'+l.pF+'</strong>';
+    html+='<span class="green">'+l.pctPF+'%</span>';
+    html+='</div>';
+
+    html+='<div class="cell metric">';
+    html+='<strong>'+l.nT+'</strong>';
+    html+='<span class="gray">Total</span>';
+    html+='</div>';
+
+    html+='<div class="cell metric">';
+    html+='<strong class="red">'+l.nA+'</strong>';
+    html+='<span class="red">'+l.pctNA+'%</span>';
+    html+='</div>';
+
+    html+='<div class="cell metric">';
+    html+='<strong class="green">'+l.nF+'</strong>';
+    html+='<span class="green">'+l.pctNF+'%</span>';
+    html+='</div>';
+
+    html+='<div class="cell trend">';
+    html+='<div class="trend-box '+trendClass+'">';
+    html+='<div class="trend-icon '+color+'">'+icon+'</div>';
+    html+='<div class="trend-value '+color+'">'+(l.diff>0?'+':'')+l.diff+'</div>';
+    html+='<div class="trend-text">'+texto+'</div>';
+    html+='</div>';
+    html+='</div>';
+
+    html+='<div class="cell">';
+    html+='<button class="btn" onclick="toggleHist('+li+')">Histórico</button>';
+    html+='</div>';
+
+    html+='<div class="cell">';
+    html+='<button class="btn" onclick="toggleSec('+li+')">Secções</button>';
+    html+='</div>';
+
+    html+='</div>';
+
+    html+='<div class="panel" id="hist-'+li+'">';
+    html+='<div class="panel-inner">';
+
+    html+='<table class="detail-table">';
+
+    html+='<thead>';
+    html+='<tr>';
+    html+='<th>Semana</th>';
+    html+='<th>P Aberto</th>';
+    html+='<th>P Fechado</th>';
+    html+='<th>NP Aberto</th>';
+    html+='<th>NP Fechado</th>';
+    html+='</tr>';
+    html+='</thead>';
+
+    html+='<tbody>';
+
+    l.historico.forEach(h=>{
+
+      html+='<tr>';
+      html+='<td>'+h.semana+'</td>';
+      html+='<td>'+h.pA+'</td>';
+      html+='<td>'+h.pF+'</td>';
+      html+='<td>'+h.nA+'</td>';
+      html+='<td>'+h.nF+'</td>';
+      html+='</tr>';
+
+    });
+
+    html+='<tr class="current">';
+    html+='<td>'+ultima+'</td>';
+    html+='<td>'+l.pA+'</td>';
+    html+='<td>'+l.pF+'</td>';
+    html+='<td>'+l.nA+'</td>';
+    html+='<td>'+l.nF+'</td>';
+    html+='</tr>';
+
+    html+='</tbody>';
+    html+='</table>';
+
+    html+='</div>';
+    html+='</div>';
+
+    html+='<div class="panel" id="sec-'+li+'">';
+    html+='<div class="panel-inner">';
+
+    html+='<div class="sections-grid">';
+
+    l.seccoes.forEach(s=>{
+
+      html+='<div class="section-card">';
+
+      html+='<div class="section-head">';
+      html+=s.nome;
+      html+='</div>';
+
+      html+='<div class="section-body">';
+
+      html+='<div class="sec-line">';
+      html+='<span>P Abertas</span>';
+      html+='<strong>'+s.pA+' ('+s.pctPA+'%)</strong>';
+      html+='</div>';
+
+      html+='<div class="bar">';
+      html+='<div class="fill-red" style="width:'+s.pctPA+'%"></div>';
+      html+='</div>';
+
+      html+='<div class="sec-line">';
+      html+='<span>P Fechadas</span>';
+      html+='<strong>'+s.pF+' ('+s.pctPF+'%)</strong>';
+      html+='</div>';
+
+      html+='<div class="bar">';
+      html+='<div class="fill-green" style="width:'+s.pctPF+'%"></div>';
+      html+='</div>';
+
+      html+='<div class="sec-line">';
+      html+='<span>NP Abertas</span>';
+      html+='<strong>'+s.nA+' ('+s.pctNA+'%)</strong>';
+      html+='</div>';
+
+      html+='<div class="bar">';
+      html+='<div class="fill-red" style="width:'+s.pctNA+'%"></div>';
+      html+='</div>';
+
+      html+='<div class="sec-line">';
+      html+='<span>NP Fechadas</span>';
+      html+='<strong>'+s.nF+' ('+s.pctNF+'%)</strong>';
+      html+='</div>';
+
+      html+='<div class="bar">';
+      html+='<div class="fill-green" style="width:'+s.pctNF+'%"></div>';
+      html+='</div>';
+
+      html+='</div>';
+      html+='</div>';
+
+    });
+
+    html+='</div>';
+
+    html+='</div>';
+    html+='</div>';
+
+    html+='</div>';
+
+  });
+
+  html+='</div>';
+
+  html+='<div class="note">';
+  html+='<strong>Legenda dos níveis</strong><br><br>';
+  html+='<span style="color:#22c55e;font-weight:800">N1</span> • Até 20% de tarefas programadas abertas<br>';
+  html+='<span style="color:#fb923c;font-weight:800">N2</span> • Entre 21% e 40% de tarefas programadas abertas<br>';
+  html+='<span style="color:#ef4444;font-weight:800">N3</span> • Mais de 40% de tarefas programadas abertas';
+  html+='</div>';
+
+  document.getElementById('app').innerHTML=html;
+
+}
 
 </script>
 
