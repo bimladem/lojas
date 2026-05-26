@@ -14,9 +14,11 @@
   --text-primary:#1a1a1a;
   --text-secondary:#4a4a4a;
   --text-tertiary:#808080;
+
   --success:#22c55e;
   --danger:#ef4444;
   --warning:#fb923c;
+
   --grad:linear-gradient(135deg,#8b5cf6 0%,#ec4899 100%);
 }
 
@@ -39,10 +41,14 @@ html,body{
   position:sticky;
   top:0;
   z-index:100;
+
   background:rgba(255,255,255,.96);
   backdrop-filter:blur(20px);
+
   border-bottom:1px solid rgba(0,0,0,.06);
+
   padding:18px 40px;
+
   display:flex;
   justify-content:space-between;
   align-items:center;
@@ -58,10 +64,13 @@ html,body{
   width:42px;
   height:42px;
   border-radius:12px;
+
   background:var(--grad);
+
   display:flex;
   align-items:center;
   justify-content:center;
+
   font-size:20px;
 }
 
@@ -79,8 +88,10 @@ html,body{
 .header-period{
   background:rgba(139,92,246,.08);
   border:1px solid rgba(139,92,246,.15);
+
   padding:8px 16px;
   border-radius:10px;
+
   font-weight:700;
   color:#8b5cf6;
   font-size:13px;
@@ -94,39 +105,30 @@ html,body{
   padding:32px 40px 60px;
 }
 
-/* KPI */
+/* LEGENDA */
 
-.kpi-row{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:16px;
-  margin-bottom:32px;
+.legend-row{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:12px;
+
+  margin-bottom:28px;
+
+  font-size:13px;
+  color:var(--text-secondary);
 }
 
-.kpi-card{
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:20px 24px;
-  text-align:center;
+.leg{
+  display:flex;
+  align-items:center;
+  gap:6px;
 }
 
-.kpi-label{
-  font-size:11px;
-  font-weight:700;
-  color:var(--text-tertiary);
-  text-transform:uppercase;
-  margin-bottom:10px;
-}
-
-.kpi-value{
-  font-size:36px;
-  font-weight:800;
-}
-
-.kpi-sub{
-  font-size:12px;
-  color:var(--text-tertiary);
-  margin-top:6px;
+.leg-dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
 }
 
 /* TABLE */
@@ -139,42 +141,59 @@ html,body{
 
 .tgrid{
   display:grid;
+
   grid-template-columns:
-    80px
+    70px
     220px
-    90px
-    90px
-    90px
-    90px
-    90px
-    90px
-    180px
-    120px
-    120px;
+    95px
+    95px
+    95px
+    95px
+    95px
+    95px
+    170px
+    110px
+    110px;
+
   align-items:center;
 }
 
 .table-header{
+  padding:14px 20px;
+
   background:#fafafa;
   border-bottom:1px solid var(--border);
-  padding:16px 20px;
+
   font-size:11px;
-  font-weight:800;
+  font-weight:700;
+
   text-transform:uppercase;
+  letter-spacing:.4px;
+
   color:#888;
 }
 
-.table-header div{
+.table-header > div{
+  text-align:center;
+}
+
+.table-header > div:nth-child(2){
   text-align:center;
 }
 
 .table-row{
   border-bottom:1px solid var(--border);
   padding:0 20px;
+
+  transition:.15s;
+}
+
+.table-row:hover{
+  background:rgba(139,92,246,.03);
 }
 
 .row-main{
-  padding:20px 0;
+  padding:18px 0;
 }
 
 /* RANK */
@@ -183,17 +202,23 @@ html,body{
   display:flex;
   flex-direction:column;
   align-items:center;
+  justify-content:center;
   gap:6px;
 }
 
+.rank-emoji{
+  font-size:18px;
+}
+
 .rank-num{
-  font-size:22px;
+  font-size:20px;
   font-weight:800;
 }
 
 .rank-badge{
-  padding:4px 8px;
-  border-radius:8px;
+  padding:3px 8px;
+  border-radius:6px;
+
   font-size:10px;
   font-weight:700;
 }
@@ -216,18 +241,22 @@ html,body{
 /* LOJA */
 
 .c-loja{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:4px;
+
   text-align:center;
 }
 
 .loja-nome{
   font-size:15px;
-  font-weight:700;
+  font-weight:800;
 }
 
 .loja-local{
   font-size:12px;
   color:var(--text-tertiary);
-  margin-top:4px;
 }
 
 /* NUM */
@@ -236,64 +265,81 @@ html,body{
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:5px;
+  gap:4px;
 }
 
 .num-val{
-  font-size:18px;
+  font-size:16px;
   font-weight:800;
 }
 
 .num-pct{
+  padding:2px 7px;
+  border-radius:5px;
+
   font-size:11px;
-  padding:2px 8px;
-  border-radius:6px;
   font-weight:700;
 }
 
 .pct-red{
-  background:rgba(239,68,68,.12);
+  background:rgba(239,68,68,.10);
   color:#ef4444;
 }
 
 .pct-green{
-  background:rgba(34,197,94,.12);
+  background:rgba(34,197,94,.10);
   color:#22c55e;
 }
 
 .pct-gray{
   background:rgba(0,0,0,.05);
-  color:#777;
+  color:#888;
 }
 
-/* TENDÊNCIA */
+/* TENDENCIA */
 
 .c-tend{
   display:flex;
   justify-content:center;
-  align-items:center;
 }
 
 .tend-badge{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:5px;
+
   padding:10px 14px;
   border-radius:12px;
-  text-align:center;
-  min-width:150px;
+
+  min-width:130px;
 }
 
-.tend-up{
-  background:rgba(239,68,68,.10);
-  border:1px solid rgba(239,68,68,.2);
+.tend-badge-up{
+  background:rgba(239,68,68,.08);
+  border:1px solid rgba(239,68,68,.18);
 }
 
-.tend-down{
-  background:rgba(34,197,94,.10);
-  border:1px solid rgba(34,197,94,.2);
+.tend-badge-down{
+  background:rgba(34,197,94,.08);
+  border:1px solid rgba(34,197,94,.18);
 }
 
-.tend-neutral{
+.tend-badge-neu{
   background:rgba(0,0,0,.04);
   border:1px solid rgba(0,0,0,.08);
+}
+
+.t-up{
+  color:#ef4444;
+}
+
+.t-down{
+  color:#22c55e;
+}
+
+.t-neu{
+  color:#888;
 }
 
 .tend-icon{
@@ -301,39 +347,54 @@ html,body{
   font-weight:800;
 }
 
-.tend-value{
-  font-size:18px;
+.tend-val{
+  font-size:17px;
   font-weight:800;
-  margin-top:4px;
 }
 
-.tend-text{
-  margin-top:6px;
-  font-size:11px;
+.tend-ctx{
+  font-size:10px;
   line-height:1.4;
-  color:#666;
+  text-align:center;
+  color:#777;
 }
 
 /* BUTTONS */
 
 .c-btn{
-  text-align:center;
+  display:flex;
+  justify-content:center;
 }
 
 .btn-act{
-  width:100px;
+  width:90px;
+
   background:#fff;
+
   border:1px solid rgba(139,92,246,.25);
+
   color:#8b5cf6;
-  border-radius:10px;
-  padding:9px 10px;
+
+  border-radius:8px;
+
+  padding:8px 10px;
+
   cursor:pointer;
-  font-size:11px;
+
+  font-size:11.5px;
   font-weight:700;
+
+  transition:.15s;
 }
 
 .btn-act:hover{
   background:rgba(139,92,246,.08);
+}
+
+.btn-act.open{
+  background:var(--grad);
+  color:#fff;
+  border-color:transparent;
 }
 
 /* PANELS */
@@ -347,93 +408,137 @@ html,body{
 }
 
 .panel-inner{
-  padding:24px;
+  padding:24px 20px;
+
   background:rgba(139,92,246,.03);
+
   border-top:1px solid var(--border);
 }
 
-/* HISTORY */
+.panel-title{
+  font-size:12px;
+  font-weight:700;
+
+  color:#888;
+
+  text-transform:uppercase;
+  letter-spacing:.5px;
+
+  margin-bottom:16px;
+
+  text-align:center;
+}
+
+/* HIST */
 
 .detail-table{
   width:100%;
   border-collapse:collapse;
+  font-size:13px;
 }
 
 .detail-table th{
+  padding:10px 14px;
+
   background:#fafafa;
-  padding:12px;
+
   border-bottom:1px solid var(--border);
+
   text-align:center;
+
   font-size:11px;
+  font-weight:700;
   color:#888;
 }
 
 .detail-table td{
-  padding:12px;
+  padding:10px 14px;
+
   border-bottom:1px solid var(--border);
+
   text-align:center;
 }
 
-.current{
+.detail-table tr.current td{
   background:rgba(139,92,246,.06);
-  font-weight:700;
+  font-weight:800;
 }
 
 /* SECÇÕES */
 
 .sections-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  gap:18px;
+  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:16px;
 }
 
 .sec-block{
-  background:#fff;
   border:1px solid var(--border);
-  border-radius:14px;
+  border-radius:12px;
   overflow:hidden;
+  background:#fff;
 }
 
 .sec-head{
-  padding:14px;
+  padding:14px 16px;
+
   background:#fafafa;
+
   border-bottom:1px solid var(--border);
-  font-weight:700;
+
   text-align:center;
+
+  font-size:14px;
+  font-weight:700;
 }
 
 .sec-body{
   padding:16px;
+
+  display:flex;
+  flex-direction:column;
+  gap:14px;
 }
 
-.sec-line{
-  margin-bottom:16px;
-}
+.sec-cat-title{
+  font-size:11px;
+  font-weight:800;
 
-.sec-line-title{
-  font-size:12px;
-  margin-bottom:6px;
-  color:#777;
+  color:#999;
+
+  text-transform:uppercase;
+
+  margin-bottom:10px;
+
   text-align:center;
+}
+
+.sec-metric{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  font-size:13px;
+
+  margin-bottom:6px;
 }
 
 .bar{
   height:6px;
-  background:#eee;
-  border-radius:999px;
+  border-radius:4px;
   overflow:hidden;
-  margin-top:6px;
+  background:#eee;
 }
 
 .bar-fill{
   height:100%;
 }
 
-.red{
+.bar-red{
   background:#ef4444;
 }
 
-.green{
+.bar-green{
   background:#22c55e;
 }
 
@@ -441,22 +546,28 @@ html,body{
 
 .note{
   margin-top:30px;
+
   padding:22px;
-  border-radius:16px;
+
+  border-radius:14px;
+
   background:#fafafa;
-  border:1px solid rgba(0,0,0,.08);
+
+  border:1px solid var(--border);
+
   text-align:center;
+
+  color:#666;
+
   line-height:1.8;
-  color:#555;
   font-size:13px;
 }
 
 .loading{
   padding:100px;
   text-align:center;
+  color:#aaa;
 }
-
-/* RESPONSIVE */
 
 @media(max-width:1300px){
 
@@ -466,15 +577,12 @@ html,body{
 
   .tgrid{
     grid-template-columns:1fr;
-    gap:16px;
   }
 
   .row-main{
-    text-align:center;
-  }
-
-  .kpi-row{
-    grid-template-columns:1fr 1fr;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
   }
 
 }
@@ -507,101 +615,146 @@ html,body{
 
 <main class="main">
 
-  <div id="app">
+  <div class="legend-row">
 
+    <span class="leg">
+      <span class="leg-dot" style="background:#22c55e"></span>
+      N1 • Até 20%
+    </span>
+
+    <span class="leg">
+      <span class="leg-dot" style="background:#fb923c"></span>
+      N2 • Entre 21% e 40%
+    </span>
+
+    <span class="leg">
+      <span class="leg-dot" style="background:#ef4444"></span>
+      N3 • Acima de 40%
+    </span>
+
+  </div>
+
+  <div id="app">
     <div class="loading">
       ⏳ A carregar dados...
     </div>
-
   </div>
 
 </main>
 
 <script>
 
-var stateHist = {};
-var stateSec = {};
+var stateHist={};
+var stateSec={};
 
 function toggleHist(li){
 
-  var p = document.getElementById('hist-'+li);
-  p.classList.toggle('visible');
+  var p=document.getElementById('hist-'+li);
+  var b=document.getElementById('btnhist-'+li);
 
+  stateHist[li]=!stateHist[li];
+
+  p.classList.toggle('visible',stateHist[li]);
+  b.classList.toggle('open',stateHist[li]);
+
+  b.innerHTML=
+    stateHist[li]
+    ? '▼ Fechar'
+    : '▶ Histórico';
 }
 
 function toggleSec(li){
 
-  var p = document.getElementById('sec-'+li);
-  p.classList.toggle('visible');
+  var p=document.getElementById('sec-'+li);
+  var b=document.getElementById('btnsec-'+li);
 
+  stateSec[li]=!stateSec[li];
+
+  p.classList.toggle('visible',stateSec[li]);
+  b.classList.toggle('open',stateSec[li]);
+
+  b.innerHTML=
+    stateSec[li]
+    ? '▼ Fechar'
+    : '▶ Secções';
 }
 
-fetch('dados.json?t=' + Date.now())
+fetch('dados.json?t='+Date.now())
 
-.then(r => r.json())
+.then(function(r){
+  return r.json();
+})
 
-.then(json => {
+.then(function(json){
 
-  var data = json.data || [];
+  var data=json.data||[];
 
-  var semanas = [];
+  var semanas=[];
 
-  data.forEach(i => {
+  data.forEach(function(i){
 
-    var s = String(i.Semana || '').trim();
+    var s=String(i.Semana||'').trim();
 
-    if(s && semanas.indexOf(s) === -1){
+    if(s && semanas.indexOf(s)===-1){
       semanas.push(s);
     }
 
   });
 
-  var ultima = semanas[semanas.length - 1] || '';
+  var ultima=semanas[semanas.length-1]||'';
 
-  var lojas = data
+  var lojas=data
 
-  .filter(i =>
-    i.Loja &&
-    !i.Secção &&
-    String(i.Semana || '').trim() === ultima
-  )
+  .filter(function(i){
 
-  .map(i => {
+    return(
+      i.Loja &&
+      !i.Secção &&
+      String(i.Semana||'').trim()===ultima
+    );
 
-    var pT = Number(i['P Total']) || 0;
-    var pA = Number(i['P Aberto']) || 0;
-    var pF = Number(i['P Fechado']) || 0;
+  })
 
-    var nT = Number(i['NP Total']) || 0;
-    var nA = Number(i['NP Aberto']) || 0;
-    var nF = Number(i['NP Fechado']) || 0;
+  .map(function(i){
 
-    var pctPA = pT > 0 ? (pA/pT*100).toFixed(1) : '0.0';
-    var pctPF = pT > 0 ? (pF/pT*100).toFixed(1) : '0.0';
+    var pT=Number(i['P Total'])||0;
+    var pA=Number(i['P Aberto'])||0;
+    var pF=Number(i['P Fechado'])||0;
 
-    var pctNA = nT > 0 ? (nA/nT*100).toFixed(1) : '0.0';
-    var pctNF = nT > 0 ? (nF/nT*100).toFixed(1) : '0.0';
+    var nT=Number(i['NP Total'])||0;
+    var nA=Number(i['NP Aberto'])||0;
+    var nF=Number(i['NP Fechado'])||0;
 
-    return {
+    var pctPA=pT>0?(pA/pT*100).toFixed(1):'0.0';
+    var pctPF=pT>0?(pF/pT*100).toFixed(1):'0.0';
+
+    var pctNA=nT>0?(nA/nT*100).toFixed(1):'0.0';
+    var pctNF=nT>0?(nF/nT*100).toFixed(1):'0.0';
+
+    var nivel=
+      parseFloat(pctPA)<=20
+      ? 1
+      : parseFloat(pctPA)<=40
+      ? 2
+      : 3;
+
+    return{
 
       loja:String(i.Loja).trim(),
 
       local:String(
-        i['Resumo contactos.Localidade'] ||
-        i['IM.Localidade'] || ''
+        i['Resumo contactos.Localidade']
+        || i['IM.Localidade']
+        || ''
       ).trim(),
 
       pT,pA,pF,
       nT,nA,nF,
 
-      pctPA,pctPF,pctNA,pctNF,
+      pctPA,pctPF,
+      pctNA,pctNF,
 
-      nivel:
-        parseFloat(pctPA) <= 20
-        ? 1
-        : parseFloat(pctPA) <= 40
-        ? 2
-        : 3,
+      nivel,
 
       historico:[],
       seccoes:[]
@@ -610,17 +763,19 @@ fetch('dados.json?t=' + Date.now())
 
   });
 
-  lojas.sort((a,b)=>b.pA-a.pA);
-
-  var ids = {};
-
-  lojas.forEach(l => {
-    ids[l.loja] = true;
+  lojas.sort(function(a,b){
+    return b.pA-a.pA;
   });
 
-  var hpl = {};
+  var ids={};
 
-  data.forEach(i => {
+  lojas.forEach(function(l){
+    ids[l.loja]=true;
+  });
+
+  var hpl={};
+
+  data.forEach(function(i){
 
     if(
       !i.Secção &&
@@ -629,21 +784,21 @@ fetch('dados.json?t=' + Date.now())
       ids[String(i.Loja).trim()]
     ){
 
-      var id = String(i.Loja).trim();
+      var id=String(i.Loja).trim();
 
       if(!hpl[id]){
-        hpl[id] = [];
+        hpl[id]=[];
       }
 
       hpl[id].push({
 
         semana:String(i.Semana).trim(),
 
-        pA:Number(i['P Aberto']) || 0,
-        pF:Number(i['P Fechado']) || 0,
+        pA:Number(i['P Aberto'])||0,
+        pF:Number(i['P Fechado'])||0,
 
-        nA:Number(i['NP Aberto']) || 0,
-        nF:Number(i['NP Fechado']) || 0
+        nA:Number(i['NP Aberto'])||0,
+        nF:Number(i['NP Fechado'])||0
 
       });
 
@@ -651,24 +806,27 @@ fetch('dados.json?t=' + Date.now())
 
   });
 
-  lojas.forEach(l => {
+  lojas.forEach(function(l){
 
-    var h = hpl[l.loja] || [];
+    var h=hpl[l.loja]||[];
 
-    l.historico = h
-      .filter(x => x.semana !== ultima)
+    l.historico=
+      h
+      .filter(function(x){
+        return x.semana!==ultima;
+      })
       .slice(-8);
 
-    var u = h.slice(-2);
+    var u=h.slice(-2);
 
-    l.diff =
-      u.length === 2
-      ? u[1].pA - u[0].pA
-      : 0;
+    l.diff=
+      u.length===2
+      ? u[1].pA-u[0].pA
+      : null;
 
   });
 
-  data.forEach(i => {
+  data.forEach(function(i){
 
     if(
       i.Secção &&
@@ -676,32 +834,34 @@ fetch('dados.json?t=' + Date.now())
       ids[String(i.Loja).trim()]
     ){
 
-      var loja = lojas.find(
-        l => l.loja === String(i.Loja).trim()
-      );
+      var loja=
+        lojas.find(function(l){
+          return l.loja===String(i.Loja).trim();
+        });
 
       if(loja){
 
-        var nome = String(i.Secção)
+        var nome=String(i.Secção)
           .replace(/^IM\s+\d+\s+/,'')
           .trim();
 
-        if(nome.toLowerCase() !== 'admin'){
+        if(nome.toLowerCase()!=='admin'){
 
-          var pA = Number(i['P Aberto']) || 0;
-          var pF = Number(i['P Fechado']) || 0;
+          var pA=Number(i['P Aberto'])||0;
+          var pF=Number(i['P Fechado'])||0;
 
-          var nA = Number(i['NP Aberto']) || 0;
-          var nF = Number(i['NP Fechado']) || 0;
+          var nA=Number(i['NP Aberto'])||0;
+          var nF=Number(i['NP Fechado'])||0;
 
-          var pT = Number(i['P Total']) || 0;
-          var nT = Number(i['NP Total']) || 0;
+          var pT=Number(i['P Total'])||0;
+          var nT=Number(i['NP Total'])||0;
 
           loja.seccoes.push({
 
             nome,
 
-            pA,pF,nA,nF,
+            pA,pF,
+            nA,nF,
 
             pctPA:pT>0?(pA/pT*100).toFixed(1):'0.0',
             pctPF:pT>0?(pF/pT*100).toFixed(1):'0.0',
@@ -719,11 +879,11 @@ fetch('dados.json?t=' + Date.now())
 
   });
 
-  document.getElementById('sub-info').textContent =
-    'Gerado hoje · ' + lojas.length + ' lojas';
+  document.getElementById('sub-info').textContent=
+    'Gerado hoje · '+lojas.length+' lojas';
 
-  document.getElementById('periodo').textContent =
-    '📅 ' + ultima;
+  document.getElementById('periodo').innerHTML=
+    '📅 <strong>'+ultima+'</strong>';
 
   renderApp(lojas,ultima);
 
@@ -731,386 +891,295 @@ fetch('dados.json?t=' + Date.now())
 
 function renderApp(lojas,ultima){
 
-  var html = '';
+  var html='';
 
-  html += '<div class="kpi-row">';
+  html+='<div class="table-container">';
 
-  html += `
-    <div class="kpi-card">
-      <div class="kpi-label">🔴 Críticas</div>
-      <div class="kpi-value">
-        ${lojas.filter(l=>l.nivel===3).length}
-      </div>
-      <div class="kpi-sub">Nível 3</div>
-    </div>
-  `;
+  html+='<div class="tgrid table-header">';
+  html+='<div>Rank</div>';
+  html+='<div>Loja</div>';
+  html+='<div>P Total</div>';
+  html+='<div>P Aberto</div>';
+  html+='<div>P Fechado</div>';
+  html+='<div>NP Total</div>';
+  html+='<div>NP Aberto</div>';
+  html+='<div>NP Fechado</div>';
+  html+='<div>Tendência</div>';
+  html+='<div>Histórico</div>';
+  html+='<div>Secções</div>';
+  html+='</div>';
 
-  html += `
-    <div class="kpi-card">
-      <div class="kpi-label">🟡 Alerta</div>
-      <div class="kpi-value">
-        ${lojas.filter(l=>l.nivel===2).length}
-      </div>
-      <div class="kpi-sub">Nível 2</div>
-    </div>
-  `;
+  lojas.forEach(function(l,li){
 
-  html += `
-    <div class="kpi-card">
-      <div class="kpi-label">🟢 Estáveis</div>
-      <div class="kpi-value">
-        ${lojas.filter(l=>l.nivel===1).length}
-      </div>
-      <div class="kpi-sub">Nível 1</div>
-    </div>
-  `;
+    var emoji=
+      li<3
+      ? '🔴'
+      : '🟡';
 
-  html += `
-    <div class="kpi-card">
-      <div class="kpi-label">🏪 Total</div>
-      <div class="kpi-value">
-        ${lojas.length}
-      </div>
-      <div class="kpi-sub">Lojas analisadas</div>
-    </div>
-  `;
-
-  html += '</div>';
-
-  html += `
-  <div class="table-container">
-
-    <div class="tgrid table-header">
-
-      <div>Rank</div>
-      <div>Loja</div>
-
-      <div>P Total</div>
-      <div>P Aberto</div>
-      <div>P Fechado</div>
-
-      <div>NP Total</div>
-      <div>NP Aberto</div>
-      <div>NP Fechado</div>
-
-      <div>Tendência</div>
-
-      <div>Histórico</div>
-      <div>Secções</div>
-
-    </div>
-  `;
-
-  lojas.forEach((l,li)=>{
-
-    var badge =
-      l.nivel === 1
+    var bn=
+      l.nivel===1
       ? 'bn1'
-      : l.nivel === 2
+      : l.nivel===2
       ? 'bn2'
       : 'bn3';
 
-    var trend =
-      l.diff > 0
-      ? '▲'
-      : l.diff < 0
-      ? '▼'
-      : '→';
+    var tendencia='';
+
+    if(l.diff===null){
 
-    var trendClass =
-      l.diff > 0
-      ? 'tend-up'
-      : l.diff < 0
-      ? 'tend-down'
-      : 'tend-neutral';
+      tendencia=
+      '<div class="tend-badge tend-badge-neu">'+
+      '<div class="tend-icon t-neu">—</div>'+
+      '<div class="tend-ctx">Sem dados</div>'+
+      '</div>';
 
-    var trendText =
-      l.diff > 0
-      ? 'A loja deixou mais tarefas abertas ao longo do tempo'
-      : l.diff < 0
-      ? 'A loja deixou menos tarefas abertas ao longo do tempo'
-      : 'Sem alterações';
+    }else if(l.diff>0){
 
-    html += `
+      tendencia=
+      '<div class="tend-badge tend-badge-up">'+
+      '<div class="tend-icon t-up">▲</div>'+
+      '<div class="tend-val t-up">+'+l.diff+'</div>'+
+      '<div class="tend-ctx">A loja deixou mais tarefas abertas ao longo do tempo</div>'+
+      '</div>';
+
+    }else if(l.diff<0){
+
+      tendencia=
+      '<div class="tend-badge tend-badge-down">'+
+      '<div class="tend-icon t-down">▼</div>'+
+      '<div class="tend-val t-down">'+l.diff+'</div>'+
+      '<div class="tend-ctx">A loja deixou menos tarefas abertas ao longo do tempo</div>'+
+      '</div>';
+
+    }else{
+
+      tendencia=
+      '<div class="tend-badge tend-badge-neu">'+
+      '<div class="tend-icon t-neu">→</div>'+
+      '<div class="tend-val t-neu">0</div>'+
+      '<div class="tend-ctx">Sem alterações</div>'+
+      '</div>';
+
+    }
+
+    html+='<div class="table-row">';
+
+    html+='<div class="tgrid row-main">';
+
+    html+='<div class="c-rank">';
+    html+='<div class="rank-emoji">'+emoji+'</div>';
+    html+='<div class="rank-num">'+(li+1)+'</div>';
+    html+='<div class="rank-badge '+bn+'">N'+l.nivel+'</div>';
+    html+='</div>';
+
+    html+='<div class="c-loja">';
+    html+='<div class="loja-nome">'+l.loja+'</div>';
+    html+='<div class="loja-local">'+(l.local||'—')+'</div>';
+    html+='</div>';
+
+    html+='<div class="c-num">';
+    html+='<div class="num-val">'+l.pT+'</div>';
+    html+='<div class="num-pct pct-gray">Total</div>';
+    html+='</div>';
 
-    <div class="table-row">
+    html+='<div class="c-num">';
+    html+='<div class="num-val" style="color:#ef4444">'+l.pA+'</div>';
+    html+='<div class="num-pct pct-red">'+l.pctPA+'%</div>';
+    html+='</div>';
 
-      <div class="tgrid row-main">
+    html+='<div class="c-num">';
+    html+='<div class="num-val" style="color:#22c55e">'+l.pF+'</div>';
+    html+='<div class="num-pct pct-green">'+l.pctPF+'%</div>';
+    html+='</div>';
 
-        <div class="c-rank">
+    html+='<div class="c-num">';
+    html+='<div class="num-val">'+l.nT+'</div>';
+    html+='<div class="num-pct pct-gray">Total</div>';
+    html+='</div>';
 
-          <div class="rank-num">
-            ${li+1}
-          </div>
+    html+='<div class="c-num">';
+    html+='<div class="num-val" style="color:#ef4444">'+l.nA+'</div>';
+    html+='<div class="num-pct pct-red">'+l.pctNA+'%</div>';
+    html+='</div>';
 
-          <div class="rank-badge ${badge}">
-            N${l.nivel}
-          </div>
+    html+='<div class="c-num">';
+    html+='<div class="num-val" style="color:#22c55e">'+l.nF+'</div>';
+    html+='<div class="num-pct pct-green">'+l.pctNF+'%</div>';
+    html+='</div>';
 
-        </div>
+    html+='<div class="c-tend">';
+    html+=tendencia;
+    html+='</div>';
 
-        <div class="c-loja">
+    html+='<div class="c-btn">';
+    html+='<button class="btn-act" id="btnhist-'+li+'" onclick="toggleHist('+li+')">▶ Histórico</button>';
+    html+='</div>';
 
-          <div class="loja-nome">
-            ${l.loja}
-          </div>
+    html+='<div class="c-btn">';
+    html+='<button class="btn-act" id="btnsec-'+li+'" onclick="toggleSec('+li+')">▶ Secções</button>';
+    html+='</div>';
 
-          <div class="loja-local">
-            ${l.local}
-          </div>
+    html+='</div>';
 
-        </div>
+    /* HISTÓRICO */
 
-        <div class="c-num">
-          <div class="num-val">${l.pT}</div>
-          <div class="num-pct pct-gray">Total</div>
-        </div>
+    html+='<div class="panel" id="hist-'+li+'">';
+    html+='<div class="panel-inner">';
 
-        <div class="c-num">
-          <div class="num-val" style="color:#ef4444">${l.pA}</div>
-          <div class="num-pct pct-red">${l.pctPA}%</div>
-        </div>
+    html+='<div class="panel-title">';
+    html+='Histórico Semanal';
+    html+='</div>';
 
-        <div class="c-num">
-          <div class="num-val" style="color:#22c55e">${l.pF}</div>
-          <div class="num-pct pct-green">${l.pctPF}%</div>
-        </div>
+    html+='<table class="detail-table">';
 
-        <div class="c-num">
-          <div class="num-val">${l.nT}</div>
-          <div class="num-pct pct-gray">Total</div>
-        </div>
+    html+='<thead>';
+    html+='<tr>';
+    html+='<th>Semana</th>';
+    html+='<th>P Aberto</th>';
+    html+='<th>P Fechado</th>';
+    html+='<th>NP Aberto</th>';
+    html+='<th>NP Fechado</th>';
+    html+='</tr>';
+    html+='</thead>';
 
-        <div class="c-num">
-          <div class="num-val" style="color:#ef4444">${l.nA}</div>
-          <div class="num-pct pct-red">${l.pctNA}%</div>
-        </div>
+    html+='<tbody>';
 
-        <div class="c-num">
-          <div class="num-val" style="color:#22c55e">${l.nF}</div>
-          <div class="num-pct pct-green">${l.pctNF}%</div>
-        </div>
+    l.historico.forEach(function(h){
 
-        <div class="c-tend">
+      html+='<tr>';
+      html+='<td>'+h.semana+'</td>';
+      html+='<td>'+h.pA+'</td>';
+      html+='<td>'+h.pF+'</td>';
+      html+='<td>'+h.nA+'</td>';
+      html+='<td>'+h.nF+'</td>';
+      html+='</tr>';
 
-          <div class="tend-badge ${trendClass}">
+    });
 
-            <div class="tend-icon">
-              ${trend}
-            </div>
+    html+='<tr class="current">';
+    html+='<td>'+ultima+'</td>';
+    html+='<td>'+l.pA+'</td>';
+    html+='<td>'+l.pF+'</td>';
+    html+='<td>'+l.nA+'</td>';
+    html+='<td>'+l.nF+'</td>';
+    html+='</tr>';
 
-            <div class="tend-value">
-              ${Math.abs(l.diff)}
-            </div>
+    html+='</tbody>';
+    html+='</table>';
 
-            <div class="tend-text">
-              ${trendText}
-            </div>
+    html+='</div>';
+    html+='</div>';
 
-          </div>
+    /* SECÇÕES */
 
-        </div>
+    html+='<div class="panel" id="sec-'+li+'">';
+    html+='<div class="panel-inner">';
 
-        <div class="c-btn">
+    html+='<div class="panel-title">';
+    html+='Detalhe por Secções';
+    html+='</div>';
 
-          <button
-            class="btn-act"
-            onclick="toggleHist(${li})">
-            Histórico
-          </button>
+    html+='<div class="sections-grid">';
 
-        </div>
+    l.seccoes.forEach(function(s){
 
-        <div class="c-btn">
+      html+='<div class="sec-block">';
 
-          <button
-            class="btn-act"
-            onclick="toggleSec(${li})">
-            Secções
-          </button>
+      html+='<div class="sec-head">';
+      html+=s.nome;
+      html+='</div>';
 
-        </div>
+      html+='<div class="sec-body">';
 
-      </div>
+      html+='<div>';
 
-      <div class="panel" id="hist-${li}">
+      html+='<div class="sec-cat-title">';
+      html+='Programadas';
+      html+='</div>';
 
-        <div class="panel-inner">
+      html+='<div class="sec-metric">';
+      html+='<span>Abertas</span>';
+      html+='<strong>'+s.pA+' ('+s.pctPA+'%)</strong>';
+      html+='</div>';
 
-          <table class="detail-table">
+      html+='<div class="bar">';
+      html+='<div class="bar-fill bar-red" style="width:'+s.pctPA+'%"></div>';
+      html+='</div>';
 
-            <thead>
+      html+='<br>';
 
-              <tr>
+      html+='<div class="sec-metric">';
+      html+='<span>Fechadas</span>';
+      html+='<strong>'+s.pF+' ('+s.pctPF+'%)</strong>';
+      html+='</div>';
 
-                <th>Semana</th>
-                <th>P Aberto</th>
-                <th>P Fechado</th>
-                <th>NP Aberto</th>
-                <th>NP Fechado</th>
+      html+='<div class="bar">';
+      html+='<div class="bar-fill bar-green" style="width:'+s.pctPF+'%"></div>';
+      html+='</div>';
 
-              </tr>
+      html+='</div>';
 
-            </thead>
+      html+='<div>';
 
-            <tbody>
+      html+='<div class="sec-cat-title">';
+      html+='Não Programadas';
+      html+='</div>';
 
-              ${l.historico.map(h=>`
+      html+='<div class="sec-metric">';
+      html+='<span>Abertas</span>';
+      html+='<strong>'+s.nA+' ('+s.pctNA+'%)</strong>';
+      html+='</div>';
 
-                <tr>
+      html+='<div class="bar">';
+      html+='<div class="bar-fill bar-red" style="width:'+s.pctNA+'%"></div>';
+      html+='</div>';
 
-                  <td>${h.semana}</td>
-                  <td>${h.pA}</td>
-                  <td>${h.pF}</td>
-                  <td>${h.nA}</td>
-                  <td>${h.nF}</td>
+      html+='<br>';
 
-                </tr>
+      html+='<div class="sec-metric">';
+      html+='<span>Fechadas</span>';
+      html+='<strong>'+s.nF+' ('+s.pctNF+'%)</strong>';
+      html+='</div>';
 
-              `).join('')}
+      html+='<div class="bar">';
+      html+='<div class="bar-fill bar-green" style="width:'+s.pctNF+'%"></div>';
+      html+='</div>';
 
-              <tr class="current">
+      html+='</div>';
 
-                <td>${ultima}</td>
-                <td>${l.pA}</td>
-                <td>${l.pF}</td>
-                <td>${l.nA}</td>
-                <td>${l.nF}</td>
+      html+='</div>';
+      html+='</div>';
 
-              </tr>
+    });
 
-            </tbody>
+    html+='</div>';
 
-          </table>
+    html+='</div>';
+    html+='</div>';
 
-        </div>
-
-      </div>
-
-      <div class="panel" id="sec-${li}">
-
-        <div class="panel-inner">
-
-          <div class="sections-grid">
-
-            ${l.seccoes.map(s=>`
-
-              <div class="sec-block">
-
-                <div class="sec-head">
-                  ${s.nome}
-                </div>
-
-                <div class="sec-body">
-
-                  <div class="sec-line">
-
-                    <div class="sec-line-title">
-                      Programadas Abertas
-                    </div>
-
-                    <strong>
-                      ${s.pA} (${s.pctPA}%)
-                    </strong>
-
-                    <div class="bar">
-
-                      <div
-                        class="bar-fill red"
-                        style="width:${s.pctPA}%">
-                      </div>
-
-                    </div>
-
-                  </div>
-
-                  <div class="sec-line">
-
-                    <div class="sec-line-title">
-                      Programadas Fechadas
-                    </div>
-
-                    <strong>
-                      ${s.pF} (${s.pctPF}%)
-                    </strong>
-
-                    <div class="bar">
-
-                      <div
-                        class="bar-fill green"
-                        style="width:${s.pctPF}%">
-                      </div>
-
-                    </div>
-
-                  </div>
-
-                </div>
-
-              </div>
-
-            `).join('')}
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-    `;
+    html+='</div>';
 
   });
 
-  html += '</div>';
+  html+='</div>';
 
-  html += `
+  html+='<div class="note">';
 
-  <div class="note">
+  html+='<strong>Legenda dos Níveis</strong><br><br>';
 
-    <strong style="font-size:15px;color:#111;">
-      📌 Legenda dos Níveis e Tendências
-    </strong>
+  html+='<span style="color:#22c55e;font-weight:700">N1</span> — Até 20% de tarefas programadas abertas.<br>';
+  html+='<span style="color:#fb923c;font-weight:700">N2</span> — Entre 21% e 40% de tarefas programadas abertas.<br>';
+  html+='<span style="color:#ef4444;font-weight:700">N3</span> — Mais de 40% de tarefas programadas abertas.<br><br>';
 
-    <br><br>
+  html+='<strong>Legenda da Tendência</strong><br><br>';
 
-    <span style="color:#22c55e;font-weight:700;">
-      N1
-    </span>
-    — Até 20% de tarefas programadas abertas
-    <br>
+  html+='<span style="color:#ef4444;font-weight:700">▲ Vermelho</span> — A loja deixou mais tarefas abertas ao longo do tempo.<br>';
+  html+='<span style="color:#22c55e;font-weight:700">▼ Verde</span> — A loja deixou menos tarefas abertas ao longo do tempo.<br>';
+  html+='<span style="color:#888;font-weight:700">→ Cinzento</span> — Sem alterações face à semana anterior.';
 
-    <span style="color:#fb923c;font-weight:700;">
-      N2
-    </span>
-    — Entre 21% e 40% de tarefas programadas abertas
-    <br>
+  html+='</div>';
 
-    <span style="color:#ef4444;font-weight:700;">
-      N3
-    </span>
-    — Mais de 40% de tarefas programadas abertas
-
-    <br><br>
-
-    <span style="color:#ef4444;font-weight:700;">
-      ▲ Vermelho
-    </span>
-    — A loja tem deixado mais tarefas abertas ao longo do tempo
-
-    <br>
-
-    <span style="color:#22c55e;font-weight:700;">
-      ▼ Verde
-    </span>
-    — A loja tem deixado menos tarefas abertas ao longo do tempo
-
-  </div>
-
-  `;
-
-  document.getElementById('app').innerHTML = html;
+  document.getElementById('app').innerHTML=html;
 
 }
 
