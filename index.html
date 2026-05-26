@@ -26,13 +26,14 @@
   box-sizing:border-box;
 }
 
-html,
 body{
   font-family:'Inter',sans-serif;
   background:#fff;
   color:var(--text-primary);
   font-size:17px;
 }
+
+/* HEADER */
 
 .header{
   position:sticky;
@@ -45,23 +46,24 @@ body{
   display:flex;
   justify-content:center;
   align-items:center;
+  gap:40px;
 }
 
 .header-brand{
   display:flex;
   align-items:center;
-  gap:20px;
+  gap:18px;
 }
 
 .header-logo{
-  width:58px;
-  height:58px;
-  border-radius:16px;
+  width:54px;
+  height:54px;
+  border-radius:14px;
   background:var(--grad);
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:28px;
+  font-size:24px;
 }
 
 .header-title{
@@ -69,18 +71,17 @@ body{
 }
 
 .header-title h1{
-  font-size:36px;
+  font-size:34px;
   font-weight:800;
 }
 
 .header-title .sub{
   color:var(--text-tertiary);
-  font-size:15px;
   margin-top:6px;
+  font-size:15px;
 }
 
 .header-period{
-  margin-left:30px;
   background:rgba(139,92,246,.08);
   border:1px solid rgba(139,92,246,.15);
   padding:12px 20px;
@@ -90,11 +91,15 @@ body{
   font-size:16px;
 }
 
+/* MAIN */
+
 .main{
   max-width:1900px;
-  margin:0 auto;
-  padding:40px 60px 80px;
+  margin:auto;
+  padding:40px;
 }
+
+/* LEGENDA */
 
 .legend-row{
   display:flex;
@@ -102,9 +107,9 @@ body{
   align-items:center;
   flex-wrap:wrap;
   gap:18px;
-  margin-bottom:35px;
-  font-size:16px;
-  color:var(--text-secondary);
+  margin-bottom:30px;
+  font-size:15px;
+  text-align:center;
 }
 
 .leg{
@@ -113,21 +118,23 @@ body{
   gap:8px;
 }
 
-.leg-sep{
-  width:1px;
-  height:18px;
-  background:var(--border);
-}
-
 .leg-dot{
   width:12px;
   height:12px;
   border-radius:50%;
 }
 
+.leg-sep{
+  width:1px;
+  height:18px;
+  background:var(--border);
+}
+
+/* TABLE */
+
 .table-container{
   border:1px solid var(--border);
-  border-radius:24px;
+  border-radius:20px;
   overflow:hidden;
 }
 
@@ -135,34 +142,34 @@ body{
   display:grid;
   grid-template-columns:
     100px
-    260px
-    120px
-    120px
-    120px
-    120px
-    120px
-    120px
-    170px
+    240px
+    110px
+    110px
+    110px
+    110px
+    110px
+    110px
+    180px
     130px
     130px;
   align-items:center;
-  justify-items:center;
 }
 
 .table-header{
-  padding:22px 30px;
   background:#fafafa;
   border-bottom:1px solid var(--border);
+  padding:22px 30px;
   font-size:14px;
   font-weight:800;
   text-transform:uppercase;
   color:#777;
+  text-align:center;
 }
 
 .table-row{
   border-bottom:1px solid var(--border);
-  transition:.2s;
   padding:0 30px;
+  transition:.2s;
 }
 
 .table-row:hover{
@@ -170,29 +177,35 @@ body{
 }
 
 .row-main{
-  padding:28px 0;
+  padding:24px 0;
 }
 
-.c-rank{
+/* CELLS */
+
+.c-rank,
+.c-num,
+.c-tend,
+.c-btn{
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:8px;
+  justify-content:center;
+  text-align:center;
 }
 
 .rank-emoji{
-  font-size:28px;
+  font-size:24px;
 }
 
 .rank-num{
-  font-size:34px;
+  font-size:30px;
   font-weight:800;
 }
 
 .rank-badge{
   padding:5px 10px;
   border-radius:8px;
-  font-size:13px;
+  font-size:12px;
   font-weight:700;
 }
 
@@ -216,21 +229,14 @@ body{
 }
 
 .loja-nome{
-  font-size:23px;
+  font-size:22px;
   font-weight:800;
-  margin-bottom:8px;
 }
 
 .loja-local{
   font-size:15px;
   color:var(--text-tertiary);
-}
-
-.c-num{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:6px;
+  margin-top:6px;
 }
 
 .num-val{
@@ -239,6 +245,7 @@ body{
 }
 
 .num-pct{
+  margin-top:6px;
   padding:4px 10px;
   border-radius:8px;
   font-size:13px;
@@ -246,12 +253,12 @@ body{
 }
 
 .pct-red{
-  background:rgba(239,68,68,.12);
+  background:rgba(239,68,68,.10);
   color:#ef4444;
 }
 
 .pct-green{
-  background:rgba(34,197,94,.12);
+  background:rgba(34,197,94,.10);
   color:#22c55e;
 }
 
@@ -260,30 +267,22 @@ body{
   color:#777;
 }
 
-.c-tend{
-  display:flex;
-  justify-content:center;
-}
+/* TENDÊNCIA */
 
 .tend-badge{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  padding:14px 18px;
-  border-radius:16px;
+  border-radius:14px;
+  padding:12px 16px;
   min-width:140px;
 }
 
 .tend-badge-up{
-  background:rgba(239,68,68,.10);
-  border:1px solid rgba(239,68,68,.18);
+  background:rgba(34,197,94,.10);
+  border:1px solid rgba(34,197,94,.18);
 }
 
 .tend-badge-down{
-  background:rgba(34,197,94,.10);
-  border:1px solid rgba(34,197,94,.18);
+  background:rgba(239,68,68,.10);
+  border:1px solid rgba(239,68,68,.18);
 }
 
 .tend-badge-neu{
@@ -292,37 +291,35 @@ body{
 }
 
 .tend-icon{
-  font-size:28px;
+  font-size:24px;
   font-weight:800;
 }
 
 .tend-val{
   font-size:24px;
   font-weight:800;
+  margin-top:4px;
 }
 
 .tend-ctx{
   font-size:13px;
+  margin-top:6px;
   line-height:1.5;
-  text-align:center;
-  color:#666;
 }
 
 .t-up{
-  color:#ef4444;
-}
-
-.t-down{
   color:#22c55e;
 }
 
-.t-neu{
-  color:#777;
+.t-down{
+  color:#ef4444;
 }
 
-.c-btn{
-  text-align:center;
+.t-neu{
+  color:#888;
 }
+
+/* BUTTONS */
 
 .btn-act{
   width:110px;
@@ -330,7 +327,7 @@ body{
   border:1px solid rgba(139,92,246,.25);
   color:#8b5cf6;
   border-radius:10px;
-  padding:12px 14px;
+  padding:12px;
   cursor:pointer;
   font-size:14px;
   font-weight:700;
@@ -346,6 +343,8 @@ body{
   color:#fff;
   border-color:transparent;
 }
+
+/* PANELS */
 
 .panel{
   display:none;
@@ -363,45 +362,46 @@ body{
 
 .panel-title{
   text-align:center;
-  font-size:16px;
+  font-size:18px;
   font-weight:800;
-  color:#777;
   margin-bottom:20px;
 }
+
+/* HISTÓRICO */
 
 .detail-table{
   width:100%;
   border-collapse:collapse;
-  font-size:15px;
   background:#fff;
-  border-radius:16px;
+  border-radius:14px;
   overflow:hidden;
 }
 
-.detail-table th{
-  padding:16px;
-  background:#fafafa;
-  border-bottom:1px solid var(--border);
-  text-align:center;
-  font-size:14px;
-  color:#777;
-}
-
+.detail-table th,
 .detail-table td{
   padding:16px;
   border-bottom:1px solid var(--border);
   text-align:center;
+  font-size:15px;
 }
 
-.detail-table tr.current td{
+.detail-table th{
+  background:#fafafa;
+  font-size:14px;
+  font-weight:800;
+}
+
+.current td{
   background:rgba(139,92,246,.06);
   font-weight:800;
 }
 
+/* SECÇÕES */
+
 .sections-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
-  gap:22px;
+  gap:20px;
 }
 
 .sec-block{
@@ -415,9 +415,9 @@ body{
   padding:18px;
   background:#fafafa;
   border-bottom:1px solid var(--border);
-  text-align:center;
   font-size:18px;
   font-weight:800;
+  text-align:center;
 }
 
 .sec-body{
@@ -428,8 +428,8 @@ body{
   font-size:13px;
   font-weight:800;
   text-transform:uppercase;
-  color:#999;
-  margin-bottom:12px;
+  color:#777;
+  margin-bottom:14px;
   text-align:center;
 }
 
@@ -460,38 +460,44 @@ body{
   background:#22c55e;
 }
 
+/* NOTES */
+
 .note{
-  margin-top:40px;
-  padding:28px;
-  border-radius:18px;
+  margin-top:30px;
+  padding:24px;
+  border-radius:16px;
   background:#fafafa;
   border:1px solid var(--border);
   text-align:center;
   font-size:16px;
-  line-height:2;
+  line-height:1.8;
   color:#555;
 }
 
 .loading{
   padding:100px;
   text-align:center;
+  color:#aaa;
   font-size:22px;
-  color:#888;
 }
 
+/* RESPONSIVE */
+
 @media(max-width:1400px){
+
+  .table-header{
+    display:none;
+  }
 
   .tgrid{
     grid-template-columns:1fr;
     gap:18px;
   }
 
-  .table-header{
-    display:none;
-  }
-
   .row-main{
-    padding:30px 0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
   }
 
 }
@@ -514,10 +520,10 @@ body{
       <div class="sub" id="sub-info">A carregar...</div>
     </div>
 
-    <div class="header-period" id="periodo">
-      —
-    </div>
+  </div>
 
+  <div class="header-period" id="periodo">
+    —
   </div>
 
 </header>
@@ -528,29 +534,24 @@ body{
 
     <span class="leg">
       <span class="leg-dot" style="background:#22c55e"></span>
-      N1 • Até 20%
+      ▲ Melhorou
     </span>
-
-    <div class="leg-sep"></div>
-
-    <span class="leg">
-      <span class="leg-dot" style="background:#fb923c"></span>
-      N2 • 21% até 40%
-    </span>
-
-    <div class="leg-sep"></div>
 
     <span class="leg">
       <span class="leg-dot" style="background:#ef4444"></span>
-      N3 • Mais de 40%
+      ▼ Piorou
     </span>
+
+    <div class="leg-sep"></div>
+
+    <span>N1 = Até 20%</span>
+    <span>N2 = Entre 21% e 40%</span>
+    <span>N3 = Mais de 40%</span>
 
   </div>
 
   <div id="app">
-    <div class="loading">
-      ⏳ A carregar dados...
-    </div>
+    <div class="loading">⏳ A carregar dados...</div>
   </div>
 
 </main>
@@ -562,81 +563,83 @@ var stateSec = {};
 
 function toggleHist(li){
 
-  var p=document.getElementById('hist-'+li);
-  var b=document.getElementById('btnhist-'+li);
+  var p = document.getElementById('hist-' + li);
+  var b = document.getElementById('btnhist-' + li);
 
-  stateHist[li]=!stateHist[li];
+  stateHist[li] = !stateHist[li];
 
-  p.classList.toggle('visible',stateHist[li]);
-  b.classList.toggle('open',stateHist[li]);
+  p.classList.toggle('visible', stateHist[li]);
+  b.classList.toggle('open', stateHist[li]);
 
-  b.innerHTML=stateHist[li]
+  b.innerHTML =
+    stateHist[li]
     ? '▼ Fechar'
     : '▶ Histórico';
 }
 
 function toggleSec(li){
 
-  var p=document.getElementById('sec-'+li);
-  var b=document.getElementById('btnsec-'+li);
+  var p = document.getElementById('sec-' + li);
+  var b = document.getElementById('btnsec-' + li);
 
-  stateSec[li]=!stateSec[li];
+  stateSec[li] = !stateSec[li];
 
-  p.classList.toggle('visible',stateSec[li]);
-  b.classList.toggle('open',stateSec[li]);
+  p.classList.toggle('visible', stateSec[li]);
+  b.classList.toggle('open', stateSec[li]);
 
-  b.innerHTML=stateSec[li]
+  b.innerHTML =
+    stateSec[li]
     ? '▼ Fechar'
     : '▶ Secções';
 }
 
-fetch('dados.json?t='+Date.now())
+fetch('dados.json?t=' + Date.now())
 
-.then(r=>r.json())
+.then(r => r.json())
 
-.then(json=>{
+.then(json => {
 
-  var data=json.data||[];
+  var data = json.data || [];
 
-  var semanas=[];
+  var semanas = [];
 
-  data.forEach(i=>{
+  data.forEach(i => {
 
-    var s=String(i.Semana||'').trim();
+    var s = String(i.Semana || '').trim();
 
-    if(s && semanas.indexOf(s)===-1){
+    if(s && semanas.indexOf(s) === -1){
       semanas.push(s);
     }
 
   });
 
-  var ultima=semanas[semanas.length-1]||'';
+  var ultima = semanas[semanas.length - 1] || '';
 
-  var lojas=data
+  var lojas = data
 
-  .filter(i=>
+  .filter(i =>
     i.Loja &&
     !i.Secção &&
-    String(i.Semana||'').trim()===ultima
+    String(i.Semana || '').trim() === ultima
   )
 
-  .map(i=>{
+  .map(i => {
 
-    var pT=Number(i['P Total'])||0;
-    var pA=Number(i['P Aberto'])||0;
-    var pF=Number(i['P Fechado'])||0;
+    var pT = Number(i['P Total']) || 0;
+    var pA = Number(i['P Aberto']) || 0;
+    var pF = Number(i['P Fechado']) || 0;
 
-    var nT=Number(i['NP Total'])||0;
-    var nA=Number(i['NP Aberto'])||0;
-    var nF=Number(i['NP Fechado'])||0;
+    var nT = Number(i['NP Total']) || 0;
+    var nA = Number(i['NP Aberto']) || 0;
+    var nF = Number(i['NP Fechado']) || 0;
 
-    var pctPA=pT>0?(pA/pT*100).toFixed(1):'0.0';
-    var pctPF=pT>0?(pF/pT*100).toFixed(1):'0.0';
+    var pctPA = pT > 0 ? (pA/pT*100).toFixed(1) : '0.0';
+    var pctPF = pT > 0 ? (pF/pT*100).toFixed(1) : '0.0';
 
-    var pctNA=nT>0?(nA/nT*100).toFixed(1):'0.0';
-    var pctNF=nT>0?(nF/nT*100).toFixed(1):'0.0';
+    var pctNA = nT > 0 ? (nA/nT*100).toFixed(1) : '0.0';
+    var pctNF = nT > 0 ? (nF/nT*100).toFixed(1) : '0.0';
 
-    return{
+    return {
 
       loja:String(i.Loja).trim(),
 
@@ -646,16 +649,14 @@ fetch('dados.json?t='+Date.now())
         ''
       ).trim(),
 
-      pT,pA,pF,
-      nT,nA,nF,
+      pT,pA,pF,nT,nA,nF,
 
-      pctPA,pctPF,
-      pctNA,pctNF,
+      pctPA,pctPF,pctNA,pctNF,
 
       nivel:
-        parseFloat(pctPA)<=20
+        parseFloat(pctPA) <= 20
         ? 1
-        : parseFloat(pctPA)<=40
+        : parseFloat(pctPA) <= 40
         ? 2
         : 3,
 
@@ -668,15 +669,15 @@ fetch('dados.json?t='+Date.now())
 
   lojas.sort((a,b)=>b.pA-a.pA);
 
-  var ids={};
+  var ids = {};
 
-  lojas.forEach(l=>{
-    ids[l.loja]=true;
+  lojas.forEach(l => {
+    ids[l.loja] = true;
   });
 
-  var hpl={};
+  var hpl = {};
 
-  data.forEach(i=>{
+  data.forEach(i => {
 
     if(
       !i.Secção &&
@@ -685,21 +686,21 @@ fetch('dados.json?t='+Date.now())
       ids[String(i.Loja).trim()]
     ){
 
-      var id=String(i.Loja).trim();
+      var id = String(i.Loja).trim();
 
       if(!hpl[id]){
-        hpl[id]=[];
+        hpl[id] = [];
       }
 
       hpl[id].push({
 
         semana:String(i.Semana).trim(),
 
-        pA:Number(i['P Aberto'])||0,
-        pF:Number(i['P Fechado'])||0,
+        pA:Number(i['P Aberto']) || 0,
+        pF:Number(i['P Fechado']) || 0,
 
-        nA:Number(i['NP Aberto'])||0,
-        nF:Number(i['NP Fechado'])||0
+        nA:Number(i['NP Aberto']) || 0,
+        nF:Number(i['NP Fechado']) || 0
 
       });
 
@@ -707,24 +708,26 @@ fetch('dados.json?t='+Date.now())
 
   });
 
-  lojas.forEach(l=>{
+  lojas.forEach(l => {
 
-    var h=hpl[l.loja]||[];
+    var h = hpl[l.loja] || [];
 
-    l.historico=h
-      .filter(x=>x.semana!==ultima)
+    l.historico = h
+      .filter(x => x.semana !== ultima)
       .slice(-8);
 
-    var u=h.slice(-2);
+    var u = h.slice(-2);
 
-    l.diff=
-      u.length===2
-      ? u[1].pA-u[0].pA
-      : null;
+    /* TENDÊNCIA BASEADA EM P FECHADO */
+
+    l.diff =
+      u.length === 2
+      ? u[1].pF - u[0].pF
+      : 0;
 
   });
 
-  data.forEach(i=>{
+  data.forEach(i => {
 
     if(
       i.Secção &&
@@ -732,26 +735,26 @@ fetch('dados.json?t='+Date.now())
       ids[String(i.Loja).trim()]
     ){
 
-      var loja=lojas.find(
-        l=>l.loja===String(i.Loja).trim()
+      var loja = lojas.find(
+        l => l.loja === String(i.Loja).trim()
       );
 
       if(loja){
 
-        var nome=String(i.Secção)
+        var nome = String(i.Secção)
           .replace(/^IM\s+\d+\s+/,'')
           .trim();
 
-        if(nome.toLowerCase()!=='admin'){
+        if(nome.toLowerCase() !== 'admin'){
 
-          var pA=Number(i['P Aberto'])||0;
-          var pF=Number(i['P Fechado'])||0;
+          var pA = Number(i['P Aberto']) || 0;
+          var pF = Number(i['P Fechado']) || 0;
 
-          var nA=Number(i['NP Aberto'])||0;
-          var nF=Number(i['NP Fechado'])||0;
+          var nA = Number(i['NP Aberto']) || 0;
+          var nF = Number(i['NP Fechado']) || 0;
 
-          var pT=Number(i['P Total'])||0;
-          var nT=Number(i['NP Total'])||0;
+          var pT = Number(i['P Total']) || 0;
+          var nT = Number(i['NP Total']) || 0;
 
           loja.seccoes.push({
 
@@ -775,11 +778,11 @@ fetch('dados.json?t='+Date.now())
 
   });
 
-  document.getElementById('sub-info').textContent=
-    'Gerado hoje • '+lojas.length+' lojas';
+  document.getElementById('sub-info').textContent =
+    'Gerado hoje · ' + lojas.length + ' lojas';
 
-  document.getElementById('periodo').innerHTML=
-    '📅 <strong>'+ultima+'</strong>';
+  document.getElementById('periodo').textContent =
+    '📅 ' + ultima;
 
   renderApp(lojas,ultima);
 
@@ -787,309 +790,332 @@ fetch('dados.json?t='+Date.now())
 
 function renderApp(lojas,ultima){
 
-  var header=''
+  var html = `
 
-  +'<div class="table-container">'
+  <div class="table-container">
 
-  +'<div class="tgrid table-header">'
+    <div class="tgrid table-header">
 
-  +'<div>Rank</div>'
-  +'<div>Loja</div>'
-  +'<div>P Total</div>'
-  +'<div>P Aberto</div>'
-  +'<div>P Fechado</div>'
-  +'<div>NP Total</div>'
-  +'<div>NP Aberto</div>'
-  +'<div>NP Fechado</div>'
-  +'<div>Tendência</div>'
-  +'<div>Histórico</div>'
-  +'<div>Secções</div>'
+      <div>Rank</div>
+      <div>Loja</div>
+      <div>P Total</div>
+      <div>P Aberto</div>
+      <div>P Fechado</div>
+      <div>NP Total</div>
+      <div>NP Aberto</div>
+      <div>NP Fechado</div>
+      <div>Tendência</div>
+      <div>Histórico</div>
+      <div>Secções</div>
 
-  +'</div>';
+    </div>
 
-  var rows='';
+  `;
 
   lojas.forEach((l,li)=>{
 
-    var emoji=l.nivel===3
-      ? '🔴'
-      : l.nivel===2
-      ? '🟡'
-      : '🟢';
+    var emoji = l.nivel === 3 ? '🔴' : l.nivel === 2 ? '🟡' : '🟢';
 
-    var bn=l.nivel===1
+    var badge =
+      l.nivel === 1
       ? 'bn1'
-      : l.nivel===2
+      : l.nivel === 2
       ? 'bn2'
       : 'bn3';
 
-    var tendencia='';
+    var trend =
+      l.diff > 0
+      ? '▲'
+      : l.diff < 0
+      ? '▼'
+      : '→';
 
-    if(l.diff===null){
+    var trendClass =
+      l.diff > 0
+      ? 't-up'
+      : l.diff < 0
+      ? 't-down'
+      : 't-neu';
 
-      tendencia=''
+    var trendBox =
+      l.diff > 0
+      ? 'tend-badge-up'
+      : l.diff < 0
+      ? 'tend-badge-down'
+      : 'tend-badge-neu';
 
-      +'<div class="c-tend">'
-      +'<div class="tend-badge tend-badge-neu">'
-      +'<div class="tend-icon t-neu">—</div>'
-      +'<div class="tend-ctx">Sem dados</div>'
-      +'</div>'
-      +'</div>';
+    var textoTrend =
+      l.diff > 0
+      ? 'A loja fechou mais tarefas programadas que na semana anterior'
+      : l.diff < 0
+      ? 'A loja fechou menos tarefas programadas que na semana anterior'
+      : 'Sem alterações';
 
-    }else if(l.diff>0){
+    html += `
 
-      tendencia=''
+    <div class="table-row">
 
-      +'<div class="c-tend">'
-      +'<div class="tend-badge tend-badge-up">'
-      +'<div class="tend-icon t-up">▲</div>'
-      +'<div class="tend-val t-up">+'+l.diff+'</div>'
-      +'<div class="tend-ctx">Mais tarefas abertas<br>ao longo do tempo</div>'
-      +'</div>'
-      +'</div>';
+      <div class="tgrid row-main">
 
-    }else if(l.diff<0){
+        <div class="c-rank">
 
-      tendencia=''
+          <div class="rank-emoji">${emoji}</div>
 
-      +'<div class="c-tend">'
-      +'<div class="tend-badge tend-badge-down">'
-      +'<div class="tend-icon t-down">▼</div>'
-      +'<div class="tend-val t-down">'+l.diff+'</div>'
-      +'<div class="tend-ctx">Menos tarefas abertas<br>ao longo do tempo</div>'
-      +'</div>'
-      +'</div>';
+          <div class="rank-num">
+            ${li+1}
+          </div>
 
-    }else{
+          <div class="rank-badge ${badge}">
+            N${l.nivel}
+          </div>
 
-      tendencia=''
+        </div>
 
-      +'<div class="c-tend">'
-      +'<div class="tend-badge tend-badge-neu">'
-      +'<div class="tend-icon t-neu">→</div>'
-      +'<div class="tend-val t-neu">0</div>'
-      +'<div class="tend-ctx">Sem alterações</div>'
-      +'</div>'
-      +'</div>';
+        <div class="c-loja">
 
-    }
+          <div class="loja-nome">
+            ${l.loja}
+          </div>
 
-    rows+=''
+          <div class="loja-local">
+            ${l.local}
+          </div>
 
-    +'<div class="table-row">'
+        </div>
 
-    +'<div class="tgrid row-main">'
+        <div class="c-num">
+          <div class="num-val">${l.pT}</div>
+          <div class="num-pct pct-gray">Total</div>
+        </div>
 
-    +'<div class="c-rank">'
-    +'<div class="rank-emoji">'+emoji+'</div>'
-    +'<div class="rank-num">'+(li+1)+'</div>'
-    +'<span class="rank-badge '+bn+'">N'+l.nivel+'</span>'
-    +'</div>'
+        <div class="c-num">
+          <div class="num-val" style="color:#ef4444">${l.pA}</div>
+          <div class="num-pct pct-red">${l.pctPA}%</div>
+        </div>
 
-    +'<div class="c-loja">'
-    +'<div class="loja-nome">'+l.loja+'</div>'
-    +'<div class="loja-local">'+(l.local||'—')+'</div>'
-    +'</div>'
+        <div class="c-num">
+          <div class="num-val" style="color:#22c55e">${l.pF}</div>
+          <div class="num-pct pct-green">${l.pctPF}%</div>
+        </div>
 
-    +'<div class="c-num">'
-    +'<div class="num-val">'+l.pT+'</div>'
-    +'<span class="num-pct pct-gray">Total</span>'
-    +'</div>'
+        <div class="c-num">
+          <div class="num-val">${l.nT}</div>
+          <div class="num-pct pct-gray">Total</div>
+        </div>
 
-    +'<div class="c-num">'
-    +'<div class="num-val" style="color:#ef4444">'+l.pA+'</div>'
-    +'<span class="num-pct pct-red">'+l.pctPA+'%</span>'
-    +'</div>'
+        <div class="c-num">
+          <div class="num-val" style="color:#ef4444">${l.nA}</div>
+          <div class="num-pct pct-red">${l.pctNA}%</div>
+        </div>
 
-    +'<div class="c-num">'
-    +'<div class="num-val" style="color:#22c55e">'+l.pF+'</div>'
-    +'<span class="num-pct pct-green">'+l.pctPF+'%</span>'
-    +'</div>'
+        <div class="c-num">
+          <div class="num-val" style="color:#22c55e">${l.nF}</div>
+          <div class="num-pct pct-green">${l.pctNF}%</div>
+        </div>
 
-    +'<div class="c-num">'
-    +'<div class="num-val">'+l.nT+'</div>'
-    +'<span class="num-pct pct-gray">Total</span>'
-    +'</div>'
+        <div class="c-tend">
 
-    +'<div class="c-num">'
-    +'<div class="num-val" style="color:#ef4444">'+l.nA+'</div>'
-    +'<span class="num-pct pct-red">'+l.pctNA+'%</span>'
-    +'</div>'
+          <div class="tend-badge ${trendBox}">
 
-    +'<div class="c-num">'
-    +'<div class="num-val" style="color:#22c55e">'+l.nF+'</div>'
-    +'<span class="num-pct pct-green">'+l.pctNF+'%</span>'
-    +'</div>'
+            <div class="tend-icon ${trendClass}">
+              ${trend}
+            </div>
 
-    +tendencia
+            <div class="tend-val ${trendClass}">
+              ${l.diff > 0 ? '+' : ''}${l.diff}
+            </div>
 
-    +'<div class="c-btn">'
-    +'<button class="btn-act" id="btnhist-'+li+'" onclick="toggleHist('+li+')">▶ Histórico</button>'
-    +'</div>'
+            <div class="tend-ctx">
+              ${textoTrend}
+            </div>
 
-    +'<div class="c-btn">'
-    +'<button class="btn-act" id="btnsec-'+li+'" onclick="toggleSec('+li+')">▶ Secções</button>'
-    +'</div>'
+          </div>
 
-    +'</div>'
+        </div>
 
-    +'<div class="panel" id="hist-'+li+'">'
+        <div class="c-btn">
 
-    +'<div class="panel-inner">'
+          <button
+            class="btn-act"
+            id="btnhist-${li}"
+            onclick="toggleHist(${li})">
+            ▶ Histórico
+          </button>
 
-    +'<div class="panel-title">'
-    +'Histórico Semanal'
-    +'</div>'
+        </div>
 
-    +'<table class="detail-table">'
+        <div class="c-btn">
 
-    +'<thead>'
+          <button
+            class="btn-act"
+            id="btnsec-${li}"
+            onclick="toggleSec(${li})">
+            ▶ Secções
+          </button>
 
-    +'<tr>'
-    +'<th>Semana</th>'
-    +'<th>P Aberto</th>'
-    +'<th>P Fechado</th>'
-    +'<th>NP Aberto</th>'
-    +'<th>NP Fechado</th>'
-    +'</tr>'
+        </div>
 
-    +'</thead>'
+      </div>
 
-    +'<tbody>'
+      <div class="panel" id="hist-${li}">
 
-    +l.historico.map(h=>''
+        <div class="panel-inner">
 
-      +'<tr>'
-      +'<td>'+h.semana+'</td>'
-      +'<td>'+h.pA+'</td>'
-      +'<td>'+h.pF+'</td>'
-      +'<td>'+h.nA+'</td>'
-      +'<td>'+h.nF+'</td>'
-      +'</tr>'
+          <div class="panel-title">
+            Histórico Semanal
+          </div>
 
-    ).join('')
+          <table class="detail-table">
 
-    +'<tr class="current">'
-    +'<td>'+ultima+' (Atual)</td>'
-    +'<td>'+l.pA+'</td>'
-    +'<td>'+l.pF+'</td>'
-    +'<td>'+l.nA+'</td>'
-    +'<td>'+l.nF+'</td>'
-    +'</tr>'
+            <thead>
 
-    +'</tbody>'
+              <tr>
+                <th>Semana</th>
+                <th>P Aberto</th>
+                <th>P Fechado</th>
+                <th>NP Aberto</th>
+                <th>NP Fechado</th>
+              </tr>
 
-    +'</table>'
+            </thead>
 
-    +'</div>'
+            <tbody>
 
-    +'</div>'
+              ${l.historico.map(h=>`
 
-    +'<div class="panel" id="sec-'+li+'">'
+                <tr>
+                  <td>${h.semana}</td>
+                  <td>${h.pA}</td>
+                  <td>${h.pF}</td>
+                  <td>${h.nA}</td>
+                  <td>${h.nF}</td>
+                </tr>
 
-    +'<div class="panel-inner">'
+              `).join('')}
 
-    +'<div class="panel-title">'
-    +'Detalhe por Secções'
-    +'</div>'
+              <tr class="current">
 
-    +'<div class="sections-grid">'
+                <td>${ultima}</td>
+                <td>${l.pA}</td>
+                <td>${l.pF}</td>
+                <td>${l.nA}</td>
+                <td>${l.nF}</td>
 
-    +l.seccoes.map(s=>''
+              </tr>
 
-      +'<div class="sec-block">'
+            </tbody>
 
-      +'<div class="sec-head">'
-      +s.nome
-      +'</div>'
+          </table>
 
-      +'<div class="sec-body">'
+        </div>
 
-      +'<div class="sec-cat-title">'
-      +'Programadas'
-      +'</div>'
+      </div>
 
-      +'<div class="sec-metric">'
-      +'<span>Abertas</span>'
-      +'<strong>'+s.pA+' ('+s.pctPA+'%)</strong>'
-      +'</div>'
+      <div class="panel" id="sec-${li}">
 
-      +'<div class="bar">'
-      +'<div class="bar-fill bar-red" style="width:'+s.pctPA+'%"></div>'
-      +'</div>'
+        <div class="panel-inner">
 
-      +'<div class="sec-metric">'
-      +'<span>Fechadas</span>'
-      +'<strong>'+s.pF+' ('+s.pctPF+'%)</strong>'
-      +'</div>'
+          <div class="panel-title">
+            Detalhe por Secções
+          </div>
 
-      +'<div class="bar">'
-      +'<div class="bar-fill bar-green" style="width:'+s.pctPF+'%"></div>'
-      +'</div>'
+          <div class="sections-grid">
 
-      +'<div class="sec-cat-title">'
-      +'Não Programadas'
-      +'</div>'
+            ${l.seccoes.map(s=>`
 
-      +'<div class="sec-metric">'
-      +'<span>Abertas</span>'
-      +'<strong>'+s.nA+' ('+s.pctNA+'%)</strong>'
-      +'</div>'
+              <div class="sec-block">
 
-      +'<div class="bar">'
-      +'<div class="bar-fill bar-red" style="width:'+s.pctNA+'%"></div>'
-      +'</div>'
+                <div class="sec-head">
+                  ${s.nome}
+                </div>
 
-      +'<div class="sec-metric">'
-      +'<span>Fechadas</span>'
-      +'<strong>'+s.nF+' ('+s.pctNF+'%)</strong>'
-      +'</div>'
+                <div class="sec-body">
 
-      +'<div class="bar">'
-      +'<div class="bar-fill bar-green" style="width:'+s.pctNF+'%"></div>'
-      +'</div>'
+                  <div class="sec-cat-title">
+                    Programadas
+                  </div>
 
-      +'</div>'
+                  <div class="sec-metric">
+                    <span>Abertas</span>
+                    <strong>${s.pA} (${s.pctPA}%)</strong>
+                  </div>
 
-      +'</div>'
+                  <div class="bar">
+                    <div class="bar-fill bar-red" style="width:${s.pctPA}%"></div>
+                  </div>
 
-    ).join('')
+                  <div class="sec-metric">
+                    <span>Fechadas</span>
+                    <strong>${s.pF} (${s.pctPF}%)</strong>
+                  </div>
 
-    +'</div>'
+                  <div class="bar">
+                    <div class="bar-fill bar-green" style="width:${s.pctPF}%"></div>
+                  </div>
 
-    +'</div>'
+                  <div class="sec-cat-title">
+                    Não Programadas
+                  </div>
 
-    +'</div>'
+                  <div class="sec-metric">
+                    <span>Abertas</span>
+                    <strong>${s.nA} (${s.pctNA}%)</strong>
+                  </div>
 
-    +'</div>';
+                  <div class="bar">
+                    <div class="bar-fill bar-red" style="width:${s.pctNA}%"></div>
+                  </div>
+
+                  <div class="sec-metric">
+                    <span>Fechadas</span>
+                    <strong>${s.nF} (${s.pctNF}%)</strong>
+                  </div>
+
+                  <div class="bar">
+                    <div class="bar-fill bar-green" style="width:${s.pctNF}%"></div>
+                  </div>
+
+                </div>
+
+              </div>
+
+            `).join('')}
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    `;
 
   });
 
-  var nota=''
+  html += `
 
-  +'<div class="note">'
+  </div>
 
-  +'<strong>Legenda dos Níveis</strong><br><br>'
+  <div class="note">
 
-  +'🟢 <strong>N1</strong> → Até 20% de tarefas programadas abertas.<br>'
-  +'🟡 <strong>N2</strong> → Entre 21% e 40% de tarefas programadas abertas.<br>'
-  +'🔴 <strong>N3</strong> → Mais de 40% de tarefas programadas abertas.<br><br>'
+    <strong>Legenda:</strong><br><br>
 
-  +'▲ Vermelho = A loja tem deixado mais tarefas abertas ao longo do tempo.<br>'
-  +'▼ Verde = A loja tem deixado menos tarefas abertas ao longo do tempo.<br><br>'
+    <strong>P</strong> = Programadas<br>
+    <strong>NP</strong> = Não Programadas<br><br>
 
-  +'<strong>Legenda das Siglas</strong><br><br>'
+    <strong>N1</strong> → Até 20% de tarefas programadas abertas.<br>
+    <strong>N2</strong> → Entre 21% e 40% de tarefas programadas abertas.<br>
+    <strong>N3</strong> → Mais de 40% de tarefas programadas abertas.<br><br>
 
-  +'<strong>P</strong> = Programadas<br>'
-  +'<strong>NP</strong> = Não Programadas'
+    <strong>▲ Verde</strong> → A loja fechou mais tarefas programadas que na semana anterior.<br>
+    <strong>▼ Vermelho</strong> → A loja fechou menos tarefas programadas que na semana anterior.
 
-  +'</div>';
+  </div>
 
-  document.getElementById('app').innerHTML=
-    header+
-    rows+
-    '</div>'+
-    nota;
+  `;
+
+  document.getElementById('app').innerHTML = html;
 
 }
 
