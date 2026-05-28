@@ -16,13 +16,11 @@
   --muted:#808080;
 
   --green:#22c55e;
-  --red:#ef4444;
   --orange:#fb923c;
+  --red:#ef4444;
 
   --purple:#8b5cf6;
   --pink:#ec4899;
-
-  --bg:#fafafa;
 
   --grad:linear-gradient(135deg,#8b5cf6 0%,#ec4899 100%);
 }
@@ -64,9 +62,10 @@ body{
 }
 
 .header-logo{
-  width:52px;
-  height:52px;
+  width:54px;
+  height:54px;
   border-radius:14px;
+
   background:var(--grad);
 
   display:flex;
@@ -96,7 +95,6 @@ body{
 
   font-weight:800;
   color:var(--purple);
-  font-size:15px;
 }
 
 /* MAIN */
@@ -104,21 +102,18 @@ body{
 .main{
   max-width:2200px;
   margin:auto;
-  padding:24px;
+  padding:28px;
 }
 
-/* TOP */
+/* NOTE */
 
 .top-note{
   text-align:center;
   margin-bottom:24px;
-  font-size:15px;
-  color:#666;
-  line-height:1.8;
-}
 
-.top-note strong{
-  color:#000;
+  font-size:16px;
+  color:#555;
+  font-weight:600;
 }
 
 /* TABLE */
@@ -149,7 +144,6 @@ body{
     120px;
 
   background:#fafafa;
-
   border-bottom:1px solid var(--border);
 
   font-size:13px;
@@ -171,7 +165,6 @@ body{
 }
 
 .row-main{
-
   display:grid;
 
   grid-template-columns:
@@ -190,7 +183,7 @@ body{
 
   align-items:center;
 
-  padding:18px 10px;
+  padding:20px 10px;
 
   transition:.2s;
 }
@@ -221,15 +214,15 @@ body{
 }
 
 .rank-badge{
-  padding:6px 12px;
+  padding:5px 12px;
   border-radius:10px;
   font-size:12px;
   font-weight:800;
 }
 
-/* NOVA LÓGICA */
-/* N1 PIOR = vermelho */
-/* N3 MELHOR = verde */
+/* NOVOS NIVEIS */
+/* N1 = PIOR */
+/* N3 = MELHOR */
 
 .n1{
   background:rgba(239,68,68,.12);
@@ -254,7 +247,7 @@ body{
 }
 
 .loja strong{
-  font-size:20px;
+  font-size:22px;
 }
 
 .loja span{
@@ -262,36 +255,31 @@ body{
   font-size:14px;
 }
 
-/* LOCALIZAÇÃO */
+/* LOCAL */
 
-.localizacao{
-  flex-direction:column;
-  gap:6px;
-}
-
-.localizacao strong{
-  font-size:15px;
-  font-weight:700;
-}
-
-/* METRIC */
-
-.metric{
+.local{
   flex-direction:column;
   gap:8px;
 }
 
-/* PERCENTAGEM EM CIMA */
+.local strong{
+  font-size:18px;
+}
 
-.metric .percent{
+/* METRICS */
+
+.metric{
+  flex-direction:column;
+  gap:6px;
+}
+
+.metric-percent{
   font-size:15px;
   font-weight:800;
 }
 
-/* NUMERO EM BAIXO */
-
-.metric .number{
-  font-size:26px;
+.metric-number{
+  font-size:28px;
   font-weight:800;
 }
 
@@ -304,20 +292,19 @@ body{
 }
 
 .gray{
-  color:#777;
+  color:#666;
 }
 
 /* TREND */
 
 .trend{
   flex-direction:column;
-  gap:8px;
 }
 
 .trend-box{
   padding:12px;
   border-radius:14px;
-  min-width:140px;
+  min-width:150px;
 }
 
 .trend-positive{
@@ -341,9 +328,9 @@ body{
 }
 
 .trend-value{
-  font-size:22px;
+  font-size:24px;
   font-weight:800;
-  margin-top:6px;
+  margin-top:4px;
 }
 
 .trend-text{
@@ -359,7 +346,6 @@ body{
   background:#fff;
 
   border:1px solid rgba(139,92,246,.25);
-
   color:var(--purple);
 
   border-radius:12px;
@@ -369,10 +355,7 @@ body{
   cursor:pointer;
 
   font-weight:800;
-
   transition:.2s;
-
-  font-size:14px;
 }
 
 .btn:hover{
@@ -400,7 +383,9 @@ body{
 .detail-table{
   width:100%;
   border-collapse:collapse;
+
   background:#fff;
+
   border-radius:14px;
   overflow:hidden;
 }
@@ -410,12 +395,11 @@ body{
   padding:16px;
   border-bottom:1px solid var(--border);
   text-align:center;
-  font-size:15px;
 }
 
 .detail-table th{
   background:#fafafa;
-  font-size:14px;
+  font-size:13px;
   font-weight:800;
 }
 
@@ -424,7 +408,7 @@ body{
   font-weight:800;
 }
 
-/* SECTION */
+/* SECTIONS */
 
 .sections-grid{
   display:grid;
@@ -435,14 +419,15 @@ body{
 .section-card{
   border:1px solid var(--border);
   border-radius:16px;
-  background:#fff;
   overflow:hidden;
+  background:#fff;
 }
 
 .section-head{
   padding:16px;
   background:#fafafa;
   border-bottom:1px solid var(--border);
+
   font-size:18px;
   font-weight:800;
   text-align:center;
@@ -455,6 +440,7 @@ body{
 .sec-line{
   display:flex;
   justify-content:space-between;
+
   margin-bottom:10px;
   font-size:15px;
 }
@@ -477,17 +463,22 @@ body{
   background:var(--green);
 }
 
-/* NOTE */
+/* FOOT */
 
 .note{
   margin-top:26px;
+
   padding:22px;
+
   border-radius:18px;
+
   background:#fafafa;
   border:1px solid var(--border);
+
   text-align:center;
+
   line-height:2;
-  font-size:15px;
+  font-size:16px;
   color:#555;
 }
 
@@ -497,14 +488,13 @@ body{
 
 /* MOBILE */
 
-@media(max-width:1400px){
+@media(max-width:1500px){
 
   .table-header{
     display:none;
   }
 
   .row-main{
-    display:grid;
     grid-template-columns:repeat(2,1fr);
     gap:14px;
     padding:20px;
@@ -517,20 +507,10 @@ body{
     flex-direction:column;
   }
 
-  .loja{
-    grid-column:1/3;
-  }
-
-  .localizacao{
-    grid-column:1/3;
-  }
-
+  .loja,
+  .local,
   .trend{
     grid-column:1/3;
-  }
-
-  .btn{
-    width:100%;
   }
 
 }
@@ -539,7 +519,6 @@ body{
 
   .header{
     flex-direction:column;
-    align-items:center;
     text-align:center;
   }
 
@@ -556,7 +535,7 @@ body{
   }
 
   .loja,
-  .localizacao,
+  .local,
   .trend{
     grid-column:auto;
   }
@@ -636,8 +615,6 @@ function toggleSec(li){
 
 }
 
-/* LEITURA DO FICHEIRO DO GITHUB */
-
 fetch('dados.json?t=' + Date.now())
 
 .then(r => r.json())
@@ -678,32 +655,17 @@ fetch('dados.json?t=' + Date.now())
     var nA = Number(i['NP Aberto']) || 0;
     var nF = Number(i['NP Fechado']) || 0;
 
-    /* LOCALIZAÇÃO VINDA DO FICHEIRO */
+    var pctPF = pT > 0 ? (pF / pT * 100) : 0;
 
-    var localizacao =
-      i['Resumo contactos.Localidade']
-      || i['IM.Localidade']
-      || i['Localidade']
-      || '';
-
-    /* NOVO SISTEMA DE NÍVEL */
-    /* BASEADO EM TAREFAS FECHADAS */
-
-    var percentFechado =
-      pT > 0
-      ? (pF / pT) * 100
-      : 0;
+    /* NIVEL BASEADO EM FECHADAS */
 
     var nivel = 1;
 
-    /* N1 = PIOR */
-    /* N3 = MELHOR */
-
-    if(percentFechado >= 80){
+    if(pctPF >= 80){
 
       nivel = 3;
 
-    }else if(percentFechado >= 50){
+    }else if(pctPF >= 60){
 
       nivel = 2;
 
@@ -717,34 +679,22 @@ fetch('dados.json?t=' + Date.now())
 
       loja:String(i.Loja).trim(),
 
-      local:String(localizacao).trim(),
+      /* LOCALIZAÇÃO LIDA DO JSON */
+      local:String(
+        i['IM.Localidade']
+        || ''
+      ).trim(),
 
-      pT,pA,pF,
-      nT,nA,nF,
+      pT,pA,pF,nT,nA,nF,
 
       pctPT:'100.0',
-
-      pctPA:
-        pT > 0
-        ? (pA/pT*100).toFixed(1)
-        : '0.0',
-
-      pctPF:
-        pT > 0
-        ? (pF/pT*100).toFixed(1)
-        : '0.0',
-
       pctNT:'100.0',
 
-      pctNA:
-        nT > 0
-        ? (nA/nT*100).toFixed(1)
-        : '0.0',
+      pctPA:pT > 0 ? (pA/pT*100).toFixed(1) : '0.0',
+      pctPF:pT > 0 ? (pF/pT*100).toFixed(1) : '0.0',
 
-      pctNF:
-        nT > 0
-        ? (nF/nT*100).toFixed(1)
-        : '0.0',
+      pctNA:nT > 0 ? (nA/nT*100).toFixed(1) : '0.0',
+      pctNF:nT > 0 ? (nF/nT*100).toFixed(1) : '0.0',
 
       nivel:nivel,
 
@@ -755,9 +705,13 @@ fetch('dados.json?t=' + Date.now())
 
   });
 
-  /* ORDENAR PELAS FECHADAS */
+  /* MELHORES PRIMEIRO */
 
-  lojas.sort((a,b) => b.pF - a.pF);
+  lojas.sort((a,b) => {
+
+    return Number(b.pctPF) - Number(a.pctPF);
+
+  });
 
   var ids = {};
 
@@ -802,8 +756,7 @@ fetch('dados.json?t=' + Date.now())
 
     var h = hpl[l.loja] || [];
 
-    l.historico =
-      h
+    l.historico = h
       .filter(x => x.semana !== ultima)
       .slice(-8);
 
@@ -815,8 +768,6 @@ fetch('dados.json?t=' + Date.now())
       : 0;
 
   });
-
-  /* SECÇÕES */
 
   data.forEach(i => {
 
@@ -832,8 +783,7 @@ fetch('dados.json?t=' + Date.now())
 
       if(loja){
 
-        var nome =
-          String(i.Secção)
+        var nome = String(i.Secção)
           .replace(/^IM\s+\d+\s+/,'')
           .trim();
 
@@ -854,25 +804,11 @@ fetch('dados.json?t=' + Date.now())
 
             pA,pF,nA,nF,
 
-            pctPA:
-              pT > 0
-              ? (pA/pT*100).toFixed(1)
-              : '0.0',
+            pctPA:pT>0?(pA/pT*100).toFixed(1):'0.0',
+            pctPF:pT>0?(pF/pT*100).toFixed(1):'0.0',
 
-            pctPF:
-              pT > 0
-              ? (pF/pT*100).toFixed(1)
-              : '0.0',
-
-            pctNA:
-              nT > 0
-              ? (nA/nT*100).toFixed(1)
-              : '0.0',
-
-            pctNF:
-              nT > 0
-              ? (nF/nT*100).toFixed(1)
-              : '0.0'
+            pctNA:nT>0?(nA/nT*100).toFixed(1):'0.0',
+            pctNF:nT>0?(nF/nT*100).toFixed(1):'0.0'
 
           });
 
@@ -893,8 +829,6 @@ fetch('dados.json?t=' + Date.now())
   render(lojas,ultima);
 
 });
-
-/* RENDER */
 
 function render(lojas,ultima){
 
@@ -917,20 +851,17 @@ function render(lojas,ultima){
   html += '<div>NP Fechado</div>';
 
   html += '<div>Tendência</div>';
-
   html += '<div>Histórico</div>';
   html += '<div>Secções</div>';
 
   html += '</div>';
 
-  lojas.forEach((l,li)=>{
+  lojas.forEach((l,li) => {
 
     var badge =
-      l.nivel === 1
-      ? 'n1'
-      : l.nivel === 2
-      ? 'n2'
-      : 'n3';
+      l.nivel === 1 ? 'n1' :
+      l.nivel === 2 ? 'n2' :
+      'n3';
 
     var trendClass =
       l.diff > 0
@@ -960,164 +891,95 @@ function render(lojas,ultima){
     /* RANK */
 
     html += '<div class="cell rank">';
-
-    html += '<div class="rank-num">';
-    html += (li+1);
-    html += '</div>';
-
-    html += '<div class="rank-badge '+badge+'">';
-    html += 'N'+l.nivel;
-    html += '</div>';
-
+    html += '<div class="rank-num">' + (li+1) + '</div>';
+    html += '<div class="rank-badge ' + badge + '">N' + l.nivel + '</div>';
     html += '</div>';
 
     /* LOJA */
 
     html += '<div class="cell loja">';
-
-    html += '<strong>';
-    html += l.loja;
-    html += '</strong>';
-
+    html += '<strong>' + l.loja + '</strong>';
     html += '</div>';
 
     /* LOCALIZAÇÃO */
 
-    html += '<div class="cell localizacao">';
-
-    html += '<strong>';
-    html += l.local || '-';
-    html += '</strong>';
-
+    html += '<div class="cell local">';
+    html += '<strong>' + l.local + '</strong>';
     html += '</div>';
 
     /* P TOTAL */
 
     html += '<div class="cell metric">';
-
-    html += '<div class="percent gray">';
-    html += l.pctPT + '%';
-    html += '</div>';
-
-    html += '<div class="number gray">';
-    html += l.pT;
-    html += '</div>';
-
+    html += '<div class="metric-percent gray">' + l.pctPT + '%</div>';
+    html += '<div class="metric-number">' + l.pT + '</div>';
     html += '</div>';
 
     /* P ABERTO */
 
     html += '<div class="cell metric">';
-
-    html += '<div class="percent red">';
-    html += l.pctPA + '%';
-    html += '</div>';
-
-    html += '<div class="number red">';
-    html += l.pA;
-    html += '</div>';
-
+    html += '<div class="metric-percent red">' + l.pctPA + '%</div>';
+    html += '<div class="metric-number red">' + l.pA + '</div>';
     html += '</div>';
 
     /* P FECHADO */
 
     html += '<div class="cell metric">';
-
-    html += '<div class="percent green">';
-    html += l.pctPF + '%';
-    html += '</div>';
-
-    html += '<div class="number green">';
-    html += l.pF;
-    html += '</div>';
-
+    html += '<div class="metric-percent green">' + l.pctPF + '%</div>';
+    html += '<div class="metric-number green">' + l.pF + '</div>';
     html += '</div>';
 
     /* NP TOTAL */
 
     html += '<div class="cell metric">';
-
-    html += '<div class="percent gray">';
-    html += l.pctNT + '%';
-    html += '</div>';
-
-    html += '<div class="number gray">';
-    html += l.nT;
-    html += '</div>';
-
+    html += '<div class="metric-percent gray">' + l.pctNT + '%</div>';
+    html += '<div class="metric-number">' + l.nT + '</div>';
     html += '</div>';
 
     /* NP ABERTO */
 
     html += '<div class="cell metric">';
-
-    html += '<div class="percent red">';
-    html += l.pctNA + '%';
-    html += '</div>';
-
-    html += '<div class="number red">';
-    html += l.nA;
-    html += '</div>';
-
+    html += '<div class="metric-percent red">' + l.pctNA + '%</div>';
+    html += '<div class="metric-number red">' + l.nA + '</div>';
     html += '</div>';
 
     /* NP FECHADO */
 
     html += '<div class="cell metric">';
-
-    html += '<div class="percent green">';
-    html += l.pctNF + '%';
+    html += '<div class="metric-percent green">' + l.pctNF + '%</div>';
+    html += '<div class="metric-number green">' + l.nF + '</div>';
     html += '</div>';
 
-    html += '<div class="number green">';
-    html += l.nF;
-    html += '</div>';
-
-    html += '</div>';
-
-    /* TENDÊNCIA */
+    /* TREND */
 
     html += '<div class="cell trend">';
 
-    html += '<div class="trend-box '+trendClass+'">';
+    html += '<div class="trend-box ' + trendClass + '">';
 
-    html += '<div class="trend-icon '+color+'">';
+    html += '<div class="trend-icon ' + color + '">';
     html += icon;
     html += '</div>';
 
-    html += '<div class="trend-value '+color+'">';
+    html += '<div class="trend-value ' + color + '">';
     html += (l.diff > 0 ? '+' : '') + l.diff;
     html += '</div>';
 
     html += '<div class="trend-text">';
-
-    if(l.diff > 0){
-
-      html += 'Mais tarefas fechadas';
-
-    }else if(l.diff < 0){
-
-      html += 'Menos tarefas fechadas';
-
-    }else{
-
-      html += 'Sem alterações';
-
-    }
-
+    html += 'Comparação semanal';
     html += '</div>';
 
     html += '</div>';
 
     html += '</div>';
 
-    /* BOTÕES */
+    /* HIST */
 
     html += '<div class="cell">';
     html += '<button class="btn" onclick="toggleHist('+li+')">';
     html += 'Histórico';
     html += '</button>';
     html += '</div>';
+
+    /* SECCOES */
 
     html += '<div class="cell">';
     html += '<button class="btn" onclick="toggleSec('+li+')">';
@@ -1127,10 +989,9 @@ function render(lojas,ultima){
 
     html += '</div>';
 
-    /* HISTÓRICO */
+    /* HISTORICO */
 
     html += '<div class="panel" id="hist-'+li+'">';
-
     html += '<div class="panel-inner">';
 
     html += '<table class="detail-table">';
@@ -1151,15 +1012,15 @@ function render(lojas,ultima){
 
     html += '<tbody>';
 
-    l.historico.forEach(h=>{
+    l.historico.forEach(h => {
 
       html += '<tr>';
 
-      html += '<td>'+h.semana+'</td>';
-      html += '<td>'+h.pA+'</td>';
-      html += '<td>'+h.pF+'</td>';
-      html += '<td>'+h.nA+'</td>';
-      html += '<td>'+h.nF+'</td>';
+      html += '<td>' + h.semana + '</td>';
+      html += '<td>' + h.pA + '</td>';
+      html += '<td>' + h.pF + '</td>';
+      html += '<td>' + h.nA + '</td>';
+      html += '<td>' + h.nF + '</td>';
 
       html += '</tr>';
 
@@ -1167,11 +1028,11 @@ function render(lojas,ultima){
 
     html += '<tr class="current">';
 
-    html += '<td>'+ultima+'</td>';
-    html += '<td>'+l.pA+'</td>';
-    html += '<td>'+l.pF+'</td>';
-    html += '<td>'+l.nA+'</td>';
-    html += '<td>'+l.nF+'</td>';
+    html += '<td>' + ultima + '</td>';
+    html += '<td>' + l.pA + '</td>';
+    html += '<td>' + l.pF + '</td>';
+    html += '<td>' + l.nA + '</td>';
+    html += '<td>' + l.nF + '</td>';
 
     html += '</tr>';
 
@@ -1180,18 +1041,16 @@ function render(lojas,ultima){
     html += '</table>';
 
     html += '</div>';
-
     html += '</div>';
 
-    /* SECÇÕES */
+    /* SECCOES */
 
     html += '<div class="panel" id="sec-'+li+'">';
-
     html += '<div class="panel-inner">';
 
     html += '<div class="sections-grid">';
 
-    l.seccoes.forEach(s=>{
+    l.seccoes.forEach(s => {
 
       html += '<div class="section-card">';
 
@@ -1246,7 +1105,6 @@ function render(lojas,ultima){
     html += '</div>';
 
     html += '</div>';
-
     html += '</div>';
 
     html += '</div>';
@@ -1261,17 +1119,11 @@ function render(lojas,ultima){
 
   html += '<strong>Legenda dos níveis</strong><br><br>';
 
-  html += '<span style="color:#ef4444;font-weight:800">';
-  html += 'N1';
-  html += '</span> • Poucas tarefas fechadas (Pior desempenho)<br>';
+  html += '<span style="color:#ef4444;font-weight:800">N1</span> • Poucas tarefas fechadas<br>';
 
-  html += '<span style="color:#fb923c;font-weight:800">';
-  html += 'N2';
-  html += '</span> • Desempenho intermédio<br>';
+  html += '<span style="color:#fb923c;font-weight:800">N2</span> • Nível intermédio<br>';
 
-  html += '<span style="color:#22c55e;font-weight:800">';
-  html += 'N3';
-  html += '</span> • Muitas tarefas fechadas (Melhor desempenho)';
+  html += '<span style="color:#22c55e;font-weight:800">N3</span> • Muitas tarefas fechadas';
 
   html += '</div>';
 
