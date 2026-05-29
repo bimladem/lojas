@@ -110,6 +110,7 @@ body{
     120px
     120px
     120px
+    120px
     180px
     120px
     120px;
@@ -135,6 +136,7 @@ body{
   grid-template-columns:
     90px
     1.7fr
+    120px
     120px
     120px
     120px
@@ -641,8 +643,9 @@ function render(lojas,ultima){
   html+='<div>P Total</div>';
   html+='<div>P Aberto</div>';
   html+='<div>P Fechado</div>';
-  html+='<div>Não Realizadas</div>';
+  html+='<div>P Deixadas em Aberto</div>';
   html+='<div>NP Total</div>';
+  html+='<div>NP Aberto</div>';
   html+='<div>NP Fechado</div>';
   html+='<div>Tendência</div>';
   html+='<div>Histórico</div>';
@@ -704,6 +707,11 @@ function render(lojas,ultima){
 
     html+='<div class="cell metric">';
     html+='<span>'+l.nT+'</span>';
+    html+='</div>';
+
+    html+='<div class="cell metric">';
+    html+='<strong class="red">'+l.pctNA+'%</strong>';
+    html+='<span>'+l.nA+'</span>';
     html+='</div>';
 
     html+='<div class="cell metric">';
