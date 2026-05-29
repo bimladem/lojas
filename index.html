@@ -111,7 +111,7 @@ body{
     120px
     120px
     120px
-    200px
+    180px
     120px
     120px;
   background:#fafafa;
@@ -143,7 +143,7 @@ body{
     120px
     120px
     120px
-    200px
+    180px
     120px
     120px;
   align-items:center;
@@ -214,13 +214,19 @@ body{
 
 .metric strong{
   font-size:24px;
-  color:var(--text);
 }
 
 .metric span{
   font-size:14px;
   font-weight:700;
-  color:var(--text);
+}
+
+.red{
+  color:var(--red);
+}
+
+.green{
+  color:var(--green);
 }
 
 .gray{
@@ -229,7 +235,6 @@ body{
 
 .trend{
   flex-direction:column;
-  gap:8px;
 }
 
 .trend-box{
@@ -256,16 +261,8 @@ body{
 }
 
 .trend-value{
-  font-size:18px;
+  font-size:22px;
   font-weight:800;
-  color:var(--text);
-}
-
-.trend-label{
-  font-size:12px;
-  font-weight:700;
-  color:var(--text);
-  line-height:1.4;
 }
 
 .btn{
@@ -662,9 +659,9 @@ function render(lojas,ultima){
 
     var trendClass=
       l.diff>0
-      ?'trend-negative'
-      :l.diff<0
       ?'trend-positive'
+      :l.diff<0
+      ?'trend-negative'
       :'trend-neutral';
 
     var icon=
@@ -673,13 +670,6 @@ function render(lojas,ultima){
       :l.diff<0
       ?'▼'
       :'→';
-
-    var trendLabel=
-      l.diff>0
-      ?'Fechou menos tarefas que a semana passada'
-      :l.diff<0
-      ?'Fechou mais tarefas que a semana passada'
-      :'Igual à semana passada';
 
     html+='<div class="table-row">';
 
@@ -696,38 +686,37 @@ function render(lojas,ultima){
     html+='</div>';
 
     html+='<div class="cell metric">';
-    html+='<strong>'+l.pT+'</strong>';
+    html+='<span>'+l.pT+'</span>';
     html+='</div>';
 
     html+='<div class="cell metric">';
-    html+='<strong>'+l.pctPA+'%</strong>';
+    html+='<strong class="red">'+l.pctPA+'%</strong>';
     html+='<span>'+l.pA+'</span>';
     html+='</div>';
 
     html+='<div class="cell metric">';
-    html+='<strong>'+l.pctPF+'%</strong>';
+    html+='<strong class="green">'+l.pctPF+'%</strong>';
     html+='<span>'+l.pF+'</span>';
     html+='</div>';
 
     html+='<div class="cell metric">';
-    html+='<strong>'+l.pctNA+'%</strong>';
+    html+='<strong class="red">'+l.pctNA+'%</strong>';
     html+='<span>'+l.nA+'</span>';
     html+='</div>';
 
     html+='<div class="cell metric">';
-    html+='<strong>'+l.nT+'</strong>';
+    html+='<span>'+l.nT+'</span>';
     html+='</div>';
 
     html+='<div class="cell metric">';
-    html+='<strong>'+l.pctNF+'%</strong>';
+    html+='<strong class="green">'+l.pctNF+'%</strong>';
     html+='<span>'+l.nF+'</span>';
     html+='</div>';
 
     html+='<div class="cell trend">';
     html+='<div class="trend-box '+trendClass+'">';
     html+='<div class="trend-icon">'+icon+'</div>';
-    html+='<div class="trend-value">'+Math.abs(l.diff)+'</div>';
-    html+='<div class="trend-label">'+trendLabel+'</div>';
+    html+='<div class="trend-value">'+l.diff+'</div>';
     html+='</div>';
     html+='</div>';
 
