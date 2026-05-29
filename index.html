@@ -110,6 +110,7 @@ body{
     120px
     120px
     120px
+    120px
     200px
     120px
     120px;
@@ -136,6 +137,7 @@ body{
     90px
     220px
     180px
+    120px
     120px
     120px
     120px
@@ -427,7 +429,24 @@ body{
 
 <script>
 
+var stateHist = {};
 var stateSec = {};
+
+function toggleHist(li){
+
+  var p=document.getElementById('hist-'+li);
+
+  if(!p) return;
+
+  stateHist[li]=!stateHist[li];
+
+  if(stateHist[li]){
+    p.classList.add('visible');
+  }else{
+    p.classList.remove('visible');
+  }
+
+}
 
 function toggleSec(li){
 
@@ -516,6 +535,7 @@ fetch('dados.json?t='+Date.now())
 
           diff:0,
 
+          historico:[],
           seccoes:[]
 
         });
@@ -546,6 +566,8 @@ fetch('dados.json?t='+Date.now())
         Number(pen["P Fechado"] || 0);
 
     }
+
+    loja.historico=historico.slice(-8);
 
   });
 
@@ -590,11 +612,11 @@ fetch('dados.json?t='+Date.now())
   document.getElementById('periodo').innerHTML=
     '📅 '+ultima;
 
-  render(lojas);
+  render(lojas,ultima);
 
 });
 
-function render(lojas){
+function render(lojas,ultima){
 
   var html='';
 
@@ -607,11 +629,13 @@ function render(lojas){
   html+='<div>P Total</div>';
   html+='<div>P Aberto</div>';
   html+='<div>P Fechado</div>';
-  html+='<div>P Não Realizadas</div>';
+  html+='<div>P Deixadas em Aberto</div>';
   html+='<div>NP Total</div>';
   html+='<div>NP Aberto</div>';
+  html+='<div>NP Fechado</div>';
   html+='<div>Tendência</div>';
   html+='<div>Secções</div>';
+  html+='<div>Histórico</div>';
   html+='</div>';
 
   lojas.forEach((l,li)=>{
@@ -682,6 +706,11 @@ function render(lojas){
     html+='<strong class="red">'+l.nA+'</strong>';
     html+='</div>';
 
+    html+='<div class="cell metric">';
+    html+='<span class="green">'+l.pctNF+'%</span>';
+    html+='<strong class="green">'+l.nF+'</strong>';
+    html+='</div>';
+
     html+='<div class="cell trend">';
     html+='<div class="trend-box '+trendClass+'">';
     html+='<div class="trend-icon">'+icon+'</div>';
@@ -703,6 +732,12 @@ function render(lojas){
     html+='<div class="cell">';
     html+='<button class="btn" onclick="toggleSec('+li+')">';
     html+='Secções';
+    html+='</button>';
+    html+='</div>';
+
+    html+='<div class="cell">';
+    html+='<button class="btn" onclick="toggleHist('+li+')">';
+    html+='Histórico';
     html+='</button>';
     html+='</div>';
 
@@ -766,6 +801,36 @@ function render(lojas){
 
     html+='</div>';
     html+='</div>';
+
+    html+='<div class="panel" id="hist-'+li+'">';
+    html+='<div class="panel-inner">';
+
+    html+='<table style="width:100%;border-collapse:collapse;background:#fff;">';
+
+    html+='<thead>';
+    html+='<tr>';
+    html+='<th style="padding:14px;border-bottom:1px solid var(--border);text-align:center;font-size:14px;font-weight:800;color:#666;text-transform:uppercase;">Semana</th>';
+    html+='<th style="padding:14px;border-bottom:1px solid var(--border);text-align:center;font-size:14px;font-weight:800;color:#666;text-transform:uppercase;">P Fechado</th>';
+    html+='</tr>';
+    html+='</thead>';
+
+    html+='<tbody>';
+
+    l.historico.forEach(h=>{
+
+      html+='<tr>';
+      html+='<td style="padding:14px;border-bottom:1px solid var(--border);text-align:center;">'+h.Semana+'</td>';
+      html+='<td style="padding:14px;border-bottom:1px solid var(--border);text-align:center;font-weight:800;">'+Number(h["P Fechado"]||0)+'</td>';
+      html+='</tr>';
+
+    });
+
+    html+='</tbody>';
+    html+='</table>';
+
+    html+='</div>';
+    html+='</div>';
+
     html+='</div>';
 
     html+='</div>';
