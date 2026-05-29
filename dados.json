@@ -2,7 +2,7 @@
   "data": [
     {
       "Loja": "IM 07593",
-      "Secção": "",
+      "Secção": "IM 01006 Admin",
       "Semana": "24-31 Ago",
       "Resumo contactos.Localidade": "Cerro Grande",
       "P Total": 657,
@@ -16,7 +16,7 @@
     },
     {
       "Loja": "IM 08937",
-      "Secção": "",
+      "Secção": "IM 01006 Armazém",
       "Semana": "24-31 Ago",
       "Resumo contactos.Localidade": "Praia da Rocha",
       "P Total": 694,
@@ -30,7 +30,7 @@
     },
     {
       "Loja": "IM 06754",
-      "Secção": "",
+      "Secção": "IM 01006 Bar e cafetaria",
       "Semana": "24-31 Ago",
       "Resumo contactos.Localidade": "Terras de Bouro",
       "P Total": 1448,
@@ -44,7 +44,7 @@
     },
     {
       "Loja": "IM 06726",
-      "Secção": "",
+      "Secção": "IM 01006 Charcutaria e queijo",
       "Semana": "24-31 Ago",
       "Resumo contactos.Localidade": "Vila Viçosa",
       "P Total": 1363,
@@ -58,7 +58,7 @@
     },
     {
       "Loja": "IM 06859",
-      "Secção": "",
+      "Secção": "IM 01006 Frescos LS",
       "Semana": "24-31 Ago",
       "Resumo contactos.Localidade": "Sta Eulália",
       "P Total": 726,
@@ -72,7 +72,7 @@
     },
     {
       "Loja": "IM 07348",
-      "Secção": "",
+      "Secção": "IM 01006 Frutas e legumes",
       "Semana": "24-31 Ago",
       "Resumo contactos.Localidade": "Famões",
       "P Total": 1804,
@@ -86,7 +86,7 @@
     },
     {
       "Loja": "IM 05175",
-      "Secção": "",
+      "Secção": "IM 01006 Manutenção",
       "Semana": "24-31 Ago",
       "Resumo contactos.Localidade": "Chamusca",
       "P Total": 1251,
@@ -100,7 +100,7 @@
     },
     {
       "Loja": "IM 05940",
-      "Secção": "",
+      "Secção": "IM 01006 Padaria",
       "Semana": "24-31 Ago",
       "Resumo contactos.Localidade": "Reguengos",
       "P Total": 1504,
@@ -114,7 +114,7 @@
     },
     {
       "Loja": "IM 08274",
-      "Secção": "",
+      "Secção": "IM 01006 Peixaria",
       "Semana": "24-31 Ago",
       "Resumo contactos.Localidade": "Portimão",
       "P Total": 1895,
@@ -128,7 +128,7 @@
     },
     {
       "Loja": "IM 09712",
-      "Secção": "",
+      "Secção": "IM 01006 Pronto a comer",
       "Semana": "24-31 Ago",
       "Resumo contactos.Localidade": "Seia",
       "P Total": 1287,
@@ -142,7 +142,7 @@
     },
     {
       "Loja": "IM 05285",
-      "Secção": "",
+      "Secção": "IM 01006 Reposição",
       "Semana": "24-31 Ago",
       "Resumo contactos.Localidade": "Vila Flôr",
       "P Total": 1021,
@@ -156,7 +156,7 @@
     },
     {
       "Loja": "IM 05047",
-      "Secção": "",
+      "Secção": "IM 01006 Talho",
       "Semana": "24-31 Ago",
       "Resumo contactos.Localidade": "São Domingos de Rana",
       "P Total": 1713,
@@ -170,7 +170,7 @@
     },
     {
       "Loja": "IM 12037",
-      "Secção": "",
+      "Secção": "IM 01209 Admin",
       "Semana": "24-31 Ago",
       "Resumo contactos.Localidade": "Baião",
       "P Total": 856,
@@ -184,7 +184,7 @@
     },
     {
       "Loja": "IM 06859",
-      "Secção": "",
+      "Secção": "IM 01209 Armazém",
       "Semana": "31-06 set",
       "Resumo contactos.Localidade": "Sta Eulália",
       "P Total": 739,
@@ -198,7 +198,7 @@
     },
     {
       "Loja": "IM 07593",
-      "Secção": "",
+      "Secção": "IM 01209 Bar e cafetaria",
       "Semana": "31-06 set",
       "Resumo contactos.Localidade": "Cerro Grande",
       "P Total": 668,
@@ -212,7 +212,7 @@
     },
     {
       "Loja": "IM 05940",
-      "Secção": "",
+      "Secção": "IM 01209 Charcutaria e queijo",
       "Semana": "31-06 set",
       "Resumo contactos.Localidade": "Reguengos",
       "P Total": 1532,
@@ -226,7 +226,7 @@
     },
     {
       "Loja": "IM 07348",
-      "Secção": "",
+      "Secção": "IM 01209 Frescos LS",
       "Semana": "31-06 set",
       "Resumo contactos.Localidade": "Famões",
       "P Total": 1823,
@@ -240,7 +240,7 @@
     },
     {
       "Loja": "IM 10949",
-      "Secção": "",
+      "Secção": "IM 01209 Frutas e legumes",
       "Semana": "31-06 set",
       "Resumo contactos.Localidade": "Sines",
       "P Total": 1448,
@@ -254,7 +254,7 @@
     },
     {
       "Loja": "IM 11739",
-      "Secção": "",
+      "Secção": "IM 01209 Padaria",
       "Semana": "31-06 set",
       "Resumo contactos.Localidade": "Mação",
       "P Total": 1913,
@@ -268,7 +268,7 @@
     },
     {
       "Loja": "IM 07397",
-      "Secção": "",
+      "Secção": "IM 01209 Peixaria",
       "Semana": "31-06 set",
       "Resumo contactos.Localidade": "Bombarral",
       "P Total": 966,
@@ -282,7 +282,7 @@
     },
     {
       "Loja": "IM 08274",
-      "Secção": "",
+      "Secção": "IM 01209 Pronto a comer",
       "Semana": "31-06 set",
       "Resumo contactos.Localidade": "Portimão",
       "P Total": 1914,
@@ -296,7 +296,7 @@
     },
     {
       "Loja": "IM 01266",
-      "Secção": "",
+      "Secção": "IM 01209 Talho",
       "Semana": "31-06 set",
       "Resumo contactos.Localidade": "Vila Nova Poiares",
       "P Total": 1188,
@@ -310,7 +310,7 @@
     },
     {
       "Loja": "IM 09064",
-      "Secção": "",
+      "Secção": "IM 01210 Admin",
       "Semana": "31-06 set",
       "Resumo contactos.Localidade": "Marinha da Guia",
       "P Total": 1424,
@@ -324,7 +324,7 @@
     },
     {
       "Loja": "IM 07626",
-      "Secção": "",
+      "Secção": "IM 01210 Armazém",
       "Semana": "31-06 set",
       "Resumo contactos.Localidade": "Merceana",
       "P Total": 954,
@@ -338,7 +338,7 @@
     },
     {
       "Loja": "IM 06858",
-      "Secção": "",
+      "Secção": "IM 01210 Bar e cafetaria",
       "Semana": "31-06 set",
       "Resumo contactos.Localidade": "Monchique",
       "P Total": 1275,
@@ -352,7 +352,7 @@
     },
     {
       "Loja": "IM 06726",
-      "Secção": "",
+      "Secção": "IM 01210 Charcutaria e queijo",
       "Semana": "31-06 set",
       "Resumo contactos.Localidade": "Vila Viçosa",
       "P Total": 1398,
@@ -366,7 +366,7 @@
     },
     {
       "Loja": "IM 12037",
-      "Secção": "",
+      "Secção": "IM 01210 Frescos LS",
       "Semana": "31-06 set",
       "Resumo contactos.Localidade": "Baião",
       "P Total": 845,
@@ -380,7 +380,7 @@
     },
     {
       "Loja": "IM 06859",
-      "Secção": "",
+      "Secção": "IM 01210 Frutas e legumes",
       "Semana": "07-13 set",
       "Resumo contactos.Localidade": "Sta Eulália",
       "P Total": 726,
@@ -394,7 +394,7 @@
     },
     {
       "Loja": "IM 07593",
-      "Secção": "",
+      "Secção": "IM 01210 Padaria",
       "Semana": "07-13 set",
       "Resumo contactos.Localidade": "Cerro Grande",
       "P Total": 657,
@@ -408,7 +408,7 @@
     },
     {
       "Loja": "IM 05940",
-      "Secção": "",
+      "Secção": "IM 01210 Peixaria",
       "Semana": "07-13 set",
       "Resumo contactos.Localidade": "Reguengos",
       "P Total": 1511,
@@ -422,7 +422,7 @@
     },
     {
       "Loja": "IM 07348",
-      "Secção": "",
+      "Secção": "IM 01210 Pronto a comer",
       "Semana": "07-13 set",
       "Resumo contactos.Localidade": "Famões",
       "P Total": 1804,
@@ -436,7 +436,7 @@
     },
     {
       "Loja": "IM 06726",
-      "Secção": "",
+      "Secção": "IM 01210 Talho",
       "Semana": "07-13 set",
       "Resumo contactos.Localidade": "Vila Viçosa",
       "P Total": 1332,
@@ -450,7 +450,7 @@
     },
     {
       "Loja": "IM 07626",
-      "Secção": "",
+      "Secção": "IM 01266 Admin",
       "Semana": "07-13 set",
       "Resumo contactos.Localidade": "Merceana",
       "P Total": 945,
@@ -464,7 +464,7 @@
     },
     {
       "Loja": "IM 08274",
-      "Secção": "",
+      "Secção": "IM 01266 Armazém",
       "Semana": "07-13 set",
       "Resumo contactos.Localidade": "Portimão",
       "P Total": 1895,
@@ -478,7 +478,7 @@
     },
     {
       "Loja": "IM 07397",
-      "Secção": "",
+      "Secção": "IM 01266 Bar e cafetaria",
       "Semana": "07-13 set",
       "Resumo contactos.Localidade": "Bombarral",
       "P Total": 957,
@@ -492,7 +492,7 @@
     },
     {
       "Loja": "IM 10949",
-      "Secção": "",
+      "Secção": "IM 01266 Charcutaria e queijo",
       "Semana": "07-13 set",
       "Resumo contactos.Localidade": "Sines",
       "P Total": 1327,
@@ -506,7 +506,7 @@
     },
     {
       "Loja": "IM 10742",
-      "Secção": "",
+      "Secção": "IM 01266 Frescos LS",
       "Semana": "07-13 set",
       "Resumo contactos.Localidade": "Monção",
       "P Total": 1652,
@@ -520,7 +520,7 @@
     },
     {
       "Loja": "IM 11929",
-      "Secção": "",
+      "Secção": "IM 01266 Frutas e legumes",
       "Semana": "07-13 set",
       "Resumo contactos.Localidade": "São Brás de Alportel",
       "P Total": 964,
@@ -534,7 +534,7 @@
     },
     {
       "Loja": "IM 01425",
-      "Secção": "",
+      "Secção": "IM 01266 Padaria",
       "Semana": "07-13 set",
       "Resumo contactos.Localidade": "Amarante",
       "P Total": 1119,
@@ -548,7 +548,7 @@
     },
     {
       "Loja": "IM 12037",
-      "Secção": "",
+      "Secção": "IM 01266 Peixaria",
       "Semana": "07-13 set",
       "Resumo contactos.Localidade": "Baião",
       "P Total": 863,
@@ -562,7 +562,7 @@
     },
     {
       "Loja": "IM 12037",
-      "Secção": "",
+      "Secção": "IM 01266 Pronto a comer",
       "Semana": "14-20set",
       "Resumo contactos.Localidade": "Baião",
       "P Total": 834,
@@ -576,7 +576,7 @@
     },
     {
       "Loja": "IM 06859",
-      "Secção": "",
+      "Secção": "IM 01266 Talho",
       "Semana": "14-20set",
       "Resumo contactos.Localidade": "Sta Eulália",
       "P Total": 726,
@@ -590,7 +590,7 @@
     },
     {
       "Loja": "IM 07593",
-      "Secção": "",
+      "Secção": "IM 01316 Admin",
       "Semana": "14-20set",
       "Resumo contactos.Localidade": "Cerro Grande",
       "P Total": 657,
@@ -604,7 +604,7 @@
     },
     {
       "Loja": "IM 07348",
-      "Secção": "",
+      "Secção": "IM 01316 Armazém",
       "Semana": "14-20set",
       "Resumo contactos.Localidade": "Famões",
       "P Total": 1806,
@@ -618,7 +618,7 @@
     },
     {
       "Loja": "IM 08274",
-      "Secção": "",
+      "Secção": "IM 01316 Bar e cafetaria",
       "Semana": "14-20set",
       "Resumo contactos.Localidade": "Portimão",
       "P Total": 1895,
@@ -632,7 +632,7 @@
     },
     {
       "Loja": "IM 10949",
-      "Secção": "",
+      "Secção": "IM 01316 Charcutaria e queijo",
       "Semana": "14-20set",
       "Resumo contactos.Localidade": "Sines",
       "P Total": 1434,
@@ -646,7 +646,7 @@
     },
     {
       "Loja": "IM 09064",
-      "Secção": "",
+      "Secção": "IM 01316 Frescos LS",
       "Semana": "14-20set",
       "Resumo contactos.Localidade": "Marinha da Guia",
       "P Total": 1410,
@@ -660,7 +660,7 @@
     },
     {
       "Loja": "IM 06726",
-      "Secção": "",
+      "Secção": "IM 01316 Frutas e legumes",
       "Semana": "14-20set",
       "Resumo contactos.Localidade": "Vila Viçosa",
       "P Total": 1358,
@@ -674,7 +674,7 @@
     },
     {
       "Loja": "IM 05940",
-      "Secção": "",
+      "Secção": "IM 01316 Padaria",
       "Semana": "14-20set",
       "Resumo contactos.Localidade": "Reguengos",
       "P Total": 1432,
@@ -688,7 +688,7 @@
     },
     {
       "Loja": "IM 09697",
-      "Secção": "",
+      "Secção": "IM 01316 Peixaria",
       "Semana": "14-20set",
       "Resumo contactos.Localidade": "Évora II",
       "P Total": 1519,
@@ -702,7 +702,7 @@
     },
     {
       "Loja": "IM 08274",
-      "Secção": "",
+      "Secção": "IM 01316 Talho",
       "Semana": "21-27 set",
       "Resumo contactos.Localidade": "Portimão",
       "P Total": 1895,
@@ -716,7 +716,7 @@
     },
     {
       "Loja": "IM 07348",
-      "Secção": "",
+      "Secção": "IM 01425 Admin",
       "Semana": "21-27 set",
       "Resumo contactos.Localidade": "Famões",
       "P Total": 1804,
@@ -730,7 +730,7 @@
     },
     {
       "Loja": "IM 06859",
-      "Secção": "",
+      "Secção": "IM 01425 Armazém",
       "Semana": "21-27 set",
       "Resumo contactos.Localidade": "Sta Eulália",
       "P Total": 237,
@@ -744,7 +744,7 @@
     },
     {
       "Loja": "IM 07626",
-      "Secção": "",
+      "Secção": "IM 01425 Bar e cafetaria",
       "Semana": "21-27 set",
       "Resumo contactos.Localidade": "Merceana",
       "P Total": 953,
@@ -758,7 +758,7 @@
     },
     {
       "Loja": "IM 10949",
-      "Secção": "",
+      "Secção": "IM 01425 Charcutaria e queijo",
       "Semana": "21-27 set",
       "Resumo contactos.Localidade": "Sines",
       "P Total": 1435,
@@ -772,7 +772,7 @@
     },
     {
       "Loja": "IM 01266",
-      "Secção": "",
+      "Secção": "IM 01425 Frescos LS",
       "Semana": "21-27 set",
       "Resumo contactos.Localidade": "Vila Nova Poiares",
       "P Total": 1159,
@@ -786,7 +786,7 @@
     },
     {
       "Loja": "IM 09697",
-      "Secção": "",
+      "Secção": "IM 01425 Frutas e legumes",
       "Semana": "21-27 set",
       "Resumo contactos.Localidade": "Évora II",
       "P Total": 1520,
@@ -800,7 +800,7 @@
     },
     {
       "Loja": "IM 09064",
-      "Secção": "",
+      "Secção": "IM 01425 Padaria",
       "Semana": "21-27 set",
       "Resumo contactos.Localidade": "Marinha da Guia",
       "P Total": 1414,
@@ -814,7 +814,7 @@
     },
     {
       "Loja": "IM 12037",
-      "Secção": "",
+      "Secção": "IM 01425 Peixaria",
       "Semana": "21-27 set",
       "Resumo contactos.Localidade": "Baião",
       "P Total": 857,
@@ -828,7 +828,7 @@
     },
     {
       "Loja": "IM 07593",
-      "Secção": "",
+      "Secção": "IM 01425 Pronto a comer",
       "Semana": "28 set - 04 out",
       "Resumo contactos.Localidade": "Cerro Grande",
       "P Total": 663,
@@ -842,7 +842,7 @@
     },
     {
       "Loja": "IM 08274",
-      "Secção": "",
+      "Secção": "IM 01425 Talho",
       "Semana": "28 set - 04 out",
       "Resumo contactos.Localidade": "Portimão",
       "P Total": 1902,
@@ -856,7 +856,7 @@
     },
     {
       "Loja": "IM 12037",
-      "Secção": "",
+      "Secção": "IM 01540 Admin",
       "Semana": "28 set - 04 out",
       "Resumo contactos.Localidade": "Baião",
       "P Total": 842,
@@ -870,7 +870,7 @@
     },
     {
       "Loja": "IM 07348",
-      "Secção": "",
+      "Secção": "IM 01540 Armazém",
       "Semana": "28 set - 04 out",
       "Resumo contactos.Localidade": "Famões",
       "P Total": 1812,
@@ -884,7 +884,7 @@
     },
     {
       "Loja": "IM 10949",
-      "Secção": "",
+      "Secção": "IM 01540 Bar e cafetaria",
       "Semana": "28 set - 04 out",
       "Resumo contactos.Localidade": "Sines",
       "P Total": 1442,
@@ -898,7 +898,7 @@
     },
     {
       "Loja": "IM 09697",
-      "Secção": "",
+      "Secção": "IM 01540 Charcutaria e queijo",
       "Semana": "28 set - 04 out",
       "Resumo contactos.Localidade": "Évora II",
       "P Total": 1528,
@@ -912,7 +912,7 @@
     },
     {
       "Loja": "IM 09064",
-      "Secção": "",
+      "Secção": "IM 01540 Frescos LS",
       "Semana": "28 set - 04 out",
       "Resumo contactos.Localidade": "Marinha da Guia",
       "P Total": 1419,
@@ -926,7 +926,7 @@
     },
     {
       "Loja": "IM 05940",
-      "Secção": "",
+      "Secção": "IM 01540 Frutas e legumes",
       "Semana": "28 set - 04 out",
       "Resumo contactos.Localidade": "Reguengos",
       "P Total": 1517,
@@ -940,7 +940,7 @@
     },
     {
       "Loja": "IM 07626",
-      "Secção": "",
+      "Secção": "IM 01540 Padaria",
       "Semana": "28 set - 04 out",
       "Resumo contactos.Localidade": "Merceana",
       "P Total": 957,
@@ -954,7 +954,7 @@
     },
     {
       "Loja": "IM 04599",
-      "Secção": "",
+      "Secção": "IM 01540 Peixaria",
       "Semana": "28 set - 04 out",
       "Resumo contactos.Localidade": "Amares",
       "P Total": 1524,
@@ -968,7 +968,7 @@
     },
     {
       "Loja": "IM 07593",
-      "Secção": "",
+      "Secção": "IM 01540 Pronto a comer",
       "Semana": "05 a 11 out",
       "Resumo contactos.Localidade": "Cerro Grande",
       "P Total": 663,
@@ -982,7 +982,7 @@
     },
     {
       "Loja": "IM 08274",
-      "Secção": "",
+      "Secção": "IM 01540 Talho",
       "Semana": "05 a 11 out",
       "Resumo contactos.Localidade": "Portimão",
       "P Total": 1902,
@@ -996,7 +996,7 @@
     },
     {
       "Loja": "IM 12037",
-      "Secção": "",
+      "Secção": "IM 01561 Admin",
       "Semana": "05 a 11 out",
       "Resumo contactos.Localidade": "Baião",
       "P Total": 842,
@@ -1010,7 +1010,7 @@
     },
     {
       "Loja": "IM 07348",
-      "Secção": "",
+      "Secção": "IM 01561 Armazém",
       "Semana": "05 a 11 out",
       "Resumo contactos.Localidade": "Famões",
       "P Total": 1812,
@@ -1024,7 +1024,7 @@
     },
     {
       "Loja": "IM 10949",
-      "Secção": "",
+      "Secção": "IM 01561 Bar e cafetaria",
       "Semana": "05 a 11 out",
       "Resumo contactos.Localidade": "Sines",
       "P Total": 1442,
@@ -1038,7 +1038,7 @@
     },
     {
       "Loja": "IM 09697",
-      "Secção": "",
+      "Secção": "IM 01561 Charcutaria e queijo",
       "Semana": "05 a 11 out",
       "Resumo contactos.Localidade": "Évora II",
       "P Total": 1528,
@@ -1052,7 +1052,7 @@
     },
     {
       "Loja": "IM 09064",
-      "Secção": "",
+      "Secção": "IM 01561 Frescos LS",
       "Semana": "05 a 11 out",
       "Resumo contactos.Localidade": "Marinha da Guia",
       "P Total": 1419,
@@ -1066,7 +1066,7 @@
     },
     {
       "Loja": "IM 05940",
-      "Secção": "",
+      "Secção": "IM 01561 Frutas e legumes",
       "Semana": "05 a 11 out",
       "Resumo contactos.Localidade": "Reguengos",
       "P Total": 1517,
@@ -1080,7 +1080,7 @@
     },
     {
       "Loja": "IM 07626",
-      "Secção": "",
+      "Secção": "IM 01561 Padaria",
       "Semana": "05 a 11 out",
       "Resumo contactos.Localidade": "Merceana",
       "P Total": 957,
@@ -1094,7 +1094,7 @@
     },
     {
       "Loja": "IM 04599",
-      "Secção": "",
+      "Secção": "IM 01561 Peixaria",
       "Semana": "05 a 11 out",
       "Resumo contactos.Localidade": "Amares",
       "P Total": 1524,
@@ -1108,7 +1108,7 @@
     },
     {
       "Loja": "IM 12037",
-      "Secção": "",
+      "Secção": "IM 01561 Pronto a comer",
       "Semana": "12 a 18 out",
       "Resumo contactos.Localidade": "Baião",
       "P Total": 1233,
@@ -1122,7 +1122,7 @@
     },
     {
       "Loja": "IM 07348",
-      "Secção": "",
+      "Secção": "IM 01561 Restaurante",
       "Semana": "12 a 18 out",
       "Resumo contactos.Localidade": "Famões",
       "P Total": 2600,
@@ -1136,7 +1136,7 @@
     },
     {
       "Loja": "IM 08274",
-      "Secção": "",
+      "Secção": "IM 01561 Talho",
       "Semana": "12 a 18 out",
       "Resumo contactos.Localidade": "Portimão",
       "P Total": 2716,
@@ -1150,7 +1150,7 @@
     },
     {
       "Loja": "IM 09064",
-      "Secção": "",
+      "Secção": "IM 01615 Admin",
       "Semana": "12 a 18 out",
       "Resumo contactos.Localidade": "Marinha da Guia",
       "P Total": 2032,
@@ -1164,7 +1164,7 @@
     },
     {
       "Loja": "IM 05940",
-      "Secção": "",
+      "Secção": "IM 01615 Armazém",
       "Semana": "12 a 18 out",
       "Resumo contactos.Localidade": "Reguengos",
       "P Total": 1989,
@@ -1178,7 +1178,7 @@
     },
     {
       "Loja": "IM 06858",
-      "Secção": "",
+      "Secção": "IM 01615 Bar e cafetaria",
       "Semana": "12 a 18 out",
       "Resumo contactos.Localidade": "Monchique",
       "P Total": 1809,
@@ -1192,7 +1192,7 @@
     },
     {
       "Loja": "IM 07006",
-      "Secção": "",
+      "Secção": "IM 01615 Charcutaria e queijo",
       "Semana": "12 a 18 out",
       "Resumo contactos.Localidade": "Redondo",
       "P Total": 1959,
@@ -1206,7 +1206,7 @@
     },
     {
       "Loja": "IM 12037",
-      "Secção": "",
+      "Secção": "IM 01615 Frescos LS",
       "Semana": "19 a 25 out",
       "Resumo contactos.Localidade": "Baião",
       "P Total": 857,
@@ -1220,7 +1220,7 @@
     },
     {
       "Loja": "IM 07348",
-      "Secção": "",
+      "Secção": "IM 01615 Frutas e legumes",
       "Semana": "19 a 25 out",
       "Resumo contactos.Localidade": "Famões",
       "P Total": 1806,
@@ -1234,7 +1234,7 @@
     },
     {
       "Loja": "IM 08274",
-      "Secção": "",
+      "Secção": "IM 01615 Padaria",
       "Semana": "19 a 25 out",
       "Resumo contactos.Localidade": "Portimão",
       "P Total": 1895,
@@ -1248,7 +1248,7 @@
     },
     {
       "Loja": "IM 05940",
-      "Secção": "",
+      "Secção": "IM 01615 Peixaria",
       "Semana": "19 a 25 out",
       "Resumo contactos.Localidade": "Reguengos",
       "P Total": 1327,
@@ -1262,7 +1262,7 @@
     },
     {
       "Loja": "IM 01266",
-      "Secção": "",
+      "Secção": "IM 01615 Pronto a comer",
       "Semana": "19 a 25 out",
       "Resumo contactos.Localidade": "Vila Nova Poiares",
       "P Total": 1159,
@@ -1276,7 +1276,7 @@
     },
     {
       "Loja": "IM 06726",
-      "Secção": "",
+      "Secção": "IM 01615 Talho",
       "Semana": "19 a 25 out",
       "Resumo contactos.Localidade": "Vila Viçosa",
       "P Total": 1363,
@@ -1290,7 +1290,7 @@
     },
     {
       "Loja": "IM 07348",
-      "Secção": "",
+      "Secção": "IM 01708 Admin",
       "Semana": "26 a 1 nov",
       "Resumo contactos.Localidade": "Famões",
       "P Total": 1812,
@@ -1304,7 +1304,7 @@
     },
     {
       "Loja": "IM 05285",
-      "Secção": "",
+      "Secção": "IM 01708 Bar e cafetaria",
       "Semana": "26 a 1 nov",
       "Resumo contactos.Localidade": "Vila Flôr",
       "P Total": 1022,
@@ -1318,7 +1318,7 @@
     },
     {
       "Loja": "IM 06789",
-      "Secção": "",
+      "Secção": "IM 01708 Charcutaria e queijo",
       "Semana": "26 a 1 nov",
       "Resumo contactos.Localidade": "Trofa",
       "P Total": 1042,
@@ -1332,7 +1332,7 @@
     },
     {
       "Loja": "IM 08274",
-      "Secção": "",
+      "Secção": "IM 01708 Frescos LS",
       "Semana": "26 a 1 nov",
       "Resumo contactos.Localidade": "Portimão",
       "P Total": 1902,
@@ -1346,7 +1346,7 @@
     },
     {
       "Loja": "IM 07626",
-      "Secção": "",
+      "Secção": "IM 01708 Frutas e legumes",
       "Semana": "02 a 08 nov",
       "Resumo contactos.Localidade": "Merceana",
       "P Total": 945,
@@ -1360,7 +1360,7 @@
     },
     {
       "Loja": "IM 10010",
-      "Secção": "",
+      "Secção": "IM 01708 Padaria",
       "Semana": "02 a 08 nov",
       "Resumo contactos.Localidade": "Alfena",
       "P Total": 1361,
@@ -1374,7 +1374,7 @@
     },
     {
       "Loja": "IM 07348",
-      "Secção": "",
+      "Secção": "IM 01708 Peixaria",
       "Semana": "02 a 08 nov",
       "Resumo contactos.Localidade": "Famões",
       "P Total": 1815,
@@ -1388,7 +1388,7 @@
     },
     {
       "Loja": "IM 08274",
-      "Secção": "",
+      "Secção": "IM 01708 Pronto a comer",
       "Semana": "02 a 08 nov",
       "Resumo contactos.Localidade": "Portimão",
       "P Total": 1907,
@@ -1402,7 +1402,7 @@
     },
     {
       "Loja": "IM 06789",
-      "Secção": "",
+      "Secção": "IM 01708 Talho",
       "Semana": "02 a 08 nov",
       "Resumo contactos.Localidade": "Trofa",
       "P Total": 1048,
@@ -1416,7 +1416,7 @@
     },
     {
       "Loja": "IM 06892",
-      "Secção": "",
+      "Secção": "IM 01820 Admin",
       "Semana": "02 a 08 nov",
       "Resumo contactos.Localidade": "Alpiarça",
       "P Total": 1105,
@@ -1430,7 +1430,7 @@
     },
     {
       "Loja": "IM 07006",
-      "Secção": "",
+      "Secção": "IM 01820 Armazém",
       "Semana": "02 a 08 nov",
       "Resumo contactos.Localidade": "Redondo",
       "P Total": 1352,
@@ -1444,7 +1444,7 @@
     },
     {
       "Loja": "IM 09064",
-      "Secção": "",
+      "Secção": "IM 01820 Bar e cafetaria",
       "Semana": "02 a 08 nov",
       "Resumo contactos.Localidade": "Marinha da Guia",
       "P Total": 1419,
@@ -1458,7 +1458,7 @@
     },
     {
       "Loja": "IM 09697",
-      "Secção": "",
+      "Secção": "IM 01820 Charcutaria e queijo",
       "Semana": "02 a 08 nov",
       "Resumo contactos.Localidade": "Évora II",
       "P Total": 1538,
@@ -1472,7 +1472,7 @@
     },
     {
       "Loja": "IM 76126",
-      "Secção": "",
+      "Secção": "IM 01820 Frescos LS",
       "Semana": "09 a 15 nov",
       "Resumo contactos.Localidade": "Fafe",
       "P Total": 1171,
@@ -1486,7 +1486,7 @@
     },
     {
       "Loja": "IM 10010",
-      "Secção": "",
+      "Secção": "IM 01820 Frutas e legumes",
       "Semana": "09 a 15 nov",
       "Resumo contactos.Localidade": "Alfena",
       "P Total": 1359,
@@ -1500,7 +1500,7 @@
     },
     {
       "Loja": "IM 07348",
-      "Secção": "",
+      "Secção": "IM 01820 Padaria",
       "Semana": "09 a 15 nov",
       "Resumo contactos.Localidade": "Famões",
       "P Total": 1804,
@@ -1514,7 +1514,7 @@
     },
     {
       "Loja": "IM 12037",
-      "Secção": "",
+      "Secção": "IM 01820 Peixaria",
       "Semana": "09 a 15 nov",
       "Resumo contactos.Localidade": "Baião",
       "P Total": 840,
@@ -1528,7 +1528,7 @@
     },
     {
       "Loja": "IM 04683",
-      "Secção": "",
+      "Secção": "IM 01820 Pronto a comer",
       "Semana": "16 a 22 nov",
       "Resumo contactos.Localidade": "Vieira de Leiria",
       "P Total": 1934,
@@ -1542,7 +1542,7 @@
     },
     {
       "Loja": "IM 08274",
-      "Secção": "",
+      "Secção": "IM 01820 Talho",
       "Semana": "16 a 22 nov",
       "Resumo contactos.Localidade": "Portimão",
       "P Total": 1895,
@@ -1556,7 +1556,7 @@
     },
     {
       "Loja": "IM 07348",
-      "Secção": "",
+      "Secção": "IM 02029 Admin",
       "Semana": "16 a 22 nov",
       "Resumo contactos.Localidade": "Famões",
       "P Total": 1806,
@@ -1570,7 +1570,7 @@
     },
     {
       "Loja": "IM 09697",
-      "Secção": "",
+      "Secção": "IM 02029 Armazém",
       "Semana": "16 a 22 nov",
       "Resumo contactos.Localidade": "Évora II",
       "P Total": 1520,
@@ -1584,7 +1584,7 @@
     },
     {
       "Loja": "IM 07626",
-      "Secção": "",
+      "Secção": "IM 02029 Charcutaria e queijo",
       "Semana": "16 a 22 nov",
       "Resumo contactos.Localidade": "Merceana",
       "P Total": 953,
@@ -1598,7 +1598,7 @@
     },
     {
       "Loja": "IM 09064",
-      "Secção": "",
+      "Secção": "IM 02029 Frescos LS",
       "Semana": "16 a 22 nov",
       "Resumo contactos.Localidade": "Marinha da Guia",
       "P Total": 1414,
@@ -1612,7 +1612,7 @@
     },
     {
       "Loja": "IM 10010",
-      "Secção": "",
+      "Secção": "IM 02029 Frutas e legumes",
       "Semana": "16 a 22 nov",
       "Resumo contactos.Localidade": "Alfena",
       "P Total": 1361,
@@ -1626,7 +1626,7 @@
     },
     {
       "Loja": "IM 04683",
-      "Secção": "",
+      "Secção": "IM 02029 Padaria",
       "Semana": "04 a 10 jan",
       "Resumo contactos.Localidade": "Vieira de Leiria",
       "P Total": 1934,
@@ -1640,7 +1640,7 @@
     },
     {
       "Loja": "IM 10573",
-      "Secção": "",
+      "Secção": "IM 02029 Peixaria",
       "Semana": "04 a 10 jan",
       "Resumo contactos.Localidade": "Ansião",
       "P Total": 1383,
@@ -1654,7 +1654,7 @@
     },
     {
       "Loja": "IM 07348",
-      "Secção": "",
+      "Secção": "IM 02029 Talho",
       "Semana": "04 a 10 jan",
       "Resumo contactos.Localidade": "Famões",
       "P Total": 1815,
@@ -1668,7 +1668,7 @@
     },
     {
       "Loja": "IM 06789",
-      "Secção": "",
+      "Secção": "IM 02057 Admin",
       "Semana": "04 a 10 jan",
       "Resumo contactos.Localidade": "Trofa",
       "P Total": 1057,
@@ -1682,7 +1682,7 @@
     },
     {
       "Loja": "IM 12036",
-      "Secção": "",
+      "Secção": "IM 02057 Armazém",
       "Semana": "04 a 10 jan",
       "Resumo contactos.Localidade": "Lourinhã",
       "P Total": 1241,
@@ -1696,7 +1696,7 @@
     },
     {
       "Loja": "IM 08274",
-      "Secção": "",
+      "Secção": "IM 02057 Bar e cafetaria",
       "Semana": "04 a 10 jan",
       "Resumo contactos.Localidade": "Portimão",
       "P Total": 1925,
@@ -1710,7 +1710,7 @@
     },
     {
       "Loja": "IM 10843",
-      "Secção": "",
+      "Secção": "IM 02057 Charcutaria e queijo",
       "Semana": "04 a 10 jan",
       "Resumo contactos.Localidade": "Torres Vedras",
       "P Total": 1388,
@@ -1724,7 +1724,7 @@
     },
     {
       "Loja": "IM 05175",
-      "Secção": "",
+      "Secção": "IM 02057 Frescos LS",
       "Semana": "04 a 10 jan",
       "Resumo contactos.Localidade": "Chamusca",
       "P Total": 1277,
@@ -1738,7 +1738,7 @@
     },
     {
       "Loja": "IM 01820",
-      "Secção": "",
+      "Secção": "IM 02057 Frutas e legumes",
       "Semana": "04 a 10 jan",
       "Resumo contactos.Localidade": "Alcochete",
       "P Total": 1657,
@@ -1752,7 +1752,7 @@
     },
     {
       "Loja": "IM 10949",
-      "Secção": "",
+      "Secção": "IM 02057 Padaria",
       "Semana": "04 a 10 jan",
       "Resumo contactos.Localidade": "Sines",
       "P Total": 1457,
@@ -1766,7 +1766,7 @@
     },
     {
       "Loja": "IM 01266",
-      "Secção": "",
+      "Secção": "IM 02057 Peixaria",
       "Semana": "04 a 10 jan",
       "Resumo contactos.Localidade": "Vila Nova Poiares",
       "P Total": 1187,
@@ -1780,7 +1780,7 @@
     },
     {
       "Loja": "IM 10571",
-      "Secção": "",
+      "Secção": "IM 02057 Pronto a comer",
       "Semana": "18 a 24 Jan",
       "Resumo contactos.Localidade": "Miranda do Corvo",
       "P Total": 1296,
@@ -1794,7 +1794,7 @@
     },
     {
       "Loja": "IM 10572",
-      "Secção": "",
+      "Secção": "IM 02057 Talho",
       "Semana": "18 a 24 Jan",
       "Resumo contactos.Localidade": "Lousã",
       "P Total": 1213,
@@ -1808,7 +1808,7 @@
     },
     {
       "Loja": "IM 04683",
-      "Secção": "",
+      "Secção": "IM 02058 Admin",
       "Semana": "18 a 24 Jan",
       "Resumo contactos.Localidade": "Vieira de Leiria",
       "P Total": 1934,
@@ -1822,7 +1822,7 @@
     },
     {
       "Loja": "IM 08274",
-      "Secção": "",
+      "Secção": "IM 02058 Armazém",
       "Semana": "18 a 24 Jan",
       "Resumo contactos.Localidade": "Portimão",
       "P Total": 1895,
@@ -1836,7 +1836,7 @@
     },
     {
       "Loja": "IM 07348",
-      "Secção": "",
+      "Secção": "IM 02058 Bar e cafetaria",
       "Semana": "18 a 24 Jan",
       "Resumo contactos.Localidade": "Famões",
       "P Total": 1806,
@@ -1850,7 +1850,7 @@
     },
     {
       "Loja": "IM 10843",
-      "Secção": "",
+      "Secção": "IM 02058 Charcutaria e queijo",
       "Semana": "18 a 24 Jan",
       "Resumo contactos.Localidade": "Torres Vedras",
       "P Total": 1379,
@@ -1864,7 +1864,7 @@
     },
     {
       "Loja": "IM 01820",
-      "Secção": "",
+      "Secção": "IM 02058 Frescos LS",
       "Semana": "18 a 24 Jan",
       "Resumo contactos.Localidade": "Alcochete",
       "P Total": 1631,
@@ -1878,7 +1878,7 @@
     },
     {
       "Loja": "IM 10571",
-      "Secção": "",
+      "Secção": "IM 02058 Frutas e legumes",
       "Semana": "25 a 31 Jan",
       "Resumo contactos.Localidade": "Miranda do Corvo",
       "P Total": 1310,
@@ -1892,7 +1892,7 @@
     },
     {
       "Loja": "IM 10572",
-      "Secção": "",
+      "Secção": "IM 02058 Padaria",
       "Semana": "25 a 31 Jan",
       "Resumo contactos.Localidade": "Lousã",
       "P Total": 1226,
@@ -1906,7 +1906,7 @@
     },
     {
       "Loja": "IM 04683",
-      "Secção": "",
+      "Secção": "IM 02058 Peixaria",
       "Semana": "25 a 31 Jan",
       "Resumo contactos.Localidade": "Vieira de Leiria",
       "P Total": 1934,
@@ -1920,7 +1920,7 @@
     },
     {
       "Loja": "IM 08274",
-      "Secção": "",
+      "Secção": "IM 02058 Pronto a comer",
       "Semana": "25 a 31 Jan",
       "Resumo contactos.Localidade": "Portimão",
       "P Total": 1859,
@@ -1934,7 +1934,7 @@
     },
     {
       "Loja": "IM 09064",
-      "Secção": "",
+      "Secção": "IM 02058 Talho",
       "Semana": "25 a 31 Jan",
       "Resumo contactos.Localidade": "Marinha da Guia",
       "P Total": 1414,
@@ -1948,7 +1948,7 @@
     },
     {
       "Loja": "IM 07348",
-      "Secção": "",
+      "Secção": "IM 02217 Admin",
       "Semana": "25 a 31 Jan",
       "Resumo contactos.Localidade": "Famões",
       "P Total": 1804,
@@ -1962,7 +1962,7 @@
     },
     {
       "Loja": "IM 07626",
-      "Secção": "",
+      "Secção": "IM 02217 Armazém",
       "Semana": "25 a 31 Jan",
       "Resumo contactos.Localidade": "Merceana",
       "P Total": 948,
@@ -1976,7 +1976,7 @@
     },
     {
       "Loja": "IM 03836",
-      "Secção": "",
+      "Secção": "IM 02217 Bar e cafetaria",
       "Semana": "25 a 31 Jan",
       "Resumo contactos.Localidade": "Ferreira do Zêzere",
       "P Total": 1253,
@@ -1990,7 +1990,7 @@
     },
     {
       "Loja": "IM 12269",
-      "Secção": "",
+      "Secção": "IM 02217 Charcutaria e queijo",
       "Semana": "25 a 31 Jan",
       "Resumo contactos.Localidade": "Monte Redondo",
       "P Total": 2136,
@@ -2004,7 +2004,7 @@
     },
     {
       "Loja": "IM 01266",
-      "Secção": "",
+      "Secção": "IM 02217 Frescos LS",
       "Semana": "25 a 31 Jan",
       "Resumo contactos.Localidade": "Vila Nova Poiares",
       "P Total": 1159,
@@ -2018,7 +2018,7 @@
     },
     {
       "Loja": "IM 03519",
-      "Secção": "",
+      "Secção": "IM 02217 Frutas e legumes",
       "Semana": "25 a 31 Jan",
       "Resumo contactos.Localidade": "Maceira",
       "P Total": 1012,
@@ -2032,7 +2032,7 @@
     },
     {
       "Loja": "IM 10573",
-      "Secção": "",
+      "Secção": "IM 02217 Padaria",
       "Semana": "25 a 31 Jan",
       "Resumo contactos.Localidade": "Ansião",
       "P Total": 1394,
@@ -2046,7 +2046,7 @@
     },
     {
       "Loja": "IM 01820",
-      "Secção": "",
+      "Secção": "IM 02217 Peixaria",
       "Semana": "25 a 31 Jan",
       "Resumo contactos.Localidade": "Alcochete",
       "P Total": 1635,
@@ -2060,7 +2060,7 @@
     },
     {
       "Loja": "IM 06859",
-      "Secção": "",
+      "Secção": "IM 02217 Pronto a comer",
       "Semana": "25 a 31 Jan",
       "Resumo contactos.Localidade": "Sta Eulália",
       "P Total": 726,
@@ -2074,7 +2074,7 @@
     },
     {
       "Loja": "IM 09478",
-      "Secção": "",
+      "Secção": "IM 02217 Talho",
       "Semana": "25 a 31 Jan",
       "Resumo contactos.Localidade": "Mealhada",
       "P Total": 1760,
@@ -2088,7 +2088,7 @@
     },
     {
       "Loja": "IM 10010",
-      "Secção": "",
+      "Secção": "IM 02357 Admin",
       "Semana": "25 a 31 Jan",
       "Resumo contactos.Localidade": "Alfena",
       "P Total": 1172,
@@ -2102,7 +2102,7 @@
     },
     {
       "Loja": "IM 03519",
-      "Secção": "",
+      "Secção": "IM 02357 Armazém",
       "Semana": "01 a 07 fev",
       "Resumo contactos.Localidade": "Maceira",
       "P Total": 974,
@@ -2116,7 +2116,7 @@
     },
     {
       "Loja": "IM 10571",
-      "Secção": "",
+      "Secção": "IM 02357 Bar e cafetaria",
       "Semana": "01 a 07 fev",
       "Resumo contactos.Localidade": "Miranda do Corvo",
       "P Total": 1305,
@@ -2130,7 +2130,7 @@
     },
     {
       "Loja": "IM 10572",
-      "Secção": "",
+      "Secção": "IM 02357 Charcutaria e queijo",
       "Semana": "01 a 07 fev",
       "Resumo contactos.Localidade": "Lousã",
       "P Total": 1222,
@@ -2144,7 +2144,7 @@
     },
     {
       "Loja": "IM 12269",
-      "Secção": "",
+      "Secção": "IM 02357 Frescos LS",
       "Semana": "01 a 07 fev",
       "Resumo contactos.Localidade": "Monte Redondo",
       "P Total": 2098,
@@ -2158,7 +2158,7 @@
     },
     {
       "Loja": "IM 04683",
-      "Secção": "",
+      "Secção": "IM 02357 Frutas e legumes",
       "Semana": "01 a 07 fev",
       "Resumo contactos.Localidade": "Vieira de Leiria",
       "P Total": 1943,
@@ -2172,7 +2172,7 @@
     },
     {
       "Loja": "IM 09064",
-      "Secção": "",
+      "Secção": "IM 02357 Padaria",
       "Semana": "01 a 07 fev",
       "Resumo contactos.Localidade": "Marinha da Guia",
       "P Total": 1424,
@@ -2186,7 +2186,7 @@
     },
     {
       "Loja": "IM 07348",
-      "Secção": "",
+      "Secção": "IM 02357 Pastelaria",
       "Semana": "01 a 07 fev",
       "Resumo contactos.Localidade": "Famões",
       "P Total": 1823,
@@ -2200,7 +2200,7 @@
     },
     {
       "Loja": "IM 07626",
-      "Secção": "",
+      "Secção": "IM 02357 Peixaria",
       "Semana": "01 a 07 fev",
       "Resumo contactos.Localidade": "Merceana",
       "P Total": 954,
@@ -2214,7 +2214,7 @@
     },
     {
       "Loja": "IM 08274",
-      "Secção": "",
+      "Secção": "IM 02357 Pronto a comer",
       "Semana": "01 a 07 fev",
       "Resumo contactos.Localidade": "Portimão",
       "P Total": 1914,
@@ -2228,7 +2228,7 @@
     },
     {
       "Loja": "IM 06859",
-      "Secção": "",
+      "Secção": "IM 02357 Talho",
       "Semana": "01 a 07 fev",
       "Resumo contactos.Localidade": "Sta Eulália",
       "P Total": 739,
@@ -2242,7 +2242,7 @@
     },
     {
       "Loja": "IM 01006",
-      "Secção": "",
+      "Secção": "IM 02375 Admin",
       "Semana": "01 a 07 fev",
       "Resumo contactos.Localidade": "Marinha Grande",
       "P Total": 1902,
@@ -2256,7 +2256,7 @@
     },
     {
       "Loja": "IM 10010",
-      "Secção": "",
+      "Secção": "IM 02375 Armazém",
       "Semana": "01 a 07 fev",
       "Resumo contactos.Localidade": "Alfena",
       "P Total": 1171,
@@ -2270,7 +2270,7 @@
     },
     {
       "Loja": "IM 10573",
-      "Secção": "",
+      "Secção": "IM 02375 Bar e cafetaria",
       "Semana": "01 a 07 fev",
       "Resumo contactos.Localidade": "Ansião",
       "P Total": 1392,
@@ -2284,7 +2284,7 @@
     },
     {
       "Loja": "IM 10843",
-      "Secção": "",
+      "Secção": "IM 02375 Charcutaria e queijo",
       "Semana": "01 a 07 fev",
       "Resumo contactos.Localidade": "Torres Vedras",
       "P Total": 1386,
@@ -2298,7 +2298,7 @@
     },
     {
       "Loja": "IM 06858",
-      "Secção": "",
+      "Secção": "IM 02375 Frescos LS",
       "Semana": "01 a 07 fev",
       "Resumo contactos.Localidade": "Monchique",
       "P Total": 1269,
@@ -2312,7 +2312,7 @@
     },
     {
       "Loja": "IM 01266",
-      "Secção": "",
+      "Secção": "IM 02375 Frutas e legumes",
       "Semana": "01 a 07 fev",
       "Resumo contactos.Localidade": "Vila Nova Poiares",
       "P Total": 1182,
@@ -2326,7 +2326,7 @@
     },
     {
       "Loja": "IM 07626",
-      "Secção": "",
+      "Secção": "IM 02375 Padaria",
       "Semana": "08 a 14 fev",
       "Resumo contactos.Localidade": "Merceana",
       "P Total": 945,
@@ -2340,7 +2340,7 @@
     },
     {
       "Loja": "IM 10571",
-      "Secção": "",
+      "Secção": "IM 02375 Peixaria",
       "Semana": "08 a 14 fev",
       "Resumo contactos.Localidade": "Miranda do Corvo",
       "P Total": 1310,
@@ -2354,7 +2354,7 @@
     },
     {
       "Loja": "IM 10572",
-      "Secção": "",
+      "Secção": "IM 02375 Pronto a comer",
       "Semana": "08 a 14 fev",
       "Resumo contactos.Localidade": "Lousã",
       "P Total": 1226,
@@ -2368,7 +2368,7 @@
     },
     {
       "Loja": "IM 04683",
-      "Secção": "",
+      "Secção": "IM 02375 Talho",
       "Semana": "08 a 14 fev",
       "Resumo contactos.Localidade": "Vieira de Leiria",
       "P Total": 1934,
@@ -2382,7 +2382,7 @@
     },
     {
       "Loja": "IM 12269",
-      "Secção": "",
+      "Secção": "IM 02486 Admin",
       "Semana": "08 a 14 fev",
       "Resumo contactos.Localidade": "Monte Redondo",
       "P Total": 2136,
@@ -2396,7 +2396,7 @@
     },
     {
       "Loja": "IM 08937",
-      "Secção": "",
+      "Secção": "IM 02486 Armazém",
       "Semana": "08 a 14 fev",
       "Resumo contactos.Localidade": "Praia da Rocha",
       "P Total": 694,
@@ -2410,7 +2410,7 @@
     },
     {
       "Loja": "IM 07348",
-      "Secção": "",
+      "Secção": "IM 02486 Bar e cafetaria",
       "Semana": "08 a 14 fev",
       "Resumo contactos.Localidade": "Famões",
       "P Total": 1804,
@@ -2424,7 +2424,7 @@
     },
     {
       "Loja": "IM 08274",
-      "Secção": "",
+      "Secção": "IM 02486 Charcutaria e queijo",
       "Semana": "08 a 14 fev",
       "Resumo contactos.Localidade": "Portimão",
       "P Total": 1895,
@@ -2438,7 +2438,7 @@
     },
     {
       "Loja": "IM 06859",
-      "Secção": "",
+      "Secção": "IM 02486 Frescos LS",
       "Semana": "08 a 14 fev",
       "Resumo contactos.Localidade": "Sta Eulália",
       "P Total": 726,
@@ -2452,7 +2452,7 @@
     },
     {
       "Loja": "IM 09064",
-      "Secção": "",
+      "Secção": "IM 02486 Frutas e legumes",
       "Semana": "08 a 14 fev",
       "Resumo contactos.Localidade": "Marinha da Guia",
       "P Total": 1414,
@@ -2466,7 +2466,7 @@
     },
     {
       "Loja": "IM 01266",
-      "Secção": "",
+      "Secção": "IM 02486 Padaria",
       "Semana": "08 a 14 fev",
       "Resumo contactos.Localidade": "Vila Nova Poiares",
       "P Total": 1159,
@@ -2480,7 +2480,7 @@
     },
     {
       "Loja": "IM 09697",
-      "Secção": "",
+      "Secção": "IM 02486 Peixaria",
       "Semana": "08 a 14 fev",
       "Resumo contactos.Localidade": "Évora II",
       "P Total": 1525,
@@ -2494,7 +2494,7 @@
     },
     {
       "Loja": "IM 10573",
-      "Secção": "",
+      "Secção": "IM 02486 Pronto a comer",
       "Semana": "08 a 14 fev",
       "Resumo contactos.Localidade": "Ansião",
       "P Total": 1394,
@@ -2508,7 +2508,7 @@
     },
     {
       "Loja": "IM 10843",
-      "Secção": "",
+      "Secção": "IM 02486 Restaurante",
       "Semana": "08 a 14 fev",
       "Resumo contactos.Localidade": "Torres Vedras",
       "P Total": 1380,
@@ -2522,7 +2522,7 @@
     },
     {
       "Loja": "IM 10571",
-      "Secção": "",
+      "Secção": "IM 02486 Talho",
       "Semana": "22 a 28 fev",
       "Resumo contactos.Localidade": "Miranda do Corvo",
       "P Total": 1226,
@@ -2536,7 +2536,7 @@
     },
     {
       "Loja": "IM 10572",
-      "Secção": "",
+      "Secção": "IM 02774 Admin",
       "Semana": "22 a 28 fev",
       "Resumo contactos.Localidade": "Lousã",
       "P Total": 1226,
@@ -2550,7 +2550,7 @@
     },
     {
       "Loja": "IM 04683",
-      "Secção": "",
+      "Secção": "IM 02774 Armazém",
       "Semana": "22 a 28 fev",
       "Resumo contactos.Localidade": "Vieira de Leiria",
       "P Total": 1934,
@@ -2564,7 +2564,7 @@
     },
     {
       "Loja": "IM 08274",
-      "Secção": "",
+      "Secção": "IM 02774 Bar e cafetaria",
       "Semana": "22 a 28 fev",
       "Resumo contactos.Localidade": "Portimão",
       "P Total": 1895,
@@ -2578,7 +2578,7 @@
     },
     {
       "Loja": "IM 07348",
-      "Secção": "",
+      "Secção": "IM 02774 Charcutaria e queijo",
       "Semana": "22 a 28 fev",
       "Resumo contactos.Localidade": "Famões",
       "P Total": 1804,
@@ -2592,7 +2592,7 @@
     },
     {
       "Loja": "IM 06859",
-      "Secção": "",
+      "Secção": "IM 02774 Frescos LS",
       "Semana": "22 a 28 fev",
       "Resumo contactos.Localidade": "Sta Eulália",
       "P Total": 726,
@@ -2606,7 +2606,7 @@
     },
     {
       "Loja": "IM 03519",
-      "Secção": "",
+      "Secção": "IM 02774 Frutas e legumes",
       "Semana": "22 a 28 fev",
       "Resumo contactos.Localidade": "Maceira",
       "P Total": 1012,
@@ -2620,7 +2620,7 @@
     },
     {
       "Loja": "IM 12268",
-      "Secção": "",
+      "Secção": "IM 02774 Padaria",
       "Semana": "22 a 28 fev",
       "Resumo contactos.Localidade": "Madalena",
       "P Total": 1177,
@@ -2634,7 +2634,7 @@
     },
     {
       "Loja": "IM 10573",
-      "Secção": "",
+      "Secção": "IM 02774 Peixaria",
       "Semana": "22 a 28 fev",
       "Resumo contactos.Localidade": "Ansião",
       "P Total": 1394,
@@ -2648,7 +2648,7 @@
     },
     {
       "Loja": "IM 10571",
-      "Secção": "",
+      "Secção": "IM 02774 Pronto a comer",
       "Semana": "01 a 07 mar",
       "Resumo contactos.Localidade": "Miranda do Corvo",
       "P Total": 1221,
@@ -2662,7 +2662,7 @@
     },
     {
       "Loja": "IM 04683",
-      "Secção": "",
+      "Secção": "IM 02774 Talho",
       "Semana": "01 a 07 mar",
       "Resumo contactos.Localidade": "Vieira de Leiria",
       "P Total": 1943,
@@ -2676,7 +2676,7 @@
     },
     {
       "Loja": "IM 05773",
-      "Secção": "",
+      "Secção": "IM 02797 Admin",
       "Semana": "01 a 07 mar",
       "Resumo contactos.Localidade": "Aveiras de Cima",
       "P Total": 1488,
@@ -2690,7 +2690,7 @@
     },
     {
       "Loja": "IM 08274",
-      "Secção": "",
+      "Secção": "IM 02797 Armazém",
       "Semana": "01 a 07 mar",
       "Resumo contactos.Localidade": "Portimão",
       "P Total": 1914,
@@ -2704,7 +2704,7 @@
     },
     {
       "Loja": "IM 07348",
-      "Secção": "",
+      "Secção": "IM 02797 Bar e cafetaria",
       "Semana": "01 a 07 mar",
       "Resumo contactos.Localidade": "Famões",
       "P Total": 1823,
@@ -2718,7 +2718,7 @@
     },
     {
       "Loja": "IM 10572",
-      "Secção": "",
+      "Secção": "IM 02797 Charcutaria e queijo",
       "Semana": "01 a 07 mar",
       "Resumo contactos.Localidade": "Lousã",
       "P Total": 1060,
@@ -2732,7 +2732,7 @@
     },
     {
       "Loja": "IM 01266",
-      "Secção": "",
+      "Secção": "IM 02797 Frescos LS",
       "Semana": "01 a 07 mar",
       "Resumo contactos.Localidade": "Vila Nova Poiares",
       "P Total": 1182,
@@ -2746,7 +2746,7 @@
     },
     {
       "Loja": "IM 12268",
-      "Secção": "",
+      "Secção": "IM 02797 Frutas e legumes",
       "Semana": "01 a 07 mar",
       "Resumo contactos.Localidade": "Madalena",
       "P Total": 1188,
@@ -2760,7 +2760,7 @@
     },
     {
       "Loja": "IM 10573",
-      "Secção": "",
+      "Secção": "IM 02797 Padaria",
       "Semana": "01 a 07 mar",
       "Resumo contactos.Localidade": "Ansião",
       "P Total": 1392,
@@ -2774,7 +2774,7 @@
     },
     {
       "Loja": "IM 09064",
-      "Secção": "",
+      "Secção": "IM 02797 Peixaria",
       "Semana": "01 a 07 mar",
       "Resumo contactos.Localidade": "Marinha da Guia",
       "P Total": 1424,
@@ -2788,7 +2788,7 @@
     },
     {
       "Loja": "IM 06859",
-      "Secção": "",
+      "Secção": "IM 02797 Pronto a comer",
       "Semana": "01 a 07 mar",
       "Resumo contactos.Localidade": "Sta Eulália",
       "P Total": 857,
@@ -2802,7 +2802,7 @@
     },
     {
       "Loja": "IM 04683",
-      "Secção": "",
+      "Secção": "IM 02797 Talho",
       "Semana": "15-21 mar",
       "Resumo contactos.Localidade": "Vieira de Leiria",
       "P Total": 1934,
@@ -2816,7 +2816,7 @@
     },
     {
       "Loja": "IM 07626",
-      "Secção": "",
+      "Secção": "IM 03034 Admin",
       "Semana": "15-21 mar",
       "Resumo contactos.Localidade": "Merceana",
       "P Total": 953,
@@ -2830,7 +2830,7 @@
     },
     {
       "Loja": "IM 10571",
-      "Secção": "",
+      "Secção": "IM 03034 Armazém",
       "Semana": "15-21 mar",
       "Resumo contactos.Localidade": "Miranda do Corvo",
       "P Total": 1332,
@@ -2844,7 +2844,7 @@
     },
     {
       "Loja": "IM 04634",
-      "Secção": "",
+      "Secção": "IM 03034 Bar e cafetaria",
       "Semana": "15-21 mar",
       "Resumo contactos.Localidade": "Braga",
       "P Total": 1995,
@@ -2858,7 +2858,7 @@
     },
     {
       "Loja": "IM 07348",
-      "Secção": "",
+      "Secção": "IM 03034 Charcutaria e queijo",
       "Semana": "15-21 mar",
       "Resumo contactos.Localidade": "Famões",
       "P Total": 1806,
@@ -2872,7 +2872,7 @@
     },
     {
       "Loja": "IM 08274",
-      "Secção": "",
+      "Secção": "IM 03034 Frescos LS",
       "Semana": "15-21 mar",
       "Resumo contactos.Localidade": "Portimão",
       "P Total": 1895,
@@ -2886,7 +2886,7 @@
     },
     {
       "Loja": "IM 01266",
-      "Secção": "",
+      "Secção": "IM 03034 Frutas e legumes",
       "Semana": "15-21 mar",
       "Resumo contactos.Localidade": "Vila Nova Poiares",
       "P Total": 1158,
@@ -2900,7 +2900,7 @@
     },
     {
       "Loja": "IM 12268",
-      "Secção": "",
+      "Secção": "IM 03034 Padaria",
       "Semana": "15-21 mar",
       "Resumo contactos.Localidade": "Madalena",
       "P Total": 1026,
@@ -2914,7 +2914,7 @@
     },
     {
       "Loja": "IM 10573",
-      "Secção": "",
+      "Secção": "IM 03034 Peixaria",
       "Semana": "15-21 mar",
       "Resumo contactos.Localidade": "Ansião",
       "P Total": 1395,
@@ -2928,7 +2928,7 @@
     },
     {
       "Loja": "IM 04683",
-      "Secção": "",
+      "Secção": "IM 03034 Pronto a comer",
       "Semana": "05 a 11 abr",
       "Resumo contactos.Localidade": "Vieira de Leiria",
       "P Total": 1934,
@@ -2942,7 +2942,7 @@
     },
     {
       "Loja": "IM 07626",
-      "Secção": "",
+      "Secção": "IM 03034 Talho",
       "Semana": "05 a 11 abr",
       "Resumo contactos.Localidade": "Merceana",
       "P Total": 955,
@@ -2956,7 +2956,7 @@
     },
     {
       "Loja": "IM 04634",
-      "Secção": "",
+      "Secção": "IM 03208 Admin",
       "Semana": "05 a 11 abr",
       "Resumo contactos.Localidade": "Braga",
       "P Total": 2004,
@@ -2970,7 +2970,7 @@
     },
     {
       "Loja": "IM 07348",
-      "Secção": "",
+      "Secção": "IM 03208 Armazém",
       "Semana": "05 a 11 abr",
       "Resumo contactos.Localidade": "Famões",
       "P Total": 1815,
@@ -2984,7 +2984,7 @@
     },
     {
       "Loja": "IM 01266",
-      "Secção": "",
+      "Secção": "IM 03208 Bar e cafetaria",
       "Semana": "05 a 11 abr",
       "Resumo contactos.Localidade": "Vila Nova Poiares",
       "P Total": 1182,
@@ -2998,7 +2998,7 @@
     },
     {
       "Loja": "IM 08274",
-      "Secção": "",
+      "Secção": "IM 03208 Charcutaria e queijo",
       "Semana": "05 a 11 abr",
       "Resumo contactos.Localidade": "Portimão",
       "P Total": 1907,
@@ -3012,7 +3012,7 @@
     },
     {
       "Loja": "IM 10571",
-      "Secção": "",
+      "Secção": "IM 03208 Churrascos",
       "Semana": "05 a 11 abr",
       "Resumo contactos.Localidade": "Miranda do Corvo",
       "P Total": 1576,
@@ -3026,7 +3026,7 @@
     },
     {
       "Loja": "IM 08594",
-      "Secção": "",
+      "Secção": "IM 03208 Frescos LS",
       "Semana": "05 a 11 abr",
       "Resumo contactos.Localidade": "",
       "P Total": 1615,
@@ -3040,7 +3040,7 @@
     },
     {
       "Loja": "IM 09064",
-      "Secção": "",
+      "Secção": "IM 03208 Frutas e legumes",
       "Semana": "05 a 11 abr",
       "Resumo contactos.Localidade": "Marinha da Guia",
       "P Total": 1501,
@@ -3054,7 +3054,7 @@
     },
     {
       "Loja": "IM 10572",
-      "Secção": "",
+      "Secção": "IM 03208 Padaria",
       "Semana": "05 a 11 abr",
       "Resumo contactos.Localidade": "Lousã",
       "P Total": 1510,
@@ -3068,7 +3068,7 @@
     },
     {
       "Loja": "IM 04683",
-      "Secção": "",
+      "Secção": "IM 03208 Peixaria",
       "Semana": "25 abr a 2 mai",
       "Resumo contactos.Localidade": "Vieira de Leiria",
       "P Total": 1943,
@@ -3082,7 +3082,7 @@
     },
     {
       "Loja": "IM 08937",
-      "Secção": "",
+      "Secção": "IM 03208 Pizzas",
       "Semana": "25 abr a 2 mai",
       "Resumo contactos.Localidade": "Praia da Rocha",
       "P Total": 695,
@@ -3096,7 +3096,7 @@
     },
     {
       "Loja": "IM 07348",
-      "Secção": "",
+      "Secção": "IM 03208 Pronto a comer",
       "Semana": "25 abr a 2 mai",
       "Resumo contactos.Localidade": "Famões",
       "P Total": 1812,
@@ -3110,7 +3110,7 @@
     },
     {
       "Loja": "IM 04634",
-      "Secção": "",
+      "Secção": "IM 03208 Queijo",
       "Semana": "25 abr a 2 mai",
       "Resumo contactos.Localidade": "Braga",
       "P Total": 2051,
@@ -3124,7 +3124,7 @@
     },
     {
       "Loja": "IM 08274",
-      "Secção": "",
+      "Secção": "IM 03208 Talho",
       "Semana": "25 abr a 2 mai",
       "Resumo contactos.Localidade": "Portimão",
       "P Total": 1902,
@@ -3138,7 +3138,7 @@
     },
     {
       "Loja": "IM 05285",
-      "Secção": "",
+      "Secção": "IM 03209 Admin",
       "Semana": "25 abr a 2 mai",
       "Resumo contactos.Localidade": "Vila Flôr",
       "P Total": 1022,
@@ -3152,7 +3152,7 @@
     },
     {
       "Loja": "IM 01266",
-      "Secção": "",
+      "Secção": "IM 03209 Armazém",
       "Semana": "25 abr a 2 mai",
       "Resumo contactos.Localidade": "Vila Nova Poiares",
       "P Total": 1167,
@@ -3166,7 +3166,7 @@
     },
     {
       "Loja": "IM 09064",
-      "Secção": "",
+      "Secção": "IM 03209 Bar e cafetaria",
       "Semana": "25 abr a 2 mai",
       "Resumo contactos.Localidade": "Marinha da Guia",
       "P Total": 1489,
@@ -3180,7 +3180,7 @@
     },
     {
       "Loja": "IM 07397",
-      "Secção": "",
+      "Secção": "IM 03209 Charcutaria e queijo",
       "Semana": "25 abr a 2 mai",
       "Resumo contactos.Localidade": "Bombarral",
       "P Total": 966,
@@ -3194,7 +3194,7 @@
     },
     {
       "Loja": "IM 08937",
-      "Secção": "",
+      "Secção": "IM 03209 Frescos LS",
       "Semana": "03 a 08 mai",
       "Resumo contactos.Localidade": "Praia da Rocha",
       "P Total": 700,
@@ -3208,7 +3208,7 @@
     },
     {
       "Loja": "IM 07348",
-      "Secção": "",
+      "Secção": "IM 03209 Frutas e legumes",
       "Semana": "03 a 08 mai",
       "Resumo contactos.Localidade": "Famões",
       "P Total": 1815,
@@ -3222,7 +3222,7 @@
     },
     {
       "Loja": "IM 09064",
-      "Secção": "",
+      "Secção": "IM 03209 Padaria",
       "Semana": "03 a 08 mai",
       "Resumo contactos.Localidade": "Marinha da Guia",
       "P Total": 1489,
@@ -3236,7 +3236,7 @@
     },
     {
       "Loja": "IM 08937",
-      "Secção": "",
+      "Secção": "IM 03209 Pronto a comer",
       "Semana": "09 mai a 16 mai",
       "Resumo contactos.Localidade": "Praia da Rocha",
       "P Total": 694,
@@ -3250,7 +3250,7 @@
     },
     {
       "Loja": "IM 04634",
-      "Secção": "",
+      "Secção": "IM 03209 Talho",
       "Semana": "09 mai a 16 mai",
       "Resumo contactos.Localidade": "Braga",
       "P Total": 2051,
@@ -3264,7 +3264,7 @@
     },
     {
       "Loja": "IM 07348",
-      "Secção": "",
+      "Secção": "IM 03291 Admin",
       "Semana": "09 mai a 16 mai",
       "Resumo contactos.Localidade": "Famões",
       "P Total": 1804,
@@ -3278,7 +3278,7 @@
     },
     {
       "Loja": "IM 09064",
-      "Secção": "",
+      "Secção": "IM 03291 Armazém",
       "Semana": "09 mai a 16 mai",
       "Resumo contactos.Localidade": "Marinha da Guia",
       "P Total": 1480,
@@ -3292,7 +3292,7 @@
     },
     {
       "Loja": "IM 08274",
-      "Secção": "",
+      "Secção": "IM 03291 Bar e cafetaria",
       "Semana": "09 mai a 16 mai",
       "Resumo contactos.Localidade": "Portimão",
       "P Total": 1895,
@@ -3306,7 +3306,7 @@
     },
     {
       "Loja": "IM 10843",
-      "Secção": "",
+      "Secção": "IM 03291 Charcutaria e queijo",
       "Semana": "09 mai a 16 mai",
       "Resumo contactos.Localidade": "Torres Vedras",
       "P Total": 1378,
@@ -3320,7 +3320,7 @@
     },
     {
       "Loja": "IM 08186",
-      "Secção": "",
+      "Secção": "IM 03291 Frescos LS",
       "Semana": "09 mai a 16 mai",
       "Resumo contactos.Localidade": "Cadaval",
       "P Total": 1274,
@@ -3334,7 +3334,7 @@
     },
     {
       "Loja": "IM 05175",
-      "Secção": "",
+      "Secção": "IM 03291 Frutas e legumes",
       "Semana": "09 mai a 16 mai",
       "Resumo contactos.Localidade": "Chamusca",
       "P Total": 1251,
@@ -3348,7 +3348,7 @@
     },
     {
       "Loja": "IM 10573",
-      "Secção": "",
+      "Secção": "IM 03291 Padaria",
       "Semana": "09 mai a 16 mai",
       "Resumo contactos.Localidade": "Ansião",
       "P Total": 1285,
@@ -3362,7 +3362,7 @@
     },
     {
       "Loja": "IM 01266",
-      "Secção": "",
+      "Secção": "IM 03291 Peixaria",
       "Semana": "09 mai a 16 mai",
       "Resumo contactos.Localidade": "Vila Nova Poiares",
       "P Total": 1158,
@@ -3376,7 +3376,7 @@
     },
     {
       "Loja": "IM 06858",
-      "Secção": "",
+      "Secção": "IM 03291 Pronto a comer",
       "Semana": "09 mai a 16 mai",
       "Resumo contactos.Localidade": "Monchique",
       "P Total": 1258,
@@ -3390,7 +3390,7 @@
     },
     {
       "Loja": "IM 07626",
-      "Secção": "",
+      "Secção": "IM 03291 Talho",
       "Semana": "09 mai a 16 mai",
       "Resumo contactos.Localidade": "Merceana",
       "P Total": 945,
