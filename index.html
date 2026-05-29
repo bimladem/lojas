@@ -344,13 +344,21 @@ body{
   width:100%;
   border-collapse:collapse;
   background:#fff;
+  font-size:13px;
 }
 
 .detail-table th,
 .detail-table td{
-  padding:14px;
+  padding:12px 8px;
   border-bottom:1px solid var(--border);
   text-align:center;
+}
+
+.detail-table th{
+  font-weight:800;
+  color:#666;
+  text-transform:uppercase;
+  background:#fafafa;
 }
 
 .current{
@@ -532,7 +540,13 @@ fetch('dados.json?t='+Date.now())
 
         semana:String(i.Semana).trim(),
 
-        pF:Number(i['P Fechado'])||0
+        pT:Number(i['P Total'])||0,
+        pA:Number(i['P Aberto'])||0,
+        pF:Number(i['P Fechado'])||0,
+
+        nT:Number(i['NP Total'])||0,
+        nA:Number(i['NP Aberto'])||0,
+        nF:Number(i['NP Fechado'])||0
 
       });
 
@@ -746,7 +760,13 @@ function render(lojas,ultima){
     html+='<thead>';
     html+='<tr>';
     html+='<th>Semana</th>';
+    html+='<th>P Total</th>';
+    html+='<th>P Aberto</th>';
     html+='<th>P Fechado</th>';
+    html+='<th>P Deixadas em Aberto</th>';
+    html+='<th>NP Total</th>';
+    html+='<th>NP Aberto</th>';
+    html+='<th>NP Fechado</th>';
     html+='</tr>';
     html+='</thead>';
 
@@ -756,7 +776,13 @@ function render(lojas,ultima){
 
       html+='<tr>';
       html+='<td>'+h.semana+'</td>';
+      html+='<td>'+h.pT+'</td>';
+      html+='<td>'+h.pA+'</td>';
       html+='<td>'+h.pF+'</td>';
+      html+='<td>'+h.pA+'</td>';
+      html+='<td>'+h.nT+'</td>';
+      html+='<td>'+h.nA+'</td>';
+      html+='<td>'+h.nF+'</td>';
       html+='</tr>';
 
     });
