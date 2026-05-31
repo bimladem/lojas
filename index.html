@@ -268,29 +268,39 @@ fetch('dados.json?t=' + Date.now())
         : null;
     });
 
-    /* SECÇÕES — filtrar por loja, excluir Admin */
+    /* SECÇÕES — a sheet seccoes não tem Loja separado,
+       o código da loja está embutido em Secção: "IM XXXXX NomeDaSecção" */
     data.forEach(function(i) {
-      if (i.Secção && i.Loja && ids[String(i.Loja).trim()]) {
-        var loja = lojas.find(function(l) {
-          return l.loja === String(i.Loja).trim();
-        });
-        if (loja) {
-          var nome = String(i.Secção)
-            .replace(/^IM\s+\d+\s+/, '')
-            .trim();
-          if (nome.toLowerCase() !== 'admin') {
-            loja.seccoes.push({
-              nome: nome,
-              pT:  Number(i['P Total'])    || 0,
-              pA:  Number(i['P Aberto'])   || 0,
-              pF:  Number(i['P Fechado'])  || 0,
-              nT:  Number(i['NP Total'])   || 0,
-              nA:  Number(i['NP Aberto'])  || 0,
-              nF:  Number(i['NP Fechado']) || 0,
-            });
-          }
-        }
-      }
+      if (!i.Secção) return;
+
+      var seccaoStr = String(i.Secção).trim();
+
+      /* Extrair código loja do campo Secção */
+      var m = seccaoStr.match(/^(IM \d+)\s+(.+)$/);
+      if (!m) return;
+
+      var lojaCode = m[1].trim();   /* ex: "IM 01006" */
+      var nomeSecção = m[2].trim(); /* ex: "Frescos LS" */
+
+      if (nomeSecção.toLowerCase() === 'admin') return;
+      if (!ids[lojaCode]) return;
+
+      var loja = lojas.find(function(l) { return l.loja === lojaCode; });
+      if (!loja) return;
+
+      /* Sheet seccoes usa campos diferentes */
+      var pT = Number(i['P Total'])    || Number(i['Programadas Total'])    || 0;
+      var pF = Number(i['P Fechado'])  || Number(i['Programadas Fechadas']) || 0;
+      var nT = Number(i['NP Total'])   || Number(i['Não Programadas Total'])    || 0;
+      var nF = Number(i['NP Fechado']) || Number(i['Não Programadas Fechadas']) || 0;
+      var pA = Number(i['P Aberto'])   || (pT - pF);
+      var nA = Number(i['NP Aberto'])  || (nT - nF);
+
+      loja.seccoes.push({
+        nome: nomeSecção,
+        pT: pT, pA: pA, pF: pF,
+        nT: nT, nA: nA, nF: nF,
+      });
     });
     lojas.forEach(function(l) {
       l.seccoes.sort(function(a, b) { return b.pA - a.pA; });
