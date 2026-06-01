@@ -206,7 +206,7 @@ body{font-family:'Inter',sans-serif;background:#f9f9f9;color:var(--text);}
 }
 
 .rank{flex-direction:column;gap:var(--spacing-xs);}
-.rank-num{font-size:clamp(20px, 2.5vw, 40px);font-weight:800;color:var(--text-light);}
+.rank-num{font-size:clamp(20px, 2.5vw, 40px);font-weight:800;color:#000;}
 .rank-badge{
   padding:var(--spacing-xs) var(--spacing-sm);
   border-radius:10px;
@@ -221,7 +221,7 @@ body{font-family:'Inter',sans-serif;background:#f9f9f9;color:var(--text);}
 .localizacao{flex-direction:column;gap:var(--spacing-xs);}
 .localizacao strong{
   font-size:clamp(13px, 1.3vw, 22px);
-  color:var(--text-light);
+  color:#000;
   font-weight:800;
   word-break:break-word;
 }
@@ -229,7 +229,7 @@ body{font-family:'Inter',sans-serif;background:#f9f9f9;color:var(--text);}
 .loja{flex-direction:column;gap:var(--spacing-xs);}
 .loja strong{
   font-size:clamp(12px, 1.1vw, 20px);
-  color:var(--text-light);
+  color:#000;
   font-weight:800;
 }
 
@@ -263,7 +263,7 @@ body{font-family:'Inter',sans-serif;background:#f9f9f9;color:var(--text);}
 .comparison-label{
   font-size:var(--font-xs);
   font-weight:800;
-  color:var(--text-light);
+  color:#000;
   text-transform:uppercase;
   letter-spacing:.2px;
   white-space:nowrap;
@@ -271,7 +271,7 @@ body{font-family:'Inter',sans-serif;background:#f9f9f9;color:var(--text);}
 .comparison-value{
   font-size:clamp(16px, 1.5vw, 28px);
   font-weight:800;
-  color:var(--text-light);
+  color:#000;
 }
 
 .trend{flex-direction:column;}
@@ -564,7 +564,7 @@ body{font-family:'Inter',sans-serif;background:#f9f9f9;color:var(--text);}
   .card-rank-num{
     font-size:clamp(18px, 4vw, 28px);
     font-weight:800;
-    color:var(--text-light);
+    color:#000;
   }
   .card-rank-badge{
     padding:var(--spacing-xs) var(--spacing-sm);
@@ -579,13 +579,13 @@ body{font-family:'Inter',sans-serif;background:#f9f9f9;color:var(--text);}
   }
   .card-local{
     font-size:var(--font-base);
-    color:var(--text-light);
+    color:#000;
     font-weight:700;
   }
   .card-loja{
     font-size:var(--font-lg);
     font-weight:800;
-    color:var(--text-light);
+    color:#000;
   }
   .card-metrics{
     display:grid;
@@ -836,11 +836,10 @@ fetch('dados.json?t=' + Date.now())
         };
       });
 
-    /* Ordenar por NÍVEL (N1, N2, N3) - pior para melhor
-       Dentro de cada nível, ordenar por % de P fechadas CRESCENTE (menor % primeiro = pior) */
+    /* Ordenar por NÍVEL (N1, N2, N3) e depois por P fechadas dentro de cada nível */
     lojas.sort(function(a, b) {
       if (a.nivel !== b.nivel) return a.nivel - b.nivel;
-      return Number(a.pctPF) - Number(b.pctPF);
+      return b.pF - a.pF;
     });
 
     var ids = {};
@@ -999,16 +998,16 @@ function render(lojas, ultimaSemana) {
 
     /* DESKTOP ROW */
     var desktopRow = '<div class="row-main">';
-    desktopRow += '<div class="cell rank"><div class="rank-num" style="color:var(--text-light);">' + (li+1) + '</div><div class="rank-badge ' + badge + '">N' + l.nivel + '</div></div>';
-    desktopRow += '<div class="cell localizacao"><strong style="color:var(--text-light);">' + (l.local || '—') + '</strong></div>';
-    desktopRow += '<div class="cell loja"><strong style="color:var(--text-light);">' + l.loja + '</strong></div>';
+    desktopRow += '<div class="cell rank"><div class="rank-num" style="color:#000;">' + (li+1) + '</div><div class="rank-badge ' + badge + '">N' + l.nivel + '</div></div>';
+    desktopRow += '<div class="cell localizacao"><strong style="color:#000;">' + (l.local || '—') + '</strong></div>';
+    desktopRow += '<div class="cell loja"><strong style="color:#000;">' + l.loja + '</strong></div>';
     desktopRow += '<div class="cell metric"><div class="num">' + l.pT + '</div></div>';
     desktopRow += '<div class="cell metric"><div class="num">' + l.pA + '</div></div>';
     desktopRow += '<div class="cell metric"><div class="num">' + l.pF + '</div></div>';
     desktopRow += '<div class="cell metric"><div class="num">' + l.nT + '</div></div>';
     desktopRow += '<div class="cell metric"><div class="num">' + l.nA + '</div></div>';
     desktopRow += '<div class="cell metric"><div class="num">' + l.nF + '</div></div>';
-    desktopRow += '<div class="cell comparison"><div class="comparison-item"><div class="comparison-label">Programadas</div><div class="comparison-value" style="color:var(--text-light);">' + l.pctPF + '%</div></div><div class="comparison-item"><div class="comparison-label">Não Prog.</div><div class="comparison-value" style="color:var(--text-light);">' + l.pctNF + '%</div></div></div>';
+    desktopRow += '<div class="cell comparison"><div class="comparison-item"><div class="comparison-label">Programadas</div><div class="comparison-value" style="color:#000;">' + l.pctPF + '%</div></div><div class="comparison-item"><div class="comparison-label">Não Prog.</div><div class="comparison-value" style="color:#000;">' + l.pctNF + '%</div></div></div>';
     desktopRow += '<div class="cell"><button class="btn" id="btnhist-' + li + '" onclick="toggleHist(' + li + ')">Histórico</button></div>';
     desktopRow += '<div class="cell"><button class="btn" id="btnsec-' + li + '" onclick="toggleSec(' + li + ')">Secções</button></div>';
     desktopRow += '</div>';
@@ -1016,8 +1015,8 @@ function render(lojas, ultimaSemana) {
     /* MOBILE CARD */
     var mobileCard = '<div class="mobile-card">'
       + '<div class="card-header">'
-      + '<div class="card-rank"><div class="card-rank-num" style="color:var(--text-light);">' + (li+1) + '</div><div class="card-rank-badge ' + badge + '" style="color:#000;">N' + l.nivel + '</div></div>'
-      + '<div class="card-info"><div class="card-local" style="color:var(--text-light);">' + (l.local || '—') + '</div><div class="card-loja" style="color:var(--text-light);">' + l.loja + '</div></div>'
+      + '<div class="card-rank"><div class="card-rank-num" style="color:#000;">' + (li+1) + '</div><div class="card-rank-badge ' + badge + '" style="color:#000;">N' + l.nivel + '</div></div>'
+      + '<div class="card-info"><div class="card-local" style="color:#000;">' + (l.local || '—') + '</div><div class="card-loja" style="color:#000;">' + l.loja + '</div></div>'
       + '</div>'
       + '<div class="card-metrics">'
       + '<div class="metric-item"><div class="metric-label" style="color:#000;">P Tot</div><div class="metric-value">' + l.pT + '</div></div>'
