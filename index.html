@@ -49,7 +49,7 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);}
 
 .table-header{
   display:grid;
-  grid-template-columns:90px 220px 180px 120px 120px 120px 120px 120px 120px 120px 180px 120px 120px;
+  grid-template-columns:90px 220px 180px 120px 120px 120px 120px 120px 120px 180px 120px 120px;
   background:#fafafa;border-bottom:1px solid var(--border);
   font-size:13px;font-weight:800;text-transform:uppercase;color:#000;
 }
@@ -60,7 +60,7 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);}
 
 .row-main{
   display:grid;
-  grid-template-columns:90px 220px 180px 120px 120px 120px 120px 120px 120px 120px 180px 120px 120px;
+  grid-template-columns:90px 220px 180px 120px 120px 120px 120px 120px 120px 180px 120px 120px;
   align-items:center;padding:18px 10px;transition:.2s;
 }
 .row-main:hover{background:rgba(139,92,246,.03);}
@@ -461,10 +461,8 @@ fetch('dados.json?t=' + Date.now())
         var nA = Number(i['NP Aberto'])  || 0;
         var nF = Number(i['NP Fechado']) || 0;
 
-        var pNF = pT - pF;
         var pctPA  = pT > 0 ? (pA / pT * 100) : 0;
         var pctPF  = pT > 0 ? (pF / pT * 100) : 0;
-        var pctPNF = pT > 0 ? (pNF / pT * 100) : 0;
         var pctNA  = nT > 0 ? (nA / nT * 100) : 0;
         var pctNF  = nT > 0 ? (nF / nT * 100) : 0;
 
@@ -480,10 +478,9 @@ fetch('dados.json?t=' + Date.now())
         return {
           loja: String(i.Loja).trim(),
           local: loc,
-          pT, pA, pF, pNF, nT, nA, nF,
+          pT, pA, pF, nT, nA, nF,
           pctPA:  pctPA.toFixed(1),
           pctPF:  pctPF.toFixed(1),
-          pctPNF: pctPNF.toFixed(1),
           pctNA:  pctNA.toFixed(1),
           pctNF:  pctNF.toFixed(1),
           nivel,
@@ -591,7 +588,7 @@ function render(lojas, ultimaSemana) {
   /* HEADER (DESKTOP ONLY) */
   html += '<div class="table-header">';
   html += '<div>Rank</div><div>Loja</div><div>Localização</div>';
-  html += '<div>P Total</div><div>P Abertas</div><div>P Fechadas</div><div>P Não Fechadas</div>';
+  html += '<div>P Total</div><div>P Abertas</div><div>P Fechadas</div>';
   html += '<div>NP Total</div><div>NP Abertas</div><div>NP Fechadas</div>';
   html += '<div>Comparação P vs NP</div><div>Histórico</div><div>Secções</div>';
   html += '</div>';
@@ -665,7 +662,6 @@ function render(lojas, ultimaSemana) {
     desktopRow += '<div class="cell metric"><div class="pct gray" style="color:#777;font-size:18px;">100%</div><div class="num" style="color:#000;">' + l.pT + '</div></div>';
     desktopRow += '<div class="cell metric"><div class="pct red" style="color:#ef4444;font-size:18px;">' + l.pctPA + '%</div><div class="num red" style="color:#ef4444;">' + l.pA + '</div></div>';
     desktopRow += '<div class="cell metric"><div class="pct green" style="color:#22c55e;font-size:18px;">' + l.pctPF + '%</div><div class="num green" style="color:#22c55e;">' + l.pF + '</div></div>';
-    desktopRow += '<div class="cell metric"><div class="pct" style="color:#1a1a1a;font-size:18px;">' + l.pctPNF + '%</div><div class="num" style="color:#1a1a1a;">' + l.pNF + '</div></div>';
     desktopRow += '<div class="cell metric"><div class="pct gray" style="color:#777;font-size:18px;">100%</div><div class="num" style="color:#000;">' + l.nT + '</div></div>';
     desktopRow += '<div class="cell metric"><div class="pct red" style="color:#ef4444;font-size:18px;">' + l.pctNA + '%</div><div class="num red" style="color:#ef4444;">' + l.nA + '</div></div>';
     desktopRow += '<div class="cell metric"><div class="pct green" style="color:#22c55e;font-size:18px;">' + l.pctNF + '%</div><div class="num green" style="color:#22c55e;">' + l.nF + '</div></div>';
@@ -684,7 +680,6 @@ function render(lojas, ultimaSemana) {
       + '<div class="metric-item"><div class="metric-label" style="color:#000;">P Total</div><div class="metric-value" style="color:#000;">' + l.pT + '</div></div>'
       + '<div class="metric-item"><div class="metric-label" style="color:#000;">P Abertas</div><div class="metric-value red" style="color:#ef4444;">' + l.pA + '</div><div class="metric-percent red" style="color:#ef4444;font-size:14px;">' + l.pctPA + '%</div></div>'
       + '<div class="metric-item"><div class="metric-label" style="color:#000;">P Fechadas</div><div class="metric-value green" style="color:#22c55e;">' + l.pF + '</div><div class="metric-percent green" style="color:#22c55e;font-size:14px;">' + l.pctPF + '%</div></div>'
-      + '<div class="metric-item"><div class="metric-label" style="color:#000;">P N.Fech.</div><div class="metric-value" style="color:#1a1a1a;">' + l.pNF + '</div><div class="metric-percent" style="color:#1a1a1a;font-size:14px;">' + l.pctPNF + '%</div></div>'
       + '<div class="metric-item"><div class="metric-label" style="color:#000;">NP Total</div><div class="metric-value" style="color:#000;">' + l.nT + '</div></div>'
       + '<div class="metric-item"><div class="metric-label" style="color:#000;">NP Abertas</div><div class="metric-value red" style="color:#ef4444;">' + l.nA + '</div><div class="metric-percent red" style="color:#ef4444;font-size:14px;">' + l.pctNA + '%</div></div>'
       + '<div class="metric-item"><div class="metric-label" style="color:#000;">NP Fechadas</div><div class="metric-value green" style="color:#22c55e;">' + l.nF + '</div><div class="metric-percent green" style="color:#22c55e;font-size:14px;">' + l.pctNF + '%</div></div>'
