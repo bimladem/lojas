@@ -79,9 +79,11 @@ body{font-family:'Inter',sans-serif;background:#f9f9f9;color:var(--text);}
 .n2{background:rgba(251,146,60,.15);color:#fb923c;}
 .n3{background:rgba(34,197,94,.15);color:#22c55e;}
 
+.localizacao{flex-direction:column;gap:6px;}
+.localizacao strong{font-size:18px;color:#000;font-weight:800;}
+
 .loja{flex-direction:column;gap:6px;}
 .loja strong{font-size:16px;color:#000;font-weight:800;}
-.local{color:#666;font-size:13px;font-weight:600;}
 
 .metric{flex-direction:column;gap:8px;padding:12px 8px;}
 .metric .pct{font-size:14px;font-weight:700;}
@@ -200,8 +202,8 @@ body{font-family:'Inter',sans-serif;background:#f9f9f9;color:var(--text);}
     flex-direction:column;
     gap:4px;
   }
+  .card-local{font-size:14px;color:#000;font-weight:700;}
   .card-loja{font-size:16px;font-weight:800;color:#000;}
-  .card-local{font-size:13px;color:#000;font-weight:600;}
   .card-metrics{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
@@ -622,7 +624,7 @@ function render(lojas, ultimaSemana) {
     /* DESKTOP ROW */
     var desktopRow = '<div class="row-main">';
     desktopRow += '<div class="cell rank"><div class="rank-num" style="color:#000;">' + (li+1) + '</div><div class="rank-badge ' + badge + '">N' + l.nivel + '</div></div>';
-    desktopRow += '<div class="cell"><div class="local" style="color:#666;">' + (l.local || '—') + '</div></div>';
+    desktopRow += '<div class="cell localizacao"><strong style="color:#000;">' + (l.local || '—') + '</strong></div>';
     desktopRow += '<div class="cell loja"><strong style="color:#000;">' + l.loja + '</strong></div>';
     desktopRow += '<div class="cell metric"><div class="num" style="color:#000;">' + l.pT + '</div></div>';
     desktopRow += '<div class="cell metric"><div class="num red" style="color:#ef4444;">' + l.pA + '</div></div>';
@@ -639,7 +641,7 @@ function render(lojas, ultimaSemana) {
     var mobileCard = '<div class="mobile-card">'
       + '<div class="card-header">'
       + '<div class="card-rank"><div class="card-rank-num" style="color:#000;">' + (li+1) + '</div><div class="card-rank-badge ' + badge + '" style="color:#000;">N' + l.nivel + '</div></div>'
-      + '<div class="card-info"><div class="card-local" style="color:#666;">' + (l.local || '—') + '</div><div class="card-loja" style="color:#000;">' + l.loja + '</div></div>'
+      + '<div class="card-info"><div class="card-local" style="color:#000;">' + (l.local || '—') + '</div><div class="card-loja" style="color:#000;">' + l.loja + '</div></div>'
       + '</div>'
       + '<div class="card-metrics">'
       + '<div class="metric-item"><div class="metric-label" style="color:#000;">P Total</div><div class="metric-value" style="color:#000;">' + l.pT + '</div></div>'
