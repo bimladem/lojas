@@ -15,6 +15,7 @@
   --orange:#fb923c;
   --purple:#8b5cf6;
   --grad:linear-gradient(135deg,#8b5cf6 0%,#ec4899 100%);
+  --text-light:#4a4a4a;
   
   /* Escalas responsivas usando clamp */
   --font-xs: clamp(10px, 0.5vw, 14px);
@@ -35,9 +36,6 @@
   --spacing-xl: clamp(14px, 1.2vw, 28px);
   --spacing-2xl: clamp(16px, 1.5vw, 36px);
   --spacing-3xl: clamp(18px, 2vw, 48px);
-  
-  --cell-min: clamp(50px, 6vw, 120px);
-  --cell-size: clamp(60px, 8vw, 140px);
 }
 
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -80,9 +78,10 @@ body{font-family:'Inter',sans-serif;background:#f9f9f9;color:var(--text);}
 }
 
 .main{
-  max-width:100%;
-  margin:auto;
+  max-width:1600px;
+  margin:0 auto;
   padding:var(--spacing-2xl) var(--spacing-xl);
+  width:100%;
 }
 
 .legend-top{
@@ -104,6 +103,7 @@ body{font-family:'Inter',sans-serif;background:#f9f9f9;color:var(--text);}
   overflow-x:auto;
   -webkit-overflow-scrolling:touch;
   border-radius:24px;
+  margin-bottom:var(--spacing-2xl);
 }
 
 .table-container{
@@ -112,24 +112,24 @@ body{font-family:'Inter',sans-serif;background:#f9f9f9;color:var(--text);}
   overflow:visible;
   box-shadow:0 4px 16px rgba(0,0,0,.06);
   background:#fff;
-  min-width:100%;
+  width:100%;
 }
 
 .table-header{
   display:grid;
   grid-template-columns:
-    var(--cell-min)
-    var(--cell-size)
-    var(--cell-size)
-    var(--cell-min)
-    var(--cell-min)
-    var(--cell-min)
-    var(--cell-min)
-    var(--cell-min)
-    var(--cell-min)
-    clamp(100px, 12vw, 160px)
-    clamp(80px, 10vw, 140px)
-    clamp(80px, 10vw, 140px);
+    minmax(60px, 80px)
+    minmax(130px, 1fr)
+    minmax(130px, 1fr)
+    minmax(90px, 120px)
+    minmax(90px, 120px)
+    minmax(90px, 120px)
+    minmax(90px, 120px)
+    minmax(90px, 120px)
+    minmax(90px, 120px)
+    minmax(130px, 160px)
+    minmax(110px, 140px)
+    minmax(110px, 140px);
   
   background:linear-gradient(135deg,#f8f8f8 0%,#fafafa 100%);
   border-bottom:2px solid var(--border);
@@ -139,16 +139,17 @@ body{font-family:'Inter',sans-serif;background:#f9f9f9;color:var(--text);}
   color:#333;
   padding:0;
   gap:0;
+  min-width:1400px;
 }
 
 .table-header div{
-  padding:var(--spacing-lg) var(--spacing-sm);
+  padding:var(--spacing-lg) var(--spacing-md);
   text-align:center;
   color:#333;
   font-weight:800;
   letter-spacing:.5px;
   word-break:break-word;
-  line-height:1.2;
+  line-height:1.3;
 }
 
 .table-row{
@@ -162,24 +163,25 @@ body{font-family:'Inter',sans-serif;background:#f9f9f9;color:var(--text);}
 .row-main{
   display:grid;
   grid-template-columns:
-    var(--cell-min)
-    var(--cell-size)
-    var(--cell-size)
-    var(--cell-min)
-    var(--cell-min)
-    var(--cell-min)
-    var(--cell-min)
-    var(--cell-min)
-    var(--cell-min)
-    clamp(100px, 12vw, 160px)
-    clamp(80px, 10vw, 140px)
-    clamp(80px, 10vw, 140px);
+    minmax(60px, 80px)
+    minmax(130px, 1fr)
+    minmax(130px, 1fr)
+    minmax(90px, 120px)
+    minmax(90px, 120px)
+    minmax(90px, 120px)
+    minmax(90px, 120px)
+    minmax(90px, 120px)
+    minmax(90px, 120px)
+    minmax(130px, 160px)
+    minmax(110px, 140px)
+    minmax(110px, 140px);
   
   align-items:stretch;
   padding:0;
   gap:0;
   background:#fff;
   border-bottom:2px solid var(--border);
+  min-width:1400px;
 }
 .table-row:last-of-type .row-main {
   border-bottom:none;
@@ -195,17 +197,22 @@ body{font-family:'Inter',sans-serif;background:#f9f9f9;color:var(--text);}
   align-items:center;
   text-align:center;
   flex-direction:column;
-  padding:var(--spacing-lg) var(--spacing-sm);
-  min-height:clamp(60px, 8vw, 100px);
+  padding:var(--spacing-lg) var(--spacing-md);
+  min-height:clamp(80px, 8vw, 120px);
+  border-right:1px solid rgba(0,0,0,.04);
+}
+.cell:last-child{
+  border-right:none;
 }
 
 .rank{flex-direction:column;gap:var(--spacing-xs);}
-.rank-num{font-size:clamp(18px, 2vw, 32px);font-weight:800;color:#000;}
+.rank-num{font-size:clamp(20px, 2.5vw, 40px);font-weight:800;color:#000;}
 .rank-badge{
   padding:var(--spacing-xs) var(--spacing-sm);
   border-radius:10px;
   font-size:var(--font-xs);
   font-weight:800;
+  white-space:nowrap;
 }
 .n1{background:rgba(239,68,68,.15);color:#ef4444;}
 .n2{background:rgba(251,146,60,.15);color:#fb923c;}
@@ -213,7 +220,7 @@ body{font-family:'Inter',sans-serif;background:#f9f9f9;color:var(--text);}
 
 .localizacao{flex-direction:column;gap:var(--spacing-xs);}
 .localizacao strong{
-  font-size:clamp(12px, 1.2vw, 20px);
+  font-size:clamp(13px, 1.3vw, 22px);
   color:#000;
   font-weight:800;
   word-break:break-word;
@@ -221,7 +228,7 @@ body{font-family:'Inter',sans-serif;background:#f9f9f9;color:var(--text);}
 
 .loja{flex-direction:column;gap:var(--spacing-xs);}
 .loja strong{
-  font-size:clamp(11px, 1vw, 18px);
+  font-size:clamp(12px, 1.1vw, 20px);
   color:#000;
   font-weight:800;
 }
@@ -229,19 +236,21 @@ body{font-family:'Inter',sans-serif;background:#f9f9f9;color:var(--text);}
 .metric{flex-direction:column;gap:var(--spacing-sm);padding:var(--spacing-sm) var(--spacing-xs);}
 .metric .pct{font-size:var(--font-base);font-weight:700;}
 .metric .num{
-  font-size:clamp(14px, 1.5vw, 28px);
+  font-size:clamp(16px, 1.8vw, 32px);
   font-weight:800;
+  color:var(--text-light);
 }
+
 .red{color:#ef4444;}
 .green{color:#22c55e;}
 .gray{color:#999;}
 
 .comparison{
   flex-direction:column;
-  gap:var(--spacing-sm);
-  padding:var(--spacing-md);
+  gap:var(--spacing-md);
+  padding:var(--spacing-lg);
   background:linear-gradient(135deg,rgba(139,92,246,.08) 0%,rgba(236,72,153,.08) 100%);
-  border-radius:12px;
+  border-radius:14px;
   border:2px solid rgba(139,92,246,.15);
   justify-content:center;
 }
@@ -257,9 +266,10 @@ body{font-family:'Inter',sans-serif;background:#f9f9f9;color:var(--text);}
   color:#000;
   text-transform:uppercase;
   letter-spacing:.2px;
+  white-space:nowrap;
 }
 .comparison-value{
-  font-size:clamp(14px, 1.3vw, 24px);
+  font-size:clamp(16px, 1.5vw, 28px);
   font-weight:800;
   color:#000;
 }
@@ -273,9 +283,9 @@ body{font-family:'Inter',sans-serif;background:#f9f9f9;color:var(--text);}
 .trend-positive{background:rgba(34,197,94,.12);border:2px solid rgba(34,197,94,.2);}
 .trend-negative{background:rgba(239,68,68,.12);border:2px solid rgba(239,68,68,.2);}
 .trend-neutral{background:rgba(0,0,0,.04);border:2px solid rgba(0,0,0,.08);}
-.trend-icon{font-size:clamp(16px, 1.8vw, 28px);font-weight:800;}
+.trend-icon{font-size:clamp(18px, 2vw, 32px);font-weight:800;}
 .trend-value{
-  font-size:clamp(14px, 1.5vw, 24px);
+  font-size:clamp(16px, 1.8vw, 28px);
   font-weight:800;
   margin-top:var(--spacing-xs);
   color:#000;
@@ -293,12 +303,12 @@ body{font-family:'Inter',sans-serif;background:#f9f9f9;color:var(--text);}
   border:2px solid rgba(139,92,246,.2);
   color:#8b5cf6;
   border-radius:10px;
-  padding:clamp(8px, 0.6vw, 14px) clamp(10px, 1vw, 18px);
+  padding:clamp(8px, 0.6vw, 14px) clamp(12px, 1.2vw, 20px);
   cursor:pointer;
   font-weight:800;
   transition:.3s;
   font-size:var(--font-sm);
-  min-width:clamp(80px, 10vw, 140px);
+  min-width:clamp(90px, 12vw, 140px);
   box-shadow:0 2px 6px rgba(139,92,246,.1);
   white-space:nowrap;
 }
@@ -322,6 +332,7 @@ body{font-family:'Inter',sans-serif;background:#f9f9f9;color:var(--text);}
   padding:var(--spacing-xl);
   background:linear-gradient(135deg,rgba(139,92,246,.03) 0%,rgba(236,72,153,.03) 100%);
   border-top:2px solid var(--border);
+  width:100%;
 }
 .panel-title{
   font-size:var(--font-sm);
@@ -363,7 +374,7 @@ body{font-family:'Inter',sans-serif;background:#f9f9f9;color:var(--text);}
 
 .sections-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill, minmax(clamp(280px, 20vw, 400px), 1fr));
+  grid-template-columns:repeat(auto-fit, minmax(clamp(280px, 25vw, 450px), 1fr));
   gap:var(--spacing-lg);
   margin-top:var(--spacing-lg);
 }
@@ -408,7 +419,7 @@ body{font-family:'Inter',sans-serif;background:#f9f9f9;color:var(--text);}
   font-weight:600;
 }
 .bar{
-  height:clamp(4px, 0.5vw, 8px);
+  height:clamp(5px, 0.6vw, 10px);
   border-radius:6px;
   overflow:hidden;
   background:#eee;
@@ -428,11 +439,17 @@ body{font-family:'Inter',sans-serif;background:#f9f9f9;color:var(--text);}
   color:#333;
   font-size:var(--font-lg);
   box-shadow:0 2px 8px rgba(0,0,0,.04);
+  max-width:1600px;
+  margin-left:auto;
+  margin-right:auto;
 }
 .note strong{color:#000;font-weight:800;}
 
 .acao{
   margin-top:var(--spacing-lg);
+  margin-left:auto;
+  margin-right:auto;
+  max-width:1600px;
   padding:var(--spacing-xl);
   border-radius:18px;
   background:linear-gradient(135deg,rgba(239,68,68,.08) 0%,rgba(239,68,68,.04) 100%);
@@ -444,8 +461,8 @@ body{font-family:'Inter',sans-serif;background:#f9f9f9;color:var(--text);}
   flex-wrap:wrap;
 }
 .acao-icon{
-  font-size:clamp(20px, 2vw, 32px);
-  min-width:clamp(30px, 3vw, 40px);
+  font-size:clamp(22px, 2.2vw, 36px);
+  min-width:clamp(32px, 3vw, 45px);
   flex-shrink:0;
 }
 .acao h3{
@@ -503,7 +520,10 @@ body{font-family:'Inter',sans-serif;background:#f9f9f9;color:var(--text);}
     width:100%;
   }
 
-  .main{padding:var(--spacing-xl) var(--spacing-lg);}
+  .main{
+    padding:var(--spacing-xl) var(--spacing-lg);
+    max-width:100%;
+  }
 
   .table-wrapper{display:none;}
   body{overflow-x:hidden;}
@@ -542,7 +562,7 @@ body{font-family:'Inter',sans-serif;background:#f9f9f9;color:var(--text);}
     gap:var(--spacing-xs);
   }
   .card-rank-num{
-    font-size:clamp(16px, 3.5vw, 24px);
+    font-size:clamp(18px, 4vw, 28px);
     font-weight:800;
     color:#000;
   }
@@ -591,9 +611,9 @@ body{font-family:'Inter',sans-serif;background:#f9f9f9;color:var(--text);}
     text-align:center;
   }
   .metric-value{
-    font-size:clamp(14px, 3vw, 20px);
+    font-size:clamp(14px, 3.5vw, 22px);
     font-weight:800;
-    color:#000;
+    color:var(--text-light);
   }
   .metric-percent{
     font-size:var(--font-sm);
@@ -611,11 +631,11 @@ body{font-family:'Inter',sans-serif;background:#f9f9f9;color:var(--text);}
     margin-bottom:var(--spacing-lg);
   }
   .card-trend .trend-icon{
-    font-size:clamp(16px, 3.5vw, 24px);
+    font-size:clamp(18px, 4vw, 28px);
     font-weight:800;
   }
   .card-trend .trend-value{
-    font-size:clamp(14px, 3vw, 20px);
+    font-size:clamp(14px, 3.5vw, 22px);
     font-weight:800;
     color:#000;
   }
@@ -680,7 +700,7 @@ body{font-family:'Inter',sans-serif;background:#f9f9f9;color:var(--text);}
     margin-bottom:var(--spacing-sm);
   }
   .bar{
-    height:clamp(3px, 0.8vw, 6px);
+    height:clamp(4px, 1vw, 7px);
     margin-bottom:var(--spacing-lg);
   }
   .note{
@@ -816,10 +836,11 @@ fetch('dados.json?t=' + Date.now())
         };
       });
 
-    /* Ordenar por NÍVEL (N1, N2, N3) e depois por P fechadas dentro de cada nível */
+    /* Ordenar por NÍVEL (N1, N2, N3) - pior para melhor
+       Dentro de cada nível, ordenar por % de P fechadas DECRESCENTE (maior % primeiro) */
     lojas.sort(function(a, b) {
       if (a.nivel !== b.nivel) return a.nivel - b.nivel;
-      return b.pF - a.pF;
+      return Number(b.pctPF) - Number(a.pctPF);
     });
 
     var ids = {};
@@ -981,13 +1002,13 @@ function render(lojas, ultimaSemana) {
     desktopRow += '<div class="cell rank"><div class="rank-num" style="color:#000;">' + (li+1) + '</div><div class="rank-badge ' + badge + '">N' + l.nivel + '</div></div>';
     desktopRow += '<div class="cell localizacao"><strong style="color:#000;">' + (l.local || '—') + '</strong></div>';
     desktopRow += '<div class="cell loja"><strong style="color:#000;">' + l.loja + '</strong></div>';
-    desktopRow += '<div class="cell metric"><div class="num" style="color:#000;">' + l.pT + '</div></div>';
-    desktopRow += '<div class="cell metric"><div class="num red" style="color:#ef4444;">' + l.pA + '</div></div>';
-    desktopRow += '<div class="cell metric"><div class="num green" style="color:#22c55e;">' + l.pF + '</div></div>';
-    desktopRow += '<div class="cell metric"><div class="num" style="color:#000;">' + l.nT + '</div></div>';
-    desktopRow += '<div class="cell metric"><div class="num red" style="color:#ef4444;">' + l.nA + '</div></div>';
-    desktopRow += '<div class="cell metric"><div class="num green" style="color:#22c55e;">' + l.nF + '</div></div>';
-    desktopRow += '<div class="cell comparison"><div class="comparison-item"><div class="comparison-label">Prog.</div><div class="comparison-value" style="color:#000;">' + l.pctPF + '%</div></div><div class="comparison-item"><div class="comparison-label">N.Prog.</div><div class="comparison-value" style="color:#000;">' + l.pctNF + '%</div></div></div>';
+    desktopRow += '<div class="cell metric"><div class="num">' + l.pT + '</div></div>';
+    desktopRow += '<div class="cell metric"><div class="num">' + l.pA + '</div></div>';
+    desktopRow += '<div class="cell metric"><div class="num">' + l.pF + '</div></div>';
+    desktopRow += '<div class="cell metric"><div class="num">' + l.nT + '</div></div>';
+    desktopRow += '<div class="cell metric"><div class="num">' + l.nA + '</div></div>';
+    desktopRow += '<div class="cell metric"><div class="num">' + l.nF + '</div></div>';
+    desktopRow += '<div class="cell comparison"><div class="comparison-item"><div class="comparison-label">Programadas</div><div class="comparison-value" style="color:#000;">' + l.pctPF + '%</div></div><div class="comparison-item"><div class="comparison-label">Não Prog.</div><div class="comparison-value" style="color:#000;">' + l.pctNF + '%</div></div></div>';
     desktopRow += '<div class="cell"><button class="btn" id="btnhist-' + li + '" onclick="toggleHist(' + li + ')">Histórico</button></div>';
     desktopRow += '<div class="cell"><button class="btn" id="btnsec-' + li + '" onclick="toggleSec(' + li + ')">Secções</button></div>';
     desktopRow += '</div>';
@@ -999,12 +1020,12 @@ function render(lojas, ultimaSemana) {
       + '<div class="card-info"><div class="card-local" style="color:#000;">' + (l.local || '—') + '</div><div class="card-loja" style="color:#000;">' + l.loja + '</div></div>'
       + '</div>'
       + '<div class="card-metrics">'
-      + '<div class="metric-item"><div class="metric-label" style="color:#000;">P Tot</div><div class="metric-value" style="color:#000;">' + l.pT + '</div></div>'
-      + '<div class="metric-item"><div class="metric-label" style="color:#000;">P Abr</div><div class="metric-value red" style="color:#ef4444;">' + l.pA + '</div></div>'
-      + '<div class="metric-item"><div class="metric-label" style="color:#000;">P Fec</div><div class="metric-value green" style="color:#22c55e;">' + l.pF + '</div></div>'
-      + '<div class="metric-item"><div class="metric-label" style="color:#000;">NP Tot</div><div class="metric-value" style="color:#000;">' + l.nT + '</div></div>'
-      + '<div class="metric-item"><div class="metric-label" style="color:#000;">NP Abr</div><div class="metric-value red" style="color:#ef4444;">' + l.nA + '</div></div>'
-      + '<div class="metric-item"><div class="metric-label" style="color:#000;">NP Fec</div><div class="metric-value green" style="color:#22c55e;">' + l.nF + '</div></div>'
+      + '<div class="metric-item"><div class="metric-label" style="color:#000;">P Tot</div><div class="metric-value">' + l.pT + '</div></div>'
+      + '<div class="metric-item"><div class="metric-label" style="color:#000;">P Abr</div><div class="metric-value">' + l.pA + '</div></div>'
+      + '<div class="metric-item"><div class="metric-label" style="color:#000;">P Fec</div><div class="metric-value">' + l.pF + '</div></div>'
+      + '<div class="metric-item"><div class="metric-label" style="color:#000;">NP Tot</div><div class="metric-value">' + l.nT + '</div></div>'
+      + '<div class="metric-item"><div class="metric-label" style="color:#000;">NP Abr</div><div class="metric-value">' + l.nA + '</div></div>'
+      + '<div class="metric-item"><div class="metric-label" style="color:#000;">NP Fec</div><div class="metric-value">' + l.nF + '</div></div>'
       + '</div>'
       + '<div class="card-trend"><div class="trend-icon">' + icon + '</div><div class="trend-value" style="color:#000;">' + diffVal + '</div><div class="trend-text" style="color:#000;">P Fechadas<br>' + texto + '</div></div>'
       + '<div class="card-actions">'
