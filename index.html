@@ -33,11 +33,23 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);}
 
 .main{max-width:1900px;margin:auto;padding:24px;}
 
+.legend-top{
+  background:#f5f5f5;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+  margin-bottom:28px;
+  text-align:center;
+  font-size:14px;
+  line-height:1.8;
+}
+.legend-top strong{color:#000;font-weight:800;}
+
 .table-container{border:1px solid var(--border);border-radius:20px;overflow:hidden;}
 
 .table-header{
   display:grid;
-  grid-template-columns:90px 220px 180px 120px 120px 120px 120px 120px 120px 180px 120px 120px;
+  grid-template-columns:90px 220px 180px 120px 120px 120px 120px 120px 120px 120px 180px 120px 120px;
   background:#fafafa;border-bottom:1px solid var(--border);
   font-size:13px;font-weight:800;text-transform:uppercase;color:#666;
 }
@@ -48,7 +60,7 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);}
 
 .row-main{
   display:grid;
-  grid-template-columns:90px 220px 180px 120px 120px 120px 120px 120px 120px 180px 120px 120px;
+  grid-template-columns:90px 220px 180px 120px 120px 120px 120px 120px 120px 120px 180px 120px 120px;
   align-items:center;padding:18px 10px;transition:.2s;
 }
 .row-main:hover{background:rgba(139,92,246,.03);}
@@ -206,13 +218,16 @@ fetch('dados.json?t=' + Date.now())
         var nA = Number(i['NP Aberto'])  || 0;
         var nF = Number(i['NP Fechado']) || 0;
 
+        var pNF = pT - pF;
         var pctPA  = pT > 0 ? (pA / pT * 100) : 0;
         var pctPF  = pT > 0 ? (pF / pT * 100) : 0;
+        var pctPNF = pT > 0 ? (pNF / pT * 100) : 0;
         var pctNA  = nT > 0 ? (nA / nT * 100) : 0;
         var pctNF  = nT > 0 ? (nF / nT * 100) : 0;
 
-        /* Nível baseado em % P fechadas — mais fechadas = melhor */
-        var nivel = pctPF >= 80 ? 3 : pctPF >= 50 ? 2 : 1;
+        /* Nível baseado em % P fechadas:
+           N1: 0-20%, N2: 21-40%, N3: 41-50% */
+        var nivel = pctPF >= 41 ? 3 : pctPF >= 21 ? 2 : 1;
 
         var loc = String(
           i['Resumo contactos.Localidade'] ||
@@ -222,9 +237,10 @@ fetch('dados.json?t=' + Date.now())
         return {
           loja: String(i.Loja).trim(),
           local: loc,
-          pT, pA, pF, nT, nA, nF,
+          pT, pA, pF, pNF, nT, nA, nF,
           pctPA:  pctPA.toFixed(1),
           pctPF:  pctPF.toFixed(1),
+          pctPNF: pctPNF.toFixed(1),
           pctNA:  pctNA.toFixed(1),
           pctNF:  pctNF.toFixed(1),
           nivel,
@@ -318,12 +334,18 @@ fetch('dados.json?t=' + Date.now())
 function render(lojas, ultimaSemana) {
   var html = '';
 
+  /* LEGEND NO TOPO */
+  html += '<div class="legend-top">'
+    + '<strong>P</strong> = Tarefas Programadas &nbsp;&nbsp; | &nbsp;&nbsp; '
+    + '<strong>NP</strong> = Tarefas Não Programadas'
+    + '</div>';
+
   html += '<div class="table-container">';
 
   /* HEADER */
   html += '<div class="table-header">';
   html += '<div>Rank</div><div>Loja</div><div>Localização</div>';
-  html += '<div>P Total</div><div>P Abertas</div><div>P Fechadas</div>';
+  html += '<div>P Total</div><div>P Abertas</div><div>P Fechadas</div><div>P Não Fechadas</div>';
   html += '<div>NP Total</div><div>NP Abertas</div><div>NP Fechadas</div>';
   html += '<div>Tendência</div><div>Histórico</div><div>Secções</div>';
   html += '</div>';
@@ -376,15 +398,15 @@ function render(lojas, ultimaSemana) {
             + '<div class="section-head">' + s.nome + '</div>'
             + '<div class="section-body">'
             + '<div class="sec-cat">Programadas</div>'
-            + '<div class="sec-line"><span>Fechadas</span><strong class="green">' + s.pF + ' (' + pctPF_s + '%)</strong></div>'
-            + '<div class="bar"><div class="fill-green" style="width:' + Math.min(100, pctPF_s) + '%"></div></div>'
             + '<div class="sec-line"><span>Abertas</span><strong class="red">' + s.pA + ' (' + pctPA_s + '%)</strong></div>'
             + '<div class="bar"><div class="fill-red" style="width:' + Math.min(100, pctPA_s) + '%"></div></div>'
+            + '<div class="sec-line"><span>Fechadas</span><strong class="green">' + s.pF + ' (' + pctPF_s + '%)</strong></div>'
+            + '<div class="bar"><div class="fill-green" style="width:' + Math.min(100, pctPF_s) + '%"></div></div>'
             + '<div class="sec-cat">Não Programadas</div>'
-            + '<div class="sec-line"><span>Fechadas</span><strong class="green">' + s.nF + ' (' + pctNF_s + '%)</strong></div>'
-            + '<div class="bar"><div class="fill-green" style="width:' + Math.min(100, pctNF_s) + '%"></div></div>'
             + '<div class="sec-line"><span>Abertas</span><strong class="red">' + s.nA + ' (' + pctNA_s + '%)</strong></div>'
             + '<div class="bar"><div class="fill-red" style="width:' + Math.min(100, pctNA_s) + '%"></div></div>'
+            + '<div class="sec-line"><span>Fechadas</span><strong class="green">' + s.nF + ' (' + pctNF_s + '%)</strong></div>'
+            + '<div class="bar"><div class="fill-green" style="width:' + Math.min(100, pctNF_s) + '%"></div></div>'
             + '</div></div>';
         }).join('')
       : '<p style="color:#aaa;font-size:13px">Sem secções disponíveis.</p>';
@@ -403,6 +425,8 @@ function render(lojas, ultimaSemana) {
     html += '<div class="cell metric"><div class="pct red">' + l.pctPA + '%</div><div class="num red">' + l.pA + '</div></div>';
 
     html += '<div class="cell metric"><div class="pct green">' + l.pctPF + '%</div><div class="num green">' + l.pF + '</div></div>';
+
+    html += '<div class="cell metric"><div class="pct red">' + l.pctPNF + '%</div><div class="num red">' + l.pNF + '</div></div>';
 
     html += '<div class="cell metric"><div class="pct gray">100%</div><div class="num">' + l.nT + '</div></div>';
 
@@ -437,13 +461,10 @@ function render(lojas, ultimaSemana) {
   html += '</div>'; /* table-container */
 
   html += '<div class="note">'
-    + '<strong>Legenda</strong><br><br>'
-    + '<strong>P</strong> = Tarefas Programadas &nbsp;&nbsp; | &nbsp;&nbsp; '
-    + '<strong>NP</strong> = Tarefas Não Programadas<br><br>'
     + '<strong>Níveis das lojas — baseados em % de tarefas programadas fechadas</strong><br>'
-    + '<span style="color:#ef4444;font-weight:800">N1</span> · menos de 50% fechadas &nbsp;&nbsp;'
-    + '<span style="color:#fb923c;font-weight:800">N2</span> · entre 50% e 79% fechadas &nbsp;&nbsp;'
-    + '<span style="color:#22c55e;font-weight:800">N3</span> · 80% ou mais fechadas'
+    + '<span style="color:#ef4444;font-weight:800">N1</span> · 0-20% fechadas &nbsp;&nbsp;'
+    + '<span style="color:#fb923c;font-weight:800">N2</span> · 21-40% fechadas &nbsp;&nbsp;'
+    + '<span style="color:#22c55e;font-weight:800">N3</span> · 41%+ fechadas'
     + '</div>';
 
   html += '<div class="acao">'
