@@ -79,8 +79,8 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);}
 .local{color:#000;font-size:16px;font-weight:600;}
 
 .metric{flex-direction:column;gap:5px;}
-.metric .pct{font-size:14px;font-weight:800;color:#1a1a1a;}
-.metric .num{font-size:14px;font-weight:700;color:#1a1a1a;}
+.metric .pct{font-size:14px;font-weight:800;}
+.metric .num{font-size:14px;font-weight:700;}
 .red{color:#ef4444;}
 .green{color:#22c55e;}
 .gray{color:#777;}
@@ -99,7 +99,7 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);}
   gap:2px;
 }
 .comparison-label{font-size:10px;font-weight:700;color:#000;text-transform:uppercase;}
-.comparison-value{font-size:20px;font-weight:800;}
+.comparison-value{font-size:20px;font-weight:800;color:#000;}
 .comp-p{color:#8b5cf6;}
 .comp-np{color:#22c55e;}
 
@@ -662,14 +662,14 @@ function render(lojas, ultimaSemana) {
     desktopRow += '<div class="cell rank"><div class="rank-num" style="color:#000;">' + (li+1) + '</div><div class="rank-badge ' + badge + '">N' + l.nivel + '</div></div>';
     desktopRow += '<div class="cell loja"><strong style="color:#000;">' + l.loja + '</strong></div>';
     desktopRow += '<div class="cell"><div class="local" style="color:#000;">' + (l.local || '—') + '</div></div>';
-    desktopRow += '<div class="cell metric"><div class="pct gray" style="color:#000;">100%</div><div class="num" style="color:#000;">' + l.pT + '</div></div>';
-    desktopRow += '<div class="cell metric"><div class="pct" style="color:#000;">' + l.pctPA + '%</div><div class="num" style="color:#000;">' + l.pA + '</div></div>';
-    desktopRow += '<div class="cell metric"><div class="pct" style="color:#000;">' + l.pctPF + '%</div><div class="num" style="color:#000;">' + l.pF + '</div></div>';
-    desktopRow += '<div class="cell metric"><div class="pct" style="color:#000;">' + l.pctPNF + '%</div><div class="num" style="color:#000;">' + l.pNF + '</div></div>';
-    desktopRow += '<div class="cell metric"><div class="pct gray" style="color:#000;">100%</div><div class="num" style="color:#000;">' + l.nT + '</div></div>';
-    desktopRow += '<div class="cell metric"><div class="pct" style="color:#000;">' + l.pctNA + '%</div><div class="num" style="color:#000;">' + l.nA + '</div></div>';
-    desktopRow += '<div class="cell metric"><div class="pct" style="color:#000;">' + l.pctNF + '%</div><div class="num" style="color:#000;">' + l.nF + '</div></div>';
-    desktopRow += '<div class="cell comparison"><div class="comparison-item"><div class="comparison-label">P Fechadas</div><div class="comparison-value comp-p">' + l.pctPF + '%</div></div><div class="comparison-item"><div class="comparison-label">NP Fechadas</div><div class="comparison-value comp-np">' + l.pctNF + '%</div></div></div>';
+    desktopRow += '<div class="cell metric"><div class="pct gray" style="color:#777;">100%</div><div class="num" style="color:#000;">' + l.pT + '</div></div>';
+    desktopRow += '<div class="cell metric"><div class="pct red" style="color:#ef4444;">' + l.pctPA + '%</div><div class="num red" style="color:#ef4444;">' + l.pA + '</div></div>';
+    desktopRow += '<div class="cell metric"><div class="pct green" style="color:#22c55e;">' + l.pctPF + '%</div><div class="num green" style="color:#22c55e;">' + l.pF + '</div></div>';
+    desktopRow += '<div class="cell metric"><div class="pct" style="color:#1a1a1a;">' + l.pctPNF + '%</div><div class="num" style="color:#1a1a1a;">' + l.pNF + '</div></div>';
+    desktopRow += '<div class="cell metric"><div class="pct gray" style="color:#777;">100%</div><div class="num" style="color:#000;">' + l.nT + '</div></div>';
+    desktopRow += '<div class="cell metric"><div class="pct red" style="color:#ef4444;">' + l.pctNA + '%</div><div class="num red" style="color:#ef4444;">' + l.nA + '</div></div>';
+    desktopRow += '<div class="cell metric"><div class="pct green" style="color:#22c55e;">' + l.pctNF + '%</div><div class="num green" style="color:#22c55e;">' + l.nF + '</div></div>';
+    desktopRow += '<div class="cell comparison"><div class="comparison-item"><div class="comparison-label">Programadas</div><div class="comparison-value comp-p" style="color:#000;">' + l.pctPF + '%</div></div><div class="comparison-item"><div class="comparison-label">Não Programadas</div><div class="comparison-value comp-np" style="color:#000;">' + l.pctNF + '%</div></div></div>';
     desktopRow += '<div class="cell"><button class="btn" id="btnhist-' + li + '" onclick="toggleHist(' + li + ')">Histórico</button></div>';
     desktopRow += '<div class="cell"><button class="btn" id="btnsec-' + li + '" onclick="toggleSec(' + li + ')">Secções</button></div>';
     desktopRow += '</div>';
@@ -682,12 +682,12 @@ function render(lojas, ultimaSemana) {
       + '</div>'
       + '<div class="card-metrics">'
       + '<div class="metric-item"><div class="metric-label" style="color:#000;">P Total</div><div class="metric-value" style="color:#000;">' + l.pT + '</div></div>'
-      + '<div class="metric-item"><div class="metric-label" style="color:#000;">P Abertas</div><div class="metric-value" style="color:#000;">' + l.pA + '</div><div class="metric-percent" style="color:#000;">' + l.pctPA + '%</div></div>'
-      + '<div class="metric-item"><div class="metric-label" style="color:#000;">P Fechadas</div><div class="metric-value" style="color:#000;">' + l.pF + '</div><div class="metric-percent" style="color:#000;">' + l.pctPF + '%</div></div>'
-      + '<div class="metric-item"><div class="metric-label" style="color:#000;">P N.Fech.</div><div class="metric-value" style="color:#000;">' + l.pNF + '</div><div class="metric-percent" style="color:#000;">' + l.pctPNF + '%</div></div>'
+      + '<div class="metric-item"><div class="metric-label" style="color:#000;">P Abertas</div><div class="metric-value red" style="color:#ef4444;">' + l.pA + '</div><div class="metric-percent red" style="color:#ef4444;">' + l.pctPA + '%</div></div>'
+      + '<div class="metric-item"><div class="metric-label" style="color:#000;">P Fechadas</div><div class="metric-value green" style="color:#22c55e;">' + l.pF + '</div><div class="metric-percent green" style="color:#22c55e;">' + l.pctPF + '%</div></div>'
+      + '<div class="metric-item"><div class="metric-label" style="color:#000;">P N.Fech.</div><div class="metric-value" style="color:#1a1a1a;">' + l.pNF + '</div><div class="metric-percent" style="color:#1a1a1a;">' + l.pctPNF + '%</div></div>'
       + '<div class="metric-item"><div class="metric-label" style="color:#000;">NP Total</div><div class="metric-value" style="color:#000;">' + l.nT + '</div></div>'
-      + '<div class="metric-item"><div class="metric-label" style="color:#000;">NP Abertas</div><div class="metric-value" style="color:#000;">' + l.nA + '</div><div class="metric-percent" style="color:#000;">' + l.pctNA + '%</div></div>'
-      + '<div class="metric-item"><div class="metric-label" style="color:#000;">NP Fechadas</div><div class="metric-value" style="color:#000;">' + l.nF + '</div><div class="metric-percent" style="color:#000;">' + l.pctNF + '%</div></div>'
+      + '<div class="metric-item"><div class="metric-label" style="color:#000;">NP Abertas</div><div class="metric-value red" style="color:#ef4444;">' + l.nA + '</div><div class="metric-percent red" style="color:#ef4444;">' + l.pctNA + '%</div></div>'
+      + '<div class="metric-item"><div class="metric-label" style="color:#000;">NP Fechadas</div><div class="metric-value green" style="color:#22c55e;">' + l.nF + '</div><div class="metric-percent green" style="color:#22c55e;">' + l.pctNF + '%</div></div>'
       + '</div>'
       + '<div class="card-trend"><div class="trend-icon">' + icon + '</div><div class="trend-value" style="color:#000;">' + diffVal + '</div><div class="trend-text" style="color:#000;">P Fechadas<br>' + texto + '</div></div>'
       + '<div class="card-actions">'
