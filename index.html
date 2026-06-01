@@ -133,7 +133,7 @@ body{font-family:'Inter',sans-serif;background:#f9f9f9;color:var(--text);}
   
   background:linear-gradient(135deg,#f8f8f8 0%,#fafafa 100%);
   border-bottom:2px solid var(--border);
-  font-size:clamp(11px, 0.8vw, 13px);
+  font-size:var(--font-xs);
   font-weight:800;
   text-transform:uppercase;
   color:#333;
@@ -484,7 +484,7 @@ body{font-family:'Inter',sans-serif;background:#f9f9f9;color:var(--text);}
   font-size:var(--font-lg);
 }
 
-.mobile-card{display:block;}
+.mobile-card{display:none;}
 
 /* MOBILE (768px e menos) */
 @media(max-width:768px){
@@ -509,35 +509,6 @@ body{font-family:'Inter',sans-serif;background:#f9f9f9;color:var(--text);}
     --spacing-3xl: clamp(16px, 4vw, 24px);
   }
 
-  .table-wrapper{
-    display:none;
-  }
-  
-  .table-row {
-    display:block !important;
-    border:none;
-    margin-bottom:var(--spacing-lg);
-    border-radius:12px;
-    overflow:hidden;
-    box-shadow:0 2px 8px rgba(0,0,0,.05);
-  }
-  
-  .row-main {
-    display:none !important;
-  }
-  
-  .table-header {
-    display:none !important;
-  }
-  
-  .cell {
-    display:none !important;
-  }
-  
-  .panel {
-    display:block !important;
-  }
-
   .header{
     padding:var(--spacing-lg) var(--spacing-xl);
     flex-direction:column;
@@ -554,7 +525,18 @@ body{font-family:'Inter',sans-serif;background:#f9f9f9;color:var(--text);}
     max-width:100%;
   }
 
+  .table-wrapper{display:none;}
   body{overflow-x:hidden;}
+
+  .table-row{
+    display:block;
+    border:none;
+    margin-bottom:var(--spacing-lg);
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 2px 8px rgba(0,0,0,.05);
+  }
+  .table-row:last-of-type{margin-bottom:0;}
 
   .mobile-card{
     display:block;
@@ -848,8 +830,6 @@ fetch('dados.json?t=' + Date.now())
           pctPF:  pctPF.toFixed(1),
           pctNA:  pctNA.toFixed(1),
           pctNF:  pctNF.toFixed(1),
-          pctPFInt: Math.round(pctPF),
-          pctNFInt: Math.round(pctNF),
           nivel,
           historico: [],
           seccoes: []
@@ -1028,7 +1008,7 @@ function render(lojas, ultimaSemana) {
     desktopRow += '<div class="cell metric"><div class="num">' + l.nT + '</div></div>';
     desktopRow += '<div class="cell metric"><div class="num">' + l.nA + '</div></div>';
     desktopRow += '<div class="cell metric"><div class="num">' + l.nF + '</div></div>';
-    desktopRow += '<div class="cell comparison"><div class="comparison-item"><div class="comparison-label">Programadas</div><div class="comparison-value" style="color:var(--text-light);">' + l.pctPFInt + '%</div></div><div class="comparison-item"><div class="comparison-label">Não Prog.</div><div class="comparison-value" style="color:var(--text-light);">' + l.pctNFInt + '%</div></div></div>';
+    desktopRow += '<div class="cell comparison"><div class="comparison-item"><div class="comparison-label">Programadas</div><div class="comparison-value" style="color:var(--text-light);">' + l.pctPF + '%</div></div><div class="comparison-item"><div class="comparison-label">Não Prog.</div><div class="comparison-value" style="color:var(--text-light);">' + l.pctNF + '%</div></div></div>';
     desktopRow += '<div class="cell"><button class="btn" id="btnhist-' + li + '" onclick="toggleHist(' + li + ')">Histórico</button></div>';
     desktopRow += '<div class="cell"><button class="btn" id="btnsec-' + li + '" onclick="toggleSec(' + li + ')">Secções</button></div>';
     desktopRow += '</div>';
