@@ -31,7 +31,9 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);}
 .header-title .sub{margin-top:4px;color:var(--muted);font-size:14px;}
 .header-period{background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.15);padding:10px 18px;border-radius:12px;font-weight:800;color:var(--purple);}
 
-.main{max-width:1900px;margin:auto;padding:24px;}
+.main{max-width:100%;margin:auto;padding:24px;display:flex;justify-content:center;}
+
+.main-content{width:100%;overflow-x:auto;}
 
 .legend-top{
   background:#f5f5f5;
@@ -49,23 +51,27 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);}
 
 .table-header{
   display:grid;
-  grid-template-columns:90px 180px 220px 100px 100px 100px 100px 100px 100px 120px 180px 120px 120px;
+  grid-template-columns:90px 180px 220px 100px 100px 100px 100px 100px 100px 140px 180px 120px 120px;
   background:#fafafa;border-bottom:1px solid var(--border);
   font-size:13px;font-weight:800;text-transform:uppercase;color:#666;
+  min-width:1600px;
 }
-.table-header div{padding:18px 10px;text-align:center;}
+.table-header div{padding:18px 10px;text-align:center;border-right:1px solid var(--border);}
+.table-header div:last-child{border-right:none;}
 
 .table-row{border-bottom:1px solid var(--border);}
 .table-row:last-of-type{border-bottom:none;}
 
 .row-main{
   display:grid;
-  grid-template-columns:90px 180px 220px 100px 100px 100px 100px 100px 100px 120px 180px 120px 120px;
+  grid-template-columns:90px 180px 220px 100px 100px 100px 100px 100px 100px 140px 180px 120px 120px;
   align-items:center;padding:18px 10px;transition:.2s;
+  min-width:1600px;
 }
 .row-main:hover{background:rgba(139,92,246,.03);}
 
-.cell{display:flex;justify-content:center;align-items:center;text-align:center;}
+.cell{display:flex;justify-content:center;align-items:center;text-align:center;border-right:1px solid var(--border);}
+.cell:last-child{border-right:none;}
 
 .rank{flex-direction:column;gap:8px;}
 .rank-num{font-size:28px;font-weight:800;}
@@ -99,9 +105,10 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);}
   border-radius:8px;
   overflow:hidden;
   display:flex;
+  gap:2px;
 }
-.comp-programadas{background:rgba(139,92,246,.2);flex:1;}
-.comp-nao-prog{background:rgba(34,197,94,.2);flex:1;}
+.comp-p-fechadas{background:rgba(139,92,246,.3);}
+.comp-np-fechadas{background:rgba(34,197,94,.3);}
 
 .trend{flex-direction:column;}
 .trend-box{padding:12px;border-radius:14px;width:100%;}
@@ -158,6 +165,9 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);}
 
 /* MOBILE */
 @media(max-width:768px){
+  .main{padding:12px;}
+  .main-content{width:100%;overflow-x:hidden;}
+
   /* HIDE DESKTOP TABLE */
   .table-header{display:none;}
   .row-main{
@@ -357,11 +367,6 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);}
   .header-title .sub{font-size:12px;}
   .header-period{font-size:12px;padding:6px 12px;}
 
-  .main{
-    padding:12px;
-    max-width:100%;
-  }
-
   .legend-top{
     padding:12px;
     font-size:12px;
@@ -414,7 +419,9 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);}
 </header>
 
 <main class="main">
-  <div id="app"><div class="loading">⏳ A carregar dados...</div></div>
+  <div class="main-content">
+    <div id="app"><div class="loading">⏳ A carregar dados...</div></div>
+  </div>
 </main>
 
 <script>
@@ -587,7 +594,7 @@ function render(lojas, ultimaSemana) {
   html += '<div class="table-header">';
   html += '<div>Rank</div><div>Localização</div><div>Loja</div>';
   html += '<div>P Total</div><div>P Aberto</div><div>P Fechado</div><div>NP Total</div><div>NP Aberto</div><div>NP Fechado</div>';
-  html += '<div>Comparação</div><div>Tendência</div><div>Histórico</div><div>Secções</div>';
+  html += '<div>P Fech. vs NP Fech.</div><div>Tendência</div><div>Histórico</div><div>Secções</div>';
   html += '</div>';
 
   lojas.forEach(function(l, li) {
@@ -599,8 +606,8 @@ function render(lojas, ultimaSemana) {
               : 'Sem alterações';
     var diffVal = l.diff !== null ? (l.diff > 0 ? '+' + l.diff : l.diff) : '—';
 
-    var pctProg = l.pT > 0 ? (l.pT / (l.pT + l.nT) * 100) : 0;
-    var pctNaoProg = l.nT > 0 ? (l.nT / (l.pT + l.nT) * 100) : 0;
+    var pctPFechadas = l.pT > 0 ? (l.pF / l.pT * 100) : 0;
+    var pctNPFechadas = l.nT > 0 ? (l.nF / l.nT * 100) : 0;
 
     /* HISTÓRICO PANEL */
     var histRows = l.historico.map(function(h) {
@@ -665,7 +672,7 @@ function render(lojas, ultimaSemana) {
     desktopRow += '<div class="cell metric"><div class="pct gray">100%</div><div class="num">' + l.nT + '</div></div>';
     desktopRow += '<div class="cell metric"><div class="pct gray">' + (l.nT > 0 ? ((l.nA/l.nT*100).toFixed(1)) : '0.0') + '%</div><div class="num">' + l.nA + '</div></div>';
     desktopRow += '<div class="cell metric"><div class="pct gray">' + (l.nT > 0 ? ((l.nF/l.nT*100).toFixed(1)) : '0.0') + '%</div><div class="num">' + l.nF + '</div></div>';
-    desktopRow += '<div class="cell comparison"><div class="comparison-label">Prog vs Não Prog</div><div class="comparison-bar"><div class="comp-programadas" style="flex:' + pctProg + '"></div><div class="comp-nao-prog" style="flex:' + pctNaoProg + '"></div></div></div>';
+    desktopRow += '<div class="cell comparison"><div class="comparison-label">P Fech. vs NP Fech.</div><div class="comparison-bar"><div class="comp-p-fechadas" style="flex:' + pctPFechadas + ';"></div><div class="comp-np-fechadas" style="flex:' + pctNPFechadas + ';"></div></div></div>';
     desktopRow += '<div class="cell trend"><div class="trend-box ' + tClass + '">'
       + '<div class="trend-icon">' + icon + '</div>'
       + '<div class="trend-value">' + diffVal + '</div>'
@@ -689,7 +696,7 @@ function render(lojas, ultimaSemana) {
       + '<div class="metric-item"><div class="metric-label">NP Aberto</div><div class="metric-value">' + l.nA + '</div><div class="metric-percent">' + (l.nT > 0 ? ((l.nA/l.nT*100).toFixed(1)) : '0.0') + '%</div></div>'
       + '<div class="metric-item"><div class="metric-label">NP Fechado</div><div class="metric-value">' + l.nF + '</div><div class="metric-percent">' + (l.nT > 0 ? ((l.nF/l.nT*100).toFixed(1)) : '0.0') + '%</div></div>'
       + '</div>'
-      + '<div class="card-comparison"><div class="card-comparison-label">Comparação P vs NP</div><div class="card-comparison-bar"><div class="comp-programadas" style="flex:' + pctProg + ';"></div><div class="comp-nao-prog" style="flex:' + pctNaoProg + ';"></div></div></div>'
+      + '<div class="card-comparison"><div class="card-comparison-label">P Fech. vs NP Fech.</div><div class="card-comparison-bar"><div class="comp-p-fechadas" style="flex:' + pctPFechadas + ';"></div><div class="comp-np-fechadas" style="flex:' + pctNPFechadas + ';"></div></div></div>'
       + '<div class="card-trend"><div class="trend-icon">' + icon + '</div><div class="trend-value">' + diffVal + '</div><div class="trend-text">P Fechadas<br>' + texto + '</div></div>'
       + '<div class="card-actions">'
       + '<button class="btn" id="btnhist-' + li + '" onclick="toggleHist(' + li + ')">Histórico</button>'
@@ -714,6 +721,12 @@ function render(lojas, ultimaSemana) {
   });
 
   html += '</div>';
+
+  html += '<div class="legend-top" style="margin-top:28px;">'
+    + '<strong style="color:#8b5cf6">Comparação P Fech. vs NP Fech.:</strong><br>'
+    + '<span style="display:inline-block;width:12px;height:12px;background:rgba(139,92,246,.3);border-radius:2px;margin-right:6px;vertical-align:middle;"></span>% de Tarefas Programadas Fechadas '
+    + '<span style="display:inline-block;width:12px;height:12px;background:rgba(34,197,94,.3);border-radius:2px;margin:0 6px 0 16px;vertical-align:middle;"></span>% de Tarefas Não Programadas Fechadas'
+    + '</div>';
 
   html += '<div class="note">'
     + '<strong>Níveis das lojas — baseados em % de tarefas programadas fechadas</strong><br>'
