@@ -94,35 +94,20 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);}
 
 .comparison{
   flex-direction:column;
-  gap:12px;
+  gap:8px;
   padding:12px;
   background:#f8f9fa;
   border-radius:10px;
   min-width:140px;
 }
-.comparison-label-main{
-  font-size:11px;
-  font-weight:700;
-  color:#000;
-  text-transform:uppercase;
-  margin-bottom:8px;
-  text-align:center;
-}
-.comparison-items-row{
-  display:flex;
-  justify-content:space-around;
-  gap:12px;
-  width:100%;
-}
 .comparison-item{
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:4px;
-  flex:1;
+  gap:2px;
 }
 .comparison-label{font-size:10px;font-weight:700;color:#000;text-transform:uppercase;}
-.comparison-value{font-size:20px;font-weight:800;color:#000;}
+.comparison-value{font-size:20px;font-weight:800;}
 .comp-p{color:#8b5cf6;}
 .comp-np{color:#22c55e;}
 
@@ -259,22 +244,8 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);}
     border-radius:10px;
     margin-bottom:14px;
     display:flex;
-    flex-direction:column;
-    justify-content:center;
-    gap:8px;
-  }
-  .card-comp-label-main{
-    font-size:10px;
-    font-weight:700;
-    color:#000;
-    text-transform:uppercase;
-    text-align:center;
-    margin-bottom:8px;
-  }
-  .card-comp-items{
-    display:flex;
-    justify-content:center;
     gap:16px;
+    justify-content:center;
   }
   .card-comp-item{
     display:flex;
@@ -283,7 +254,7 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);}
     gap:4px;
   }
   .card-comp-label{font-size:10px;font-weight:700;color:#000;text-transform:uppercase;}
-  .card-comp-value{font-size:18px;font-weight:800;color:#000;}
+  .card-comp-value{font-size:18px;font-weight:800;}
 
   .card-trend{
     background:#f8f9fa;
@@ -536,8 +507,11 @@ fetch('dados.json?t=' + Date.now())
         };
       });
 
-    /* Ordenar por P fechadas (mais fechadas primeiro = melhor) */
-    lojas.sort(function(a, b) { return b.pF - a.pF; });
+    /* Ordenar por NÍVEL (N1, N2, N3) e depois por P fechadas dentro de cada nível */
+    lojas.sort(function(a, b) {
+      if (a.nivel !== b.nivel) return a.nivel - b.nivel;
+      return b.pF - a.pF;
+    });
 
     var ids = {};
     lojas.forEach(function(l) { ids[l.loja] = true; });
@@ -627,7 +601,7 @@ function render(lojas, ultimaSemana) {
   html += '<div class="table-header">';
   html += '<div>Rank</div><div>Localização</div><div>Loja</div>';
   html += '<div>P Total</div><div>P Aberto</div><div>P Fechado</div><div>NP Total</div><div>NP Aberto</div><div>NP Fechado</div>';
-  html += '<div>Comparação P vs NP</div><div>Tendência</div><div>Histórico</div><div>Secções</div>';
+  html += '<div>P Fechadas<br>NP Fechadas</div><div>Tendência</div><div>Histórico</div><div>Secções</div>';
   html += '</div>';
 
   lojas.forEach(function(l, li) {
@@ -652,10 +626,10 @@ function render(lojas, ultimaSemana) {
       var hnA = hnT - hnF;
       return '<tr>'
         + '<td style="color:#000;">' + (h.Semana || '—') + '</td>'
-        + '<td class="red" style="color:#000;">' + hpA + '</td>'
-        + '<td class="green" style="color:#000;">' + hpF + '</td>'
-        + '<td class="red" style="color:#000;">'  + hnA + '</td>'
-        + '<td class="green" style="color:#000;">' + hnF + '</td>'
+        + '<td class="red" style="color:#ef4444;">' + hpA + '</td>'
+        + '<td class="green" style="color:#22c55e;">' + hpF + '</td>'
+        + '<td class="red" style="color:#ef4444;">'  + hnA + '</td>'
+        + '<td class="green" style="color:#22c55e;">' + hnF + '</td>'
         + '</tr>';
     }).join('');
     var histHtml = l.historico.length > 0
@@ -663,10 +637,10 @@ function render(lojas, ultimaSemana) {
         + '<thead><tr><th style="color:#000;">Semana</th><th style="color:#000;">P Abertas</th><th style="color:#000;">P Fechadas</th><th style="color:#000;">NP Abertas</th><th style="color:#000;">NP Fechadas</th></tr></thead>'
         + '<tbody>' + histRows
         + '<tr class="atual"><td style="color:#000;">' + ultimaSemana + ' (atual)</td>'
-        + '<td class="red" style="color:#000;">' + l.pA + '</td>'
-        + '<td class="green" style="color:#000;">' + l.pF + '</td>'
-        + '<td class="red" style="color:#000;">'   + l.nA + '</td>'
-        + '<td class="green" style="color:#000;">' + l.nF + '</td>'
+        + '<td class="red" style="color:#ef4444;">' + l.pA + '</td>'
+        + '<td class="green" style="color:#22c55e;">' + l.pF + '</td>'
+        + '<td class="red" style="color:#ef4444;">'   + l.nA + '</td>'
+        + '<td class="green" style="color:#22c55e;">' + l.nF + '</td>'
         + '</tr></tbody></table>'
       : '<p style="color:#000;font-size:13px;font-weight:600;">Sem semanas anteriores disponíveis.</p>';
 
@@ -681,14 +655,14 @@ function render(lojas, ultimaSemana) {
             + '<div class="section-head" style="color:#000;">' + s.nome + '</div>'
             + '<div class="section-body">'
             + '<div class="sec-cat" style="color:#000;">Programadas</div>'
-            + '<div class="sec-line" style="color:#000;"><span>Abertas</span><strong class="red" style="color:#000;">' + s.pA + ' (' + pctPA_s + '%)</strong></div>'
+            + '<div class="sec-line" style="color:#000;"><span>Abertas</span><strong class="red" style="color:#ef4444;">' + s.pA + ' (' + pctPA_s + '%)</strong></div>'
             + '<div class="bar"><div class="fill-red" style="width:' + Math.min(100, pctPA_s) + '%"></div></div>'
-            + '<div class="sec-line" style="color:#000;"><span>Fechadas</span><strong class="green" style="color:#000;">' + s.pF + ' (' + pctPF_s + '%)</strong></div>'
+            + '<div class="sec-line" style="color:#000;"><span>Fechadas</span><strong class="green" style="color:#22c55e;">' + s.pF + ' (' + pctPF_s + '%)</strong></div>'
             + '<div class="bar"><div class="fill-green" style="width:' + Math.min(100, pctPF_s) + '%"></div></div>'
             + '<div class="sec-cat" style="color:#000;">Não Programadas</div>'
-            + '<div class="sec-line" style="color:#000;"><span>Abertas</span><strong class="red" style="color:#000;">' + s.nA + ' (' + pctNA_s + '%)</strong></div>'
+            + '<div class="sec-line" style="color:#000;"><span>Abertas</span><strong class="red" style="color:#ef4444;">' + s.nA + ' (' + pctNA_s + '%)</strong></div>'
             + '<div class="bar"><div class="fill-red" style="width:' + Math.min(100, pctNA_s) + '%"></div></div>'
-            + '<div class="sec-line" style="color:#000;"><span>Fechadas</span><strong class="green" style="color:#000;">' + s.nF + ' (' + pctNF_s + '%)</strong></div>'
+            + '<div class="sec-line" style="color:#000;"><span>Fechadas</span><strong class="green" style="color:#22c55e;">' + s.nF + ' (' + pctNF_s + '%)</strong></div>'
             + '<div class="bar"><div class="fill-green" style="width:' + Math.min(100, pctNF_s) + '%"></div></div>'
             + '</div></div>';
         }).join('')
@@ -705,7 +679,7 @@ function render(lojas, ultimaSemana) {
     desktopRow += '<div class="cell metric"><div class="pct gray" style="color:#000;">100%</div><div class="num" style="color:#000;">' + l.nT + '</div></div>';
     desktopRow += '<div class="cell metric"><div class="pct gray" style="color:#000;">' + (l.nT > 0 ? ((l.nA/l.nT*100).toFixed(1)) : '0.0') + '%</div><div class="num" style="color:#000;">' + l.nA + '</div></div>';
     desktopRow += '<div class="cell metric"><div class="pct gray" style="color:#000;">' + (l.nT > 0 ? ((l.nF/l.nT*100).toFixed(1)) : '0.0') + '%</div><div class="num" style="color:#000;">' + l.nF + '</div></div>';
-    desktopRow += '<div class="cell comparison"><div class="comparison-label-main">Comparação P vs NP</div><div class="comparison-items-row"><div class="comparison-item"><div class="comparison-label">P Fechadas</div><div class="comparison-value comp-p" style="color:#000;">' + pctPFechadas + '%</div></div><div class="comparison-item"><div class="comparison-label">NP Fechadas</div><div class="comparison-value comp-np" style="color:#000;">' + pctNPFechadas + '%</div></div></div></div>';
+    desktopRow += '<div class="cell comparison"><div class="comparison-item"><div class="comparison-label">P Fechadas</div><div class="comparison-value comp-p">' + pctPFechadas + '%</div></div><div class="comparison-item"><div class="comparison-label">NP Fechadas</div><div class="comparison-value comp-np">' + pctNPFechadas + '%</div></div></div>';
     desktopRow += '<div class="cell trend"><div class="trend-box ' + tClass + '">'
       + '<div class="trend-icon">' + icon + '</div>'
       + '<div class="trend-value" style="color:#000;">' + diffVal + '</div>'
@@ -729,7 +703,7 @@ function render(lojas, ultimaSemana) {
       + '<div class="metric-item"><div class="metric-label" style="color:#000;">NP Aberto</div><div class="metric-value" style="color:#000;">' + l.nA + '</div><div class="metric-percent" style="color:#000;">' + (l.nT > 0 ? ((l.nA/l.nT*100).toFixed(1)) : '0.0') + '%</div></div>'
       + '<div class="metric-item"><div class="metric-label" style="color:#000;">NP Fechado</div><div class="metric-value" style="color:#000;">' + l.nF + '</div><div class="metric-percent" style="color:#000;">' + (l.nT > 0 ? ((l.nF/l.nT*100).toFixed(1)) : '0.0') + '%</div></div>'
       + '</div>'
-      + '<div class="card-comparison"><div class="card-comp-label-main" style="color:#000;">Comparação P vs NP</div><div class="card-comp-items"><div class="card-comp-item"><div class="card-comp-label" style="color:#000;">P Fechadas</div><div class="card-comp-value comp-p" style="color:#000;">' + pctPFechadas + '%</div></div><div class="card-comp-item"><div class="card-comp-label" style="color:#000;">NP Fechadas</div><div class="card-comp-value comp-np" style="color:#000;">' + pctNPFechadas + '%</div></div></div></div>'
+      + '<div class="card-comparison"><div class="card-comp-item"><div class="card-comp-label" style="color:#000;">P Fechadas</div><div class="card-comp-value comp-p">' + pctPFechadas + '%</div></div><div class="card-comp-item"><div class="card-comp-label" style="color:#000;">NP Fechadas</div><div class="card-comp-value comp-np">' + pctNPFechadas + '%</div></div></div>'
       + '<div class="card-trend"><div class="trend-icon">' + icon + '</div><div class="trend-value" style="color:#000;">' + diffVal + '</div><div class="trend-text" style="color:#000;">P Fechadas<br>' + texto + '</div></div>'
       + '<div class="card-actions">'
       + '<button class="btn" id="btnhist-' + li + '" onclick="toggleHist(' + li + ')">Histórico</button>'
