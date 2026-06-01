@@ -17,7 +17,7 @@
   --grad:linear-gradient(135deg,#8b5cf6 0%,#ec4899 100%);
 }
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);overflow-x:hidden;}
+body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);}
 
 .header{
   position:sticky;top:0;z-index:100;
@@ -98,10 +98,9 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);overflow-x
   background:#fff;border:1px solid rgba(139,92,246,.25);
   color:#8b5cf6;border-radius:12px;padding:12px 16px;
   cursor:pointer;font-weight:800;transition:.2s;font-size:14px;
-  min-width:100px;touch-action:manipulation;
+  min-width:100px;
 }
 .btn:hover{background:rgba(139,92,246,.08);}
-.btn:active{transform:scale(0.95);}
 .btn.open{background:var(--grad);color:#fff;border-color:transparent;}
 
 /* PANELS */
@@ -123,7 +122,7 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);overflow-x
 .sec-cat{font-size:11px;font-weight:800;color:#aaa;text-transform:uppercase;letter-spacing:.4px;margin:12px 0 8px;}
 .sec-cat:first-child{margin-top:0;}
 .sec-line{display:flex;justify-content:space-between;margin-bottom:8px;font-size:14px;}
-.bar{height:7px;border-radius:999px;overflow:hidden;background:#eee;margin-bottom:14px;max-width:100%;}
+.bar{height:7px;border-radius:999px;overflow:hidden;background:#eee;margin-bottom:14px;}
 .fill-red{height:100%;background:#ef4444;}
 .fill-green{height:100%;background:#22c55e;}
 
@@ -131,36 +130,35 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);overflow-x
 .note strong{color:#000;}
 
 .acao{margin-top:16px;padding:20px 24px;border-radius:14px;background:rgba(239,68,68,.05);border:1px solid rgba(239,68,68,.15);display:flex;align-items:center;gap:14px;}
-.acao-icon{font-size:24px;flex-shrink:0;}
+.acao-icon{font-size:24px;}
 .acao h3{font-size:14px;font-weight:800;color:#ef4444;margin-bottom:4px;}
 .acao p{font-size:13px;color:#555;}
 
 .loading{padding:80px;text-align:center;color:#aaa;font-size:16px;}
 
-/* DESKTOP */
-@media(min-width:769px){
-  .legend-top{margin-bottom:28px;}
-}
+.mobile-card{display:none;}
 
-/* TABLET & MOBILE */
+/* MOBILE */
 @media(max-width:768px){
   /* HIDE DESKTOP TABLE */
   .table-header{display:none;}
   .row-main{
     display:none;
   }
+
+  body{overflow-x:hidden;}
+
   .table-row{display:block;border:none;margin-bottom:16px;}
   .table-row:last-of-type{margin-bottom:0;}
 
   /* MOBILE CARD LAYOUT */
   .mobile-card{
+    display:block;
     background:#fff;
     border:1px solid var(--border);
     border-radius:16px;
     padding:16px;
-    margin-bottom:16px;
-    display:grid;
-    gap:14px;
+    overflow:hidden;
   }
 
   .card-header{
@@ -170,6 +168,7 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);overflow-x
     align-items:start;
     padding-bottom:14px;
     border-bottom:1px solid var(--border);
+    margin-bottom:14px;
   }
 
   .card-rank{
@@ -193,6 +192,7 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);overflow-x
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
     gap:10px;
+    margin-bottom:14px;
   }
 
   .metric-item{
@@ -203,8 +203,9 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);overflow-x
     flex-direction:column;
     align-items:center;
     gap:4px;
+    word-wrap:break-word;
   }
-  .metric-label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;}
+  .metric-label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;text-align:center;}
   .metric-value{font-size:18px;font-weight:800;color:var(--text);}
   .metric-percent{font-size:12px;font-weight:700;color:var(--muted);}
 
@@ -216,10 +217,11 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);overflow-x
     flex-direction:column;
     align-items:center;
     gap:6px;
+    margin-bottom:14px;
   }
-  .trend-icon{font-size:20px;font-weight:800;}
-  .trend-value{font-size:18px;font-weight:800;}
-  .trend-text{font-size:10px;font-weight:700;text-align:center;line-height:1.3;}
+  .card-trend .trend-icon{font-size:20px;font-weight:800;}
+  .card-trend .trend-value{font-size:18px;font-weight:800;}
+  .card-trend .trend-text{font-size:10px;font-weight:700;text-align:center;line-height:1.3;}
 
   .card-actions{
     display:grid;
@@ -289,6 +291,7 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);overflow-x
   .bar{
     height:5px;
     margin-bottom:10px;
+    max-width:100%;
   }
 
   .note{
@@ -341,15 +344,15 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);overflow-x
   }
 }
 
-/* SMALL PHONES */
 @media(max-width:480px){
   .card-metrics{
     grid-template-columns:repeat(2,1fr);
   }
 
-  .card-actions{
-    grid-template-columns:1fr 1fr;
+  .metric-item{
+    padding:8px;
   }
+  .metric-value{font-size:16px;}
 
   .btn{
     padding:9px 10px;
@@ -361,9 +364,6 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);overflow-x
   .header-title h1{font-size:18px;}
 
   .section-head{font-size:13px;}
-
-  .metric-item{padding:8px;}
-  .metric-value{font-size:16px;}
 }
 </style>
 </head>
@@ -559,7 +559,7 @@ function render(lojas, ultimaSemana) {
 
   html += '<div class="table-container">';
 
-  /* HEADER (DESKTOP) */
+  /* HEADER (DESKTOP ONLY) */
   html += '<div class="table-header">';
   html += '<div>Rank</div><div>Loja</div><div>Localização</div>';
   html += '<div>P Total</div><div>P Abertas</div><div>P Fechadas</div><div>P Não Fechadas</div>';
@@ -571,8 +571,8 @@ function render(lojas, ultimaSemana) {
     var badge = l.nivel === 1 ? 'n1' : l.nivel === 2 ? 'n2' : 'n3';
     var tClass = l.diff > 0 ? 'trend-positive' : l.diff < 0 ? 'trend-negative' : 'trend-neutral';
     var icon  = l.diff > 0 ? '▲' : l.diff < 0 ? '▼' : '→';
-    var texto = l.diff > 0 ? 'Mais tarefas'
-              : l.diff < 0 ? 'Menos tarefas'
+    var texto = l.diff > 0 ? 'Fechou mais tarefas'
+              : l.diff < 0 ? 'Fechou menos tarefas'
               : 'Sem alterações';
     var diffVal = l.diff !== null ? (l.diff > 0 ? '+' + l.diff : l.diff) : '—';
 
@@ -596,13 +596,13 @@ function render(lojas, ultimaSemana) {
       ? '<table class="detail-table">'
         + '<thead><tr><th>Semana</th><th>P Abertas</th><th>P Fechadas</th><th>NP Abertas</th><th>NP Fechadas</th></tr></thead>'
         + '<tbody>' + histRows
-        + '<tr class="atual"><td>' + ultimaSemana + '</td>'
+        + '<tr class="atual"><td>' + ultimaSemana + ' (atual)</td>'
         + '<td class="red">' + l.pA + '</td>'
         + '<td class="green">' + l.pF + '</td>'
         + '<td class="red">'   + l.nA + '</td>'
         + '<td class="green">' + l.nF + '</td>'
         + '</tr></tbody></table>'
-      : '<p style="color:#aaa;font-size:13px">Sem semanas anteriores.</p>';
+      : '<p style="color:#aaa;font-size:13px">Sem semanas anteriores disponíveis.</p>';
 
     /* SECÇÕES PANEL */
     var secCards = l.seccoes.length > 0
@@ -626,7 +626,7 @@ function render(lojas, ultimaSemana) {
             + '<div class="bar"><div class="fill-green" style="width:' + Math.min(100, pctNF_s) + '%"></div></div>'
             + '</div></div>';
         }).join('')
-      : '<p style="color:#aaa;font-size:13px">Sem secções.</p>';
+      : '<p style="color:#aaa;font-size:13px">Sem secções disponíveis.</p>';
 
     /* DESKTOP ROW */
     var desktopRow = '<div class="row-main">';
@@ -643,7 +643,7 @@ function render(lojas, ultimaSemana) {
     desktopRow += '<div class="cell trend"><div class="trend-box ' + tClass + '">'
       + '<div class="trend-icon">' + icon + '</div>'
       + '<div class="trend-value">' + diffVal + '</div>'
-      + '<div class="trend-text">' + texto + '</div>'
+      + '<div class="trend-text">P fechadas<br>' + texto + '</div>'
       + '</div></div>';
     desktopRow += '<div class="cell"><button class="btn" id="btnhist-' + li + '" onclick="toggleHist(' + li + ')">Histórico</button></div>';
     desktopRow += '<div class="cell"><button class="btn" id="btnsec-' + li + '" onclick="toggleSec(' + li + ')">Secções</button></div>';
@@ -659,7 +659,7 @@ function render(lojas, ultimaSemana) {
       + '<div class="metric-item"><div class="metric-label">P Total</div><div class="metric-value">' + l.pT + '</div></div>'
       + '<div class="metric-item"><div class="metric-label">P Abertas</div><div class="metric-value">' + l.pA + '</div><div class="metric-percent">' + l.pctPA + '%</div></div>'
       + '<div class="metric-item"><div class="metric-label">P Fechadas</div><div class="metric-value">' + l.pF + '</div><div class="metric-percent">' + l.pctPF + '%</div></div>'
-      + '<div class="metric-item"><div class="metric-label">P Não Fech.</div><div class="metric-value">' + l.pNF + '</div><div class="metric-percent">' + l.pctPNF + '%</div></div>'
+      + '<div class="metric-item"><div class="metric-label">P N.Fech.</div><div class="metric-value">' + l.pNF + '</div><div class="metric-percent">' + l.pctPNF + '%</div></div>'
       + '<div class="metric-item"><div class="metric-label">NP Total</div><div class="metric-value">' + l.nT + '</div></div>'
       + '<div class="metric-item"><div class="metric-label">NP Abertas</div><div class="metric-value">' + l.nA + '</div><div class="metric-percent">' + l.pctNA + '%</div></div>'
       + '<div class="metric-item"><div class="metric-label">NP Fechadas</div><div class="metric-value">' + l.nF + '</div><div class="metric-percent">' + l.pctNF + '%</div></div>'
@@ -691,9 +691,9 @@ function render(lojas, ultimaSemana) {
 
   html += '<div class="note">'
     + '<strong>Níveis das lojas — baseados em % de tarefas programadas fechadas</strong><br>'
-    + '<span style="color:#ef4444;font-weight:800">N1</span> · 0-20% &nbsp; '
-    + '<span style="color:#fb923c;font-weight:800">N2</span> · 21-40% &nbsp; '
-    + '<span style="color:#22c55e;font-weight:800">N3</span> · 41%+'
+    + '<span style="color:#ef4444;font-weight:800">N1</span> · 0-20% fechadas &nbsp;&nbsp;'
+    + '<span style="color:#fb923c;font-weight:800">N2</span> · 21-40% fechadas &nbsp;&nbsp;'
+    + '<span style="color:#22c55e;font-weight:800">N3</span> · 41%+ fechadas'
     + '</div>';
 
   html += '<div class="acao">'
