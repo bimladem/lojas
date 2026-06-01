@@ -49,7 +49,7 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);}
 
 .table-header{
   display:grid;
-  grid-template-columns:90px 220px 180px 120px 120px 120px 120px 120px 120px 120px 180px 120px 120px;
+  grid-template-columns:90px 180px 220px 100px 100px 100px 100px 100px 100px 120px 180px 120px 120px;
   background:#fafafa;border-bottom:1px solid var(--border);
   font-size:13px;font-weight:800;text-transform:uppercase;color:#666;
 }
@@ -60,7 +60,7 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);}
 
 .row-main{
   display:grid;
-  grid-template-columns:90px 220px 180px 120px 120px 120px 120px 120px 120px 120px 180px 120px 120px;
+  grid-template-columns:90px 180px 220px 100px 100px 100px 100px 100px 100px 120px 180px 120px 120px;
   align-items:center;padding:18px 10px;transition:.2s;
 }
 .row-main:hover{background:rgba(139,92,246,.03);}
@@ -76,14 +76,32 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);}
 
 .loja{flex-direction:column;gap:6px;}
 .loja strong{font-size:18px;}
-.local{color:var(--muted);font-size:16px;font-weight:600;}
 
-.metric{flex-direction:column;gap:5px;}
-.metric .pct{font-size:14px;font-weight:800;color:#1a1a1a;}
+.local{color:var(--muted);font-size:16px;font-weight:600;flex-direction:column;gap:4px;}
+
+.metric{flex-direction:column;gap:0;}
+.metric .pct{font-size:24px;font-weight:800;color:#1a1a1a;}
 .metric .num{font-size:24px;font-weight:800;color:#1a1a1a;}
 .red{color:#ef4444;}
 .green{color:#22c55e;}
 .gray{color:#777;}
+
+.comparison{
+  flex-direction:column;
+  gap:6px;
+  padding:12px;
+  background:#f8f9fa;
+  border-radius:10px;
+}
+.comparison-label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;}
+.comparison-bar{
+  height:20px;
+  border-radius:8px;
+  overflow:hidden;
+  display:flex;
+}
+.comp-programadas{background:rgba(139,92,246,.2);flex:1;}
+.comp-nao-prog{background:rgba(34,197,94,.2);flex:1;}
 
 .trend{flex-direction:column;}
 .trend-box{padding:12px;border-radius:14px;width:100%;}
@@ -208,6 +226,21 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);}
   .metric-label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;text-align:center;}
   .metric-value{font-size:18px;font-weight:800;color:var(--text);}
   .metric-percent{font-size:12px;font-weight:700;color:#1a1a1a;}
+
+  .card-comparison{
+    background:#f8f9fa;
+    padding:12px;
+    border-radius:10px;
+    margin-bottom:14px;
+  }
+  .card-comparison-label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:8px;}
+  .card-comparison-bar{
+    height:20px;
+    border-radius:8px;
+    overflow:hidden;
+    display:flex;
+    gap:2px;
+  }
 
   .card-trend{
     background:#f8f9fa;
@@ -435,12 +468,7 @@ fetch('dados.json?t=' + Date.now())
         var nA = Number(i['NP Aberto'])  || 0;
         var nF = Number(i['NP Fechado']) || 0;
 
-        var pNF = pT - pF;
-        var pctPA  = pT > 0 ? (pA / pT * 100) : 0;
         var pctPF  = pT > 0 ? (pF / pT * 100) : 0;
-        var pctPNF = pT > 0 ? (pNF / pT * 100) : 0;
-        var pctNA  = nT > 0 ? (nA / nT * 100) : 0;
-        var pctNF  = nT > 0 ? (nF / nT * 100) : 0;
 
         /* Nível baseado em % P fechadas:
            N1: 0-20%, N2: 21-40%, N3: 41-50% */
@@ -454,12 +482,8 @@ fetch('dados.json?t=' + Date.now())
         return {
           loja: String(i.Loja).trim(),
           local: loc,
-          pT, pA, pF, pNF, nT, nA, nF,
-          pctPA:  pctPA.toFixed(1),
+          pT, pA, pF, nT, nA, nF,
           pctPF:  pctPF.toFixed(1),
-          pctPNF: pctPNF.toFixed(1),
-          pctNA:  pctNA.toFixed(1),
-          pctNF:  pctNF.toFixed(1),
           nivel,
           historico: [],
           seccoes: []
@@ -561,10 +585,9 @@ function render(lojas, ultimaSemana) {
 
   /* HEADER (DESKTOP ONLY) */
   html += '<div class="table-header">';
-  html += '<div>Rank</div><div>Loja</div><div>Localização</div>';
-  html += '<div>P Total</div><div>P Abertas</div><div>P Fechadas</div><div>P Não Fechadas</div>';
-  html += '<div>NP Total</div><div>NP Abertas</div><div>NP Fechadas</div>';
-  html += '<div>Tendência</div><div>Histórico</div><div>Secções</div>';
+  html += '<div>Rank</div><div>Localização</div><div>Loja</div>';
+  html += '<div>P Total</div><div>P Aberto</div><div>P Fechado</div><div>NP Total</div><div>NP Aberto</div><div>NP Fechado</div>';
+  html += '<div>Comparação</div><div>Tendência</div><div>Histórico</div><div>Secções</div>';
   html += '</div>';
 
   lojas.forEach(function(l, li) {
@@ -575,6 +598,9 @@ function render(lojas, ultimaSemana) {
               : l.diff < 0 ? 'Fechou menos tarefas'
               : 'Sem alterações';
     var diffVal = l.diff !== null ? (l.diff > 0 ? '+' + l.diff : l.diff) : '—';
+
+    var pctProg = l.pT > 0 ? (l.pT / (l.pT + l.nT) * 100) : 0;
+    var pctNaoProg = l.nT > 0 ? (l.nT / (l.pT + l.nT) * 100) : 0;
 
     /* HISTÓRICO PANEL */
     var histRows = l.historico.map(function(h) {
@@ -631,15 +657,15 @@ function render(lojas, ultimaSemana) {
     /* DESKTOP ROW */
     var desktopRow = '<div class="row-main">';
     desktopRow += '<div class="cell rank"><div class="rank-num">' + (li+1) + '</div><div class="rank-badge ' + badge + '">N' + l.nivel + '</div></div>';
+    desktopRow += '<div class="cell local"><div>' + (l.local || '—') + '</div></div>';
     desktopRow += '<div class="cell loja"><strong>' + l.loja + '</strong></div>';
-    desktopRow += '<div class="cell"><div class="local">' + (l.local || '—') + '</div></div>';
     desktopRow += '<div class="cell metric"><div class="pct gray">100%</div><div class="num">' + l.pT + '</div></div>';
-    desktopRow += '<div class="cell metric"><div class="pct">' + l.pctPA + '%</div><div class="num">' + l.pA + '</div></div>';
-    desktopRow += '<div class="cell metric"><div class="pct">' + l.pctPF + '%</div><div class="num">' + l.pF + '</div></div>';
-    desktopRow += '<div class="cell metric"><div class="pct">' + l.pctPNF + '%</div><div class="num">' + l.pNF + '</div></div>';
+    desktopRow += '<div class="cell metric"><div class="pct gray">' + (l.pT > 0 ? ((l.pA/l.pT*100).toFixed(1)) : '0.0') + '%</div><div class="num">' + l.pA + '</div></div>';
+    desktopRow += '<div class="cell metric"><div class="pct gray">' + (l.pT > 0 ? ((l.pF/l.pT*100).toFixed(1)) : '0.0') + '%</div><div class="num">' + l.pF + '</div></div>';
     desktopRow += '<div class="cell metric"><div class="pct gray">100%</div><div class="num">' + l.nT + '</div></div>';
-    desktopRow += '<div class="cell metric"><div class="pct">' + l.pctNA + '%</div><div class="num">' + l.nA + '</div></div>';
-    desktopRow += '<div class="cell metric"><div class="pct">' + l.pctNF + '%</div><div class="num">' + l.nF + '</div></div>';
+    desktopRow += '<div class="cell metric"><div class="pct gray">' + (l.nT > 0 ? ((l.nA/l.nT*100).toFixed(1)) : '0.0') + '%</div><div class="num">' + l.nA + '</div></div>';
+    desktopRow += '<div class="cell metric"><div class="pct gray">' + (l.nT > 0 ? ((l.nF/l.nT*100).toFixed(1)) : '0.0') + '%</div><div class="num">' + l.nF + '</div></div>';
+    desktopRow += '<div class="cell comparison"><div class="comparison-label">Prog vs Não Prog</div><div class="comparison-bar"><div class="comp-programadas" style="flex:' + pctProg + '"></div><div class="comp-nao-prog" style="flex:' + pctNaoProg + '"></div></div></div>';
     desktopRow += '<div class="cell trend"><div class="trend-box ' + tClass + '">'
       + '<div class="trend-icon">' + icon + '</div>'
       + '<div class="trend-value">' + diffVal + '</div>'
@@ -657,13 +683,13 @@ function render(lojas, ultimaSemana) {
       + '</div>'
       + '<div class="card-metrics">'
       + '<div class="metric-item"><div class="metric-label">P Total</div><div class="metric-value">' + l.pT + '</div></div>'
-      + '<div class="metric-item"><div class="metric-label">P Abertas</div><div class="metric-value">' + l.pA + '</div><div class="metric-percent">' + l.pctPA + '%</div></div>'
-      + '<div class="metric-item"><div class="metric-label">P Fechadas</div><div class="metric-value">' + l.pF + '</div><div class="metric-percent">' + l.pctPF + '%</div></div>'
-      + '<div class="metric-item"><div class="metric-label">P N.Fech.</div><div class="metric-value">' + l.pNF + '</div><div class="metric-percent">' + l.pctPNF + '%</div></div>'
+      + '<div class="metric-item"><div class="metric-label">P Aberto</div><div class="metric-value">' + l.pA + '</div><div class="metric-percent">' + (l.pT > 0 ? ((l.pA/l.pT*100).toFixed(1)) : '0.0') + '%</div></div>'
+      + '<div class="metric-item"><div class="metric-label">P Fechado</div><div class="metric-value">' + l.pF + '</div><div class="metric-percent">' + (l.pT > 0 ? ((l.pF/l.pT*100).toFixed(1)) : '0.0') + '%</div></div>'
       + '<div class="metric-item"><div class="metric-label">NP Total</div><div class="metric-value">' + l.nT + '</div></div>'
-      + '<div class="metric-item"><div class="metric-label">NP Abertas</div><div class="metric-value">' + l.nA + '</div><div class="metric-percent">' + l.pctNA + '%</div></div>'
-      + '<div class="metric-item"><div class="metric-label">NP Fechadas</div><div class="metric-value">' + l.nF + '</div><div class="metric-percent">' + l.pctNF + '%</div></div>'
+      + '<div class="metric-item"><div class="metric-label">NP Aberto</div><div class="metric-value">' + l.nA + '</div><div class="metric-percent">' + (l.nT > 0 ? ((l.nA/l.nT*100).toFixed(1)) : '0.0') + '%</div></div>'
+      + '<div class="metric-item"><div class="metric-label">NP Fechado</div><div class="metric-value">' + l.nF + '</div><div class="metric-percent">' + (l.nT > 0 ? ((l.nF/l.nT*100).toFixed(1)) : '0.0') + '%</div></div>'
       + '</div>'
+      + '<div class="card-comparison"><div class="card-comparison-label">Comparação P vs NP</div><div class="card-comparison-bar"><div class="comp-programadas" style="flex:' + pctProg + ';"></div><div class="comp-nao-prog" style="flex:' + pctNaoProg + ';"></div></div></div>'
       + '<div class="card-trend"><div class="trend-icon">' + icon + '</div><div class="trend-value">' + diffVal + '</div><div class="trend-text">P Fechadas<br>' + texto + '</div></div>'
       + '<div class="card-actions">'
       + '<button class="btn" id="btnhist-' + li + '" onclick="toggleHist(' + li + ')">Histórico</button>'
