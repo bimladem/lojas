@@ -37,7 +37,7 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);}
 
 .table-header{
   display:grid;
-  grid-template-columns:90px 220px 180px 120px 140px 140px 120px 120px 180px 120px 120px;
+  grid-template-columns:90px 220px 180px 120px 120px 120px 120px 120px 120px 180px 120px 120px;
   background:#fafafa;border-bottom:1px solid var(--border);
   font-size:13px;font-weight:800;text-transform:uppercase;color:#666;
 }
@@ -48,7 +48,7 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);}
 
 .row-main{
   display:grid;
-  grid-template-columns:90px 220px 180px 120px 140px 140px 120px 120px 180px 120px 120px;
+  grid-template-columns:90px 220px 180px 120px 120px 120px 120px 120px 120px 180px 120px 120px;
   align-items:center;padding:18px 10px;transition:.2s;
 }
 .row-main:hover{background:rgba(139,92,246,.03);}
@@ -206,11 +206,10 @@ fetch('dados.json?t=' + Date.now())
         var nA = Number(i['NP Aberto'])  || 0;
         var nF = Number(i['NP Fechado']) || 0;
 
-        var pNR = pT - pF;
-        var pctPF  = pT > 0 ? (pF  / pT * 100) : 0;
-        var pctPNR = pT > 0 ? (pNR / pT * 100) : 0;
-        var pctNA  = nT > 0 ? (nA  / nT * 100) : 0;
-        var pctNF  = nT > 0 ? (nF  / nT * 100) : 0;
+        var pctPA  = pT > 0 ? (pA / pT * 100) : 0;
+        var pctPF  = pT > 0 ? (pF / pT * 100) : 0;
+        var pctNA  = nT > 0 ? (nA / nT * 100) : 0;
+        var pctNF  = nT > 0 ? (nF / nT * 100) : 0;
 
         /* Nível baseado em % P fechadas — mais fechadas = melhor */
         var nivel = pctPF >= 80 ? 3 : pctPF >= 50 ? 2 : 1;
@@ -223,9 +222,9 @@ fetch('dados.json?t=' + Date.now())
         return {
           loja: String(i.Loja).trim(),
           local: loc,
-          pT, pA, pF, nT, nA, nF, pNR,
+          pT, pA, pF, nT, nA, nF,
+          pctPA:  pctPA.toFixed(1),
           pctPF:  pctPF.toFixed(1),
-          pctPNR: pctPNR.toFixed(1),
           pctNA:  pctNA.toFixed(1),
           pctNF:  pctNF.toFixed(1),
           nivel,
@@ -268,8 +267,7 @@ fetch('dados.json?t=' + Date.now())
         : null;
     });
 
-    /* SECÇÕES — a sheet seccoes não tem Loja separado,
-       o código da loja está embutido em Secção: "IM XXXXX NomeDaSecção" */
+    /* SECÇÕES */
     data.forEach(function(i) {
       if (!i.Secção) return;
 
@@ -279,8 +277,8 @@ fetch('dados.json?t=' + Date.now())
       var m = seccaoStr.match(/^(IM \d+)\s+(.+)$/);
       if (!m) return;
 
-      var lojaCode = m[1].trim();   /* ex: "IM 01006" */
-      var nomeSecção = m[2].trim(); /* ex: "Frescos LS" */
+      var lojaCode = m[1].trim();
+      var nomeSecção = m[2].trim();
 
       if (nomeSecção.toLowerCase() === 'admin') return;
       if (!ids[lojaCode]) return;
@@ -288,13 +286,12 @@ fetch('dados.json?t=' + Date.now())
       var loja = lojas.find(function(l) { return l.loja === lojaCode; });
       if (!loja) return;
 
-      /* Sheet seccoes usa campos diferentes */
-      var pT = Number(i['P Total'])    || Number(i['Programadas Total'])    || 0;
-      var pF = Number(i['P Fechado'])  || Number(i['Programadas Fechadas']) || 0;
-      var nT = Number(i['NP Total'])   || Number(i['Não Programadas Total'])    || 0;
-      var nF = Number(i['NP Fechado']) || Number(i['Não Programadas Fechadas']) || 0;
-      var pA = Number(i['P Aberto'])   || (pT - pF);
-      var nA = Number(i['NP Aberto'])  || (nT - nF);
+      var pT = Number(i['Programadas Total'])    || 0;
+      var pF = Number(i['Programadas Fechadas']) || 0;
+      var nT = Number(i['Não Programadas Total'])    || 0;
+      var nF = Number(i['Não Programadas Fechadas']) || 0;
+      var pA = pT - pF;
+      var nA = nT - nF;
 
       loja.seccoes.push({
         nome: nomeSecção,
@@ -326,8 +323,8 @@ function render(lojas, ultimaSemana) {
   /* HEADER */
   html += '<div class="table-header">';
   html += '<div>Rank</div><div>Loja</div><div>Localização</div>';
-  html += '<div>P Total</div><div>P Fechadas</div><div>P Não Realizadas</div>';
-  html += '<div>NP Total</div><div>NP Fechadas</div>';
+  html += '<div>P Total</div><div>P Abertas</div><div>P Fechadas</div>';
+  html += '<div>NP Total</div><div>NP Abertas</div><div>NP Fechadas</div>';
   html += '<div>Tendência</div><div>Histórico</div><div>Secções</div>';
   html += '</div>';
 
@@ -344,22 +341,26 @@ function render(lojas, ultimaSemana) {
     var histRows = l.historico.map(function(h) {
       var hpT = Number(h['P Total'])   || 0;
       var hpF = Number(h['P Fechado']) || 0;
-      var hpNR = hpT - hpF;
-      var hnF  = Number(h['NP Fechado']) || 0;
+      var hpA = hpT - hpF;
+      var hnT = Number(h['NP Total'])   || 0;
+      var hnF = Number(h['NP Fechado']) || 0;
+      var hnA = hnT - hnF;
       return '<tr>'
         + '<td>' + (h.Semana || '—') + '</td>'
+        + '<td class="red">' + hpA + '</td>'
         + '<td class="green">' + hpF + '</td>'
-        + '<td class="red">'  + hpNR + '</td>'
+        + '<td class="red">'  + hnA + '</td>'
         + '<td class="green">' + hnF + '</td>'
         + '</tr>';
     }).join('');
     var histHtml = l.historico.length > 0
       ? '<table class="detail-table">'
-        + '<thead><tr><th>Semana</th><th>P Fechadas</th><th>P Não Realizadas</th><th>NP Fechadas</th></tr></thead>'
+        + '<thead><tr><th>Semana</th><th>P Abertas</th><th>P Fechadas</th><th>NP Abertas</th><th>NP Fechadas</th></tr></thead>'
         + '<tbody>' + histRows
         + '<tr class="atual"><td>' + ultimaSemana + ' (atual)</td>'
+        + '<td class="red">' + l.pA + '</td>'
         + '<td class="green">' + l.pF + '</td>'
-        + '<td class="red">'   + l.pNR + '</td>'
+        + '<td class="red">'   + l.nA + '</td>'
         + '<td class="green">' + l.nF + '</td>'
         + '</tr></tbody></table>'
       : '<p style="color:#aaa;font-size:13px">Sem semanas anteriores disponíveis.</p>';
@@ -367,8 +368,8 @@ function render(lojas, ultimaSemana) {
     /* SECÇÕES PANEL */
     var secCards = l.seccoes.length > 0
       ? l.seccoes.map(function(s) {
-          var pctPF_s = s.pT > 0 ? (s.pF / s.pT * 100).toFixed(1) : '0.0';
           var pctPA_s = s.pT > 0 ? (s.pA / s.pT * 100).toFixed(1) : '0.0';
+          var pctPF_s = s.pT > 0 ? (s.pF / s.pT * 100).toFixed(1) : '0.0';
           var pctNA_s = s.nT > 0 ? (s.nA / s.nT * 100).toFixed(1) : '0.0';
           var pctNF_s = s.nT > 0 ? (s.nF / s.nT * 100).toFixed(1) : '0.0';
           return '<div class="section-card">'
@@ -377,7 +378,7 @@ function render(lojas, ultimaSemana) {
             + '<div class="sec-cat">Programadas</div>'
             + '<div class="sec-line"><span>Fechadas</span><strong class="green">' + s.pF + ' (' + pctPF_s + '%)</strong></div>'
             + '<div class="bar"><div class="fill-green" style="width:' + Math.min(100, pctPF_s) + '%"></div></div>'
-            + '<div class="sec-line"><span>Não realizadas</span><strong class="red">' + s.pA + ' (' + pctPA_s + '%)</strong></div>'
+            + '<div class="sec-line"><span>Abertas</span><strong class="red">' + s.pA + ' (' + pctPA_s + '%)</strong></div>'
             + '<div class="bar"><div class="fill-red" style="width:' + Math.min(100, pctPA_s) + '%"></div></div>'
             + '<div class="sec-cat">Não Programadas</div>'
             + '<div class="sec-line"><span>Fechadas</span><strong class="green">' + s.nF + ' (' + pctNF_s + '%)</strong></div>'
@@ -399,11 +400,13 @@ function render(lojas, ultimaSemana) {
 
     html += '<div class="cell metric"><div class="pct gray">100%</div><div class="num">' + l.pT + '</div></div>';
 
+    html += '<div class="cell metric"><div class="pct red">' + l.pctPA + '%</div><div class="num red">' + l.pA + '</div></div>';
+
     html += '<div class="cell metric"><div class="pct green">' + l.pctPF + '%</div><div class="num green">' + l.pF + '</div></div>';
 
-    html += '<div class="cell metric"><div class="pct red">' + l.pctPNR + '%</div><div class="num red">' + l.pNR + '</div></div>';
-
     html += '<div class="cell metric"><div class="pct gray">100%</div><div class="num">' + l.nT + '</div></div>';
+
+    html += '<div class="cell metric"><div class="pct red">' + l.pctNA + '%</div><div class="num red">' + l.nA + '</div></div>';
 
     html += '<div class="cell metric"><div class="pct green">' + l.pctNF + '%</div><div class="num green">' + l.nF + '</div></div>';
 
@@ -434,7 +437,10 @@ function render(lojas, ultimaSemana) {
   html += '</div>'; /* table-container */
 
   html += '<div class="note">'
-    + '<strong>Níveis das lojas — baseados em % de tarefas programadas fechadas</strong><br><br>'
+    + '<strong>Legenda</strong><br><br>'
+    + '<strong>P</strong> = Tarefas Programadas &nbsp;&nbsp; | &nbsp;&nbsp; '
+    + '<strong>NP</strong> = Tarefas Não Programadas<br><br>'
+    + '<strong>Níveis das lojas — baseados em % de tarefas programadas fechadas</strong><br>'
     + '<span style="color:#ef4444;font-weight:800">N1</span> · menos de 50% fechadas &nbsp;&nbsp;'
     + '<span style="color:#fb923c;font-weight:800">N2</span> · entre 50% e 79% fechadas &nbsp;&nbsp;'
     + '<span style="color:#22c55e;font-weight:800">N3</span> · 80% ou mais fechadas'
