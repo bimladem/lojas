@@ -79,7 +79,7 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);}
 .local{color:var(--muted);font-size:16px;font-weight:600;}
 
 .metric{flex-direction:column;gap:5px;}
-.metric .pct{font-size:14px;font-weight:800;}
+.metric .pct{font-size:14px;font-weight:800;color:#1a1a1a;}
 .metric .num{font-size:24px;font-weight:800;color:#1a1a1a;}
 .red{color:#ef4444;}
 .green{color:#22c55e;}
@@ -207,7 +207,7 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);}
   }
   .metric-label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;text-align:center;}
   .metric-value{font-size:18px;font-weight:800;color:var(--text);}
-  .metric-percent{font-size:12px;font-weight:700;color:var(--muted);}
+  .metric-percent{font-size:12px;font-weight:700;color:#1a1a1a;}
 
   .card-trend{
     background:#f8f9fa;
@@ -634,12 +634,12 @@ function render(lojas, ultimaSemana) {
     desktopRow += '<div class="cell loja"><strong>' + l.loja + '</strong></div>';
     desktopRow += '<div class="cell"><div class="local">' + (l.local || '—') + '</div></div>';
     desktopRow += '<div class="cell metric"><div class="pct gray">100%</div><div class="num">' + l.pT + '</div></div>';
-    desktopRow += '<div class="cell metric"><div class="pct red">' + l.pctPA + '%</div><div class="num">' + l.pA + '</div></div>';
-    desktopRow += '<div class="cell metric"><div class="pct green">' + l.pctPF + '%</div><div class="num">' + l.pF + '</div></div>';
-    desktopRow += '<div class="cell metric"><div class="pct red">' + l.pctPNF + '%</div><div class="num">' + l.pNF + '</div></div>';
+    desktopRow += '<div class="cell metric"><div class="pct">' + l.pctPA + '%</div><div class="num">' + l.pA + '</div></div>';
+    desktopRow += '<div class="cell metric"><div class="pct">' + l.pctPF + '%</div><div class="num">' + l.pF + '</div></div>';
+    desktopRow += '<div class="cell metric"><div class="pct">' + l.pctPNF + '%</div><div class="num">' + l.pNF + '</div></div>';
     desktopRow += '<div class="cell metric"><div class="pct gray">100%</div><div class="num">' + l.nT + '</div></div>';
-    desktopRow += '<div class="cell metric"><div class="pct red">' + l.pctNA + '%</div><div class="num">' + l.nA + '</div></div>';
-    desktopRow += '<div class="cell metric"><div class="pct green">' + l.pctNF + '%</div><div class="num">' + l.nF + '</div></div>';
+    desktopRow += '<div class="cell metric"><div class="pct">' + l.pctNA + '%</div><div class="num">' + l.nA + '</div></div>';
+    desktopRow += '<div class="cell metric"><div class="pct">' + l.pctNF + '%</div><div class="num">' + l.nF + '</div></div>';
     desktopRow += '<div class="cell trend"><div class="trend-box ' + tClass + '">'
       + '<div class="trend-icon">' + icon + '</div>'
       + '<div class="trend-value">' + diffVal + '</div>'
