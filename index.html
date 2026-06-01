@@ -586,12 +586,6 @@ fetch('dados.json?t=' + Date.now())
 function render(lojas, ultimaSemana) {
   var html = '';
 
-  /* LEGEND NO TOPO */
-  html += '<div class="legend-top">'
-    + '<strong>P</strong> = Tarefas Programadas &nbsp;&nbsp; | &nbsp;&nbsp; '
-    + '<strong>NP</strong> = Tarefas Não Programadas'
-    + '</div>';
-
   html += '<div class="table-container">';
 
   /* HEADER (DESKTOP ONLY) */
@@ -725,6 +719,11 @@ function render(lojas, ultimaSemana) {
   });
 
   html += '</div>';
+
+  html += '<div class="legend-top">'
+    + '<strong>P</strong> = Tarefas Programadas &nbsp;&nbsp; | &nbsp;&nbsp; '
+    + '<strong>NP</strong> = Tarefas Não Programadas'
+    + '</div>';
 
   html += '<div class="note">'
     + '<strong>Níveis das lojas — baseados em % de tarefas programadas fechadas</strong><br>'
