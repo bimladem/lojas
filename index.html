@@ -76,11 +76,11 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);}
 
 .loja{flex-direction:column;gap:6px;}
 .loja strong{font-size:18px;}
-.local{color:var(--muted);font-size:13px;font-weight:600;}
+.local{color:var(--muted);font-size:16px;font-weight:600;}
 
 .metric{flex-direction:column;gap:5px;}
 .metric .pct{font-size:14px;font-weight:800;}
-.metric .num{font-size:24px;font-weight:800;}
+.metric .num{font-size:24px;font-weight:800;color:#1a1a1a;}
 .red{color:#ef4444;}
 .green{color:#22c55e;}
 .gray{color:#777;}
@@ -422,17 +422,17 @@ function render(lojas, ultimaSemana) {
 
     html += '<div class="cell metric"><div class="pct gray">100%</div><div class="num">' + l.pT + '</div></div>';
 
-    html += '<div class="cell metric"><div class="pct red">' + l.pctPA + '%</div><div class="num red">' + l.pA + '</div></div>';
+    html += '<div class="cell metric"><div class="pct red">' + l.pctPA + '%</div><div class="num">' + l.pA + '</div></div>';
 
-    html += '<div class="cell metric"><div class="pct green">' + l.pctPF + '%</div><div class="num green">' + l.pF + '</div></div>';
+    html += '<div class="cell metric"><div class="pct green">' + l.pctPF + '%</div><div class="num">' + l.pF + '</div></div>';
 
-    html += '<div class="cell metric"><div class="pct red">' + l.pctPNF + '%</div><div class="num red">' + l.pNF + '</div></div>';
+    html += '<div class="cell metric"><div class="pct red">' + l.pctPNF + '%</div><div class="num">' + l.pNF + '</div></div>';
 
     html += '<div class="cell metric"><div class="pct gray">100%</div><div class="num">' + l.nT + '</div></div>';
 
-    html += '<div class="cell metric"><div class="pct red">' + l.pctNA + '%</div><div class="num red">' + l.nA + '</div></div>';
+    html += '<div class="cell metric"><div class="pct red">' + l.pctNA + '%</div><div class="num">' + l.nA + '</div></div>';
 
-    html += '<div class="cell metric"><div class="pct green">' + l.pctNF + '%</div><div class="num green">' + l.nF + '</div></div>';
+    html += '<div class="cell metric"><div class="pct green">' + l.pctNF + '%</div><div class="num">' + l.nF + '</div></div>';
 
     html += '<div class="cell trend"><div class="trend-box ' + tClass + '">'
       + '<div class="trend-icon">' + icon + '</div>'
