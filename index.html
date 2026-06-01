@@ -27,8 +27,8 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);}
 }
 .header-brand{display:flex;align-items:center;gap:16px;}
 .header-logo{width:52px;height:52px;border-radius:14px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:24px;}
-.header-title h1{font-size:28px;font-weight:800;}
-.header-title .sub{margin-top:4px;color:var(--muted);font-size:14px;}
+.header-title h1{font-size:28px;font-weight:800;color:#000;}
+.header-title .sub{margin-top:4px;color:#000;font-size:14px;font-weight:600;}
 .header-period{background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.15);padding:10px 18px;border-radius:12px;font-weight:800;color:var(--purple);}
 
 .main{max-width:100%;margin:auto;padding:24px;display:flex;justify-content:center;}
@@ -53,10 +53,10 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);}
   display:grid;
   grid-template-columns:90px 180px 220px 100px 100px 100px 100px 100px 100px 140px 180px 120px 120px;
   background:#fafafa;border-bottom:1px solid var(--border);
-  font-size:13px;font-weight:800;text-transform:uppercase;color:#666;
+  font-size:13px;font-weight:800;text-transform:uppercase;color:#000;
   min-width:1600px;
 }
-.table-header div{padding:18px 10px;text-align:center;border-right:1px solid var(--border);}
+.table-header div{padding:18px 10px;text-align:center;border-right:1px solid var(--border);color:#000;font-weight:800;}
 .table-header div:last-child{border-right:none;}
 
 .table-row{border-bottom:1px solid var(--border);}
@@ -74,40 +74,55 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);}
 .cell:last-child{border-right:none;}
 
 .rank{flex-direction:column;gap:8px;}
-.rank-num{font-size:28px;font-weight:800;}
+.rank-num{font-size:28px;font-weight:800;color:#000;}
 .rank-badge{padding:5px 12px;border-radius:10px;font-size:12px;font-weight:800;}
 .n1{background:rgba(239,68,68,.12);color:#ef4444;}
 .n2{background:rgba(251,146,60,.12);color:#fb923c;}
 .n3{background:rgba(34,197,94,.12);color:#22c55e;}
 
 .loja{flex-direction:column;gap:6px;}
-.loja strong{font-size:18px;}
+.loja strong{font-size:18px;color:#000;font-weight:800;}
 
-.local{color:var(--muted);font-size:16px;font-weight:600;flex-direction:column;gap:4px;}
+.local{color:#000;font-size:16px;font-weight:600;flex-direction:column;gap:4px;}
 
 .metric{flex-direction:column;gap:0;}
-.metric .pct{font-size:24px;font-weight:800;color:#1a1a1a;}
-.metric .num{font-size:24px;font-weight:800;color:#1a1a1a;}
+.metric .pct{font-size:24px;font-weight:800;color:#000;}
+.metric .num{font-size:24px;font-weight:800;color:#000;}
 .red{color:#ef4444;}
 .green{color:#22c55e;}
 .gray{color:#777;}
 
 .comparison{
   flex-direction:column;
-  gap:8px;
+  gap:12px;
   padding:12px;
   background:#f8f9fa;
   border-radius:10px;
   min-width:140px;
 }
+.comparison-label-main{
+  font-size:11px;
+  font-weight:700;
+  color:#000;
+  text-transform:uppercase;
+  margin-bottom:8px;
+  text-align:center;
+}
+.comparison-items-row{
+  display:flex;
+  justify-content:space-around;
+  gap:12px;
+  width:100%;
+}
 .comparison-item{
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:2px;
+  gap:4px;
+  flex:1;
 }
-.comparison-label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;}
-.comparison-value{font-size:20px;font-weight:800;color:#1a1a1a;}
+.comparison-label{font-size:10px;font-weight:700;color:#000;text-transform:uppercase;}
+.comparison-value{font-size:20px;font-weight:800;color:#000;}
 .comp-p{color:#8b5cf6;}
 .comp-np{color:#22c55e;}
 
@@ -117,8 +132,8 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);}
 .trend-negative{background:rgba(239,68,68,.12);}
 .trend-neutral{background:rgba(0,0,0,.04);}
 .trend-icon{font-size:22px;font-weight:800;}
-.trend-value{font-size:20px;font-weight:800;margin-top:4px;}
-.trend-text{margin-top:6px;font-size:11px;line-height:1.4;font-weight:700;}
+.trend-value{font-size:20px;font-weight:800;margin-top:4px;color:#000;}
+.trend-text{margin-top:6px;font-size:11px;line-height:1.4;font-weight:700;color:#000;}
 
 .btn{
   background:#fff;border:1px solid rgba(139,92,246,.25);
@@ -133,32 +148,32 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);}
 .panel{display:none;}
 .panel.visible{display:block;}
 .panel-inner{padding:24px;background:rgba(139,92,246,.03);border-top:1px solid var(--border);}
-.panel-title{font-size:13px;font-weight:800;color:#888;text-transform:uppercase;letter-spacing:.5px;margin-bottom:16px;}
+.panel-title{font-size:13px;font-weight:800;color:#000;text-transform:uppercase;letter-spacing:.5px;margin-bottom:16px;}
 
 .detail-table{width:100%;border-collapse:collapse;background:#fff;border-radius:14px;overflow:hidden;}
-.detail-table th,.detail-table td{padding:14px;border-bottom:1px solid var(--border);text-align:center;font-size:14px;}
-.detail-table th{background:#fafafa;font-size:13px;font-weight:800;color:#666;}
+.detail-table th,.detail-table td{padding:14px;border-bottom:1px solid var(--border);text-align:center;font-size:14px;color:#000;}
+.detail-table th{background:#fafafa;font-size:13px;font-weight:800;color:#000;}
 .detail-table tbody tr:hover td{background:rgba(139,92,246,.04);}
-.detail-table tr.atual td{background:rgba(139,92,246,.08);font-weight:800;}
+.detail-table tr.atual td{background:rgba(139,92,246,.08);font-weight:800;color:#000;}
 
 .sections-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;}
 .section-card{border:1px solid var(--border);border-radius:16px;overflow:hidden;background:#fff;}
-.section-head{padding:16px;background:#fafafa;border-bottom:1px solid var(--border);font-size:16px;font-weight:800;text-align:center;}
+.section-head{padding:16px;background:#fafafa;border-bottom:1px solid var(--border);font-size:16px;font-weight:800;text-align:center;color:#000;}
 .section-body{padding:18px;}
-.sec-cat{font-size:11px;font-weight:800;color:#aaa;text-transform:uppercase;letter-spacing:.4px;margin:12px 0 8px;}
+.sec-cat{font-size:11px;font-weight:800;color:#000;text-transform:uppercase;letter-spacing:.4px;margin:12px 0 8px;}
 .sec-cat:first-child{margin-top:0;}
-.sec-line{display:flex;justify-content:space-between;margin-bottom:8px;font-size:14px;}
+.sec-line{display:flex;justify-content:space-between;margin-bottom:8px;font-size:14px;color:#000;}
 .bar{height:7px;border-radius:999px;overflow:hidden;background:#eee;margin-bottom:14px;}
 .fill-red{height:100%;background:#ef4444;}
 .fill-green{height:100%;background:#22c55e;}
 
-.note{margin-top:24px;padding:22px;border-radius:18px;background:#fafafa;border:1px solid var(--border);text-align:center;line-height:2.2;color:#555;font-size:15px;}
-.note strong{color:#000;}
+.note{margin-top:24px;padding:22px;border-radius:18px;background:#fafafa;border:1px solid var(--border);text-align:center;line-height:2.2;color:#000;font-size:15px;}
+.note strong{color:#000;font-weight:800;}
 
 .acao{margin-top:16px;padding:20px 24px;border-radius:14px;background:rgba(239,68,68,.05);border:1px solid rgba(239,68,68,.15);display:flex;align-items:center;gap:14px;}
 .acao-icon{font-size:24px;}
 .acao h3{font-size:14px;font-weight:800;color:#ef4444;margin-bottom:4px;}
-.acao p{font-size:13px;color:#555;}
+.acao p{font-size:13px;color:#000;font-weight:600;}
 
 .loading{padding:80px;text-align:center;color:#aaa;font-size:16px;}
 
@@ -206,7 +221,7 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);}
     align-items:center;
     gap:4px;
   }
-  .card-rank-num{font-size:24px;font-weight:800;}
+  .card-rank-num{font-size:24px;font-weight:800;color:#000;}
   .card-rank-badge{padding:3px 8px;border-radius:8px;font-size:10px;font-weight:800;}
 
   .card-info{
@@ -214,8 +229,8 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);}
     flex-direction:column;
     gap:4px;
   }
-  .card-loja{font-size:16px;font-weight:800;color:var(--text);}
-  .card-local{font-size:13px;color:var(--muted);font-weight:600;}
+  .card-loja{font-size:16px;font-weight:800;color:#000;}
+  .card-local{font-size:13px;color:#000;font-weight:600;}
 
   .card-metrics{
     display:grid;
@@ -234,9 +249,9 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);}
     gap:4px;
     word-wrap:break-word;
   }
-  .metric-label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;text-align:center;}
-  .metric-value{font-size:18px;font-weight:800;color:var(--text);}
-  .metric-percent{font-size:12px;font-weight:700;color:#1a1a1a;}
+  .metric-label{font-size:11px;font-weight:700;color:#000;text-transform:uppercase;text-align:center;}
+  .metric-value{font-size:18px;font-weight:800;color:#000;}
+  .metric-percent{font-size:12px;font-weight:700;color:#000;}
 
   .card-comparison{
     background:#f8f9fa;
@@ -244,8 +259,22 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);}
     border-radius:10px;
     margin-bottom:14px;
     display:flex;
-    gap:16px;
+    flex-direction:column;
     justify-content:center;
+    gap:8px;
+  }
+  .card-comp-label-main{
+    font-size:10px;
+    font-weight:700;
+    color:#000;
+    text-transform:uppercase;
+    text-align:center;
+    margin-bottom:8px;
+  }
+  .card-comp-items{
+    display:flex;
+    justify-content:center;
+    gap:16px;
   }
   .card-comp-item{
     display:flex;
@@ -253,8 +282,8 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);}
     align-items:center;
     gap:4px;
   }
-  .card-comp-label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;}
-  .card-comp-value{font-size:18px;font-weight:800;}
+  .card-comp-label{font-size:10px;font-weight:700;color:#000;text-transform:uppercase;}
+  .card-comp-value{font-size:18px;font-weight:800;color:#000;}
 
   .card-trend{
     background:#f8f9fa;
@@ -267,8 +296,8 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);}
     margin-bottom:14px;
   }
   .card-trend .trend-icon{font-size:20px;font-weight:800;}
-  .card-trend .trend-value{font-size:18px;font-weight:800;}
-  .card-trend .trend-text{font-size:10px;font-weight:700;text-align:center;line-height:1.3;}
+  .card-trend .trend-value{font-size:18px;font-weight:800;color:#000;}
+  .card-trend .trend-text{font-size:10px;font-weight:700;text-align:center;line-height:1.3;color:#000;}
 
   .card-actions{
     display:grid;
@@ -295,6 +324,7 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);}
   .panel-title{
     font-size:12px;
     margin-bottom:12px;
+    color:#000;
   }
 
   .detail-table{
@@ -304,8 +334,9 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);}
   .detail-table th,.detail-table td{
     padding:10px 6px;
     font-size:11px;
+    color:#000;
   }
-  .detail-table th{font-size:10px;}
+  .detail-table th{font-size:10px;color:#000;}
 
   .sections-grid{
     grid-template-columns:1fr;
@@ -319,6 +350,7 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);}
   .section-head{
     padding:12px;
     font-size:14px;
+    color:#000;
   }
 
   .section-body{
@@ -328,11 +360,13 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);}
   .sec-cat{
     font-size:10px;
     margin:8px 0 6px;
+    color:#000;
   }
 
   .sec-line{
     font-size:12px;
     margin-bottom:6px;
+    color:#000;
   }
 
   .bar{
@@ -347,6 +381,7 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);}
     line-height:1.6;
     margin-top:20px;
     border-radius:12px;
+    color:#000;
   }
 
   .acao{
@@ -357,7 +392,7 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);}
   }
   .acao-icon{font-size:20px;}
   .acao h3{font-size:12px;}
-  .acao p{font-size:11px;}
+  .acao p{font-size:11px;color:#000;}
 
   .header{
     padding:12px 16px;
@@ -367,8 +402,8 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);}
   }
   .header-brand{justify-content:center;}
   .header-logo{width:44px;height:44px;font-size:20px;}
-  .header-title h1{font-size:20px;}
-  .header-title .sub{font-size:12px;}
+  .header-title h1{font-size:20px;color:#000;}
+  .header-title .sub{font-size:12px;color:#000;}
   .header-period{font-size:12px;padding:6px 12px;}
 
   .legend-top{
@@ -394,7 +429,7 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);}
   .metric-item{
     padding:8px;
   }
-  .metric-value{font-size:16px;}
+  .metric-value{font-size:16px;color:#000;}
 
   .btn{
     padding:9px 10px;
@@ -403,9 +438,9 @@ body{font-family:'Inter',sans-serif;background:#fff;color:var(--text);}
   }
 
   .header-logo{width:40px;height:40px;font-size:18px;}
-  .header-title h1{font-size:18px;}
+  .header-title h1{font-size:18px;color:#000;}
 
-  .section-head{font-size:13px;}
+  .section-head{font-size:13px;color:#000;}
 }
 </style>
 </head>
@@ -616,24 +651,24 @@ function render(lojas, ultimaSemana) {
       var hnF = Number(h['NP Fechado']) || 0;
       var hnA = hnT - hnF;
       return '<tr>'
-        + '<td>' + (h.Semana || '—') + '</td>'
-        + '<td class="red">' + hpA + '</td>'
-        + '<td class="green">' + hpF + '</td>'
-        + '<td class="red">'  + hnA + '</td>'
-        + '<td class="green">' + hnF + '</td>'
+        + '<td style="color:#000;">' + (h.Semana || '—') + '</td>'
+        + '<td class="red" style="color:#000;">' + hpA + '</td>'
+        + '<td class="green" style="color:#000;">' + hpF + '</td>'
+        + '<td class="red" style="color:#000;">'  + hnA + '</td>'
+        + '<td class="green" style="color:#000;">' + hnF + '</td>'
         + '</tr>';
     }).join('');
     var histHtml = l.historico.length > 0
       ? '<table class="detail-table">'
-        + '<thead><tr><th>Semana</th><th>P Abertas</th><th>P Fechadas</th><th>NP Abertas</th><th>NP Fechadas</th></tr></thead>'
+        + '<thead><tr><th style="color:#000;">Semana</th><th style="color:#000;">P Abertas</th><th style="color:#000;">P Fechadas</th><th style="color:#000;">NP Abertas</th><th style="color:#000;">NP Fechadas</th></tr></thead>'
         + '<tbody>' + histRows
-        + '<tr class="atual"><td>' + ultimaSemana + ' (atual)</td>'
-        + '<td class="red">' + l.pA + '</td>'
-        + '<td class="green">' + l.pF + '</td>'
-        + '<td class="red">'   + l.nA + '</td>'
-        + '<td class="green">' + l.nF + '</td>'
+        + '<tr class="atual"><td style="color:#000;">' + ultimaSemana + ' (atual)</td>'
+        + '<td class="red" style="color:#000;">' + l.pA + '</td>'
+        + '<td class="green" style="color:#000;">' + l.pF + '</td>'
+        + '<td class="red" style="color:#000;">'   + l.nA + '</td>'
+        + '<td class="green" style="color:#000;">' + l.nF + '</td>'
         + '</tr></tbody></table>'
-      : '<p style="color:#aaa;font-size:13px">Sem semanas anteriores disponíveis.</p>';
+      : '<p style="color:#000;font-size:13px;font-weight:600;">Sem semanas anteriores disponíveis.</p>';
 
     /* SECÇÕES PANEL */
     var secCards = l.seccoes.length > 0
@@ -643,38 +678,38 @@ function render(lojas, ultimaSemana) {
           var pctNA_s = s.nT > 0 ? (s.nA / s.nT * 100).toFixed(1) : '0.0';
           var pctNF_s = s.nT > 0 ? (s.nF / s.nT * 100).toFixed(1) : '0.0';
           return '<div class="section-card">'
-            + '<div class="section-head">' + s.nome + '</div>'
+            + '<div class="section-head" style="color:#000;">' + s.nome + '</div>'
             + '<div class="section-body">'
-            + '<div class="sec-cat">Programadas</div>'
-            + '<div class="sec-line"><span>Abertas</span><strong class="red">' + s.pA + ' (' + pctPA_s + '%)</strong></div>'
+            + '<div class="sec-cat" style="color:#000;">Programadas</div>'
+            + '<div class="sec-line" style="color:#000;"><span>Abertas</span><strong class="red" style="color:#000;">' + s.pA + ' (' + pctPA_s + '%)</strong></div>'
             + '<div class="bar"><div class="fill-red" style="width:' + Math.min(100, pctPA_s) + '%"></div></div>'
-            + '<div class="sec-line"><span>Fechadas</span><strong class="green">' + s.pF + ' (' + pctPF_s + '%)</strong></div>'
+            + '<div class="sec-line" style="color:#000;"><span>Fechadas</span><strong class="green" style="color:#000;">' + s.pF + ' (' + pctPF_s + '%)</strong></div>'
             + '<div class="bar"><div class="fill-green" style="width:' + Math.min(100, pctPF_s) + '%"></div></div>'
-            + '<div class="sec-cat">Não Programadas</div>'
-            + '<div class="sec-line"><span>Abertas</span><strong class="red">' + s.nA + ' (' + pctNA_s + '%)</strong></div>'
+            + '<div class="sec-cat" style="color:#000;">Não Programadas</div>'
+            + '<div class="sec-line" style="color:#000;"><span>Abertas</span><strong class="red" style="color:#000;">' + s.nA + ' (' + pctNA_s + '%)</strong></div>'
             + '<div class="bar"><div class="fill-red" style="width:' + Math.min(100, pctNA_s) + '%"></div></div>'
-            + '<div class="sec-line"><span>Fechadas</span><strong class="green">' + s.nF + ' (' + pctNF_s + '%)</strong></div>'
+            + '<div class="sec-line" style="color:#000;"><span>Fechadas</span><strong class="green" style="color:#000;">' + s.nF + ' (' + pctNF_s + '%)</strong></div>'
             + '<div class="bar"><div class="fill-green" style="width:' + Math.min(100, pctNF_s) + '%"></div></div>'
             + '</div></div>';
         }).join('')
-      : '<p style="color:#aaa;font-size:13px">Sem secções disponíveis.</p>';
+      : '<p style="color:#000;font-size:13px;font-weight:600;">Sem secções disponíveis.</p>';
 
     /* DESKTOP ROW */
     var desktopRow = '<div class="row-main">';
     desktopRow += '<div class="cell rank"><div class="rank-num">' + (li+1) + '</div><div class="rank-badge ' + badge + '">N' + l.nivel + '</div></div>';
-    desktopRow += '<div class="cell local"><div>' + (l.local || '—') + '</div></div>';
-    desktopRow += '<div class="cell loja"><strong>' + l.loja + '</strong></div>';
-    desktopRow += '<div class="cell metric"><div class="pct gray">100%</div><div class="num">' + l.pT + '</div></div>';
-    desktopRow += '<div class="cell metric"><div class="pct gray">' + (l.pT > 0 ? ((l.pA/l.pT*100).toFixed(1)) : '0.0') + '%</div><div class="num">' + l.pA + '</div></div>';
-    desktopRow += '<div class="cell metric"><div class="pct gray">' + (l.pT > 0 ? ((l.pF/l.pT*100).toFixed(1)) : '0.0') + '%</div><div class="num">' + l.pF + '</div></div>';
-    desktopRow += '<div class="cell metric"><div class="pct gray">100%</div><div class="num">' + l.nT + '</div></div>';
-    desktopRow += '<div class="cell metric"><div class="pct gray">' + (l.nT > 0 ? ((l.nA/l.nT*100).toFixed(1)) : '0.0') + '%</div><div class="num">' + l.nA + '</div></div>';
-    desktopRow += '<div class="cell metric"><div class="pct gray">' + (l.nT > 0 ? ((l.nF/l.nT*100).toFixed(1)) : '0.0') + '%</div><div class="num">' + l.nF + '</div></div>';
-    desktopRow += '<div class="cell comparison"><div class="comparison-item"><div class="comparison-label">P Fechadas</div><div class="comparison-value comp-p">' + pctPFechadas + '%</div></div><div class="comparison-item"><div class="comparison-label">NP Fechadas</div><div class="comparison-value comp-np">' + pctNPFechadas + '%</div></div></div>';
+    desktopRow += '<div class="cell local"><div style="color:#000;">' + (l.local || '—') + '</div></div>';
+    desktopRow += '<div class="cell loja"><strong style="color:#000;">' + l.loja + '</strong></div>';
+    desktopRow += '<div class="cell metric"><div class="pct gray" style="color:#000;">100%</div><div class="num" style="color:#000;">' + l.pT + '</div></div>';
+    desktopRow += '<div class="cell metric"><div class="pct gray" style="color:#000;">' + (l.pT > 0 ? ((l.pA/l.pT*100).toFixed(1)) : '0.0') + '%</div><div class="num" style="color:#000;">' + l.pA + '</div></div>';
+    desktopRow += '<div class="cell metric"><div class="pct gray" style="color:#000;">' + (l.pT > 0 ? ((l.pF/l.pT*100).toFixed(1)) : '0.0') + '%</div><div class="num" style="color:#000;">' + l.pF + '</div></div>';
+    desktopRow += '<div class="cell metric"><div class="pct gray" style="color:#000;">100%</div><div class="num" style="color:#000;">' + l.nT + '</div></div>';
+    desktopRow += '<div class="cell metric"><div class="pct gray" style="color:#000;">' + (l.nT > 0 ? ((l.nA/l.nT*100).toFixed(1)) : '0.0') + '%</div><div class="num" style="color:#000;">' + l.nA + '</div></div>';
+    desktopRow += '<div class="cell metric"><div class="pct gray" style="color:#000;">' + (l.nT > 0 ? ((l.nF/l.nT*100).toFixed(1)) : '0.0') + '%</div><div class="num" style="color:#000;">' + l.nF + '</div></div>';
+    desktopRow += '<div class="cell comparison"><div class="comparison-label-main">Comparação P vs NP</div><div class="comparison-items-row"><div class="comparison-item"><div class="comparison-label">P Fechadas</div><div class="comparison-value comp-p" style="color:#000;">' + pctPFechadas + '%</div></div><div class="comparison-item"><div class="comparison-label">NP Fechadas</div><div class="comparison-value comp-np" style="color:#000;">' + pctNPFechadas + '%</div></div></div></div>';
     desktopRow += '<div class="cell trend"><div class="trend-box ' + tClass + '">'
       + '<div class="trend-icon">' + icon + '</div>'
-      + '<div class="trend-value">' + diffVal + '</div>'
-      + '<div class="trend-text">P fechadas<br>' + texto + '</div>'
+      + '<div class="trend-value" style="color:#000;">' + diffVal + '</div>'
+      + '<div class="trend-text" style="color:#000;">P fechadas<br>' + texto + '</div>'
       + '</div></div>';
     desktopRow += '<div class="cell"><button class="btn" id="btnhist-' + li + '" onclick="toggleHist(' + li + ')">Histórico</button></div>';
     desktopRow += '<div class="cell"><button class="btn" id="btnsec-' + li + '" onclick="toggleSec(' + li + ')">Secções</button></div>';
@@ -683,19 +718,19 @@ function render(lojas, ultimaSemana) {
     /* MOBILE CARD */
     var mobileCard = '<div class="mobile-card">'
       + '<div class="card-header">'
-      + '<div class="card-rank"><div class="card-rank-num">' + (li+1) + '</div><div class="card-rank-badge ' + badge + '">N' + l.nivel + '</div></div>'
-      + '<div class="card-info"><div class="card-loja">' + l.loja + '</div><div class="card-local">' + (l.local || '—') + '</div></div>'
+      + '<div class="card-rank"><div class="card-rank-num" style="color:#000;">' + (li+1) + '</div><div class="card-rank-badge ' + badge + '" style="color:#000;">N' + l.nivel + '</div></div>'
+      + '<div class="card-info"><div class="card-loja" style="color:#000;">' + l.loja + '</div><div class="card-local" style="color:#000;">' + (l.local || '—') + '</div></div>'
       + '</div>'
       + '<div class="card-metrics">'
-      + '<div class="metric-item"><div class="metric-label">P Total</div><div class="metric-value">' + l.pT + '</div></div>'
-      + '<div class="metric-item"><div class="metric-label">P Aberto</div><div class="metric-value">' + l.pA + '</div><div class="metric-percent">' + (l.pT > 0 ? ((l.pA/l.pT*100).toFixed(1)) : '0.0') + '%</div></div>'
-      + '<div class="metric-item"><div class="metric-label">P Fechado</div><div class="metric-value">' + l.pF + '</div><div class="metric-percent">' + (l.pT > 0 ? ((l.pF/l.pT*100).toFixed(1)) : '0.0') + '%</div></div>'
-      + '<div class="metric-item"><div class="metric-label">NP Total</div><div class="metric-value">' + l.nT + '</div></div>'
-      + '<div class="metric-item"><div class="metric-label">NP Aberto</div><div class="metric-value">' + l.nA + '</div><div class="metric-percent">' + (l.nT > 0 ? ((l.nA/l.nT*100).toFixed(1)) : '0.0') + '%</div></div>'
-      + '<div class="metric-item"><div class="metric-label">NP Fechado</div><div class="metric-value">' + l.nF + '</div><div class="metric-percent">' + (l.nT > 0 ? ((l.nF/l.nT*100).toFixed(1)) : '0.0') + '%</div></div>'
+      + '<div class="metric-item"><div class="metric-label" style="color:#000;">P Total</div><div class="metric-value" style="color:#000;">' + l.pT + '</div></div>'
+      + '<div class="metric-item"><div class="metric-label" style="color:#000;">P Aberto</div><div class="metric-value" style="color:#000;">' + l.pA + '</div><div class="metric-percent" style="color:#000;">' + (l.pT > 0 ? ((l.pA/l.pT*100).toFixed(1)) : '0.0') + '%</div></div>'
+      + '<div class="metric-item"><div class="metric-label" style="color:#000;">P Fechado</div><div class="metric-value" style="color:#000;">' + l.pF + '</div><div class="metric-percent" style="color:#000;">' + (l.pT > 0 ? ((l.pF/l.pT*100).toFixed(1)) : '0.0') + '%</div></div>'
+      + '<div class="metric-item"><div class="metric-label" style="color:#000;">NP Total</div><div class="metric-value" style="color:#000;">' + l.nT + '</div></div>'
+      + '<div class="metric-item"><div class="metric-label" style="color:#000;">NP Aberto</div><div class="metric-value" style="color:#000;">' + l.nA + '</div><div class="metric-percent" style="color:#000;">' + (l.nT > 0 ? ((l.nA/l.nT*100).toFixed(1)) : '0.0') + '%</div></div>'
+      + '<div class="metric-item"><div class="metric-label" style="color:#000;">NP Fechado</div><div class="metric-value" style="color:#000;">' + l.nF + '</div><div class="metric-percent" style="color:#000;">' + (l.nT > 0 ? ((l.nF/l.nT*100).toFixed(1)) : '0.0') + '%</div></div>'
       + '</div>'
-      + '<div class="card-comparison"><div class="card-comp-item"><div class="card-comp-label">P Fechadas</div><div class="card-comp-value comp-p">' + pctPFechadas + '%</div></div><div class="card-comp-item"><div class="card-comp-label">NP Fechadas</div><div class="card-comp-value comp-np">' + pctNPFechadas + '%</div></div></div>'
-      + '<div class="card-trend"><div class="trend-icon">' + icon + '</div><div class="trend-value">' + diffVal + '</div><div class="trend-text">P Fechadas<br>' + texto + '</div></div>'
+      + '<div class="card-comparison"><div class="card-comp-label-main" style="color:#000;">Comparação P vs NP</div><div class="card-comp-items"><div class="card-comp-item"><div class="card-comp-label" style="color:#000;">P Fechadas</div><div class="card-comp-value comp-p" style="color:#000;">' + pctPFechadas + '%</div></div><div class="card-comp-item"><div class="card-comp-label" style="color:#000;">NP Fechadas</div><div class="card-comp-value comp-np" style="color:#000;">' + pctNPFechadas + '%</div></div></div></div>'
+      + '<div class="card-trend"><div class="trend-icon">' + icon + '</div><div class="trend-value" style="color:#000;">' + diffVal + '</div><div class="trend-text" style="color:#000;">P Fechadas<br>' + texto + '</div></div>'
       + '<div class="card-actions">'
       + '<button class="btn" id="btnhist-' + li + '" onclick="toggleHist(' + li + ')">Histórico</button>'
       + '<button class="btn" id="btnsec-' + li + '" onclick="toggleSec(' + li + ')">Secções</button>'
@@ -708,11 +743,11 @@ function render(lojas, ultimaSemana) {
 
     /* PAINÉIS */
     html += '<div class="panel" id="hist-' + li + '">'
-      + '<div class="panel-inner"><div class="panel-title">Evolução Semanal</div>'
+      + '<div class="panel-inner"><div class="panel-title" style="color:#000;">Evolução Semanal</div>'
       + histHtml + '</div></div>';
 
     html += '<div class="panel" id="sec-' + li + '">'
-      + '<div class="panel-inner"><div class="panel-title">Detalhe por Secção (' + l.seccoes.length + ')</div>'
+      + '<div class="panel-inner"><div class="panel-title" style="color:#000;">Detalhe por Secção (' + l.seccoes.length + ')</div>'
       + '<div class="sections-grid">' + secCards + '</div></div></div>';
 
     html += '</div>';
@@ -721,21 +756,21 @@ function render(lojas, ultimaSemana) {
   html += '</div>';
 
   html += '<div class="legend-top">'
-    + '<strong>P</strong> = Tarefas Programadas &nbsp;&nbsp; | &nbsp;&nbsp; '
-    + '<strong>NP</strong> = Tarefas Não Programadas'
+    + '<strong style="color:#000;">P</strong> = Tarefas Programadas &nbsp;&nbsp; | &nbsp;&nbsp; '
+    + '<strong style="color:#000;">NP</strong> = Tarefas Não Programadas'
     + '</div>';
 
   html += '<div class="note">'
-    + '<strong>Níveis das lojas — baseados em % de tarefas programadas fechadas</strong><br>'
-    + '<span style="color:#ef4444;font-weight:800">N1</span> · 0-20% fechadas &nbsp;&nbsp;'
-    + '<span style="color:#fb923c;font-weight:800">N2</span> · 21-40% fechadas &nbsp;&nbsp;'
-    + '<span style="color:#22c55e;font-weight:800">N3</span> · 41%+ fechadas'
+    + '<strong style="color:#000;">Níveis das lojas — baseados em % de tarefas programadas fechadas</strong><br>'
+    + '<span style="color:#ef4444;font-weight:800;">N1</span> · 0-20% fechadas &nbsp;&nbsp;'
+    + '<span style="color:#fb923c;font-weight:800;">N2</span> · 21-40% fechadas &nbsp;&nbsp;'
+    + '<span style="color:#22c55e;font-weight:800;">N3</span> · 41%+ fechadas'
     + '</div>';
 
   html += '<div class="acao">'
     + '<div class="acao-icon">⚠️</div>'
     + '<div><h3>Ação Recomendada</h3>'
-    + '<p>Contactar urgentemente os responsáveis das lojas críticas.</p>'
+    + '<p style="color:#000;">Contactar urgentemente os responsáveis das lojas críticas.</p>'
     + '</div></div>';
 
   document.getElementById('app').innerHTML = html;
