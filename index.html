@@ -1013,9 +1013,61 @@ function render(lojas, ultimaSemana) {
     }).join('');
 
     var chartId = 'chart-' + li;
+    
+    /* Calcular comparação com semana anterior */
+    var comparisonHtml = '';
+    if (l.historico.length > 0) {
+      var ultimoHist = l.historico[l.historico.length - 1];
+      var pA_prev = Number(ultimoHist['P Total']) - Number(ultimoHist['P Fechado']) || 0;
+      var pF_prev = Number(ultimoHist['P Fechado']) || 0;
+      var nA_prev = Number(ultimoHist['NP Total']) - Number(ultimoHist['NP Fechado']) || 0;
+      var nF_prev = Number(ultimoHist['NP Fechado']) || 0;
+      
+      var pA_diff = l.pA - pA_prev;
+      var pF_diff = l.pF - pF_prev;
+      var nA_diff = l.nA - nA_prev;
+      var nF_diff = l.nF - nF_prev;
+      
+      var pA_trend = pA_diff < 0 ? '✓ Melhorou' : pA_diff > 0 ? '✗ Piorou' : 'Sem mudança';
+      var pF_trend = pF_diff > 0 ? '✓ Melhorou' : pF_diff < 0 ? '✗ Piorou' : 'Sem mudança';
+      var nA_trend = nA_diff < 0 ? '✓ Melhorou' : nA_diff > 0 ? '✗ Piorou' : 'Sem mudança';
+      var nF_trend = nF_diff > 0 ? '✓ Melhorou' : nF_diff < 0 ? '✗ Piorou' : 'Sem mudança';
+      
+      var pA_color = pA_diff < 0 ? '#22c55e' : pA_diff > 0 ? '#ef4444' : '#999';
+      var pF_color = pF_diff > 0 ? '#22c55e' : pF_diff < 0 ? '#ef4444' : '#999';
+      var nA_color = nA_diff < 0 ? '#22c55e' : nA_diff > 0 ? '#ef4444' : '#999';
+      var nF_color = nF_diff > 0 ? '#22c55e' : nF_diff < 0 ? '#ef4444' : '#999';
+      
+      comparisonHtml = '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:var(--spacing-lg);margin:var(--spacing-xl) 0;background:#f9f9f9;padding:var(--spacing-lg);border-radius:12px;">' 
+        + '<div style="text-align:center;">' 
+        + '<div style="font-size:12px;font-weight:600;color:#333;margin-bottom:var(--spacing-sm);">P Abertas</div>' 
+        + '<div style="font-size:18px;font-weight:800;color:' + pA_color + ';">' + (pA_diff >= 0 ? '+' : '') + pA_diff + '</div>' 
+        + '<div style="font-size:11px;font-weight:600;color:' + pA_color + ';margin-top:var(--spacing-xs);">' + pA_trend + '</div>' 
+        + '</div>' 
+        + '<div style="text-align:center;">' 
+        + '<div style="font-size:12px;font-weight:600;color:#333;margin-bottom:var(--spacing-sm);">P Fechadas</div>' 
+        + '<div style="font-size:18px;font-weight:800;color:' + pF_color + ';">' + (pF_diff >= 0 ? '+' : '') + pF_diff + '</div>' 
+        + '<div style="font-size:11px;font-weight:600;color:' + pF_color + ';margin-top:var(--spacing-xs);">' + pF_trend + '</div>' 
+        + '</div>' 
+        + '<div style="text-align:center;">' 
+        + '<div style="font-size:12px;font-weight:600;color:#333;margin-bottom:var(--spacing-sm);">NP Abertas</div>' 
+        + '<div style="font-size:18px;font-weight:800;color:' + nA_color + ';">' + (nA_diff >= 0 ? '+' : '') + nA_diff + '</div>' 
+        + '<div style="font-size:11px;font-weight:600;color:' + nA_color + ';margin-top:var(--spacing-xs);">' + nA_trend + '</div>' 
+        + '</div>' 
+        + '<div style="text-align:center;">' 
+        + '<div style="font-size:12px;font-weight:600;color:#333;margin-bottom:var(--spacing-sm);">NP Fechadas</div>' 
+        + '<div style="font-size:18px;font-weight:800;color:' + nF_color + ';">' + (nF_diff >= 0 ? '+' : '') + nF_diff + '</div>' 
+        + '<div style="font-size:11px;font-weight:600;color:' + nF_color + ';margin-top:var(--spacing-xs);">' + nF_trend + '</div>' 
+        + '</div>' 
+        + '</div>';
+    }
+    
     var histHtml = l.historico.length > 0
-      ? '<p style="color:#333;font-size:13px;font-weight:600;margin-bottom:var(--spacing-lg);"><strong>Evolução Semanal - P Abertas, P Fechadas, NP Abertas, NP Fechadas</strong></p>'
+      ? '<p style="color:#333;font-size:13px;font-weight:600;margin-bottom:var(--spacing-lg);"><strong>Evolução Semanal - Comparação com Semana Anterior</strong></p>'
+        + comparisonHtml
+        + '<p style="color:#333;font-size:13px;font-weight:600;margin-bottom:var(--spacing-lg);margin-top:var(--spacing-xl);"><strong>Gráfico de Tendência</strong></p>'
         + '<div class="chart-container"><canvas id="' + chartId + '"></canvas></div>'
+        + '<p style="color:#333;font-size:13px;font-weight:600;margin-bottom:var(--spacing-lg);margin-top:var(--spacing-xl);"><strong>Histórico Detalhado</strong></p>'
         + '<table class="detail-table">'
         + '<thead><tr><th style="text-align:center;">Semana</th><th style="text-align:center;">P Abertas</th><th style="text-align:center;">P Fechadas</th><th style="text-align:center;">NP Abertas</th><th style="text-align:center;">NP Fechadas</th></tr></thead>'
         + '<tbody>' + histRows
@@ -1240,7 +1292,17 @@ function render(lojas, ultimaSemana) {
             titleFont: { size: 13, weight: 'bold' },
             bodyFont: { size: 12 },
             borderColor: 'rgba(255, 255, 255, 0.3)',
-            borderWidth: 1
+            borderWidth: 1,
+            callbacks: {
+              label: function(context) {
+                var label = context.dataset.label || '';
+                if (label) {
+                  label += ': ';
+                }
+                label += context.parsed.y;
+                return label;
+              }
+            }
           }
         },
         scales: {
