@@ -1050,7 +1050,8 @@ function render(lojas, ultimaSemana) {
     var pnpChartId = 'pnp-' + li;
     
     var histHtml = l.historico.length > 0
-      ? '<p style="color:#333;font-size:13px;font-weight:600;margin-bottom:var(--spacing-lg);margin-top:var(--spacing-xl);"><strong>Comparação: Programadas vs Não Programadas (% Fechadas)</strong></p>'
+      ? '<p style="color:#333;font-size:13px;font-weight:600;margin-bottom:var(--spacing-lg);"><strong>Dashboard de Carga de Trabalho</strong></p>'
+        + '<p style="color:#333;font-size:13px;font-weight:600;margin-bottom:var(--spacing-lg);margin-top:var(--spacing-xl);"><strong>Comparação: Programadas vs Não Programadas (% Fechadas)</strong></p>'
         + '<div class="chart-container"><canvas id="' + pnpChartId + '"></canvas></div>'
         + '<p style="color:#333;font-size:13px;font-weight:600;margin-bottom:var(--spacing-lg);margin-top:var(--spacing-xl);"><strong>Histórico Detalhado (%)</strong></p>'
         + '<table class="detail-table">'
@@ -1089,11 +1090,11 @@ function render(lojas, ultimaSemana) {
     desktopRow += '<div class="cell localizacao"><strong style="color:var(--text-light);">' + (l.local || '—') + '</strong></div>';
     desktopRow += '<div class="cell loja"><strong style="color:var(--text-light);">' + l.loja + '</strong></div>';
     desktopRow += '<div class="cell metric"><div class="num">' + l.pT + '</div></div>';
-    desktopRow += '<div class="cell metric"><div class="num">' + l.pA + '</div><div class="pct" style="font-size:var(--font-xs);color:var(--muted);">' + l.pctPA + '%</div></div>';
-    desktopRow += '<div class="cell metric"><div class="num">' + l.pF + '</div><div class="pct" style="font-size:var(--font-xs);color:var(--muted);">' + l.pctPF + '%</div></div>';
+    desktopRow += '<div class="cell metric"><div class="num">' + l.pA + '</div></div>';
+    desktopRow += '<div class="cell metric"><div class="num">' + l.pF + '</div></div>';
     desktopRow += '<div class="cell metric"><div class="num">' + l.nT + '</div></div>';
-    desktopRow += '<div class="cell metric"><div class="num">' + l.nA + '</div><div class="pct" style="font-size:var(--font-xs);color:var(--muted);">' + l.pctNA + '%</div></div>';
-    desktopRow += '<div class="cell metric"><div class="num">' + l.nF + '</div><div class="pct" style="font-size:var(--font-xs);color:var(--muted);">' + l.pctNF + '%</div></div>';
+    desktopRow += '<div class="cell metric"><div class="num">' + l.nA + '</div></div>';
+    desktopRow += '<div class="cell metric"><div class="num">' + l.nF + '</div></div>';
     desktopRow += '<div class="cell comparison"><div class="comparison-item"><div class="comparison-label">Programadas</div><div class="comparison-value" style="color:var(--text-light);">' + l.pctPFInt + '%</div></div><div class="comparison-item"><div class="comparison-label">Não Prog.</div><div class="comparison-value" style="color:var(--text-light);">' + l.pctNFInt + '%</div></div></div>';
     desktopRow += '<div class="cell"><button class="btn" id="btnhist-' + li + '" onclick="toggleHist(' + li + ')">Histórico</button></div>';
     desktopRow += '<div class="cell"><button class="btn" id="btnsec-' + li + '" onclick="toggleSec(' + li + ')">Secções</button></div>';
@@ -1127,7 +1128,7 @@ function render(lojas, ultimaSemana) {
 
     /* PAINÉIS */
     html += '<div class="panel" id="hist-' + li + '">'
-      + '<div class="panel-inner">'
+      + '<div class="panel-inner"><div class="panel-title" style="color:#8b5cf6;">Carga de Trabalho Semanal</div>'
       + histHtml + '</div></div>';
 
     html += '<div class="panel" id="sec-' + li + '">'
