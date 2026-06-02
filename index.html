@@ -943,23 +943,47 @@ fetch('dados.json?t=' + Date.now())
       /* Ordenar por semana cronologicamente */
       function parseWeekDate(s) {
         if (!s) return 0;
-        // Tenta extrair a data inicial da semana (ex: "20.05 a 26.05" -> 20.05)
-        var parts = s.split(' ');
-        if (parts.length > 0) {
-          var dateParts = parts[0].split('.');
-          if (dateParts.length === 2) {
-            // Assume ano 2026 como base para comparação se não houver ano
-            return new Date(2026, parseInt(dateParts[1]) - 1, parseInt(dateParts[0])).getTime();
+        var str = String(s).toLowerCase().trim();
+        var months = {
+          'jan': 0, 'fev': 1, 'mar': 2, 'abr': 3, 'mai': 4, 'jun': 5,
+          'jul': 6, 'ago': 7, 'set': 8, 'out': 9, 'nov': 10, 'dez': 11
+        };
+        
+        // Tenta encontrar o dia e o mês no início da string
+        // Formatos comuns: "21-27 set", "22 a 28 fev", "20.05 a 26.05"
+        var day = 0, month = 0, year = 2026;
+
+        // Caso 1: Formato com ponto (20.05)
+        var dotMatch = str.match(/^(\d{1,2})\.(\d{1,2})/);
+        if (dotMatch) {
+          day = parseInt(dotMatch[1]);
+          month = parseInt(dotMatch[2]) - 1;
+        } else {
+          // Caso 2: Formato com dia e nome do mês (21-27 set ou 22 a 28 fev)
+          var dayMatch = str.match(/^(\d{1,2})/);
+          if (dayMatch) {
+            day = parseInt(dayMatch[1]);
+            // Procura o nome do mês na string
+            for (var m in months) {
+              if (str.indexOf(m) !== -1) {
+                month = months[m];
+                break;
+              }
+            }
           }
         }
-        return 0;
+
+        // Ajuste básico para viragem de ano (ex: dez para jan)
+        // Se a semana contém 'jan' mas o dia é alto (ex: 28 dez a 3 jan), 
+        // a data de início é no ano anterior se a data atual for início de 2026
+        // Mas simplificando para ordenação, apenas o timestamp relativo basta.
+        return new Date(year, month, day).getTime();
       }
 
       hist.sort(function(a, b) {
-        var dateA = parseWeekDate(String(a.Semana || ''));
-        var dateB = parseWeekDate(String(b.Semana || ''));
-        if (dateA !== dateB) return dateA - dateB;
-        return String(a.Semana || '').localeCompare(String(b.Semana || ''));
+        var dateA = parseWeekDate(a.Semana);
+        var dateB = parseWeekDate(b.Semana);
+        return dateA - dateB;
       });
       
       /* Incluir semana actual no histórico */
@@ -1087,14 +1111,14 @@ function render(lojas, ultimaSemana) {
             + '<div class="section-head" style="color:#000;">' + s.nome + '</div>'
             + '<div class="section-body">'
             + '<div class="sec-cat" style="color:#000;">Programadas</div>'
-            + '<div class="sec-line" style="color:#000;"><span>Abertas</span><strong class="blue" style="color:#3b82f6;">' + s.pA + ' (' + pctPA_s + '%)</strong></div>'
+            + '<div class="sec-line" style="color:#000;"><span>Abertas</span><strong class="blue" style="color:#3b82f6;">' + pctPA_s + '%</strong></div>'
             + '<div class="bar"><div class="fill-blue" style="width:' + Math.min(100, pctPA_s) + '%"></div></div>'
-            + '<div class="sec-line" style="color:#000;"><span>Fechadas</span><strong class="green" style="color:#22c55e;">' + s.pF + ' (' + pctPF_s + '%)</strong></div>'
+            + '<div class="sec-line" style="color:#000;"><span>Fechadas</span><strong class="green" style="color:#22c55e;">' + pctPF_s + '%</strong></div>'
             + '<div class="bar"><div class="fill-green" style="width:' + Math.min(100, pctPF_s) + '%"></div></div>'
             + '<div class="sec-cat" style="color:#000;">Não Programadas</div>'
-            + '<div class="sec-line" style="color:#000;"><span>Abertas</span><strong class="blue" style="color:#3b82f6;">' + s.nA + ' (' + pctNA_s + '%)</strong></div>'
+            + '<div class="sec-line" style="color:#000;"><span>Abertas</span><strong class="blue" style="color:#3b82f6;">' + pctNA_s + '%</strong></div>'
             + '<div class="bar"><div class="fill-blue" style="width:' + Math.min(100, pctNA_s) + '%"></div></div>'
-            + '<div class="sec-line" style="color:#000;"><span>Fechadas</span><strong class="green" style="color:#22c55e;">' + s.nF + ' (' + pctNF_s + '%)</strong></div>'
+            + '<div class="sec-line" style="color:#000;"><span>Fechadas</span><strong class="green" style="color:#22c55e;">' + pctNF_s + '%</strong></div>'
             + '<div class="bar"><div class="fill-green" style="width:' + Math.min(100, pctNF_s) + '%"></div></div>'
             + '</div></div>';
         }).join('')
