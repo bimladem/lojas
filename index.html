@@ -1197,21 +1197,17 @@ function render(lojas, ultimaSemana) {
     
     if (!workloadCanvasEl || l.historico.length === 0) return;
 
-    /* GRÁFICO 1: Total de tarefas abertas por semana */
+    /* GRÁFICO 1: Total de tarefas fechadas por semana */
     var semanas = [];
-    var totalAbertosData = [];
+    var totalFechadosData = [];
 
     l.historico.forEach(function(h) {
       semanas.push(h.Semana || '');
-      var pT = Number(h['P Total']) || 0;
       var pF = Number(h['P Fechado']) || 0;
-      var pA = pT - pF;
-      var nT = Number(h['NP Total']) || 0;
       var nF = Number(h['NP Fechado']) || 0;
-      var nA = nT - nF;
-      var totalAberto = pA + nA;
+      var totalFechado = pF + nF;
       
-      totalAbertosData.push(totalAberto);
+      totalFechadosData.push(totalFechado);
     });
 
     var ctx = workloadCanvasEl.getContext('2d');
@@ -1221,10 +1217,10 @@ function render(lojas, ultimaSemana) {
         labels: semanas,
         datasets: [
           {
-            label: 'Total de Tarefas Abertas',
-            data: totalAbertosData,
-            backgroundColor: 'rgba(139, 92, 246, 0.8)',
-            borderColor: 'rgba(139, 92, 246, 1)',
+            label: 'Total de Tarefas Fechadas',
+            data: totalFechadosData,
+            backgroundColor: 'rgba(34, 197, 94, 0.8)',
+            borderColor: 'rgba(34, 197, 94, 1)',
             borderWidth: 2,
             borderRadius: 6,
             barPercentage: 0.7,
@@ -1259,7 +1255,7 @@ function render(lojas, ultimaSemana) {
             borderWidth: 1,
             callbacks: {
               label: function(context) {
-                return 'Tarefas abertas: ' + context.parsed.x;
+                return 'Tarefas fechadas: ' + context.parsed.x;
               }
             }
           }
@@ -1297,21 +1293,17 @@ function render(lojas, ultimaSemana) {
       }
     });
 
-    /* GRÁFICO 2: Comparação P vs NP */
+    /* GRÁFICO 2: Comparação P vs NP (Fechadas) */
     if (pnpCanvasEl) {
-      var pAbertosData = [];
-      var npAbertosData = [];
+      var pFechadosData = [];
+      var npFechadosData = [];
 
       l.historico.forEach(function(h) {
-        var pT = Number(h['P Total']) || 0;
         var pF = Number(h['P Fechado']) || 0;
-        var pA = pT - pF;
-        var nT = Number(h['NP Total']) || 0;
         var nF = Number(h['NP Fechado']) || 0;
-        var nA = nT - nF;
         
-        pAbertosData.push(pA);
-        npAbertosData.push(nA);
+        pFechadosData.push(pF);
+        npFechadosData.push(nF);
       });
 
       var ctx2 = pnpCanvasEl.getContext('2d');
@@ -1321,8 +1313,8 @@ function render(lojas, ultimaSemana) {
           labels: semanas,
           datasets: [
             {
-              label: 'Programadas Abertas',
-              data: pAbertosData,
+              label: 'Programadas Fechadas',
+              data: pFechadosData,
               backgroundColor: 'rgba(59, 130, 246, 0.8)',
               borderColor: 'rgba(59, 130, 246, 1)',
               borderWidth: 1.5,
@@ -1331,10 +1323,10 @@ function render(lojas, ultimaSemana) {
               categoryPercentage: 0.85
             },
             {
-              label: 'Não Programadas Abertas',
-              data: npAbertosData,
-              backgroundColor: 'rgba(239, 68, 68, 0.8)',
-              borderColor: 'rgba(239, 68, 68, 1)',
+              label: 'Não Programadas Fechadas',
+              data: npFechadosData,
+              backgroundColor: 'rgba(34, 197, 94, 0.8)',
+              borderColor: 'rgba(34, 197, 94, 1)',
               borderWidth: 1.5,
               borderRadius: 4,
               barPercentage: 0.6,
