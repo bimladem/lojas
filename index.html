@@ -6,6 +6,7 @@
 <title>Análise Semanal IM</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.1.0/chartjs-plugin-datalabels.min.js"></script>
 <style>
 :root{
   --border:rgba(0,0,0,.08);
@@ -1033,27 +1034,21 @@ function render(lojas, ultimaSemana) {
       var hnF = Number(h['NP Fechado']) || 0;
       var hnA = hnT - hnF;
 
-      var pctHPA = hpT > 0 ? (hpA / hpT * 100).toFixed(1) : '0.0';
-      var pctHPF = hpT > 0 ? (hpF / hpT * 100).toFixed(1) : '0.0';
-      var pctHNA = hnT > 0 ? (hnA / hnT * 100).toFixed(1) : '0.0';
-      var pctHNF = hnT > 0 ? (hnF / hnT * 100).toFixed(1) : '0.0';
-
       return '<tr>'
         + '<td style="color:#000;text-align:center;">' + (h.Semana || '—') + '</td>'
-        + '<td style="color:#000;text-align:center;font-weight:800;">' + pctHPA + '%</td>'
-        + '<td style="color:#000;text-align:center;font-weight:800;">' + pctHPF + '%</td>'
-        + '<td style="color:#000;text-align:center;font-weight:800;">' + pctHNA + '%</td>'
-        + '<td style="color:#000;text-align:center;font-weight:800;">' + pctHNF + '%</td>'
+        + '<td style="color:#000;text-align:center;font-weight:800;">' + hpA + '</td>'
+        + '<td style="color:#000;text-align:center;font-weight:800;">' + hpF + '</td>'
+        + '<td style="color:#000;text-align:center;font-weight:800;">' + hnA + '</td>'
+        + '<td style="color:#000;text-align:center;font-weight:800;">' + hnF + '</td>'
         + '</tr>';
     }).join('');
 
     var pnpChartId = 'pnp-' + li;
     
     var histHtml = l.historico.length > 0
-      ? '<p style="color:#333;font-size:13px;font-weight:600;margin-bottom:var(--spacing-lg);"><strong>Dashboard de Carga de Trabalho</strong></p>'
-        + '<p style="color:#333;font-size:13px;font-weight:600;margin-bottom:var(--spacing-lg);margin-top:var(--spacing-xl);"><strong>Comparação: Programadas vs Não Programadas (% Fechadas)</strong></p>'
+      ? '<p style="color:#333;font-size:13px;font-weight:600;margin-bottom:var(--spacing-lg);margin-top:var(--spacing-xl);"><strong>Comparação: Programadas vs Não Programadas (% Fechadas)</strong></p>'
         + '<div class="chart-container"><canvas id="' + pnpChartId + '"></canvas></div>'
-        + '<p style="color:#333;font-size:13px;font-weight:600;margin-bottom:var(--spacing-lg);margin-top:var(--spacing-xl);"><strong>Histórico Detalhado (%)</strong></p>'
+        + '<p style="color:#333;font-size:13px;font-weight:600;margin-bottom:var(--spacing-lg);margin-top:var(--spacing-xl);"><strong>Histórico Detalhado</strong></p>'
         + '<table class="detail-table">'
         + '<thead><tr><th style="text-align:center;">Semana</th><th style="text-align:center;">P Abertas</th><th style="text-align:center;">P Fechadas</th><th style="text-align:center;">NP Abertas</th><th style="text-align:center;">NP Fechadas</th></tr></thead>'
         + '<tbody>' + histRows
@@ -1128,7 +1123,7 @@ function render(lojas, ultimaSemana) {
 
     /* PAINÉIS */
     html += '<div class="panel" id="hist-' + li + '">'
-      + '<div class="panel-inner"><div class="panel-title" style="color:#8b5cf6;">Carga de Trabalho Semanal</div>'
+      + '<div class="panel-inner">'
       + histHtml + '</div></div>';
 
     html += '<div class="panel" id="sec-' + li + '">'
@@ -1192,6 +1187,7 @@ function render(lojas, ultimaSemana) {
       var ctx2 = pnpCanvasEl.getContext('2d');
       charts['pnp-' + li] = new Chart(ctx2, {
         type: 'bar',
+        plugins: [ChartDataLabels],
         data: {
           labels: semanas,
           datasets: [
@@ -1221,11 +1217,28 @@ function render(lojas, ultimaSemana) {
           indexAxis: 'y',
           responsive: true,
           maintainAspectRatio: false,
+          layout: {
+            padding: {
+              right: 40
+            }
+          },
           interaction: {
             mode: 'index',
             intersect: false
           },
           plugins: {
+            datalabels: {
+              anchor: 'end',
+              align: 'right',
+              formatter: function(value) {
+                return value + '%';
+              },
+              font: {
+                weight: 'bold',
+                size: 11
+              },
+              color: '#333'
+            },
             legend: {
               position: 'top',
               labels: {
@@ -1260,6 +1273,7 @@ function render(lojas, ultimaSemana) {
               display: true,
               position: 'bottom',
               beginAtZero: true,
+              max: 100,
               title: {
                 display: true,
                 text: 'Percentagem (%)',
