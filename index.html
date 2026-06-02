@@ -1014,7 +1014,8 @@ function render(lojas, ultimaSemana) {
 
     var chartId = 'chart-' + li;
     var histHtml = l.historico.length > 0
-      ? '<table class="detail-table">'
+      ? '<div class="chart-container"><canvas id="' + chartId + '"></canvas></div>'
+        + '<table class="detail-table">'
         + '<thead><tr><th>Semana</th><th>P Abertas</th><th>P Fechadas</th><th>NP Abertas</th><th>NP Fechadas</th></tr></thead>'
         + '<tbody>' + histRows
         + '<tr class="atual"><td style="color:#000;">' + ultimaSemana + ' (atual)</td>'
@@ -1023,7 +1024,6 @@ function render(lojas, ultimaSemana) {
         + '<td class="blue" style="color:#3b82f6;">'   + l.nA + '</td>'
         + '<td class="green" style="color:#22c55e;">' + l.nF + '</td>'
         + '</tr></tbody></table>'
-        + '<div class="chart-container"><canvas id="' + chartId + '"></canvas></div>'
       : '<p style="color:#000;font-size:13px;font-weight:600;">Sem semanas anteriores disponíveis.</p>';
 
     /* SECÇÕES PANEL */
@@ -1134,77 +1134,139 @@ function render(lojas, ultimaSemana) {
     if (!canvasEl) return;
 
     var semanas = [];
-    var pAbertasData = [];
-    var pFechadasData = [];
-    var npAbertasData = [];
-    var npFechadasData = [];
+    var totalAbertasData = [];
+    var totalFechadasData = [];
+    var percentualFechadasData = [];
 
     l.historico.forEach(function(h) {
       semanas.push(h.Semana || '');
-      pAbertasData.push(Number(h['P Total']) - Number(h['P Fechado']) || 0);
-      pFechadasData.push(Number(h['P Fechado']) || 0);
-      npAbertasData.push(Number(h['NP Total']) - Number(h['NP Fechado']) || 0);
-      npFechadasData.push(Number(h['NP Fechado']) || 0);
+      var pT = Number(h['P Total']) || 0;
+      var pF = Number(h['P Fechado']) || 0;
+      var pA = pT - pF;
+      var nT = Number(h['NP Total']) || 0;
+      var nF = Number(h['NP Fechado']) || 0;
+      var nA = nT - nF;
+      
+      totalAbertasData.push(pA + nA);
+      totalFechadasData.push(pF + nF);
+      var totalTarefas = pT + nT;
+      var percentualFechadas = totalTarefas > 0 ? ((pF + nF) / totalTarefas * 100).toFixed(1) : 0;
+      percentualFechadasData.push(percentualFechadas);
     });
 
     var ctx = canvasEl.getContext('2d');
     charts['hist-' + li] = new Chart(ctx, {
-      type: 'bar',
+      type: 'line',
       data: {
         labels: semanas,
         datasets: [
           {
-            label: 'P Abertas',
-            data: pAbertasData,
-            backgroundColor: 'rgba(59, 130, 246, 0.7)',
+            label: 'Total Aberto',
+            data: totalAbertasData,
             borderColor: 'rgba(59, 130, 246, 1)',
-            borderWidth: 1
+            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+            borderWidth: 2,
+            fill: true,
+            tension: 0.4,
+            pointRadius: 5,
+            pointBackgroundColor: 'rgba(59, 130, 246, 1)',
+            pointBorderColor: '#fff',
+            pointBorderWidth: 2
           },
           {
-            label: 'P Fechadas',
-            data: pFechadasData,
-            backgroundColor: 'rgba(34, 197, 94, 0.7)',
+            label: 'Total Fechado',
+            data: totalFechadasData,
             borderColor: 'rgba(34, 197, 94, 1)',
-            borderWidth: 1
+            backgroundColor: 'rgba(34, 197, 94, 0.1)',
+            borderWidth: 2,
+            fill: true,
+            tension: 0.4,
+            pointRadius: 5,
+            pointBackgroundColor: 'rgba(34, 197, 94, 1)',
+            pointBorderColor: '#fff',
+            pointBorderWidth: 2
           },
           {
-            label: 'NP Abertas',
-            data: npAbertasData,
-            backgroundColor: 'rgba(59, 130, 246, 0.4)',
-            borderColor: 'rgba(59, 130, 246, 0.6)',
-            borderWidth: 1
-          },
-          {
-            label: 'NP Fechadas',
-            data: npFechadasData,
-            backgroundColor: 'rgba(34, 197, 94, 0.4)',
-            borderColor: 'rgba(34, 197, 94, 0.6)',
-            borderWidth: 1
+            label: '% Fechadas',
+            data: percentualFechadasData,
+            borderColor: 'rgba(139, 92, 246, 1)',
+            backgroundColor: 'rgba(139, 92, 246, 0.05)',
+            borderWidth: 2,
+            fill: true,
+            tension: 0.4,
+            pointRadius: 5,
+            pointBackgroundColor: 'rgba(139, 92, 246, 1)',
+            pointBorderColor: '#fff',
+            pointBorderWidth: 2,
+            yAxisID: 'y1'
           }
         ]
       },
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        interaction: {
+          mode: 'index',
+          intersect: false
+        },
         plugins: {
           legend: {
             position: 'top',
             labels: {
               font: { size: 12, weight: 'bold' },
               color: '#333',
-              padding: 15
+              padding: 15,
+              usePointStyle: true
             }
+          },
+          tooltip: {
+            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+            padding: 12,
+            titleFont: { size: 13, weight: 'bold' },
+            bodyFont: { size: 12 },
+            borderColor: 'rgba(255, 255, 255, 0.3)',
+            borderWidth: 1
           }
         },
         scales: {
           y: {
+            type: 'linear',
+            display: true,
+            position: 'left',
             beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Quantidade de Tarefas',
+              color: '#333',
+              font: { size: 12, weight: 'bold' }
+            },
             ticks: {
               color: '#666',
               font: { size: 11 }
             },
             grid: {
               color: 'rgba(0, 0, 0, 0.05)'
+            }
+          },
+          y1: {
+            type: 'linear',
+            display: true,
+            position: 'right',
+            beginAtZero: true,
+            max: 100,
+            title: {
+              display: true,
+              text: 'Percentual Fechadas (%)',
+              color: '#333',
+              font: { size: 12, weight: 'bold' }
+            },
+            ticks: {
+              color: '#666',
+              font: { size: 11 },
+              callback: function(value) { return value + '%'; }
+            },
+            grid: {
+              display: false
             }
           },
           x: {
