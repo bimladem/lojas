@@ -354,7 +354,7 @@ body{font-family:'Inter',sans-serif;background:#f9f9f9;color:var(--text);}
 .chart-container{
   position:relative;
   width:100%;
-  height:500px;
+  height:450px;
   margin:var(--spacing-xl) 0;
   background:#fff;
   border-radius:12px;
@@ -362,86 +362,47 @@ body{font-family:'Inter',sans-serif;background:#f9f9f9;color:var(--text);}
   box-shadow:0 2px 8px rgba(0,0,0,.05);
 }
 
-.chart-container-small{
-  position:relative;
-  width:100%;
-  height:350px;
-  margin:var(--spacing-xl) 0;
-  background:#fff;
-  border-radius:12px;
-  padding:var(--spacing-lg);
-  box-shadow:0 2px 8px rgba(0,0,0,.05);
-}
-
-.summary-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
-  gap:var(--spacing-lg);
-  margin:var(--spacing-xl) 0;
-}
-
-.summary-card{
-  background:#fff;
-  border:2px solid var(--border);
-  border-radius:14px;
-  padding:var(--spacing-lg);
-  box-shadow:0 2px 8px rgba(0,0,0,.04);
-}
-
-.summary-card.improved{
-  border-color:rgba(34,197,94,.3);
-  background:rgba(34,197,94,.05);
-}
-
-.summary-card.worsened{
-  border-color:rgba(239,68,68,.3);
-  background:rgba(239,68,68,.05);
-}
-
-.summary-card.neutral{
-  border-color:rgba(128,128,128,.3);
-  background:rgba(128,128,128,.05);
-}
-
-.summary-title{
-  font-size:var(--font-sm);
-  font-weight:800;
-  color:#333;
-  text-transform:uppercase;
-  letter-spacing:.3px;
-  margin-bottom:var(--spacing-md);
-}
-
-.summary-content{
+.trend-indicator{
   display:flex;
   align-items:center;
-  gap:var(--spacing-lg);
+  gap:var(--spacing-md);
+  padding:var(--spacing-lg);
+  border-radius:12px;
+  margin:var(--spacing-xl) 0;
+  font-weight:800;
+  font-size:var(--font-lg);
 }
 
-.summary-icon{
-  font-size:clamp(32px, 4vw, 48px);
-  flex-shrink:0;
+.trend-indicator.improved{
+  background:rgba(34,197,94,.1);
+  border:2px solid rgba(34,197,94,.3);
+  color:#22c55e;
 }
 
-.summary-stats{
-  flex:1;
+.trend-indicator.worsened{
+  background:rgba(239,68,68,.1);
+  border:2px solid rgba(239,68,68,.3);
+  color:#ef4444;
 }
 
-.summary-stat-line{
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:var(--spacing-sm);
-  font-size:var(--font-base);
-  font-weight:600;
-}
-
-.summary-stat-label{
+.trend-indicator.neutral{
+  background:rgba(128,128,128,.1);
+  border:2px solid rgba(128,128,128,.3);
   color:#666;
 }
 
-.summary-stat-value{
+.trend-icon{
+  font-size:clamp(28px, 3.5vw, 40px);
+  flex-shrink:0;
+}
+
+.trend-text{
+  flex:1;
+}
+
+.trend-value{
+  font-size:clamp(18px, 2.2vw, 28px);
   font-weight:800;
-  color:#000;
 }
 
 .sections-grid{
@@ -823,25 +784,16 @@ body{font-family:'Inter',sans-serif;background:#f9f9f9;color:var(--text);}
   }
 
   .chart-container{
-    height:400px;
+    height:350px;
     padding:var(--spacing-md);
   }
 
-  .chart-container-small{
-    height:300px;
-    padding:var(--spacing-md);
-  }
-
-  .summary-grid{
-    grid-template-columns:1fr;
-  }
-
-  .summary-content{
+  .trend-indicator{
     flex-direction:column;
     text-align:center;
   }
 
-  .summary-icon{
+  .trend-icon{
     margin-bottom:var(--spacing-sm);
   }
 }
@@ -854,10 +806,7 @@ body{font-family:'Inter',sans-serif;background:#f9f9f9;color:var(--text);}
     line-height:1;
   }
   .chart-container{
-    height:350px;
-  }
-  .chart-container-small{
-    height:250px;
+    height:300px;
   }
 }
 </style>
@@ -890,12 +839,12 @@ function toggleHist(li) {
   stateHist[li] = !stateHist[li];
   p.classList.toggle('visible', stateHist[li]);
   b.classList.toggle('open', stateHist[li]);
-  b.textContent = stateHist[li] ? '▼ Fechar' : 'Histórico';
+  b.textContent = stateHist[li] ? '▼ Fechar' : 'Histórico' ;
   
   if (stateHist[li]) {
     setTimeout(function() {
-      if (charts['hist-' + li]) charts['hist-' + li].resize();
-      if (charts['comp-' + li]) charts['comp-' + li].resize();
+      if (charts['workload-' + li]) charts['workload-' + li].resize();
+      if (charts['pnp-' + li]) charts['pnp-' + li].resize();
     }, 100);
   }
 }
@@ -1075,7 +1024,7 @@ function render(lojas, ultimaSemana) {
               : 'Sem alterações';
     var diffVal = l.diff !== null ? (l.diff > 0 ? '+' + l.diff : l.diff) : '—';
 
-    /* HISTÓRICO PANEL COM GRÁFICOS DE EVOLUÇÃO COMPLETA */
+    /* DASHBOARD DE CARGA DE TRABALHO */
     var histRows = l.historico.map(function(h) {
       var hpT = Number(h['P Total'])   || 0;
       var hpF = Number(h['P Fechado']) || 0;
@@ -1092,71 +1041,45 @@ function render(lojas, ultimaSemana) {
         + '</tr>';
     }).join('');
 
-    var chartId = 'chart-' + li;
-    var compChartId = 'comp-' + li;
+    var workloadChartId = 'workload-' + li;
+    var pnpChartId = 'pnp-' + li;
     
-    /* Calcular resumo visual */
-    var pTotal_primeira = l.historico.length > 0 ? Number(l.historico[0]['P Total']) || 0 : 0;
-    var pFechado_primeira = l.historico.length > 0 ? Number(l.historico[0]['P Fechado']) || 0 : 0;
-    var pAberto_primeira = pTotal_primeira - pFechado_primeira;
-    
-    var npTotal_primeira = l.historico.length > 0 ? Number(l.historico[0]['NP Total']) || 0 : 0;
-    var npFechado_primeira = l.historico.length > 0 ? Number(l.historico[0]['NP Fechado']) || 0 : 0;
-    var npAberto_primeira = npTotal_primeira - npFechado_primeira;
-    
-    var pAberto_atual = l.pA;
-    var pFechado_atual = l.pF;
-    var npAberto_atual = l.nA;
-    var npFechado_atual = l.nF;
-    
-    var pAberto_diff = pAberto_atual - pAberto_primeira;
-    var pFechado_diff = pFechado_atual - pFechado_primeira;
-    var npAberto_diff = npAberto_atual - npAberto_primeira;
-    var npFechado_diff = npFechado_atual - npFechado_primeira;
-    
-    var pTrend = pAberto_diff < 0 && pFechado_diff > 0 ? 'improved' : pAberto_diff > 0 || pFechado_diff < 0 ? 'worsened' : 'neutral';
-    var npTrend = npFechado_diff > 0 ? 'improved' : npFechado_diff < 0 ? 'worsened' : 'neutral';
-    
-    var pIcon = pTrend === 'improved' ? '▲' : pTrend === 'worsened' ? '▼' : '➜';
-    var npIcon = npTrend === 'improved' ? '▲' : npTrend === 'worsened' ? '▼' : '➜';
-    
-    var overallTrend = pTrend === 'improved' && npTrend === 'improved' ? 'improved' : pTrend === 'worsened' || npTrend === 'worsened' ? 'worsened' : 'neutral';
-    var overallIcon = overallTrend === 'improved' ? '▲' : overallTrend === 'worsened' ? '▼' : '➜';
-    
-    var summaryHtml = '<div class="summary-grid">'
-      + '<div class="summary-card ' + pTrend + '">'
-      + '<div class="summary-title">Programadas (P)</div>'
-      + '<div class="summary-content">'
-      + '<div class="summary-icon">' + pIcon + '</div>'
-      + '<div class="summary-stats">'
-      + '<div class="summary-stat-line"><span class="summary-stat-label">Abertas:</span><span class="summary-stat-value">' + pAberto_atual + ' ' + (pAberto_diff > 0 ? '+' + pAberto_diff : pAberto_diff) + '</span></div>'
-      + '<div class="summary-stat-line"><span class="summary-stat-label">Fechadas:</span><span class="summary-stat-value">' + pFechado_atual + ' ' + (pFechado_diff > 0 ? '+' + pFechado_diff : pFechado_diff) + '</span></div>'
-      + '</div></div></div>'
-      + '<div class="summary-card ' + npTrend + '">'
-      + '<div class="summary-title">Não Programadas (NP)</div>'
-      + '<div class="summary-content">'
-      + '<div class="summary-icon">' + npIcon + '</div>'
-      + '<div class="summary-stats">'
-      + '<div class="summary-stat-line"><span class="summary-stat-label">Abertas:</span><span class="summary-stat-value">' + npAberto_atual + ' ' + (npAberto_diff > 0 ? '+' + npAberto_diff : npAberto_diff) + '</span></div>'
-      + '<div class="summary-stat-line"><span class="summary-stat-label">Fechadas:</span><span class="summary-stat-value">' + npFechado_atual + ' ' + (npFechado_diff > 0 ? '+' + npFechado_diff : npFechado_diff) + '</span></div>'
-      + '</div></div></div>'
-      + '<div class="summary-card ' + overallTrend + '">'
-      + '<div class="summary-title">Evolução Geral</div>'
-      + '<div class="summary-content">'
-      + '<div class="summary-icon">' + overallIcon + '</div>'
-      + '<div class="summary-stats">'
-      + '<div class="summary-stat-line"><span class="summary-stat-label">Status:</span><span class="summary-stat-value">' + (overallTrend === 'improved' ? 'Melhorando' : overallTrend === 'worsened' ? 'Piorando' : 'Estável') + '</span></div>'
-      + '<div class="summary-stat-line"><span class="summary-stat-label">Semanas:</span><span class="summary-stat-value">' + l.historico.length + '</span></div>'
-      + '</div></div></div>'
-      + '</div>';
+    /* Calcular tendência semana a semana */
+    var trendHtml = '';
+    if (l.historico.length >= 2) {
+      var ultimoHist = l.historico[l.historico.length - 1];
+      var penultimoHist = l.historico[l.historico.length - 2];
+      
+      var pAberto_atual = Number(ultimoHist['P Total']) - Number(ultimoHist['P Fechado']) || 0;
+      var npAberto_atual = Number(ultimoHist['NP Total']) - Number(ultimoHist['NP Fechado']) || 0;
+      var totalAberto_atual = pAberto_atual + npAberto_atual;
+      
+      var pAberto_anterior = Number(penultimoHist['P Total']) - Number(penultimoHist['P Fechado']) || 0;
+      var npAberto_anterior = Number(penultimoHist['NP Total']) - Number(penultimoHist['NP Fechado']) || 0;
+      var totalAberto_anterior = pAberto_anterior + npAberto_anterior;
+      
+      var diff = totalAberto_atual - totalAberto_anterior;
+      var pctDiff = totalAberto_anterior > 0 ? ((diff / totalAberto_anterior) * 100).toFixed(1) : 0;
+      
+      var trendClass = diff < 0 ? 'improved' : diff > 0 ? 'worsened' : 'neutral';
+      var trendIcon = diff < 0 ? '▲' : diff > 0 ? '▼' : '➜';
+      var trendMsg = diff < 0 ? 'Carga reduzida' : diff > 0 ? 'Carga aumentada' : 'Carga estável';
+      
+      trendHtml = '<div class="trend-indicator ' + trendClass + '">'
+        + '<div class="trend-icon">' + trendIcon + '</div>'
+        + '<div class="trend-text">'
+        + '<div style="font-size:var(--font-sm);color:inherit;opacity:0.8;">Semana anterior vs atual</div>'
+        + '<div class="trend-value">' + trendMsg + ' (' + (diff >= 0 ? '+' : '') + diff + ' tarefas, ' + (pctDiff >= 0 ? '+' : '') + pctDiff + '%)</div>'
+        + '</div></div>';
+    }
     
     var histHtml = l.historico.length > 0
-      ? '<p style="color:#333;font-size:13px;font-weight:600;margin-bottom:var(--spacing-lg);"><strong>Resumo da Evolução</strong></p>'
-        + summaryHtml
-        + '<p style="color:#333;font-size:13px;font-weight:600;margin-bottom:var(--spacing-lg);margin-top:var(--spacing-xl);"><strong>Evolução Histórica Completa (4 Métricas)</strong></p>'
-        + '<div class="chart-container"><canvas id="' + chartId + '"></canvas></div>'
-        + '<p style="color:#333;font-size:13px;font-weight:600;margin-bottom:var(--spacing-lg);margin-top:var(--spacing-xl);"><strong>Comparação Programadas vs Não Programadas</strong></p>'
-        + '<div class="chart-container-small"><canvas id="' + compChartId + '"></canvas></div>'
+      ? '<p style="color:#333;font-size:13px;font-weight:600;margin-bottom:var(--spacing-lg);"><strong>Dashboard de Carga de Trabalho</strong></p>'
+        + trendHtml
+        + '<p style="color:#333;font-size:13px;font-weight:600;margin-bottom:var(--spacing-lg);margin-top:var(--spacing-xl);"><strong>Total de Tarefas Abertas por Semana</strong></p>'
+        + '<div class="chart-container"><canvas id="' + workloadChartId + '"></canvas></div>'
+        + '<p style="color:#333;font-size:13px;font-weight:600;margin-bottom:var(--spacing-lg);margin-top:var(--spacing-xl);"><strong>Comparação: Programadas vs Não Programadas</strong></p>'
+        + '<div class="chart-container"><canvas id="' + pnpChartId + '"></canvas></div>'
         + '<p style="color:#333;font-size:13px;font-weight:600;margin-bottom:var(--spacing-lg);margin-top:var(--spacing-xl);"><strong>Histórico Detalhado</strong></p>'
         + '<table class="detail-table">'
         + '<thead><tr><th style="text-align:center;">Semana</th><th style="text-align:center;">P Abertas</th><th style="text-align:center;">P Fechadas</th><th style="text-align:center;">NP Abertas</th><th style="text-align:center;">NP Fechadas</th></tr></thead>'
@@ -1232,7 +1155,7 @@ function render(lojas, ultimaSemana) {
 
     /* PAINÉIS */
     html += '<div class="panel" id="hist-' + li + '">'
-      + '<div class="panel-inner"><div class="panel-title" style="color:#8b5cf6;">Evolução Semanal Completa</div>'
+      + '<div class="panel-inner"><div class="panel-title" style="color:#8b5cf6;">Carga de Trabalho Semanal</div>'
       + histHtml + '</div></div>';
 
     html += '<div class="panel" id="sec-' + li + '">'
@@ -1265,21 +1188,18 @@ function render(lojas, ultimaSemana) {
 
   document.getElementById('app').innerHTML = html;
 
-  /* Inicializar gráficos de evolução completa */
+  /* Inicializar gráficos de carga de trabalho */
   lojas.forEach(function(l, li) {
-    var chartId = 'chart-' + li;
-    var compChartId = 'comp-' + li;
-    var canvasEl = document.getElementById(chartId);
-    var compCanvasEl = document.getElementById(compChartId);
+    var workloadChartId = 'workload-' + li;
+    var pnpChartId = 'pnp-' + li;
+    var workloadCanvasEl = document.getElementById(workloadChartId);
+    var pnpCanvasEl = document.getElementById(pnpChartId);
     
-    if (!canvasEl || l.historico.length === 0) return;
+    if (!workloadCanvasEl || l.historico.length === 0) return;
 
-    /* GRÁFICO 1: Evolução com 4 métricas */
+    /* GRÁFICO 1: Total de tarefas abertas por semana */
     var semanas = [];
-    var pAbertasData = [];
-    var pFechadasData = [];
-    var npAbertasData = [];
-    var npFechadasData = [];
+    var totalAbertosData = [];
 
     l.historico.forEach(function(h) {
       semanas.push(h.Semana || '');
@@ -1289,62 +1209,31 @@ function render(lojas, ultimaSemana) {
       var nT = Number(h['NP Total']) || 0;
       var nF = Number(h['NP Fechado']) || 0;
       var nA = nT - nF;
+      var totalAberto = pA + nA;
       
-      pAbertasData.push(pA);
-      pFechadasData.push(pF);
-      npAbertasData.push(nA);
-      npFechadasData.push(nF);
+      totalAbertosData.push(totalAberto);
     });
 
-    var ctx = canvasEl.getContext('2d');
-    charts['hist-' + li] = new Chart(ctx, {
+    var ctx = workloadCanvasEl.getContext('2d');
+    charts['workload-' + li] = new Chart(ctx, {
       type: 'bar',
       data: {
         labels: semanas,
         datasets: [
           {
-            label: 'P Abertas',
-            data: pAbertasData,
-            backgroundColor: 'rgba(59, 130, 246, 0.8)',
-            borderColor: 'rgba(59, 130, 246, 1)',
-            borderWidth: 1.5,
-            borderRadius: 4,
-            barPercentage: 0.6,
-            categoryPercentage: 0.95
-          },
-          {
-            label: 'P Fechadas',
-            data: pFechadasData,
-            backgroundColor: 'rgba(34, 197, 94, 0.8)',
-            borderColor: 'rgba(34, 197, 94, 1)',
-            borderWidth: 1.5,
-            borderRadius: 4,
-            barPercentage: 0.6,
-            categoryPercentage: 0.95
-          },
-          {
-            label: 'NP Abertas',
-            data: npAbertasData,
-            backgroundColor: 'rgba(239, 68, 68, 0.8)',
-            borderColor: 'rgba(239, 68, 68, 1)',
-            borderWidth: 1.5,
-            borderRadius: 4,
-            barPercentage: 0.6,
-            categoryPercentage: 0.95
-          },
-          {
-            label: 'NP Fechadas',
-            data: npFechadasData,
-            backgroundColor: 'rgba(251, 146, 60, 0.8)',
-            borderColor: 'rgba(251, 146, 60, 1)',
-            borderWidth: 1.5,
-            borderRadius: 4,
-            barPercentage: 0.6,
-            categoryPercentage: 0.95
+            label: 'Total de Tarefas Abertas',
+            data: totalAbertosData,
+            backgroundColor: 'rgba(139, 92, 246, 0.8)',
+            borderColor: 'rgba(139, 92, 246, 1)',
+            borderWidth: 2,
+            borderRadius: 6,
+            barPercentage: 0.7,
+            categoryPercentage: 0.8
           }
         ]
       },
       options: {
+        indexAxis: 'y',
         responsive: true,
         maintainAspectRatio: false,
         interaction: {
@@ -1370,21 +1259,16 @@ function render(lojas, ultimaSemana) {
             borderWidth: 1,
             callbacks: {
               label: function(context) {
-                var label = context.dataset.label || '';
-                if (label) {
-                  label += ': ';
-                }
-                label += context.parsed.y;
-                return label;
+                return 'Tarefas abertas: ' + context.parsed.x;
               }
             }
           }
         },
         scales: {
-          y: {
+          x: {
             type: 'linear',
             display: true,
-            position: 'left',
+            position: 'bottom',
             beginAtZero: true,
             title: {
               display: true,
@@ -1400,10 +1284,10 @@ function render(lojas, ultimaSemana) {
               color: 'rgba(0, 0, 0, 0.05)'
             }
           },
-          x: {
+          y: {
             ticks: {
               color: '#666',
-              font: { size: 11 }
+              font: { size: 11, weight: 'bold' }
             },
             grid: {
               display: false
@@ -1414,52 +1298,52 @@ function render(lojas, ultimaSemana) {
     });
 
     /* GRÁFICO 2: Comparação P vs NP */
-    if (compCanvasEl) {
-      var pTotalData = [];
-      var npTotalData = [];
+    if (pnpCanvasEl) {
+      var pAbertosData = [];
+      var npAbertosData = [];
 
       l.historico.forEach(function(h) {
         var pT = Number(h['P Total']) || 0;
+        var pF = Number(h['P Fechado']) || 0;
+        var pA = pT - pF;
         var nT = Number(h['NP Total']) || 0;
-        pTotalData.push(pT);
-        npTotalData.push(nT);
+        var nF = Number(h['NP Fechado']) || 0;
+        var nA = nT - nF;
+        
+        pAbertosData.push(pA);
+        npAbertosData.push(nA);
       });
 
-      var ctx2 = compCanvasEl.getContext('2d');
-      charts['comp-' + li] = new Chart(ctx2, {
-        type: 'line',
+      var ctx2 = pnpCanvasEl.getContext('2d');
+      charts['pnp-' + li] = new Chart(ctx2, {
+        type: 'bar',
         data: {
           labels: semanas,
           datasets: [
             {
-              label: 'Total Programadas (P)',
-              data: pTotalData,
+              label: 'Programadas Abertas',
+              data: pAbertosData,
+              backgroundColor: 'rgba(59, 130, 246, 0.8)',
               borderColor: 'rgba(59, 130, 246, 1)',
-              backgroundColor: 'rgba(59, 130, 246, 0.1)',
-              borderWidth: 3,
-              fill: true,
-              tension: 0.4,
-              pointRadius: 5,
-              pointBackgroundColor: 'rgba(59, 130, 246, 1)',
-              pointBorderColor: '#fff',
-              pointBorderWidth: 2
+              borderWidth: 1.5,
+              borderRadius: 4,
+              barPercentage: 0.6,
+              categoryPercentage: 0.85
             },
             {
-              label: 'Total Não Programadas (NP)',
-              data: npTotalData,
+              label: 'Não Programadas Abertas',
+              data: npAbertosData,
+              backgroundColor: 'rgba(239, 68, 68, 0.8)',
               borderColor: 'rgba(239, 68, 68, 1)',
-              backgroundColor: 'rgba(239, 68, 68, 0.1)',
-              borderWidth: 3,
-              fill: true,
-              tension: 0.4,
-              pointRadius: 5,
-              pointBackgroundColor: 'rgba(239, 68, 68, 1)',
-              pointBorderColor: '#fff',
-              pointBorderWidth: 2
+              borderWidth: 1.5,
+              borderRadius: 4,
+              barPercentage: 0.6,
+              categoryPercentage: 0.85
             }
           ]
         },
         options: {
+          indexAxis: 'y',
           responsive: true,
           maintainAspectRatio: false,
           interaction: {
@@ -1482,18 +1366,28 @@ function render(lojas, ultimaSemana) {
               titleFont: { size: 13, weight: 'bold' },
               bodyFont: { size: 12 },
               borderColor: 'rgba(255, 255, 255, 0.3)',
-              borderWidth: 1
+              borderWidth: 1,
+              callbacks: {
+                label: function(context) {
+                  var label = context.dataset.label || '';
+                  if (label) {
+                    label += ': ';
+                  }
+                  label += context.parsed.x;
+                  return label;
+                }
+              }
             }
           },
           scales: {
-            y: {
+            x: {
               type: 'linear',
               display: true,
-              position: 'left',
+              position: 'bottom',
               beginAtZero: true,
               title: {
                 display: true,
-                text: 'Total de Tarefas',
+                text: 'Quantidade de Tarefas Abertas',
                 color: '#333',
                 font: { size: 12, weight: 'bold' }
               },
@@ -1505,10 +1399,10 @@ function render(lojas, ultimaSemana) {
                 color: 'rgba(0, 0, 0, 0.05)'
               }
             },
-            x: {
+            y: {
               ticks: {
                 color: '#666',
-                font: { size: 11 }
+                font: { size: 11, weight: 'bold' }
               },
               grid: {
                 display: false
