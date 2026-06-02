@@ -940,51 +940,8 @@ fetch('dados.json?t=' + Date.now())
     lojas.forEach(function(l) {
       var hist = histPorLoja[l.loja] || [];
       
-      /* Ordenar por semana cronologicamente */
-      function parseWeekDate(s) {
-        if (!s) return 0;
-        var str = String(s).toLowerCase().trim();
-        var months = {
-          'jan': 0, 'fev': 1, 'mar': 2, 'abr': 3, 'mai': 4, 'jun': 5,
-          'jul': 6, 'ago': 7, 'set': 8, 'out': 9, 'nov': 10, 'dez': 11
-        };
-        
-        // Tenta encontrar o dia e o mês no início da string
-        // Formatos comuns: "21-27 set", "22 a 28 fev", "20.05 a 26.05"
-        var day = 0, month = 0, year = 2026;
-
-        // Caso 1: Formato com ponto (20.05)
-        var dotMatch = str.match(/^(\d{1,2})\.(\d{1,2})/);
-        if (dotMatch) {
-          day = parseInt(dotMatch[1]);
-          month = parseInt(dotMatch[2]) - 1;
-        } else {
-          // Caso 2: Formato com dia e nome do mês (21-27 set ou 22 a 28 fev)
-          var dayMatch = str.match(/^(\d{1,2})/);
-          if (dayMatch) {
-            day = parseInt(dayMatch[1]);
-            // Procura o nome do mês na string
-            for (var m in months) {
-              if (str.indexOf(m) !== -1) {
-                month = months[m];
-                break;
-              }
-            }
-          }
-        }
-
-        // Ajuste básico para viragem de ano (ex: dez para jan)
-        // Se a semana contém 'jan' mas o dia é alto (ex: 28 dez a 3 jan), 
-        // a data de início é no ano anterior se a data atual for início de 2026
-        // Mas simplificando para ordenação, apenas o timestamp relativo basta.
-        return new Date(year, month, day).getTime();
-      }
-
-      hist.sort(function(a, b) {
-        var dateA = parseWeekDate(a.Semana);
-        var dateB = parseWeekDate(b.Semana);
-        return dateA - dateB;
-      });
+      /* Ordenar por semana (ordem original dos dados) */
+      // Removida ordenação cronológica personalizada
       
       /* Incluir semana actual no histórico */
       l.historico = hist.slice(-8);
@@ -1075,25 +1032,28 @@ function render(lojas, ultimaSemana) {
       var hnT = Number(h['NP Total'])   || 0;
       var hnF = Number(h['NP Fechado']) || 0;
       var hnA = hnT - hnF;
+
+      var pctHPA = hpT > 0 ? (hpA / hpT * 100).toFixed(1) : '0.0';
+      var pctHPF = hpT > 0 ? (hpF / hpT * 100).toFixed(1) : '0.0';
+      var pctHNA = hnT > 0 ? (hnA / hnT * 100).toFixed(1) : '0.0';
+      var pctHNF = hnT > 0 ? (hnF / hnT * 100).toFixed(1) : '0.0';
+
       return '<tr>'
         + '<td style="color:#000;text-align:center;">' + (h.Semana || '—') + '</td>'
-        + '<td style="color:#3b82f6;text-align:center;font-weight:800;">' + hpA + '</td>'
-        + '<td style="color:#22c55e;text-align:center;font-weight:800;">' + hpF + '</td>'
-        + '<td style="color:#ef4444;text-align:center;font-weight:800;">'  + hnA + '</td>'
-        + '<td style="color:#fb923c;text-align:center;font-weight:800;">' + hnF + '</td>'
+        + '<td style="color:#3b82f6;text-align:center;font-weight:800;">' + pctHPA + '%</td>'
+        + '<td style="color:#22c55e;text-align:center;font-weight:800;">' + pctHPF + '%</td>'
+        + '<td style="color:#ef4444;text-align:center;font-weight:800;">' + pctHNA + '%</td>'
+        + '<td style="color:#fb923c;text-align:center;font-weight:800;">' + pctHNF + '%</td>'
         + '</tr>';
     }).join('');
 
-    var workloadChartId = 'workload-' + li;
     var pnpChartId = 'pnp-' + li;
     
     var histHtml = l.historico.length > 0
       ? '<p style="color:#333;font-size:13px;font-weight:600;margin-bottom:var(--spacing-lg);"><strong>Dashboard de Carga de Trabalho</strong></p>'
-        + '<p style="color:#333;font-size:13px;font-weight:600;margin-bottom:var(--spacing-lg);margin-top:var(--spacing-xl);"><strong>Total de Tarefas Fechadas por Semana</strong></p>'
-        + '<div class="chart-container"><canvas id="' + workloadChartId + '"></canvas></div>'
-        + '<p style="color:#333;font-size:13px;font-weight:600;margin-bottom:var(--spacing-lg);margin-top:var(--spacing-xl);"><strong>Comparação: Programadas vs Não Programadas</strong></p>'
+        + '<p style="color:#333;font-size:13px;font-weight:600;margin-bottom:var(--spacing-lg);margin-top:var(--spacing-xl);"><strong>Comparação: Programadas vs Não Programadas (% Fechadas)</strong></p>'
         + '<div class="chart-container"><canvas id="' + pnpChartId + '"></canvas></div>'
-        + '<p style="color:#333;font-size:13px;font-weight:600;margin-bottom:var(--spacing-lg);margin-top:var(--spacing-xl);"><strong>Histórico Detalhado</strong></p>'
+        + '<p style="color:#333;font-size:13px;font-weight:600;margin-bottom:var(--spacing-lg);margin-top:var(--spacing-xl);"><strong>Histórico Detalhado (%)</strong></p>'
         + '<table class="detail-table">'
         + '<thead><tr><th style="text-align:center;">Semana</th><th style="text-align:center;">P Abertas</th><th style="text-align:center;">P Fechadas</th><th style="text-align:center;">NP Abertas</th><th style="text-align:center;">NP Fechadas</th></tr></thead>'
         + '<tbody>' + histRows
@@ -1205,118 +1165,28 @@ function render(lojas, ultimaSemana) {
   lojas.forEach(function(l, li) {
     var workloadChartId = 'workload-' + li;
     var pnpChartId = 'pnp-' + li;
-    var workloadCanvasEl = document.getElementById(workloadChartId);
     var pnpCanvasEl = document.getElementById(pnpChartId);
     
-    if (!workloadCanvasEl || l.historico.length === 0) return;
+    if (!pnpCanvasEl || l.historico.length === 0) return;
 
-    /* GRÁFICO 1: Total de tarefas fechadas por semana */
-    var semanas = [];
-    var totalFechadosData = [];
-
-    l.historico.forEach(function(h) {
-      semanas.push(h.Semana || '');
-      var pF = Number(h['P Fechado']) || 0;
-      var nF = Number(h['NP Fechado']) || 0;
-      var totalFechado = pF + nF;
-      
-      totalFechadosData.push(totalFechado);
-    });
-
-    var ctx = workloadCanvasEl.getContext('2d');
-    charts['workload-' + li] = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: semanas,
-        datasets: [
-          {
-            label: 'Total de Tarefas Fechadas',
-            data: totalFechadosData,
-            backgroundColor: 'rgba(34, 197, 94, 0.8)',
-            borderColor: 'rgba(34, 197, 94, 1)',
-            borderWidth: 2,
-            borderRadius: 6,
-            barPercentage: 0.7,
-            categoryPercentage: 0.8
-          }
-        ]
-      },
-      options: {
-        indexAxis: 'y',
-        responsive: true,
-        maintainAspectRatio: false,
-        interaction: {
-          mode: 'index',
-          intersect: false
-        },
-        plugins: {
-          legend: {
-            position: 'top',
-            labels: {
-              font: { size: 12, weight: 'bold' },
-              color: '#333',
-              padding: 15,
-              usePointStyle: true
-            }
-          },
-          tooltip: {
-            backgroundColor: 'rgba(0, 0, 0, 0.8)',
-            padding: 12,
-            titleFont: { size: 13, weight: 'bold' },
-            bodyFont: { size: 12 },
-            borderColor: 'rgba(255, 255, 255, 0.3)',
-            borderWidth: 1,
-            callbacks: {
-              label: function(context) {
-                return 'Tarefas fechadas: ' + context.parsed.x;
-              }
-            }
-          }
-        },
-        scales: {
-          x: {
-            type: 'linear',
-            display: true,
-            position: 'bottom',
-            beginAtZero: true,
-            title: {
-              display: true,
-              text: 'Quantidade de Tarefas',
-              color: '#333',
-              font: { size: 12, weight: 'bold' }
-            },
-            ticks: {
-              color: '#666',
-              font: { size: 11 }
-            },
-            grid: {
-              color: 'rgba(0, 0, 0, 0.05)'
-            }
-          },
-          y: {
-            ticks: {
-              color: '#666',
-              font: { size: 11, weight: 'bold' }
-            },
-            grid: {
-              display: false
-            }
-          }
-        }
-      }
-    });
-
-    /* GRÁFICO 2: Comparação P vs NP (Fechadas) */
+    /* GRÁFICO: Comparação P vs NP (Fechadas %) */
     if (pnpCanvasEl) {
+      var semanas = [];
       var pFechadosData = [];
       var npFechadosData = [];
 
       l.historico.forEach(function(h) {
+        semanas.push(h.Semana || '');
+        var pT = Number(h['P Total']) || 0;
         var pF = Number(h['P Fechado']) || 0;
+        var nT = Number(h['NP Total']) || 0;
         var nF = Number(h['NP Fechado']) || 0;
         
-        pFechadosData.push(pF);
-        npFechadosData.push(nF);
+        var pctPF = pT > 0 ? (pF / pT * 100).toFixed(1) : 0;
+        var pctNF = nT > 0 ? (nF / nT * 100).toFixed(1) : 0;
+
+        pFechadosData.push(pctPF);
+        npFechadosData.push(pctNF);
       });
 
       var ctx2 = pnpCanvasEl.getContext('2d');
@@ -1326,7 +1196,7 @@ function render(lojas, ultimaSemana) {
           labels: semanas,
           datasets: [
             {
-              label: 'Programadas Fechadas',
+              label: 'Programadas Fechadas (%)',
               data: pFechadosData,
               backgroundColor: 'rgba(59, 130, 246, 0.8)',
               borderColor: 'rgba(59, 130, 246, 1)',
@@ -1336,7 +1206,7 @@ function render(lojas, ultimaSemana) {
               categoryPercentage: 0.85
             },
             {
-              label: 'Não Programadas Fechadas',
+              label: 'Não Programadas Fechadas (%)',
               data: npFechadosData,
               backgroundColor: 'rgba(34, 197, 94, 0.8)',
               borderColor: 'rgba(34, 197, 94, 1)',
@@ -1378,7 +1248,7 @@ function render(lojas, ultimaSemana) {
                   if (label) {
                     label += ': ';
                   }
-                  label += context.parsed.x;
+                  label += context.parsed.x + '%';
                   return label;
                 }
               }
@@ -1392,7 +1262,7 @@ function render(lojas, ultimaSemana) {
               beginAtZero: true,
               title: {
                 display: true,
-                text: 'Quantidade de Tarefas Abertas',
+                text: 'Percentagem (%)',
                 color: '#333',
                 font: { size: 12, weight: 'bold' }
               },
