@@ -1092,10 +1092,10 @@ function render(lojas, ultimaSemana) {
             + '<div class="sec-line" style="color:#000;"><span>Fechadas</span><strong class="green" style="color:#22c55e;">' + s.pF + ' (' + pctPF_s + '%)</strong></div>'
             + '<div class="bar"><div class="fill-green" style="width:' + Math.min(100, pctPF_s) + '%"></div></div>'
             + '<div class="sec-cat" style="color:#000;">Não Programadas</div>'
-            + '<div class="sec-line" style="color:#000;"><span>Abertas</span><strong style="color:#ef4444;">' + s.nA + ' (' + pctNA_s + '%)</strong></div>'
-            + '<div class="bar"><div class="fill-red" style="width:' + Math.min(100, pctNA_s) + '%"></div></div>'
-            + '<div class="sec-line" style="color:#000;"><span>Fechadas</span><strong style="color:#fb923c;">' + s.nF + ' (' + pctNF_s + '%)</strong></div>'
-            + '<div class="bar"><div class="fill-orange" style="width:' + Math.min(100, pctNF_s) + '%;height:100%;background:linear-gradient(90deg,#fb923c 0%,#fbbf24 100%);border-radius:6px;"></div></div>'
+            + '<div class="sec-line" style="color:#000;"><span>Abertas</span><strong class="blue" style="color:#3b82f6;">' + s.nA + ' (' + pctNA_s + '%)</strong></div>'
+            + '<div class="bar"><div class="fill-blue" style="width:' + Math.min(100, pctNA_s) + '%"></div></div>'
+            + '<div class="sec-line" style="color:#000;"><span>Fechadas</span><strong class="green" style="color:#22c55e;">' + s.nF + ' (' + pctNF_s + '%)</strong></div>'
+            + '<div class="bar"><div class="fill-green" style="width:' + Math.min(100, pctNF_s) + '%"></div></div>'
             + '</div></div>';
         }).join('')
       : '<p style="color:#000;font-size:13px;font-weight:600;">Sem secções disponíveis.</p>';
