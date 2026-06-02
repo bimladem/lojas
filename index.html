@@ -1004,25 +1004,26 @@ function render(lojas, ultimaSemana) {
       var hnF = Number(h['NP Fechado']) || 0;
       var hnA = hnT - hnF;
       return '<tr>'
-        + '<td style="color:#000;">' + (h.Semana || '—') + '</td>'
-        + '<td class="blue" style="color:#3b82f6;">' + hpA + '</td>'
-        + '<td class="green" style="color:#22c55e;">' + hpF + '</td>'
-        + '<td class="blue" style="color:#3b82f6;">'  + hnA + '</td>'
-        + '<td class="green" style="color:#22c55e;">' + hnF + '</td>'
+        + '<td style="color:#000;text-align:center;">' + (h.Semana || '—') + '</td>'
+        + '<td style="color:#3b82f6;text-align:center;font-weight:800;">' + hpA + '</td>'
+        + '<td style="color:#22c55e;text-align:center;font-weight:800;">' + hpF + '</td>'
+        + '<td style="color:#3b82f6;text-align:center;font-weight:800;">'  + hnA + '</td>'
+        + '<td style="color:#22c55e;text-align:center;font-weight:800;">' + hnF + '</td>'
         + '</tr>';
     }).join('');
 
     var chartId = 'chart-' + li;
     var histHtml = l.historico.length > 0
-      ? '<div class="chart-container"><canvas id="' + chartId + '"></canvas></div>'
+      ? '<p style="color:#333;font-size:13px;font-weight:600;margin-bottom:var(--spacing-lg);"><strong>Evolução Semanal - P Abertas, P Fechadas, NP Abertas, NP Fechadas</strong></p>'
+        + '<div class="chart-container"><canvas id="' + chartId + '"></canvas></div>'
         + '<table class="detail-table">'
-        + '<thead><tr><th>Semana</th><th>P Abertas</th><th>P Fechadas</th><th>NP Abertas</th><th>NP Fechadas</th></tr></thead>'
+        + '<thead><tr><th style="text-align:center;">Semana</th><th style="text-align:center;">P Abertas</th><th style="text-align:center;">P Fechadas</th><th style="text-align:center;">NP Abertas</th><th style="text-align:center;">NP Fechadas</th></tr></thead>'
         + '<tbody>' + histRows
-        + '<tr class="atual"><td style="color:#000;">' + ultimaSemana + ' (atual)</td>'
-        + '<td class="blue" style="color:#3b82f6;">' + l.pA + '</td>'
-        + '<td class="green" style="color:#22c55e;">' + l.pF + '</td>'
-        + '<td class="blue" style="color:#3b82f6;">'   + l.nA + '</td>'
-        + '<td class="green" style="color:#22c55e;">' + l.nF + '</td>'
+        + '<tr class="atual"><td style="color:#000;text-align:center;">' + ultimaSemana + ' (atual)</td>'
+        + '<td style="color:#3b82f6;text-align:center;font-weight:800;">' + l.pA + '</td>'
+        + '<td style="color:#22c55e;text-align:center;font-weight:800;">' + l.pF + '</td>'
+        + '<td style="color:#3b82f6;text-align:center;font-weight:800;">'   + l.nA + '</td>'
+        + '<td style="color:#22c55e;text-align:center;font-weight:800;">' + l.nF + '</td>'
         + '</tr></tbody></table>'
       : '<p style="color:#000;font-size:13px;font-weight:600;">Sem semanas anteriores disponíveis.</p>';
 
@@ -1134,9 +1135,10 @@ function render(lojas, ultimaSemana) {
     if (!canvasEl) return;
 
     var semanas = [];
-    var totalAbertasData = [];
-    var totalFechadasData = [];
-    var percentualFechadasData = [];
+    var pAbertasData = [];
+    var pFechadasData = [];
+    var npAbertasData = [];
+    var npFechadasData = [];
 
     l.historico.forEach(function(h) {
       semanas.push(h.Semana || '');
@@ -1147,11 +1149,10 @@ function render(lojas, ultimaSemana) {
       var nF = Number(h['NP Fechado']) || 0;
       var nA = nT - nF;
       
-      totalAbertasData.push(pA + nA);
-      totalFechadasData.push(pF + nF);
-      var totalTarefas = pT + nT;
-      var percentualFechadas = totalTarefas > 0 ? ((pF + nF) / totalTarefas * 100).toFixed(1) : 0;
-      percentualFechadasData.push(percentualFechadas);
+      pAbertasData.push(pA);
+      pFechadasData.push(pF);
+      npAbertasData.push(nA);
+      npFechadasData.push(nF);
     });
 
     var ctx = canvasEl.getContext('2d');
@@ -1161,12 +1162,12 @@ function render(lojas, ultimaSemana) {
         labels: semanas,
         datasets: [
           {
-            label: 'Total Aberto',
-            data: totalAbertasData,
+            label: 'P Abertas',
+            data: pAbertasData,
             borderColor: 'rgba(59, 130, 246, 1)',
-            backgroundColor: 'rgba(59, 130, 246, 0.1)',
-            borderWidth: 2,
-            fill: true,
+            backgroundColor: 'rgba(59, 130, 246, 0.05)',
+            borderWidth: 2.5,
+            fill: false,
             tension: 0.4,
             pointRadius: 5,
             pointBackgroundColor: 'rgba(59, 130, 246, 1)',
@@ -1174,12 +1175,12 @@ function render(lojas, ultimaSemana) {
             pointBorderWidth: 2
           },
           {
-            label: 'Total Fechado',
-            data: totalFechadasData,
+            label: 'P Fechadas',
+            data: pFechadasData,
             borderColor: 'rgba(34, 197, 94, 1)',
-            backgroundColor: 'rgba(34, 197, 94, 0.1)',
-            borderWidth: 2,
-            fill: true,
+            backgroundColor: 'rgba(34, 197, 94, 0.05)',
+            borderWidth: 2.5,
+            fill: false,
             tension: 0.4,
             pointRadius: 5,
             pointBackgroundColor: 'rgba(34, 197, 94, 1)',
@@ -1187,18 +1188,32 @@ function render(lojas, ultimaSemana) {
             pointBorderWidth: 2
           },
           {
-            label: '% Fechadas',
-            data: percentualFechadasData,
-            borderColor: 'rgba(139, 92, 246, 1)',
-            backgroundColor: 'rgba(139, 92, 246, 0.05)',
-            borderWidth: 2,
-            fill: true,
+            label: 'NP Abertas',
+            data: npAbertasData,
+            borderColor: 'rgba(59, 130, 246, 0.5)',
+            backgroundColor: 'rgba(59, 130, 246, 0.02)',
+            borderWidth: 2.5,
+            borderDash: [5, 5],
+            fill: false,
             tension: 0.4,
-            pointRadius: 5,
-            pointBackgroundColor: 'rgba(139, 92, 246, 1)',
+            pointRadius: 4,
+            pointBackgroundColor: 'rgba(59, 130, 246, 0.6)',
             pointBorderColor: '#fff',
-            pointBorderWidth: 2,
-            yAxisID: 'y1'
+            pointBorderWidth: 1.5
+          },
+          {
+            label: 'NP Fechadas',
+            data: npFechadasData,
+            borderColor: 'rgba(34, 197, 94, 0.5)',
+            backgroundColor: 'rgba(34, 197, 94, 0.02)',
+            borderWidth: 2.5,
+            borderDash: [5, 5],
+            fill: false,
+            tension: 0.4,
+            pointRadius: 4,
+            pointBackgroundColor: 'rgba(34, 197, 94, 0.6)',
+            pointBorderColor: '#fff',
+            pointBorderWidth: 1.5
           }
         ]
       },
@@ -1246,27 +1261,6 @@ function render(lojas, ultimaSemana) {
             },
             grid: {
               color: 'rgba(0, 0, 0, 0.05)'
-            }
-          },
-          y1: {
-            type: 'linear',
-            display: true,
-            position: 'right',
-            beginAtZero: true,
-            max: 100,
-            title: {
-              display: true,
-              text: 'Percentual Fechadas (%)',
-              color: '#333',
-              font: { size: 12, weight: 'bold' }
-            },
-            ticks: {
-              color: '#666',
-              font: { size: 11 },
-              callback: function(value) { return value + '%'; }
-            },
-            grid: {
-              display: false
             }
           },
           x: {
