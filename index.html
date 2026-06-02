@@ -827,8 +827,8 @@ function render(weeks, trend) {
   html += '</div>';
   html += '<div id="historico-chart-container" style="display: none; margin-bottom: var(--spacing-lg);">';
   html += '<div class="chart-card">';
-  html += '<h2>📈 Histórico de Percentagens P vs NP</h2>';
-  html += '<p class="description">Comparação da percentagem de tarefas Programadas vs Não Programadas ao longo das semanas</p>';
+  html += '<h2>📈 Histórico de Percentagens P vs NP (Fechadas)</h2>';
+  html += '<p class="description">Comparação da percentagem de tarefas Programadas vs Não Programadas FECHADAS ao longo das semanas</p>';
   html += '<div class="chart-wrapper"><canvas id="chart-historico"></canvas></div>';
   html += '</div>';
   html += '</div>';
@@ -933,17 +933,17 @@ function render(weeks, trend) {
     });
   }
 
-  // CHART 3: Historico de Percentagens
+  // CHART 3: Historico de Percentagens (Tarefas Fechadas)
   var ctx3 = document.getElementById('chart-historico');
   if (ctx3) {
     var labels = weeks.map(function(w) { return w.semana; });
     var pPercentages = weeks.map(function(w) {
-      var total = w.pAberto + w.npAberto;
-      return total > 0 ? parseFloat((w.pAberto / total * 100).toFixed(1)) : 0;
+      var total = w.pFechado + w.npFechado;
+      return total > 0 ? parseFloat((w.pFechado / total * 100).toFixed(1)) : 0;
     });
     var npPercentages = weeks.map(function(w) {
-      var total = w.pAberto + w.npAberto;
-      return total > 0 ? parseFloat((w.npAberto / total * 100).toFixed(1)) : 0;
+      var total = w.pFechado + w.npFechado;
+      return total > 0 ? parseFloat((w.npFechado / total * 100).toFixed(1)) : 0;
     });
     
     charts['historico'] = new Chart(ctx3, {
@@ -952,7 +952,7 @@ function render(weeks, trend) {
         labels: labels,
         datasets: [
           {
-            label: 'Programadas (%)',
+            label: 'Programadas Fechadas (%)',
             data: pPercentages,
             backgroundColor: 'rgba(59, 130, 246, 0.8)',
             borderColor: 'rgba(59, 130, 246, 1)',
@@ -962,7 +962,7 @@ function render(weeks, trend) {
             categoryPercentage: 0.85
           },
           {
-            label: 'Nao Programadas (%)',
+            label: 'Nao Programadas Fechadas (%)',
             data: npPercentages,
             backgroundColor: 'rgba(249, 115, 22, 0.8)',
             borderColor: 'rgba(249, 115, 22, 1)',
