@@ -378,12 +378,51 @@ body{font-family:'Inter',sans-serif;background:#f9f9f9;color:var(--text);}
 .chart-container{
   position:relative;
   width:100%;
-  height:400px;
+  height:500px;
   margin:var(--spacing-xl) 0;
   background:#fff;
   border-radius:12px;
   padding:var(--spacing-lg);
   box-shadow:0 2px 8px rgba(0,0,0,.05);
+}
+
+.comparison-summary{
+  margin:var(--spacing-xl) 0;
+  padding:var(--spacing-xl);
+  border-radius:14px;
+  border:2px solid;
+  display:flex;
+  align-items:center;
+  gap:var(--spacing-lg);
+  font-weight:800;
+}
+
+.comparison-summary.improved{
+  background:rgba(34,197,94,.1);
+  border-color:rgba(34,197,94,.3);
+  color:#22c55e;
+}
+
+.comparison-summary.worsened{
+  background:rgba(239,68,68,.1);
+  border-color:rgba(239,68,68,.3);
+  color:#ef4444;
+}
+
+.comparison-summary.neutral{
+  background:rgba(128,128,128,.1);
+  border-color:rgba(128,128,128,.3);
+  color:#666;
+}
+
+.comparison-summary-icon{
+  font-size:clamp(24px, 3vw, 40px);
+  flex-shrink:0;
+}
+
+.comparison-summary-text{
+  font-size:var(--font-lg);
+  line-height:1.5;
 }
 
 .sections-grid{
@@ -765,8 +804,17 @@ body{font-family:'Inter',sans-serif;background:#f9f9f9;color:var(--text);}
   }
 
   .chart-container{
-    height:300px;
+    height:400px;
     padding:var(--spacing-md);
+  }
+
+  .comparison-summary{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .comparison-summary-icon{
+    margin-bottom:var(--spacing-sm);
   }
 }
 
@@ -776,6 +824,9 @@ body{font-family:'Inter',sans-serif;background:#f9f9f9;color:var(--text);}
   }
   .header-title h1{
     line-height:1;
+  }
+  .chart-container{
+    height:350px;
   }
 }
 </style>
@@ -994,7 +1045,7 @@ function render(lojas, ultimaSemana) {
               : 'Sem alterações';
     var diffVal = l.diff !== null ? (l.diff > 0 ? '+' + l.diff : l.diff) : '—';
 
-    /* HISTÓRICO PANEL COM GRÁFICO DE COLUNAS */
+    /* HISTÓRICO PANEL COM GRÁFICO DE BARRAS HORIZONTAIS */
     var histRows = l.historico.map(function(h) {
       var hpT = Number(h['P Total'])   || 0;
       var hpF = Number(h['P Fechado']) || 0;
@@ -1015,6 +1066,10 @@ function render(lojas, ultimaSemana) {
     
     /* Calcular comparação com semana anterior */
     var comparisonHtml = '';
+    var overallTrend = 'neutral';
+    var overallIcon = '➜';
+    var overallText = 'Sem alterações';
+    
     if (l.historico.length > 0) {
       var ultimoHist = l.historico[l.historico.length - 1];
       var pA_prev = Number(ultimoHist['P Total']) - Number(ultimoHist['P Fechado']) || 0;
@@ -1027,45 +1082,45 @@ function render(lojas, ultimaSemana) {
       var nA_diff = l.nA - nA_prev;
       var nF_diff = l.nF - nF_prev;
       
+      /* Para tarefas programadas */
       var pA_trend = pA_diff < 0 ? '✓ Melhorou' : pA_diff > 0 ? '✗ Piorou' : 'Sem mudança';
       var pF_trend = pF_diff > 0 ? '✓ Melhorou' : pF_diff < 0 ? '✗ Piorou' : 'Sem mudança';
-      var nA_trend = nA_diff < 0 ? '✓ Melhorou' : nA_diff > 0 ? '✗ Piorou' : 'Sem mudança';
-      var nF_trend = nF_diff > 0 ? '✓ Melhorou' : nF_diff < 0 ? '✗ Piorou' : 'Sem mudança';
+      
+      /* Para tarefas não programadas - "Fez mais/menos" */
+      var nA_trend = nA_diff > 0 ? 'Fez mais' : nA_diff < 0 ? 'Fez menos' : 'Sem mudança';
+      var nF_trend = nF_diff > 0 ? 'Fez mais' : nF_diff < 0 ? 'Fez menos' : 'Sem mudança';
       
       var pA_color = pA_diff < 0 ? '#22c55e' : pA_diff > 0 ? '#ef4444' : '#999';
       var pF_color = pF_diff > 0 ? '#22c55e' : pF_diff < 0 ? '#ef4444' : '#999';
-      var nA_color = nA_diff < 0 ? '#22c55e' : nA_diff > 0 ? '#ef4444' : '#999';
+      var nA_color = nA_diff > 0 ? '#ef4444' : nA_diff < 0 ? '#22c55e' : '#999';
       var nF_color = nF_diff > 0 ? '#22c55e' : nF_diff < 0 ? '#ef4444' : '#999';
       
-      comparisonHtml = '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:var(--spacing-lg);margin:var(--spacing-xl) 0;background:#f9f9f9;padding:var(--spacing-lg);border-radius:12px;">' 
-        + '<div style="text-align:center;">' 
-        + '<div style="font-size:12px;font-weight:600;color:#333;margin-bottom:var(--spacing-sm);">P Abertas</div>' 
-        + '<div style="font-size:18px;font-weight:800;color:' + pA_color + ';">' + (pA_diff >= 0 ? '+' : '') + pA_diff + '</div>' 
-        + '<div style="font-size:11px;font-weight:600;color:' + pA_color + ';margin-top:var(--spacing-xs);">' + pA_trend + '</div>' 
-        + '</div>' 
-        + '<div style="text-align:center;">' 
-        + '<div style="font-size:12px;font-weight:600;color:#333;margin-bottom:var(--spacing-sm);">P Fechadas</div>' 
-        + '<div style="font-size:18px;font-weight:800;color:' + pF_color + ';">' + (pF_diff >= 0 ? '+' : '') + pF_diff + '</div>' 
-        + '<div style="font-size:11px;font-weight:600;color:' + pF_color + ';margin-top:var(--spacing-xs);">' + pF_trend + '</div>' 
-        + '</div>' 
-        + '<div style="text-align:center;">' 
-        + '<div style="font-size:12px;font-weight:600;color:#333;margin-bottom:var(--spacing-sm);">NP Abertas</div>' 
-        + '<div style="font-size:18px;font-weight:800;color:' + nA_color + ';">' + (nA_diff >= 0 ? '+' : '') + nA_diff + '</div>' 
-        + '<div style="font-size:11px;font-weight:600;color:' + nA_color + ';margin-top:var(--spacing-xs);">' + nA_trend + '</div>' 
-        + '</div>' 
-        + '<div style="text-align:center;">' 
-        + '<div style="font-size:12px;font-weight:600;color:#333;margin-bottom:var(--spacing-sm);">NP Fechadas</div>' 
-        + '<div style="font-size:18px;font-weight:800;color:' + nF_color + ';">' + (nF_diff >= 0 ? '+' : '') + nF_diff + '</div>' 
-        + '<div style="font-size:11px;font-weight:600;color:' + nF_color + ';margin-top:var(--spacing-xs);">' + nF_trend + '</div>' 
-        + '</div>' 
-        + '</div>';
+      /* Determinar tendência geral */
+      var totalImprovements = (pA_diff < 0 ? 1 : 0) + (pF_diff > 0 ? 1 : 0) + (nF_diff > 0 ? 1 : 0);
+      var totalWorsening = (pA_diff > 0 ? 1 : 0) + (pF_diff < 0 ? 1 : 0) + (nF_diff < 0 ? 1 : 0);
+      
+      if (totalImprovements > totalWorsening) {
+        overallTrend = 'improved';
+        overallIcon = '▲';
+        overallText = 'A loja <strong>melhorou</strong> em relação à semana anterior';
+      } else if (totalWorsening > totalImprovements) {
+        overallTrend = 'worsened';
+        overallIcon = '▼';
+        overallText = 'A loja <strong>piorou</strong> em relação à semana anterior';
+      } else {
+        overallTrend = 'neutral';
+        overallIcon = '➜';
+        overallText = 'A loja <strong>manteve-se</strong> estável em relação à semana anterior';
+      }
     }
     
     var histHtml = l.historico.length > 0
-      ? '<p style="color:#333;font-size:13px;font-weight:600;margin-bottom:var(--spacing-lg);"><strong>Evolução Semanal - Comparação com Semana Anterior</strong></p>'
-        + comparisonHtml
-        + '<p style="color:#333;font-size:13px;font-weight:600;margin-bottom:var(--spacing-lg);margin-top:var(--spacing-xl);"><strong>Gráfico de Colunas - Comparação por Semana</strong></p>'
+      ? '<p style="color:#333;font-size:13px;font-weight:600;margin-bottom:var(--spacing-lg);"><strong>Evolução Semanal - Semana Anterior vs Semana Atual</strong></p>'
         + '<div class="chart-container"><canvas id="' + chartId + '"></canvas></div>'
+        + '<div class="comparison-summary ' + overallTrend + '">'
+        + '<div class="comparison-summary-icon">' + overallIcon + '</div>'
+        + '<div class="comparison-summary-text">' + overallText + '</div>'
+        + '</div>'
         + '<p style="color:#333;font-size:13px;font-weight:600;margin-bottom:var(--spacing-lg);margin-top:var(--spacing-xl);"><strong>Histórico Detalhado</strong></p>'
         + '<table class="detail-table">'
         + '<thead><tr><th style="text-align:center;">Semana</th><th style="text-align:center;">P Abertas</th><th style="text-align:center;">P Fechadas</th><th style="text-align:center;">NP Abertas</th><th style="text-align:center;">NP Fechadas</th></tr></thead>'
@@ -1179,82 +1234,108 @@ function render(lojas, ultimaSemana) {
 
   document.getElementById('app').innerHTML = html;
 
-  /* Inicializar gráficos de colunas */
+  /* Inicializar gráficos de barras horizontais */
   lojas.forEach(function(l, li) {
     var chartId = 'chart-' + li;
     var canvasEl = document.getElementById(chartId);
     if (!canvasEl) return;
 
-    var semanas = [];
-    var pAbertasData = [];
-    var pFechadasData = [];
-    var npAbertasData = [];
-    var npFechadasData = [];
+    if (l.historico.length === 0) return;
 
-    l.historico.forEach(function(h) {
-      semanas.push(h.Semana || '');
-      var pT = Number(h['P Total']) || 0;
-      var pF = Number(h['P Fechado']) || 0;
-      var pA = pT - pF;
-      var nT = Number(h['NP Total']) || 0;
-      var nF = Number(h['NP Fechado']) || 0;
-      var nA = nT - nF;
-      
-      pAbertasData.push(pA);
-      pFechadasData.push(pF);
-      npAbertasData.push(nA);
-      npFechadasData.push(nF);
-    });
+    var ultimoHist = l.historico[l.historico.length - 1];
+    var pA_prev = Number(ultimoHist['P Total']) - Number(ultimoHist['P Fechado']) || 0;
+    var pF_prev = Number(ultimoHist['P Fechado']) || 0;
+    var nA_prev = Number(ultimoHist['NP Total']) - Number(ultimoHist['NP Fechado']) || 0;
+    var nF_prev = Number(ultimoHist['NP Fechado']) || 0;
+    
+    var pA_diff = l.pA - pA_prev;
+    var pF_diff = l.pF - pF_prev;
+    var nA_diff = l.nA - nA_prev;
+    var nF_diff = l.nF - nF_prev;
+    
+    /* Calcular variações percentuais */
+    var pA_pct = pA_prev > 0 ? ((pA_diff / pA_prev) * 100).toFixed(1) : 0;
+    var pF_pct = pF_prev > 0 ? ((pF_diff / pF_prev) * 100).toFixed(1) : 0;
+    var nA_pct = nA_prev > 0 ? ((nA_diff / nA_prev) * 100).toFixed(1) : 0;
+    var nF_pct = nF_prev > 0 ? ((nF_diff / nF_prev) * 100).toFixed(1) : 0;
+    
+    /* Criar array de métricas com impacto para ordenação */
+    var metricas = [
+      {
+        label: 'P Abertas',
+        anterior: pA_prev,
+        atual: l.pA,
+        diff: pA_diff,
+        pct: pA_pct,
+        impacto: Math.abs(pA_diff),
+        tipo: 'p_abertas'
+      },
+      {
+        label: 'P Fechadas',
+        anterior: pF_prev,
+        atual: l.pF,
+        diff: pF_diff,
+        pct: pF_pct,
+        impacto: Math.abs(pF_diff),
+        tipo: 'p_fechadas'
+      },
+      {
+        label: 'NP Abertas',
+        anterior: nA_prev,
+        atual: l.nA,
+        diff: nA_diff,
+        pct: nA_pct,
+        impacto: Math.abs(nA_diff),
+        tipo: 'np_abertas'
+      },
+      {
+        label: 'NP Fechadas',
+        anterior: nF_prev,
+        atual: l.nF,
+        diff: nF_diff,
+        pct: nF_pct,
+        impacto: Math.abs(nF_diff),
+        tipo: 'np_fechadas'
+      }
+    ];
+    
+    /* Ordenar por impacto (maior variação primeiro) */
+    metricas.sort(function(a, b) { return b.impacto - a.impacto; });
+    
+    var labels = metricas.map(function(m) { return m.label; });
+    var dataAnterior = metricas.map(function(m) { return m.anterior; });
+    var dataAtual = metricas.map(function(m) { return m.atual; });
 
     var ctx = canvasEl.getContext('2d');
     charts['hist-' + li] = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: semanas,
+        labels: labels,
         datasets: [
           {
-            label: 'P Abertas',
-            data: pAbertasData,
+            label: 'Semana Anterior',
+            data: dataAnterior,
+            backgroundColor: 'rgba(128, 128, 128, 0.7)',
+            borderColor: 'rgba(128, 128, 128, 1)',
+            borderWidth: 1.5,
+            borderRadius: 6,
+            barPercentage: 0.7,
+            categoryPercentage: 0.8
+          },
+          {
+            label: 'Semana Atual',
+            data: dataAtual,
             backgroundColor: 'rgba(59, 130, 246, 0.8)',
             borderColor: 'rgba(59, 130, 246, 1)',
             borderWidth: 1.5,
             borderRadius: 6,
-            barPercentage: 0.8,
-            categoryPercentage: 0.9
-          },
-          {
-            label: 'P Fechadas',
-            data: pFechadasData,
-            backgroundColor: 'rgba(34, 197, 94, 0.8)',
-            borderColor: 'rgba(34, 197, 94, 1)',
-            borderWidth: 1.5,
-            borderRadius: 6,
-            barPercentage: 0.8,
-            categoryPercentage: 0.9
-          },
-          {
-            label: 'NP Abertas',
-            data: npAbertasData,
-            backgroundColor: 'rgba(59, 130, 246, 0.4)',
-            borderColor: 'rgba(59, 130, 246, 0.7)',
-            borderWidth: 1.5,
-            borderRadius: 6,
-            barPercentage: 0.8,
-            categoryPercentage: 0.9
-          },
-          {
-            label: 'NP Fechadas',
-            data: npFechadasData,
-            backgroundColor: 'rgba(34, 197, 94, 0.4)',
-            borderColor: 'rgba(34, 197, 94, 0.7)',
-            borderWidth: 1.5,
-            borderRadius: 6,
-            barPercentage: 0.8,
-            categoryPercentage: 0.9
+            barPercentage: 0.7,
+            categoryPercentage: 0.8
           }
         ]
       },
       options: {
+        indexAxis: 'y',
         responsive: true,
         maintainAspectRatio: false,
         interaction: {
@@ -1279,22 +1360,21 @@ function render(lojas, ultimaSemana) {
             borderColor: 'rgba(255, 255, 255, 0.3)',
             borderWidth: 1,
             callbacks: {
-              label: function(context) {
-                var label = context.dataset.label || '';
-                if (label) {
-                  label += ': ';
-                }
-                label += context.parsed.y;
-                return label;
+              afterLabel: function(context) {
+                var metrica = metricas[context.dataIndex];
+                var diff = metrica.atual - metrica.anterior;
+                var pct = metrica.pct;
+                var sinal = diff >= 0 ? '+' : '';
+                return 'Variação: ' + sinal + diff + ' (' + sinal + pct + '%)';
               }
             }
           }
         },
         scales: {
-          y: {
+          x: {
             type: 'linear',
             display: true,
-            position: 'left',
+            position: 'bottom',
             beginAtZero: true,
             title: {
               display: true,
@@ -1310,10 +1390,10 @@ function render(lojas, ultimaSemana) {
               color: 'rgba(0, 0, 0, 0.05)'
             }
           },
-          x: {
+          y: {
             ticks: {
               color: '#666',
-              font: { size: 11 }
+              font: { size: 11, weight: 'bold' }
             },
             grid: {
               display: false
