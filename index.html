@@ -939,10 +939,29 @@ fetch('dados.json?t=' + Date.now())
 
     lojas.forEach(function(l) {
       var hist = histPorLoja[l.loja] || [];
-      /* Ordenar por semana */
+      
+      /* Ordenar por semana cronologicamente */
+      function parseWeekDate(s) {
+        if (!s) return 0;
+        // Tenta extrair a data inicial da semana (ex: "20.05 a 26.05" -> 20.05)
+        var parts = s.split(' ');
+        if (parts.length > 0) {
+          var dateParts = parts[0].split('.');
+          if (dateParts.length === 2) {
+            // Assume ano 2026 como base para comparação se não houver ano
+            return new Date(2026, parseInt(dateParts[1]) - 1, parseInt(dateParts[0])).getTime();
+          }
+        }
+        return 0;
+      }
+
       hist.sort(function(a, b) {
+        var dateA = parseWeekDate(String(a.Semana || ''));
+        var dateB = parseWeekDate(String(b.Semana || ''));
+        if (dateA !== dateB) return dateA - dateB;
         return String(a.Semana || '').localeCompare(String(b.Semana || ''));
       });
+      
       /* Incluir semana actual no histórico */
       l.historico = hist.slice(-8);
 
@@ -1044,39 +1063,9 @@ function render(lojas, ultimaSemana) {
     var workloadChartId = 'workload-' + li;
     var pnpChartId = 'pnp-' + li;
     
-    /* Calcular tendência semana a semana */
-    var trendHtml = '';
-    if (l.historico.length >= 2) {
-      var ultimoHist = l.historico[l.historico.length - 1];
-      var penultimoHist = l.historico[l.historico.length - 2];
-      
-      var pAberto_atual = Number(ultimoHist['P Total']) - Number(ultimoHist['P Fechado']) || 0;
-      var npAberto_atual = Number(ultimoHist['NP Total']) - Number(ultimoHist['NP Fechado']) || 0;
-      var totalAberto_atual = pAberto_atual + npAberto_atual;
-      
-      var pAberto_anterior = Number(penultimoHist['P Total']) - Number(penultimoHist['P Fechado']) || 0;
-      var npAberto_anterior = Number(penultimoHist['NP Total']) - Number(penultimoHist['NP Fechado']) || 0;
-      var totalAberto_anterior = pAberto_anterior + npAberto_anterior;
-      
-      var diff = totalAberto_atual - totalAberto_anterior;
-      var pctDiff = totalAberto_anterior > 0 ? ((diff / totalAberto_anterior) * 100).toFixed(1) : 0;
-      
-      var trendClass = diff < 0 ? 'improved' : diff > 0 ? 'worsened' : 'neutral';
-      var trendIcon = diff < 0 ? '▲' : diff > 0 ? '▼' : '➜';
-      var trendMsg = diff < 0 ? 'Carga reduzida' : diff > 0 ? 'Carga aumentada' : 'Carga estável';
-      
-      trendHtml = '<div class="trend-indicator ' + trendClass + '">'
-        + '<div class="trend-icon">' + trendIcon + '</div>'
-        + '<div class="trend-text">'
-        + '<div style="font-size:var(--font-sm);color:inherit;opacity:0.8;">Semana anterior vs atual</div>'
-        + '<div class="trend-value">' + trendMsg + ' (' + (diff >= 0 ? '+' : '') + diff + ' tarefas, ' + (pctDiff >= 0 ? '+' : '') + pctDiff + '%)</div>'
-        + '</div></div>';
-    }
-    
     var histHtml = l.historico.length > 0
       ? '<p style="color:#333;font-size:13px;font-weight:600;margin-bottom:var(--spacing-lg);"><strong>Dashboard de Carga de Trabalho</strong></p>'
-        + trendHtml
-        + '<p style="color:#333;font-size:13px;font-weight:600;margin-bottom:var(--spacing-lg);margin-top:var(--spacing-xl);"><strong>Total de Tarefas Abertas por Semana</strong></p>'
+        + '<p style="color:#333;font-size:13px;font-weight:600;margin-bottom:var(--spacing-lg);margin-top:var(--spacing-xl);"><strong>Total de Tarefas Fechadas por Semana</strong></p>'
         + '<div class="chart-container"><canvas id="' + workloadChartId + '"></canvas></div>'
         + '<p style="color:#333;font-size:13px;font-weight:600;margin-bottom:var(--spacing-lg);margin-top:var(--spacing-xl);"><strong>Comparação: Programadas vs Não Programadas</strong></p>'
         + '<div class="chart-container"><canvas id="' + pnpChartId + '"></canvas></div>'
