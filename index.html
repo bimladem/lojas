@@ -123,6 +123,7 @@ h1, h2, h3, .panel-title, .section-head, .header-title h1 { font-family: 'Cormor
   display:grid;
   grid-template-columns:
     minmax(60px, 80px)
+    minmax(90px, 120px)
     minmax(130px, 1fr)
     minmax(130px, 1fr)
     minmax(90px, 120px)
@@ -168,6 +169,7 @@ h1, h2, h3, .panel-title, .section-head, .header-title h1 { font-family: 'Cormor
   display:grid;
   grid-template-columns:
     minmax(60px, 80px)
+    minmax(90px, 120px)
     minmax(130px, 1fr)
     minmax(130px, 1fr)
     minmax(90px, 120px)
@@ -1011,7 +1013,7 @@ function render(lojas, ultimaSemana) {
 
   /* HEADER (DESKTOP ONLY) */
   html += '<div class="table-header">';
-  html += '<div>Rank</div><div>Localização</div><div>Loja</div>';
+  html += '<div>Rank</div><div>Rank Badge</div><div>Localização</div><div>Loja</div>';
   html += '<div>P Total</div><div>P Abertas</div><div>P Fechadas</div>';
   html += '<div>NP Total</div><div>NP Abertas</div><div>NP Fechadas</div>';
   html += '<div>Comp. P vs NP</div><div>Histórico</div><div>Secções</div>';
@@ -1069,7 +1071,8 @@ function render(lojas, ultimaSemana) {
 
     /* DESKTOP ROW */
     var desktopRow = '<div class="row-main">';
-    desktopRow += '<div class="cell rank"><div class="rank-num" style="color:var(--text-light);">' + (li+1) + '</div><div class="rank-badge ' + badge + '">N' + l.nivel + '</div></div>';
+    desktopRow += '<div class="cell rank"><div class="rank-num" style="color:var(--text-light);">' + (li+1) + '</div></div>';
+    desktopRow += '<div class="cell rank"><div class="rank-badge ' + badge + '">N' + l.nivel + '</div></div>';
     desktopRow += '<div class="cell localizacao"><strong style="color:var(--text-light);">' + (l.local || '—') + '</strong></div>';
     desktopRow += '<div class="cell loja"><strong style="color:var(--text-light);">' + l.loja + '</strong></div>';
     desktopRow += '<div class="cell metric"><div class="num">' + l.pT + '</div></div>';
