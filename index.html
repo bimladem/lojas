@@ -67,7 +67,7 @@ body{font-family:'Inter',sans-serif;background:#f9f9f9;color:var(--text);}
   box-shadow:0 4px 12px rgba(139,92,246,.2);
   flex-shrink:0;
 }
-.header-title h1{font-size:var(--font-6xl);font-weight:800;color:#000;line-height:1.1;}
+.header-title h1{font-size:var(--font-4xl);font-weight:800;color:#000;line-height:1.1;}
 .header-title .sub{margin-top:var(--spacing-xs);color:#666;font-size:var(--font-sm);font-weight:600;}
 .header-period{
   background:rgba(139,92,246,.08);
@@ -1056,26 +1056,16 @@ function render(lojas, ultimaSemana) {
       : '<p style="color:#000;font-size:13px;font-weight:600;">Sem semanas anteriores disponíveis.</p>';
 
     /* SECÇÕES PANEL */
-    var secCards = l.seccoes.length > 0
+    var secTables = l.seccoes.length > 0
       ? l.seccoes.map(function(s) {
-          var pctPA_s = s.pT > 0 ? (s.pA / s.pT * 100).toFixed(1) : '0.0';
-          var pctPF_s = s.pT > 0 ? (s.pF / s.pT * 100).toFixed(1) : '0.0';
-          var pctNA_s = s.nT > 0 ? (s.nA / s.nT * 100).toFixed(1) : '0.0';
-          var pctNF_s = s.nT > 0 ? (s.nF / s.nT * 100).toFixed(1) : '0.0';
-          return '<div class="section-card">'
-            + '<div class="section-head" style="color:#000;">' + s.nome + '</div>'
-            + '<div class="section-body">'
-            + '<div class="sec-cat" style="color:#000;">Programadas</div>'
-            + '<div class="sec-line" style="color:#000;"><span>Abertas</span><strong class="blue" style="color:#3b82f6;">' + pctPA_s + '%</strong></div>'
-            + '<div class="bar"><div class="fill-blue" style="width:' + Math.min(100, pctPA_s) + '%"></div></div>'
-            + '<div class="sec-line" style="color:#000;"><span>Fechadas</span><strong class="green" style="color:#22c55e;">' + pctPF_s + '%</strong></div>'
-            + '<div class="bar"><div class="fill-green" style="width:' + Math.min(100, pctPF_s) + '%"></div></div>'
-            + '<div class="sec-cat" style="color:#000;">Não Programadas</div>'
-            + '<div class="sec-line" style="color:#000;"><span>Abertas</span><strong class="blue" style="color:#3b82f6;">' + pctNA_s + '%</strong></div>'
-            + '<div class="bar"><div class="fill-blue" style="width:' + Math.min(100, pctNA_s) + '%"></div></div>'
-            + '<div class="sec-line" style="color:#000;"><span>Fechadas</span><strong class="green" style="color:#22c55e;">' + pctNF_s + '%</strong></div>'
-            + '<div class="bar"><div class="fill-green" style="width:' + Math.min(100, pctNF_s) + '%"></div></div>'
-            + '</div></div>';
+          return '<div style="margin-bottom:var(--spacing-xl);">'
+            + '<p style="color:#333;font-size:13px;font-weight:700;margin-bottom:var(--spacing-sm);">' + s.nome + '</p>'
+            + '<table class="detail-table" style="font-size:13px;">'
+            + '<thead><tr><th style="padding:6px;">Tipo</th><th style="padding:6px;">Abertas</th><th style="padding:6px;">Fechadas</th></tr></thead>'
+            + '<tbody>'
+            + '<tr><td style="padding:6px;font-weight:600;text-align:left;">Programadas</td><td style="padding:6px;">' + s.pA + '</td><td style="padding:6px;">' + s.pF + '</td></tr>'
+            + '<tr><td style="padding:6px;font-weight:600;text-align:left;">Não Programadas</td><td style="padding:6px;">' + s.nA + '</td><td style="padding:6px;">' + s.nF + '</td></tr>'
+            + '</tbody></table></div>';
         }).join('')
       : '<p style="color:#000;font-size:13px;font-weight:600;">Sem secções disponíveis.</p>';
 
@@ -1128,7 +1118,7 @@ function render(lojas, ultimaSemana) {
 
     html += '<div class="panel" id="sec-' + li + '">'
       + '<div class="panel-inner"><div class="panel-title" style="color:#8b5cf6;">Detalhe por Secção (' + l.seccoes.length + ')</div>'
-      + '<div class="sections-grid">' + secCards + '</div></div></div>';
+      + '<div class="sections-grid" style="display:block;">' + secTables + '</div></div></div>';
 
     html += '</div>';
   });
@@ -1198,8 +1188,8 @@ function render(lojas, ultimaSemana) {
               borderColor: 'rgba(59, 130, 246, 1)',
               borderWidth: 1.5,
               borderRadius: 4,
-              barPercentage: 0.6,
-              categoryPercentage: 0.85
+              barPercentage: 1.0,
+              categoryPercentage: 0.9
             },
             {
               label: 'Não Programadas Fechadas (%)',
@@ -1208,8 +1198,8 @@ function render(lojas, ultimaSemana) {
               borderColor: 'rgba(34, 197, 94, 1)',
               borderWidth: 1.5,
               borderRadius: 4,
-              barPercentage: 0.6,
-              categoryPercentage: 0.85
+              barPercentage: 1.0,
+              categoryPercentage: 0.9
             }
           ]
         },
