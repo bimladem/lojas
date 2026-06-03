@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Análise Semanal IM</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.1.0/chartjs-plugin-datalabels.min.js"></script>
 <style>
@@ -43,6 +43,7 @@
 
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Inter',sans-serif;background:#f9f9f9;color:var(--text);}
+h1, h2, h3, .panel-title, .section-head, .header-title h1 { font-family: 'Cormorant Garamond', serif; }
 
 .header{
   position:sticky;top:0;z-index:100;
@@ -67,7 +68,7 @@ body{font-family:'Inter',sans-serif;background:#f9f9f9;color:var(--text);}
   box-shadow:0 4px 12px rgba(139,92,246,.2);
   flex-shrink:0;
 }
-.header-title h1{font-size:var(--font-4xl);font-weight:800;color:#000;line-height:1.1;}
+.header-title h1{font-size:var(--font-5xl);font-weight:700;color:#000;line-height:1.1;letter-spacing:-0.5px;}
 .header-title .sub{margin-top:var(--spacing-xs);color:#666;font-size:var(--font-sm);font-weight:600;}
 .header-period{
   background:rgba(139,92,246,.08);
@@ -1046,9 +1047,9 @@ function render(lojas, ultimaSemana) {
     var pnpChartId = 'pnp-' + li;
     
     var histHtml = l.historico.length > 0
-      ? '<p style="color:#333;font-size:13px;font-weight:600;margin-bottom:var(--spacing-lg);margin-top:var(--spacing-xl);"><strong>Comparação: Programadas vs Não Programadas (% Fechadas)</strong></p>'
+      ? '<p style="color:#333;font-size:18px;font-weight:700;margin-bottom:var(--spacing-lg);margin-top:var(--spacing-xl);font-family:\'Cormorant Garamond\', serif;">Comparação: Programadas vs Não Programadas (% Fechadas)</p>'
         + '<div class="chart-container"><canvas id="' + pnpChartId + '"></canvas></div>'
-        + '<p style="color:#333;font-size:13px;font-weight:600;margin-bottom:var(--spacing-lg);margin-top:var(--spacing-xl);"><strong>Histórico Detalhado</strong></p>'
+        + '<p style="color:#333;font-size:18px;font-weight:700;margin-bottom:var(--spacing-lg);margin-top:var(--spacing-xl);font-family:\'Cormorant Garamond\', serif;">Histórico Detalhado</p>'
         + '<table class="detail-table">'
         + '<thead><tr><th style="text-align:center;">Semana</th><th style="text-align:center;">P Abertas</th><th style="text-align:center;">P Fechadas</th><th style="text-align:center;">NP Abertas</th><th style="text-align:center;">NP Fechadas</th></tr></thead>'
         + '<tbody>' + histRows
@@ -1060,7 +1061,7 @@ function render(lojas, ultimaSemana) {
       ? l.seccoes.map(function(s, si) {
           var secChartId = 'secchart-' + li + '-' + si;
           return '<div class="section-card" style="margin-bottom:var(--spacing-xl); background:#fff; padding:15px; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.05);">'
-            + '<p style="color:#333;font-size:14px;font-weight:700;margin-bottom:10px;">' + s.nome + '</p>'
+            + '<p style="color:#333;font-size:18px;font-weight:700;margin-bottom:10px;font-family:\'Cormorant Garamond\', serif;">' + s.nome + '</p>'
             + '<div style="height:150px; position:relative;"><canvas id="' + secChartId + '"></canvas></div>'
             + '</div>';
         }).join('')
