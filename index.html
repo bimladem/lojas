@@ -1056,16 +1056,13 @@ function render(lojas, ultimaSemana) {
       : '<p style="color:#000;font-size:13px;font-weight:600;">Sem semanas anteriores disponíveis.</p>';
 
     /* SECÇÕES PANEL */
-    var secTables = l.seccoes.length > 0
-      ? l.seccoes.map(function(s) {
-          return '<div style="margin-bottom:var(--spacing-xl);">'
-            + '<p style="color:#333;font-size:13px;font-weight:700;margin-bottom:var(--spacing-sm);">' + s.nome + '</p>'
-            + '<table class="detail-table" style="font-size:13px;">'
-            + '<thead><tr><th style="padding:6px;">Tipo</th><th style="padding:6px;">Abertas</th><th style="padding:6px;">Fechadas</th></tr></thead>'
-            + '<tbody>'
-            + '<tr><td style="padding:6px;font-weight:600;text-align:left;">Programadas</td><td style="padding:6px;">' + s.pA + '</td><td style="padding:6px;">' + s.pF + '</td></tr>'
-            + '<tr><td style="padding:6px;font-weight:600;text-align:left;">Não Programadas</td><td style="padding:6px;">' + s.nA + '</td><td style="padding:6px;">' + s.nF + '</td></tr>'
-            + '</tbody></table></div>';
+    var secChartsHtml = l.seccoes.length > 0
+      ? l.seccoes.map(function(s, si) {
+          var secChartId = 'secchart-' + li + '-' + si;
+          return '<div class="section-card" style="margin-bottom:var(--spacing-xl); background:#fff; padding:15px; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.05);">'
+            + '<p style="color:#333;font-size:14px;font-weight:700;margin-bottom:10px;">' + s.nome + '</p>'
+            + '<div style="height:150px; position:relative;"><canvas id="' + secChartId + '"></canvas></div>'
+            + '</div>';
         }).join('')
       : '<p style="color:#000;font-size:13px;font-weight:600;">Sem secções disponíveis.</p>';
 
@@ -1118,7 +1115,7 @@ function render(lojas, ultimaSemana) {
 
     html += '<div class="panel" id="sec-' + li + '">'
       + '<div class="panel-inner"><div class="panel-title" style="color:#8b5cf6;">Detalhe por Secção (' + l.seccoes.length + ')</div>'
-      + '<div class="sections-grid" style="display:block;">' + secTables + '</div></div></div>';
+      + '<div class="sections-grid" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;">' + secChartsHtml + '</div></div></div>';
 
     html += '</div>';
   });
@@ -1207,50 +1204,27 @@ function render(lojas, ultimaSemana) {
           indexAxis: 'y',
           responsive: true,
           maintainAspectRatio: false,
-          layout: {
-            padding: {
-              right: 60
-            }
-          },
-          interaction: {
-            mode: 'index',
-            intersect: false
-          },
+          layout: { padding: { right: 60 } },
+          interaction: { mode: 'index', intersect: false },
           plugins: {
             datalabels: {
-              anchor: 'end',
-              align: 'right',
-              formatter: function(value) {
-                return value + '%';
-              },
-              font: {
-                weight: 'bold',
-                size: 14
-              },
+              anchor: 'end', align: 'right',
+              formatter: function(value) { return value + '%'; },
+              font: { weight: 'bold', size: 14 },
               color: '#333'
             },
             legend: {
               position: 'top',
-              labels: {
-                font: { size: 12, weight: 'bold' },
-                color: '#333',
-                padding: 15,
-                usePointStyle: true
-              }
+              labels: { font: { size: 12, weight: 'bold' }, color: '#333', padding: 15, usePointStyle: true }
             },
             tooltip: {
-              backgroundColor: 'rgba(0, 0, 0, 0.8)',
-              padding: 12,
-              titleFont: { size: 13, weight: 'bold' },
-              bodyFont: { size: 12 },
-              borderColor: 'rgba(255, 255, 255, 0.3)',
-              borderWidth: 1,
+              backgroundColor: 'rgba(0, 0, 0, 0.8)', padding: 12,
+              titleFont: { size: 13, weight: 'bold' }, bodyFont: { size: 12 },
+              borderColor: 'rgba(255, 255, 255, 0.3)', borderWidth: 1,
               callbacks: {
                 label: function(context) {
                   var label = context.dataset.label || '';
-                  if (label) {
-                    label += ': ';
-                  }
+                  if (label) label += ': ';
                   label += context.parsed.x + '%';
                   return label;
                 }
@@ -1259,38 +1233,75 @@ function render(lojas, ultimaSemana) {
           },
           scales: {
             x: {
-              type: 'linear',
-              display: true,
-              position: 'bottom',
-              beginAtZero: true,
-              max: 100,
-              title: {
-                display: true,
-                text: 'Percentagem (%)',
-                color: '#333',
-                font: { size: 12, weight: 'bold' }
-              },
-              ticks: {
-                color: '#666',
-                font: { size: 11 }
-              },
-              grid: {
-                color: 'rgba(0, 0, 0, 0.05)'
-              }
+              type: 'linear', display: true, position: 'bottom', beginAtZero: true, max: 100,
+              title: { display: true, text: 'Percentagem (%)', color: '#333', font: { size: 12, weight: 'bold' } },
+              ticks: { color: '#666', font: { size: 11 } },
+              grid: { color: 'rgba(0, 0, 0, 0.05)' }
             },
-            y: {
-              ticks: {
-                color: '#666',
-                font: { size: 11, weight: 'bold' }
-              },
-              grid: {
-                display: false
-              }
-            }
+            y: { ticks: { color: '#666', font: { size: 11, weight: 'bold' } }, grid: { display: false } }
           }
         }
       });
     }
+
+    /* GRÁFICOS DAS SECÇÕES */
+    l.seccoes.forEach(function(s, si) {
+      var secChartId = 'secchart-' + li + '-' + si;
+      var secCanvasEl = document.getElementById(secChartId);
+      if (!secCanvasEl) return;
+
+      var pctPF_s = s.pT > 0 ? (s.pF / s.pT * 100).toFixed(1) : 0;
+      var pctNF_s = s.nT > 0 ? (s.nF / s.nT * 100).toFixed(1) : 0;
+
+      var ctxS = secCanvasEl.getContext('2d');
+      charts[secChartId] = new Chart(ctxS, {
+        type: 'bar',
+        plugins: [ChartDataLabels],
+        data: {
+          labels: ['Programadas', 'Não Programadas'],
+          datasets: [
+            {
+              label: 'Fechadas (%)',
+              data: [pctPF_s, pctNF_s],
+              backgroundColor: function(context) {
+                return context.dataIndex === 0 ? 'rgba(59, 130, 246, 0.8)' : 'rgba(34, 197, 94, 0.8)';
+              },
+              borderColor: function(context) {
+                return context.dataIndex === 0 ? 'rgba(59, 130, 246, 1)' : 'rgba(34, 197, 94, 1)';
+              },
+              borderWidth: 1.5,
+              borderRadius: 4,
+              barPercentage: 0.8,
+              categoryPercentage: 0.9
+            }
+          ]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          layout: { padding: { right: 50 } },
+          plugins: {
+            datalabels: {
+              anchor: 'end', align: 'right',
+              formatter: function(value) { return value + '%'; },
+              font: { weight: 'bold', size: 12 },
+              color: '#333'
+            },
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: function(context) { return context.parsed.x + '% fechadas'; }
+              }
+            }
+          },
+          scales: {
+            x: { beginAtZero: true, max: 100, display: false },
+            y: { ticks: { font: { size: 11, weight: 'bold' } }, grid: { display: false } }
+          }
+        }
+      });
+    });
   });
 }
 </script>
