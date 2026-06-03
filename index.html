@@ -9,7 +9,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.1.0/chartjs-plugin-datalabels.min.js"></script>
 <style>
 :root{
-  --border:rgba(0,0,0,.08 );
+  --border:rgba(0,0,0,.08);
   --text:#1a1a1a;
   --muted:#808080;
   --green:#22c55e;
@@ -20,6 +20,7 @@
   --grad:linear-gradient(135deg,#8b5cf6 0%,#ec4899 100%);
   --text-light:#4a4a4a;
   
+  /* Escalas responsivas usando clamp */
   --font-xs: clamp(10px, 0.5vw, 14px);
   --font-sm: clamp(11px, 0.65vw, 16px);
   --font-base: clamp(12px, 0.75vw, 18px);
@@ -87,6 +88,20 @@ h1, h2, h3, .panel-title, .section-head, .header-title h1 { font-family: 'Cormor
   width:100%;
 }
 
+.legend-top{
+  background:#fff;
+  border:2px solid var(--border);
+  border-radius:18px;
+  padding:var(--spacing-xl);
+  margin-bottom:var(--spacing-2xl);
+  text-align:center;
+  font-size:var(--font-lg);
+  line-height:1.8;
+  box-shadow:0 2px 8px rgba(0,0,0,.04);
+  word-wrap:break-word;
+}
+.legend-top strong{color:#000;font-weight:800;}
+
 .table-wrapper{
   width:100%;
   overflow-x:auto;
@@ -108,7 +123,6 @@ h1, h2, h3, .panel-title, .section-head, .header-title h1 { font-family: 'Cormor
   display:grid;
   grid-template-columns:
     minmax(60px, 80px)
-    minmax(90px, 120px)
     minmax(130px, 1fr)
     minmax(130px, 1fr)
     minmax(90px, 120px)
@@ -154,7 +168,6 @@ h1, h2, h3, .panel-title, .section-head, .header-title h1 { font-family: 'Cormor
   display:grid;
   grid-template-columns:
     minmax(60px, 80px)
-    minmax(90px, 120px)
     minmax(130px, 1fr)
     minmax(130px, 1fr)
     minmax(90px, 120px)
@@ -232,6 +245,11 @@ h1, h2, h3, .panel-title, .section-head, .header-title h1 { font-family: 'Cormor
   color:var(--text-light);
 }
 
+.red{color:#ef4444;}
+.green{color:#22c55e;}
+.gray{color:#999;}
+.blue{color:#3b82f6;}
+
 .comparison{
   flex-direction:column;
   gap:var(--spacing-md);
@@ -288,6 +306,7 @@ h1, h2, h3, .panel-title, .section-head, .header-title h1 { font-family: 'Cormor
   box-shadow:0 4px 12px rgba(139,92,246,.3);
 }
 
+/* PANELS */
 .panel{display:none;}
 .panel.visible{display:block;}
 .panel-inner{
@@ -328,6 +347,11 @@ h1, h2, h3, .panel-title, .section-head, .header-title h1 { font-family: 'Cormor
   color:#333;
 }
 .detail-table tbody tr:hover td{background:rgba(139,92,246,.04);}
+.detail-table tr.atual td{
+  background:rgba(139,92,246,.1);
+  font-weight:800;
+  color:#000;
+}
 
 .chart-container{
   position:relative;
@@ -338,6 +362,49 @@ h1, h2, h3, .panel-title, .section-head, .header-title h1 { font-family: 'Cormor
   border-radius:12px;
   padding:var(--spacing-lg);
   box-shadow:0 2px 8px rgba(0,0,0,.05);
+}
+
+.trend-indicator{
+  display:flex;
+  align-items:center;
+  gap:var(--spacing-md);
+  padding:var(--spacing-lg);
+  border-radius:12px;
+  margin:var(--spacing-xl) 0;
+  font-weight:800;
+  font-size:var(--font-lg);
+}
+
+.trend-indicator.improved{
+  background:rgba(34,197,94,.1);
+  border:2px solid rgba(34,197,94,.3);
+  color:#22c55e;
+}
+
+.trend-indicator.worsened{
+  background:rgba(239,68,68,.1);
+  border:2px solid rgba(239,68,68,.3);
+  color:#ef4444;
+}
+
+.trend-indicator.neutral{
+  background:rgba(128,128,128,.1);
+  border:2px solid rgba(128,128,128,.3);
+  color:#666;
+}
+
+.trend-icon{
+  font-size:clamp(28px, 3.5vw, 40px);
+  flex-shrink:0;
+}
+
+.trend-text{
+  flex:1;
+}
+
+.trend-value{
+  font-size:clamp(18px, 2.2vw, 28px);
+  font-weight:800;
 }
 
 .sections-grid{
@@ -369,20 +436,33 @@ h1, h2, h3, .panel-title, .section-head, .header-title h1 { font-family: 'Cormor
   color:#000;
 }
 .section-body{padding:var(--spacing-lg);}
-
-.legend-top{
-  background:#fff;
-  border:2px solid var(--border);
-  border-radius:18px;
-  padding:var(--spacing-xl);
-  margin-bottom:var(--spacing-2xl);
-  text-align:center;
-  font-size:var(--font-lg);
-  line-height:1.8;
-  box-shadow:0 2px 8px rgba(0,0,0,.04);
-  word-wrap:break-word;
+.sec-cat{
+  font-size:var(--font-xs);
+  font-weight:800;
+  color:#333;
+  text-transform:uppercase;
+  letter-spacing:.3px;
+  margin:var(--spacing-lg) 0 var(--spacing-sm);
 }
-.legend-top strong{color:#000;font-weight:800;}
+.sec-cat:first-child{margin-top:0;}
+.sec-line{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:var(--spacing-sm);
+  font-size:var(--font-base);
+  color:#333;
+  font-weight:600;
+}
+.bar{
+  height:clamp(5px, 0.6vw, 10px);
+  border-radius:6px;
+  overflow:hidden;
+  background:#eee;
+  margin-bottom:var(--spacing-xl);
+}
+.fill-red{height:100%;background:linear-gradient(90deg,#ef4444 0%,#ff6b6b 100%);}
+.fill-green{height:100%;background:linear-gradient(90deg,#22c55e 0%,#34d399 100%);}
+.fill-blue{height:100%;background:linear-gradient(90deg,#3b82f6 0%,#60a5fa 100%);}
 
 .note{
   margin-top:var(--spacing-2xl);
@@ -436,6 +516,7 @@ h1, h2, h3, .panel-title, .section-head, .header-title h1 { font-family: 'Cormor
 
 .mobile-card{display:none;}
 
+/* MOBILE (768px e menos) */
 @media(max-width:768px){
   .table-wrapper{display:none !important;}
   .table-header{display:none !important;}
@@ -662,6 +743,40 @@ h1, h2, h3, .panel-title, .section-head, .header-title h1 { font-family: 'Cormor
     padding:var(--spacing-lg);
   }
 
+  .sec-cat{
+    font-size:var(--font-xs);
+    margin:var(--spacing-lg) 0 var(--spacing-sm);
+  }
+
+  .sec-line{
+    font-size:var(--font-base);
+    margin-bottom:var(--spacing-sm);
+  }
+
+  .bar{
+    height:clamp(4px, 1vw, 7px);
+    margin-bottom:var(--spacing-lg);
+  }
+
+  .note{
+    padding:var(--spacing-lg);
+    font-size:var(--font-base);
+    line-height:1.6;
+    margin-top:var(--spacing-xl);
+    margin-bottom:var(--spacing-lg);
+    border-radius:12px;
+  }
+
+  .acao{
+    padding:var(--spacing-lg);
+    gap:var(--spacing-sm);
+    margin-top:var(--spacing-lg);
+    margin-bottom:var(--spacing-2xl);
+    border-radius:12px;
+  }
+  .acao h3{font-size:var(--font-base);}
+  .acao p{font-size:var(--font-sm);}
+
   .legend-top{
     padding:var(--spacing-lg);
     font-size:var(--font-base);
@@ -673,6 +788,15 @@ h1, h2, h3, .panel-title, .section-head, .header-title h1 { font-family: 'Cormor
   .chart-container{
     height:350px;
     padding:var(--spacing-md);
+  }
+
+  .trend-indicator{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .trend-icon{
+    margin-bottom:var(--spacing-sm);
   }
 }
 
@@ -721,6 +845,7 @@ function toggleHist(li) {
   
   if (stateHist[li]) {
     setTimeout(function() {
+      if (charts['workload-' + li]) charts['workload-' + li].resize();
       if (charts['pnp-' + li]) charts['pnp-' + li].resize();
     }, 100);
   }
@@ -741,6 +866,7 @@ fetch('dados.json?t=' + Date.now())
 
     var data = json.data || [];
 
+    /* ÚLTIMA SEMANA */
     var semanas = [];
     data.forEach(function(i) {
       var s = String(i.Semana || '').trim();
@@ -748,6 +874,7 @@ fetch('dados.json?t=' + Date.now())
     });
     var ultimaSemana = semanas[semanas.length - 1] || '';
 
+    /* LOJAS DA ÚLTIMA SEMANA */
     var lojas = data
       .filter(function(i) {
         return i.Loja &&
@@ -767,6 +894,8 @@ fetch('dados.json?t=' + Date.now())
         var pctNA  = nT > 0 ? (nA / nT * 100) : 0;
         var pctNF  = nT > 0 ? (nF / nT * 100) : 0;
 
+        /* Nível baseado em % P fechadas:
+           N1: 0-20%, N2: 21-40%, N3: 41-50% */
         var nivel = pctPF >= 41 ? 3 : pctPF >= 21 ? 2 : 1;
 
         var loc = String(
@@ -790,6 +919,8 @@ fetch('dados.json?t=' + Date.now())
         };
       });
 
+    /* Ordenar por NÍVEL (N1, N2, N3) - pior para melhor
+       Dentro de cada nível, ordenar por % de P fechadas CRESCENTE (menor % primeiro = pior) */
     lojas.sort(function(a, b) {
       if (a.nivel !== b.nivel) return a.nivel - b.nivel;
       return Number(a.pctPF) - Number(b.pctPF);
@@ -798,6 +929,7 @@ fetch('dados.json?t=' + Date.now())
     var ids = {};
     lojas.forEach(function(l) { ids[l.loja] = true; });
 
+    /* HISTÓRICO */
     var histPorLoja = {};
     data.forEach(function(i) {
       if (i.Loja && !i.Secção && ids[String(i.Loja).trim()]) {
@@ -809,18 +941,27 @@ fetch('dados.json?t=' + Date.now())
 
     lojas.forEach(function(l) {
       var hist = histPorLoja[l.loja] || [];
+      
+      /* Ordenar por semana (ordem original dos dados) */
+      // Removida ordenação cronológica personalizada
+      
+      /* Incluir semana actual no histórico */
       l.historico = hist.slice(-8);
 
+      /* Tendência: diferença de P fechadas vs semana anterior */
       var u = hist.slice(-2);
       l.diff = u.length === 2
         ? (Number(u[1]['P Fechado']) || 0) - (Number(u[0]['P Fechado']) || 0)
         : null;
     });
 
+    /* SECÇÕES */
     data.forEach(function(i) {
       if (!i.Secção) return;
 
       var seccaoStr = String(i.Secção).trim();
+
+      /* Extrair código loja do campo Secção */
       var m = seccaoStr.match(/^(IM \d+)\s+(.+)$/);
       if (!m) return;
 
@@ -868,6 +1009,7 @@ function render(lojas, ultimaSemana) {
   html += '<div class="table-wrapper">';
   html += '<div class="table-container">';
 
+  /* HEADER (DESKTOP ONLY) */
   html += '<div class="table-header">';
   html += '<div>Rank</div><div>Localização</div><div>Loja</div>';
   html += '<div>P Total</div><div>P Abertas</div><div>P Fechadas</div>';
@@ -877,7 +1019,14 @@ function render(lojas, ultimaSemana) {
 
   lojas.forEach(function(l, li) {
     var badge = l.nivel === 1 ? 'n1' : l.nivel === 2 ? 'n2' : 'n3';
+    var tClass = l.diff > 0 ? 'trend-positive' : l.diff < 0 ? 'trend-negative' : 'trend-neutral';
+    var icon  = l.diff > 0 ? '▲' : l.diff < 0 ? '▼' : '→';
+    var texto = l.diff > 0 ? 'Fechou mais tarefas'
+              : l.diff < 0 ? 'Fechou menos tarefas'
+              : 'Sem alterações';
+    var diffVal = l.diff !== null ? (l.diff > 0 ? '+' + l.diff : l.diff) : '—';
 
+    /* DASHBOARD DE CARGA DE TRABALHO */
     var histRows = l.historico.map(function(h) {
       var hpT = Number(h['P Total'])   || 0;
       var hpF = Number(h['P Fechado']) || 0;
@@ -907,6 +1056,7 @@ function render(lojas, ultimaSemana) {
         + '</tbody></table>'
       : '<p style="color:#000;font-size:13px;font-weight:600;">Sem semanas anteriores disponíveis.</p>';
 
+    /* SECÇÕES PANEL */
     var secChartsHtml = l.seccoes.length > 0
       ? l.seccoes.map(function(s, si) {
           var secChartId = 'secchart-' + li + '-' + si;
@@ -917,6 +1067,7 @@ function render(lojas, ultimaSemana) {
         }).join('')
       : '<p style="color:#000;font-size:13px;font-weight:600;">Sem secções disponíveis.</p>';
 
+    /* DESKTOP ROW */
     var desktopRow = '<div class="row-main">';
     desktopRow += '<div class="cell rank"><div class="rank-num" style="color:var(--text-light);">' + (li+1) + '</div><div class="rank-badge ' + badge + '">N' + l.nivel + '</div></div>';
     desktopRow += '<div class="cell localizacao"><strong style="color:var(--text-light);">' + (l.local || '—') + '</strong></div>';
@@ -932,6 +1083,7 @@ function render(lojas, ultimaSemana) {
     desktopRow += '<div class="cell"><button class="btn" id="btnsec-' + li + '" onclick="toggleSec(' + li + ')">Secções</button></div>';
     desktopRow += '</div>';
 
+    /* MOBILE CARD */
     var mobileCard = '<div class="mobile-card">'
       + '<div class="card-header">'
       + '<div class="card-rank"><div class="card-rank-num" style="color:var(--text-light);">' + (li+1) + '</div><div class="card-rank-badge ' + badge + '" style="color:#000;">N' + l.nivel + '</div></div>'
@@ -946,7 +1098,7 @@ function render(lojas, ultimaSemana) {
       + '<div class="metric-item"><div class="metric-label" style="color:#000;">NP Fec</div><div class="metric-value">' + l.nF + '</div><div class="metric-percent">' + (l.nT > 0 ? ((l.nF/l.nT*100).toFixed(1)) : '0.0') + '%</div></div>'
       + '</div>'
       + '<div class="card-comparison"><div class="card-comp-item"><div class="card-comp-label">P Fechadas</div><div class="card-comp-value" style="color:#8b5cf6;">' + l.pctPFInt + '%</div></div><div class="card-comp-item"><div class="card-comp-label">NP Fechadas</div><div class="card-comp-value" style="color:#22c55e;">' + l.pctNFInt + '%</div></div></div>'
-      + '<div class="card-trend"><div class="trend-value" style="color:#000;">P Fechadas</div><div class="trend-text" style="color:#000;"></div></div>'
+      + '<div class="card-trend"><div class="trend-icon">' + icon + '</div><div class="trend-value" style="color:#000;">' + diffVal + '</div><div class="trend-text" style="color:#000;">P Fechadas<br>' + texto + '</div></div>'
       + '<div class="card-actions">'
       + '<button class="btn" id="btnhist-' + li + '" onclick="toggleHist(' + li + ')">Histórico</button>'
       + '<button class="btn" id="btnsec-' + li + '" onclick="toggleSec(' + li + ')">Secções</button>'
@@ -957,6 +1109,7 @@ function render(lojas, ultimaSemana) {
     html += desktopRow;
     html += mobileCard;
 
+    /* PAINÉIS */
     html += '<div class="panel" id="hist-' + li + '">'
       + '<div class="panel-inner">'
       + histHtml + '</div></div>';
@@ -977,8 +1130,7 @@ function render(lojas, ultimaSemana) {
     + '</div>';
 
   html += '<div class="note">'
-    + '<strong style="color:#000;">Níveis das lojas — baseados em % de tarefas programadas fechadas</strong>  
-'
+    + '<strong style="color:#000;">Níveis das lojas — baseados em % de tarefas programadas fechadas</strong><br>'
     + '<span style="color:#ef4444;font-weight:800;">N1</span> · 0-20% fechadas &nbsp;&nbsp;'
     + '<span style="color:#fb923c;font-weight:800;">N2</span> · 21-40% fechadas &nbsp;&nbsp;'
     + '<span style="color:#22c55e;font-weight:800;">N3</span> · 41%+ fechadas'
@@ -992,102 +1144,108 @@ function render(lojas, ultimaSemana) {
 
   document.getElementById('app').innerHTML = html;
 
+  /* Inicializar gráficos de carga de trabalho */
   lojas.forEach(function(l, li) {
+    var workloadChartId = 'workload-' + li;
     var pnpChartId = 'pnp-' + li;
     var pnpCanvasEl = document.getElementById(pnpChartId);
     
     if (!pnpCanvasEl || l.historico.length === 0) return;
 
-    var semanas = [];
-    var pFechadosData = [];
-    var npFechadosData = [];
+    /* GRÁFICO: Comparação P vs NP (Fechadas %) */
+    if (pnpCanvasEl) {
+      var semanas = [];
+      var pFechadosData = [];
+      var npFechadosData = [];
 
-    l.historico.forEach(function(h) {
-      semanas.push(h.Semana || '');
-      var pT = Number(h['P Total']) || 0;
-      var pF = Number(h['P Fechado']) || 0;
-      var nT = Number(h['NP Total']) || 0;
-      var nF = Number(h['NP Fechado']) || 0;
-      
-      var pctPF = pT > 0 ? (pF / pT * 100).toFixed(1) : 0;
-      var pctNF = nT > 0 ? (nF / nT * 100).toFixed(1) : 0;
+      l.historico.forEach(function(h) {
+        semanas.push(h.Semana || '');
+        var pT = Number(h['P Total']) || 0;
+        var pF = Number(h['P Fechado']) || 0;
+        var nT = Number(h['NP Total']) || 0;
+        var nF = Number(h['NP Fechado']) || 0;
+        
+        var pctPF = pT > 0 ? (pF / pT * 100).toFixed(1) : 0;
+        var pctNF = nT > 0 ? (nF / nT * 100).toFixed(1) : 0;
 
-      pFechadosData.push(pctPF);
-      npFechadosData.push(pctNF);
-    });
+        pFechadosData.push(pctPF);
+        npFechadosData.push(pctNF);
+      });
 
-    var ctx2 = pnpCanvasEl.getContext('2d');
-    charts['pnp-' + li] = new Chart(ctx2, {
-      type: 'bar',
-      plugins: [ChartDataLabels],
-      data: {
-        labels: semanas,
-        datasets: [
-          {
-            label: 'Programadas Fechadas (%)',
-            data: pFechadosData,
-            backgroundColor: 'rgba(59, 130, 246, 0.8)',
-            borderColor: 'rgba(59, 130, 246, 1)',
-            borderWidth: 1.5,
-            borderRadius: 4,
-            barPercentage: 1.0,
-            categoryPercentage: 0.9
-          },
-          {
-            label: 'Não Programadas Fechadas (%)',
-            data: npFechadosData,
-            backgroundColor: 'rgba(34, 197, 94, 0.8)',
-            borderColor: 'rgba(34, 197, 94, 1)',
-            borderWidth: 1.5,
-            borderRadius: 4,
-            barPercentage: 1.0,
-            categoryPercentage: 0.9
-          }
-        ]
-      },
-      options: {
-        indexAxis: 'y',
-        responsive: true,
-        maintainAspectRatio: false,
-        layout: { padding: { right: 60 } },
-        interaction: { mode: 'index', intersect: false },
-        plugins: {
-          datalabels: {
-            anchor: 'end', align: 'right',
-            formatter: function(value) { return value + '%'; },
-            font: { weight: 'bold', size: 14 },
-            color: '#333'
-          },
-          legend: {
-            position: 'top',
-            labels: { font: { size: 12, weight: 'bold' }, color: '#333', padding: 15, usePointStyle: true }
-          },
-          tooltip: {
-            backgroundColor: 'rgba(0, 0, 0, 0.8)', padding: 12,
-            titleFont: { size: 13, weight: 'bold' }, bodyFont: { size: 12 },
-            borderColor: 'rgba(255, 255, 255, 0.3)', borderWidth: 1,
-            callbacks: {
-              label: function(context) {
-                var label = context.dataset.label || '';
-                if (label) label += ': ';
-                label += context.parsed.x + '%';
-                return label;
+      var ctx2 = pnpCanvasEl.getContext('2d');
+      charts['pnp-' + li] = new Chart(ctx2, {
+        type: 'bar',
+        plugins: [ChartDataLabels],
+        data: {
+          labels: semanas,
+          datasets: [
+            {
+              label: 'Programadas Fechadas (%)',
+              data: pFechadosData,
+              backgroundColor: 'rgba(59, 130, 246, 0.8)',
+              borderColor: 'rgba(59, 130, 246, 1)',
+              borderWidth: 1.5,
+              borderRadius: 4,
+              barPercentage: 1.0,
+              categoryPercentage: 0.9
+            },
+            {
+              label: 'Não Programadas Fechadas (%)',
+              data: npFechadosData,
+              backgroundColor: 'rgba(34, 197, 94, 0.8)',
+              borderColor: 'rgba(34, 197, 94, 1)',
+              borderWidth: 1.5,
+              borderRadius: 4,
+              barPercentage: 1.0,
+              categoryPercentage: 0.9
+            }
+          ]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          layout: { padding: { right: 60 } },
+          interaction: { mode: 'index', intersect: false },
+          plugins: {
+            datalabels: {
+              anchor: 'end', align: 'right',
+              formatter: function(value) { return value + '%'; },
+              font: { weight: 'bold', size: 14 },
+              color: '#333'
+            },
+            legend: {
+              position: 'top',
+              labels: { font: { size: 12, weight: 'bold' }, color: '#333', padding: 15, usePointStyle: true }
+            },
+            tooltip: {
+              backgroundColor: 'rgba(0, 0, 0, 0.8)', padding: 12,
+              titleFont: { size: 13, weight: 'bold' }, bodyFont: { size: 12 },
+              borderColor: 'rgba(255, 255, 255, 0.3)', borderWidth: 1,
+              callbacks: {
+                label: function(context) {
+                  var label = context.dataset.label || '';
+                  if (label) label += ': ';
+                  label += context.parsed.x + '%';
+                  return label;
+                }
               }
             }
-          }
-        },
-        scales: {
-          x: {
-            type: 'linear', display: true, position: 'bottom', beginAtZero: true, max: 100,
-            title: { display: true, text: 'Percentagem (%)', color: '#333', font: { size: 12, weight: 'bold' } },
-            ticks: { color: '#666', font: { size: 11 } },
-            grid: { color: 'rgba(0, 0, 0, 0.05)' }
           },
-          y: { ticks: { color: '#666', font: { size: 11, weight: 'bold' } }, grid: { display: false } }
+          scales: {
+            x: {
+              type: 'linear', display: true, position: 'bottom', beginAtZero: true, max: 100,
+              title: { display: true, text: 'Percentagem (%)', color: '#333', font: { size: 12, weight: 'bold' } },
+              ticks: { color: '#666', font: { size: 11 } },
+              grid: { color: 'rgba(0, 0, 0, 0.05)' }
+            },
+            y: { ticks: { color: '#666', font: { size: 11, weight: 'bold' } }, grid: { display: false } }
+          }
         }
-      }
-    });
+      });
+    }
 
+    /* GRÁFICOS DAS SECÇÕES */
     l.seccoes.forEach(function(s, si) {
       var secChartId = 'secchart-' + li + '-' + si;
       var secCanvasEl = document.getElementById(secChartId);
