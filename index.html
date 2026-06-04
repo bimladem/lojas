@@ -63,12 +63,11 @@ body {
 }
 
 /* ── MAIN ── */
-.main { max-width: 1100px; margin: 0 auto; padding: 28px 20px 64px; }
+.main { max-width: 1320px; margin: 0 auto; padding: 28px 24px 64px; }
 
 /* ── LEGEND BAR ── */
 .legend-bar {
   display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
-  margin-bottom: 20px;
   padding: 10px 16px;
   background: #fff; border: 1px solid var(--line); border-radius: 10px;
   font-size: 12.5px; color: var(--ink-3);
@@ -169,10 +168,10 @@ body {
 /* progress + actions column */
 .col-right {
   display: flex; align-items: center;
-  padding: 14px 20px;
-  gap: 20px;
+  padding: 14px 22px;
+  gap: 22px;
   align-self: stretch;
-  min-width: 320px;
+  min-width: 360px;
 }
 
 .progress-block { flex: 1; display: flex; flex-direction: column; gap: 10px; }
@@ -437,13 +436,6 @@ function fmt(n) {
 function render(lojas) {
   var html = '';
 
-  /* Legend */
-  html += '<div class="legend-bar">';
-  html += '<div class="legend-item"><div class="legend-dot" style="background:var(--bar-blue)"></div><span class="legend-label">P</span> = Tarefas Programadas</div>';
-  html += '<div class="legend-sep"></div>';
-  html += '<div class="legend-item"><div class="legend-dot" style="background:var(--bar-orange)"></div><span class="legend-label">NP</span> = Tarefas Não Programadas</div>';
-  html += '</div>';
-
   html += '<div class="card-list">';
 
   lojas.forEach(function(l, li) {
@@ -523,6 +515,13 @@ function render(lojas) {
   });
 
   html += '</div>'; /* card-list */
+
+  /* Legend note below cards */
+  html += '<div class="legend-bar" style="margin-top:14px;margin-bottom:0">';
+  html += '<div class="legend-item"><div class="legend-dot" style="background:var(--bar-blue)"></div><span class="legend-label">P</span> = Tarefas Programadas</div>';
+  html += '<div class="legend-sep"></div>';
+  html += '<div class="legend-item"><div class="legend-dot" style="background:var(--bar-orange)"></div><span class="legend-label">NP</span> = Tarefas Não Programadas</div>';
+  html += '</div>';
 
   /* Bottom */
   html += '<div class="bottom-bar">';
