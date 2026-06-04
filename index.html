@@ -453,8 +453,9 @@ body {
 .action-title { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
 .action-desc { font-size: 12.5px; color: var(--ink-3); line-height: 1.4; }
 
-/* ── MOBILE CARD ─────────────────────────────────────── */
-.mobile-card { display: none; }
+/* ── MOBILE LIST ─────────────────────────────────────── */
+.mobile-list { display: none; }
+.m-card-wrap { margin-bottom: 12px; }
 
 .loading {
   text-align: center;
@@ -466,11 +467,10 @@ body {
 /* ── MOBILE ──────────────────────────────────────────── */
 @media (max-width: 768px) {
   .table-scroll { display: none; }
+  .mobile-list { display: block; }
   .header { padding: 0 20px; }
   .header-title { font-size: 18px; }
   .main { padding: 20px 16px 48px; }
-
-  .mobile-card { display: block; margin-bottom: 12px; }
 
   .m-card {
     background: #fff;
@@ -569,32 +569,38 @@ var charts    = {};
 function toggleHist(li) {
   stateHist[li] = !stateHist[li];
   var p = document.getElementById('hist-' + li);
-  var b1 = document.getElementById('btnhist-' + li);
-  var b2 = document.getElementById('mbtnhist-' + li);
-  [p].forEach(function(el) { if (el) el.classList.toggle('open', stateHist[li]); });
-  [b1, b2].forEach(function(b) {
-    if (!b) return;
-    b.classList.toggle('active', stateHist[li]);
-    b.textContent = stateHist[li] ? '▾ Fechar' : '↗ Histórico';
-  });
-  if (stateHist[li]) {
-    setTimeout(function() {
-      if (charts['pnp-' + li]) charts['pnp-' + li].resize();
-    }, 100);
-  }
+  var b = document.getElementById('btnhist-' + li);
+  if (p) p.classList.toggle('open', stateHist[li]);
+  if (b) { b.classList.toggle('active', stateHist[li]); b.textContent = stateHist[li] ? '▾ Fechar' : '↗ Histórico'; }
+  if (stateHist[li]) setTimeout(function() { if (charts['pnp-' + li]) charts['pnp-' + li].resize(); }, 100);
 }
 
 function toggleSec(li) {
   stateSec[li] = !stateSec[li];
   var p = document.getElementById('sec-' + li);
-  var b1 = document.getElementById('btnsec-' + li);
-  var b2 = document.getElementById('mbtnsec-' + li);
-  [p].forEach(function(el) { if (el) el.classList.toggle('open', stateSec[li]); });
-  [b1, b2].forEach(function(b) {
-    if (!b) return;
-    b.classList.toggle('active', stateSec[li]);
-    b.textContent = stateSec[li] ? '▾ Fechar' : '↗ Secções';
-  });
+  var b = document.getElementById('btnsec-' + li);
+  if (p) p.classList.toggle('open', stateSec[li]);
+  if (b) { b.classList.toggle('active', stateSec[li]); b.textContent = stateSec[li] ? '▾ Fechar' : '↗ Secções'; }
+}
+
+var mstateHist = {};
+var mstateSec  = {};
+
+function mtoggleHist(li) {
+  mstateHist[li] = !mstateHist[li];
+  var p = document.getElementById('mhist-' + li);
+  var b = document.getElementById('mbtnhist-' + li);
+  if (p) p.classList.toggle('open', mstateHist[li]);
+  if (b) { b.classList.toggle('active', mstateHist[li]); b.textContent = mstateHist[li] ? '▾ Fechar' : '↗ Histórico'; }
+  if (mstateHist[li]) setTimeout(function() { if (charts['mpnp-' + li]) charts['mpnp-' + li].resize(); }, 100);
+}
+
+function mtoggleSec(li) {
+  mstateSec[li] = !mstateSec[li];
+  var p = document.getElementById('msec-' + li);
+  var b = document.getElementById('mbtnsec-' + li);
+  if (p) p.classList.toggle('open', mstateSec[li]);
+  if (b) { b.classList.toggle('active', mstateSec[li]); b.textContent = mstateSec[li] ? '▾ Fechar' : '↗ Secções'; }
 }
 
 fetch('dados.json?t=' + Date.now())
@@ -698,10 +704,9 @@ function render(lojas, ultimaSemana) {
   html += '<div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div><span class="legend-label">NP</span><span class="legend-desc">= Tarefas Não Programadas</span></div>';
   html += '</div>';
 
-  /* DESKTOP TABLE */
+  /* ── DESKTOP TABLE (hidden on mobile) ── */
   html += '<div class="table-scroll">';
   html += '<div class="table-card">';
-
   html += '<div class="table-head">';
   ['Rank','Localização','Loja','P Total','P Abertas','P Fechadas','NP Total','NP Abertas','NP Fechadas','P vs NP','Histórico','Secções'].forEach(function(t,i) {
     html += '<div class="th' + (i <= 2 ? ' th-left' : '') + '">' + t + '</div>';
@@ -710,8 +715,6 @@ function render(lojas, ultimaSemana) {
 
   lojas.forEach(function(l, li) {
     var pc = pillClass(l.nivel);
-
-    /* Panels */
     var histRows = l.historico.map(function(h) {
       var hpT = Number(h['P Total'])||0, hpF = Number(h['P Fechado'])||0;
       var hnT = Number(h['NP Total'])||0, hnF = Number(h['NP Fechado'])||0;
@@ -719,16 +722,13 @@ function render(lojas, ultimaSemana) {
         + '<td>' + (hpT-hpF) + '</td><td>' + hpF + '</td>'
         + '<td>' + (hnT-hnF) + '</td><td>' + hnF + '</td></tr>';
     }).join('');
-
     var pnpId = 'pnp-' + li;
     var chartH = Math.max(200, l.historico.length * 60 + 80);
-
     var histHtml = l.historico.length > 0
-      ? '<div class="chart-wrap" style="height:' + chartH + 'px; margin-bottom: 20px;"><canvas id="' + pnpId + '" role="img" aria-label="Gráfico histórico de tarefas fechadas"></canvas></div>'
+      ? '<div class="chart-wrap" style="height:' + chartH + 'px; margin-bottom: 20px;"><canvas id="' + pnpId + '" role="img" aria-label="Gráfico histórico"></canvas></div>'
         + '<table class="dtable"><thead><tr><th>Semana</th><th>P Abertas</th><th>P Fechadas</th><th>NP Abertas</th><th>NP Fechadas</th></tr></thead>'
         + '<tbody>' + histRows + '</tbody></table>'
       : '<p style="color:var(--ink-4);font-size:13px;">Sem dados históricos disponíveis.</p>';
-
     var secHtml = l.seccoes.length > 0
       ? '<div class="sec-grid">' + l.seccoes.map(function(s, si) {
           var sid = 'secchart-' + li + '-' + si;
@@ -737,7 +737,6 @@ function render(lojas, ultimaSemana) {
         }).join('') + '</div>'
       : '<p style="color:var(--ink-4);font-size:13px;">Sem secções disponíveis.</p>';
 
-    /* Desktop row */
     html += '<div class="table-row">';
     html += '<div class="row-grid">';
     html += '<div class="td td-left"><div class="rank-wrap"><div class="rank-num">' + (li+1) + '</div><div class="rank-pill ' + pc + '">N' + l.nivel + '</div></div></div>';
@@ -753,31 +752,56 @@ function render(lojas, ultimaSemana) {
     html += '<div class="td"><button class="btn-act" id="btnhist-' + li + '" onclick="toggleHist(' + li + ')">↗ Histórico</button></div>';
     html += '<div class="td"><button class="btn-act" id="btnsec-' + li + '" onclick="toggleSec(' + li + ')">↗ Secções</button></div>';
     html += '</div>';
-
-    /* Panels */
     html += '<div class="panel" id="hist-' + li + '"><div class="panel-body"><div class="panel-section-title">Evolução Histórica · ' + l.loja + '</div>' + histHtml + '</div></div>';
     html += '<div class="panel" id="sec-' + li + '"><div class="panel-body"><div class="panel-section-title">Detalhe por Secção · ' + l.seccoes.length + ' secções</div>' + secHtml + '</div></div>';
+    html += '</div>';
+  });
+  html += '</div></div>';
 
-    /* Mobile card */
-    html += '<div class="mobile-card"><div class="m-card">';
+  /* ── MOBILE CARDS (hidden on desktop) ── */
+  html += '<div class="mobile-list">';
+  lojas.forEach(function(l, li) {
+    var pc = pillClass(l.nivel);
+    var histRows = l.historico.map(function(h) {
+      var hpT = Number(h['P Total'])||0, hpF = Number(h['P Fechado'])||0;
+      var hnT = Number(h['NP Total'])||0, hnF = Number(h['NP Fechado'])||0;
+      return '<tr><td>' + (h.Semana||'—') + '</td>'
+        + '<td>' + (hpT-hpF) + '</td><td>' + hpF + '</td>'
+        + '<td>' + (hnT-hnF) + '</td><td>' + hnF + '</td></tr>';
+    }).join('');
+    var mpnpId = 'mpnp-' + li;
+    var mchartH = Math.max(200, l.historico.length * 60 + 80);
+    var mhistHtml = l.historico.length > 0
+      ? '<div class="chart-wrap" style="height:' + mchartH + 'px; margin-bottom: 20px;"><canvas id="' + mpnpId + '" role="img" aria-label="Gráfico histórico"></canvas></div>'
+        + '<div style="overflow-x:auto;"><table class="dtable" style="min-width:320px;"><thead><tr><th>Semana</th><th>P Ab.</th><th>P Fec.</th><th>NP Ab.</th><th>NP Fec.</th></tr></thead>'
+        + '<tbody>' + histRows + '</tbody></table></div>'
+      : '<p style="color:var(--ink-4);font-size:13px;">Sem dados históricos.</p>';
+    var msecHtml = l.seccoes.length > 0
+      ? '<div class="sec-grid" style="grid-template-columns:1fr;">' + l.seccoes.map(function(s, si) {
+          var msid = 'msecchart-' + li + '-' + si;
+          return '<div class="sec-card"><div class="sec-card-head">' + s.nome + '</div>'
+            + '<div class="sec-card-body"><div style="height:70px;position:relative;"><canvas id="' + msid + '" role="img" aria-label="Secção ' + s.nome + '"></canvas></div></div></div>';
+        }).join('') + '</div>'
+      : '<p style="color:var(--ink-4);font-size:13px;">Sem secções disponíveis.</p>';
+
+    html += '<div class="m-card-wrap">';
+    html += '<div class="m-card">';
     html += '<div class="m-head"><div class="m-rank-num">' + (li+1) + '</div><div class="rank-pill ' + pc + '" style="align-self:flex-start;margin-top:4px">N' + l.nivel + '</div><div class="m-info"><div class="m-loja">' + l.loja + '</div><div class="m-local">' + (l.local||'—') + '</div></div></div>';
     html += '<div class="m-metrics">';
-    var mItems = [
-      {l:'P Total',v:l.pT,p:null},{l:'P Abertas',v:l.pA,p:l.pT>0?((l.pA/l.pT*100).toFixed(1))+'%':null},{l:'P Fechadas',v:l.pF,p:l.pT>0?((l.pF/l.pT*100).toFixed(1))+'%':null},
-      {l:'NP Total',v:l.nT,p:null},{l:'NP Abertas',v:l.nA,p:l.nT>0?((l.nA/l.nT*100).toFixed(1))+'%':null},{l:'NP Fechadas',v:l.nF,p:l.nT>0?((l.nF/l.nT*100).toFixed(1))+'%':null}
-    ];
-    mItems.forEach(function(m) {
+    [{l:'P Total',v:l.pT,p:null},{l:'P Abertas',v:l.pA,p:l.pT>0?((l.pA/l.pT*100).toFixed(1))+'%':null},{l:'P Fechadas',v:l.pF,p:l.pT>0?((l.pF/l.pT*100).toFixed(1))+'%':null},
+     {l:'NP Total',v:l.nT,p:null},{l:'NP Abertas',v:l.nA,p:l.nT>0?((l.nA/l.nT*100).toFixed(1))+'%':null},{l:'NP Fechadas',v:l.nF,p:l.nT>0?((l.nF/l.nT*100).toFixed(1))+'%':null}
+    ].forEach(function(m) {
       html += '<div class="m-metric"><div class="m-metric-label">' + m.l + '</div><div class="m-metric-num">' + m.v + '</div>' + (m.p ? '<div class="m-metric-pct">' + m.p + '</div>' : '') + '</div>';
     });
     html += '</div>';
     html += '<div class="m-comp"><div class="m-comp-item"><div class="m-comp-label">Prog. Fechadas</div><div class="m-comp-val" style="color:var(--blue)">' + l.pctPFInt + '%</div></div><div class="m-comp-item"><div class="m-comp-label">Não Prog. Fechadas</div><div class="m-comp-val" style="color:var(--green)">' + l.pctNFInt + '%</div></div></div>';
-    html += '<div class="m-actions"><button class="btn-act" id="mbtnhist-' + li + '" onclick="toggleHist(' + li + ')">↗ Histórico</button><button class="btn-act" id="mbtnsec-' + li + '" onclick="toggleSec(' + li + ')">↗ Secções</button></div>';
-    html += '</div></div>';
-
+    html += '<div class="m-actions"><button class="btn-act" id="mbtnhist-' + li + '" onclick="mtoggleHist(' + li + ')">↗ Histórico</button><button class="btn-act" id="mbtnsec-' + li + '" onclick="mtoggleSec(' + li + ')">↗ Secções</button></div>';
+    html += '</div>';
+    html += '<div class="panel" id="mhist-' + li + '"><div class="panel-body"><div class="panel-section-title">Evolução Histórica · ' + l.loja + '</div>' + mhistHtml + '</div></div>';
+    html += '<div class="panel" id="msec-' + li + '"><div class="panel-body"><div class="panel-section-title">Detalhe por Secção · ' + l.seccoes.length + ' secções</div>' + msecHtml + '</div></div>';
     html += '</div>';
   });
-
-  html += '</div></div>';
+  html += '</div>';
 
   /* BOTTOM */
   html += '<div class="bottom-bar">';
@@ -835,24 +859,49 @@ function render(lojas, ultimaSemana) {
       var pctP = s.pT > 0 ? parseFloat((s.pF/s.pT*100).toFixed(1)) : 0;
       var pctN = s.nT > 0 ? parseFloat((s.nF/s.nT*100).toFixed(1)) : 0;
       charts['secchart-' + li + '-' + si] = new Chart(sEl.getContext('2d'), {
-        type: 'bar',
-        plugins: [ChartDataLabels],
-        data: {
-          labels: ['Programadas', 'Não Prog.'],
-          datasets: [{ data: [pctP, pctN], backgroundColor: ['rgba(45,95,160,.75)', 'rgba(46,125,82,.75)'], borderRadius: 3, borderWidth: 0 }]
-        },
-        options: {
-          indexAxis: 'y', responsive: true, maintainAspectRatio: false,
-          layout: { padding: { right: 45 } },
-          plugins: {
-            datalabels: { anchor:'end', align:'right', formatter: function(v){ return v+'%'; }, font:{size:11,weight:'600'}, color:'#3a3835' },
-            legend: { display:false },
-            tooltip: { callbacks: { label: function(c){ return c.parsed.x + '% fechadas'; } } }
-          },
-          scales: {
-            x: { beginAtZero:true, max:100, display:false },
-            y: { ticks:{ font:{size:11,weight:'500'}, color:'#3a3835' }, grid:{ display:false } }
-          }
+        type: 'bar', plugins: [ChartDataLabels],
+        data: { labels: ['Programadas', 'Não Prog.'], datasets: [{ data: [pctP, pctN], backgroundColor: ['rgba(45,95,160,.75)', 'rgba(46,125,82,.75)'], borderRadius: 3, borderWidth: 0 }] },
+        options: { indexAxis:'y', responsive:true, maintainAspectRatio:false, layout:{ padding:{ right:45 } },
+          plugins: { datalabels:{ anchor:'end', align:'right', formatter:function(v){ return v+'%'; }, font:{size:11,weight:'600'}, color:'#3a3835' }, legend:{ display:false } },
+          scales: { x:{ beginAtZero:true, max:100, display:false }, y:{ ticks:{ font:{size:11,weight:'500'}, color:'#3a3835' }, grid:{ display:false } } }
+        }
+      });
+    });
+
+    /* Mobile charts (rendered but lazy — only visible when panel opens) */
+    var mpnpEl = document.getElementById('mpnp-' + li);
+    if (mpnpEl && l.historico.length > 0) {
+      var msemanas = [], mpPcts = [], mnPcts = [];
+      l.historico.forEach(function(h) {
+        msemanas.push(h.Semana || '');
+        var pT2 = Number(h['P Total'])||0, pF2 = Number(h['P Fechado'])||0;
+        var nT2 = Number(h['NP Total'])||0, nF2 = Number(h['NP Fechado'])||0;
+        mpPcts.push(pT2 > 0 ? parseFloat((pF2/pT2*100).toFixed(1)) : 0);
+        mnPcts.push(nT2 > 0 ? parseFloat((nF2/nT2*100).toFixed(1)) : 0);
+      });
+      charts['mpnp-' + li] = new Chart(mpnpEl.getContext('2d'), {
+        type: 'bar', plugins: [ChartDataLabels],
+        data: { labels: msemanas, datasets: [
+          { label: 'Programadas (%)', data: mpPcts, backgroundColor: 'rgba(45,95,160,.75)', borderRadius: 3, borderWidth: 1 },
+          { label: 'Não Prog. (%)', data: mnPcts, backgroundColor: 'rgba(46,125,82,.75)', borderRadius: 3, borderWidth: 1 }
+        ]},
+        options: { indexAxis:'y', responsive:true, maintainAspectRatio:false, layout:{ padding:{ right:50 } },
+          plugins: { datalabels:{ anchor:'end', align:'right', formatter:function(v){ return v+'%'; }, font:{size:11,weight:'600'}, color:'#3a3835' }, legend:{ position:'top', labels:{ font:{size:11}, color:'#3a3835', padding:10, usePointStyle:true } } },
+          scales: { x:{ beginAtZero:true, max:100, ticks:{ color:'#6b6860', font:{size:10} } }, y:{ ticks:{ color:'#3a3835', font:{size:10,weight:'500'} }, grid:{ display:false } } }
+        }
+      });
+    }
+    l.seccoes.forEach(function(s, si) {
+      var msEl = document.getElementById('msecchart-' + li + '-' + si);
+      if (!msEl) return;
+      var pctP2 = s.pT > 0 ? parseFloat((s.pF/s.pT*100).toFixed(1)) : 0;
+      var pctN2 = s.nT > 0 ? parseFloat((s.nF/s.nT*100).toFixed(1)) : 0;
+      charts['msecchart-' + li + '-' + si] = new Chart(msEl.getContext('2d'), {
+        type: 'bar', plugins: [ChartDataLabels],
+        data: { labels: ['Prog.', 'Não Prog.'], datasets: [{ data: [pctP2, pctN2], backgroundColor: ['rgba(45,95,160,.75)', 'rgba(46,125,82,.75)'], borderRadius: 3, borderWidth: 0 }] },
+        options: { indexAxis:'y', responsive:true, maintainAspectRatio:false, layout:{ padding:{ right:40 } },
+          plugins: { datalabels:{ anchor:'end', align:'right', formatter:function(v){ return v+'%'; }, font:{size:11,weight:'600'}, color:'#3a3835' }, legend:{ display:false } },
+          scales: { x:{ beginAtZero:true, max:100, display:false }, y:{ ticks:{ font:{size:11,weight:'500'}, color:'#3a3835' }, grid:{ display:false } } }
         }
       });
     });
