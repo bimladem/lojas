@@ -307,7 +307,150 @@ body {
 .action-title { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
 .action-desc { font-size: 12px; color: var(--ink-3); line-height: 1.4; }
 
-.loading { text-align: center; padding: 80px 20px; color: var(--ink-4); font-size: 14px; }
+/* ── HOME SCREEN ── */
+.home-screen, .detail-screen { display: none; }
+.home-screen.active, .detail-screen.active { display: block; }
+
+/* back button in header */
+.btn-back {
+  display: none; align-items: center; gap: 6px;
+  padding: 6px 12px; border-radius: 7px;
+  border: 1px solid var(--line-2); background: var(--paper-3);
+  font-size: 12.5px; font-weight: 500; color: var(--ink-2);
+  cursor: pointer; font-family: 'DM Sans', sans-serif;
+  transition: all 0.15s;
+}
+.btn-back:hover { border-color: var(--ink-2); background: var(--paper); }
+.btn-back.visible { display: flex; }
+.btn-back svg { width: 14px; height: 14px; }
+
+/* stat cards row */
+.home-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.stat-card {
+  background: #fff; border: 1px solid var(--line);
+  border-radius: 14px; padding: 20px 20px 16px;
+  box-shadow: var(--shadow);
+  display: flex; flex-direction: column; gap: 6px;
+}
+.stat-card-label {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.7px;
+  text-transform: uppercase; color: var(--ink-4);
+}
+.stat-card-val {
+  font-family: 'DM Serif Display', serif;
+  font-size: 36px; line-height: 1; color: var(--ink);
+}
+.stat-card-sub { font-size: 12px; color: var(--ink-4); margin-top: 2px; }
+.stat-card.accent-red   .stat-card-val { color: var(--n1); }
+.stat-card.accent-amber .stat-card-val { color: var(--n2); }
+.stat-card.accent-green .stat-card-val { color: var(--n3); }
+.stat-card.accent-blue  .stat-card-val { color: var(--bar-blue); }
+
+/* filter bar */
+.filter-bar {
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 16px; flex-wrap: wrap;
+}
+.filter-label { font-size: 12px; color: var(--ink-4); font-weight: 500; margin-right: 4px; }
+.filter-btn {
+  padding: 5px 14px; border-radius: 99px;
+  border: 1px solid var(--line-2); background: #fff;
+  font-size: 12px; font-weight: 500; color: var(--ink-3);
+  cursor: pointer; font-family: 'DM Sans', sans-serif;
+  transition: all 0.15s; white-space: nowrap;
+}
+.filter-btn:hover { border-color: var(--ink-2); color: var(--ink); }
+.filter-btn.active {
+  background: var(--ink); border-color: var(--ink); color: #fff;
+}
+.filter-divider { width: 1px; height: 20px; background: var(--line-2); }
+
+/* summary table */
+.home-table {
+  background: #fff; border: 1px solid var(--line);
+  border-radius: 14px; overflow: hidden; box-shadow: var(--shadow);
+}
+.ht-head {
+  display: grid;
+  grid-template-columns: 52px 56px 190px 1fr 1fr 130px 100px 120px;
+  background: #f8f8fa; border-bottom: 1px solid var(--line);
+}
+.ht-th {
+  padding: 11px 14px; font-size: 10px; font-weight: 700;
+  letter-spacing: 0.6px; text-transform: uppercase; color: var(--ink-4);
+  text-align: center; border-right: 1px solid var(--line);
+}
+.ht-th:last-child { border-right: none; }
+.ht-th.left { text-align: left; }
+
+.ht-row {
+  display: grid;
+  grid-template-columns: 52px 56px 190px 1fr 1fr 130px 100px 120px;
+  border-bottom: 1px solid var(--line);
+  transition: background 0.12s;
+  cursor: pointer;
+}
+.ht-row:last-child { border-bottom: none; }
+.ht-row:hover { background: var(--paper); }
+.ht-row.new-loja { background: #f6fef9; }
+.ht-row.new-loja:hover { background: #edfaf2; }
+
+.ht-td {
+  padding: 14px 14px; display: flex; align-items: center;
+  justify-content: center; border-right: 1px solid var(--line);
+  font-size: 13px; color: var(--ink); min-height: 64px;
+}
+.ht-td:last-child { border-right: none; }
+.ht-td.left { justify-content: flex-start; }
+
+.new-badge {
+  display: inline-flex; align-items: center;
+  padding: 2px 7px; border-radius: 99px;
+  background: #dcfce7; color: #16a34a;
+  font-size: 9.5px; font-weight: 700; letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
+/* mini progress in home table */
+.mini-prog { width: 100%; display: flex; flex-direction: column; gap: 5px; }
+.mini-row { display: flex; align-items: center; gap: 6px; }
+.mini-track { flex: 1; height: 5px; background: var(--bar-track); border-radius: 99px; overflow: hidden; }
+.mini-fill { height: 100%; border-radius: 99px; }
+.mini-pct { font-size: 11px; font-weight: 700; min-width: 32px; text-align: right; }
+
+/* detalhe button in home table */
+.btn-detail {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 6px 14px; border-radius: 7px;
+  border: 1px solid var(--line-2); background: #fff;
+  font-size: 12px; font-weight: 500; color: var(--ink-2);
+  cursor: pointer; font-family: 'DM Sans', sans-serif;
+  transition: all 0.15s; white-space: nowrap;
+}
+.btn-detail:hover { background: var(--ink); border-color: var(--ink); color: #fff; }
+.btn-detail svg { width: 12px; height: 12px; }
+
+@media (max-width: 800px) {
+  .ht-head { display: none; }
+  .ht-row {
+    grid-template-columns: 44px 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 0;
+  }
+  .ht-td { min-height: auto; padding: 10px 12px; }
+  .ht-td.rank-td { grid-row: 1/4; border-right: 1px solid var(--line); flex-direction: column; gap: 4px; }
+  .ht-td.id-td   { grid-column: 2; grid-row: 1; border-right: none; border-bottom: 1px solid var(--line); justify-content: flex-start; }
+  .ht-td.metrics-td { grid-column: 2; grid-row: 2; border-right: none; border-bottom: 1px solid var(--line); gap: 12px; flex-wrap: wrap; }
+  .ht-td.prog-td  { grid-column: 2; grid-row: 3; border-right: none; }
+  .ht-td.level-td, .ht-td.new-td, .ht-td.act-td { display: none; }
+  .home-stats { grid-template-columns: repeat(2, 1fr); }
+}
+
 
 /* ── MOBILE ── */
 @media (max-width: 800px) {
@@ -352,11 +495,15 @@ body {
 
 <header class="header">
   <div class="header-left">
+    <button class="btn-back" id="btn-back" onclick="goHome()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Voltar
+    </button>
     <div class="header-icon">
       <svg viewBox="0 0 24 24"><rect x="3" y="13" width="4" height="8" rx="1"/><rect x="10" y="9" width="4" height="12" rx="1"/><rect x="17" y="5" width="4" height="16" rx="1"/></svg>
     </div>
     <div>
-      <div class="header-title">Análise Semanal IM</div>
+      <div class="header-title" id="header-title">Análise Semanal IM</div>
       <div class="header-subtitle" id="sub-info">A carregar…</div>
     </div>
   </div>
@@ -364,18 +511,52 @@ body {
 </header>
 
 <main class="main">
-  <div id="app"><div class="loading">A carregar dados…</div></div>
+  <div id="home-screen" class="home-screen">
+    <div class="loading">A carregar dados…</div>
+  </div>
+  <div id="detail-screen" class="detail-screen">
+    <div id="app"></div>
+  </div>
 </main>
 
 <script>
 var charts = {};
 var stateH = {}, stateS = {};
+var _lojas = [], _ultima = '';
+var _activeFilter = 'all';
 
+/* ── Navigation ── */
+function goHome() {
+  document.getElementById('home-screen').classList.add('active');
+  document.getElementById('detail-screen').classList.remove('active');
+  document.getElementById('btn-back').classList.remove('visible');
+  document.getElementById('header-title').textContent = 'Análise Semanal IM';
+  document.getElementById('sub-info').textContent = _lojas.length + ' lojas · ' + _ultima;
+}
+
+function goDetail(lojaIdx) {
+  document.getElementById('home-screen').classList.remove('active');
+  document.getElementById('detail-screen').classList.add('active');
+  document.getElementById('btn-back').classList.add('visible');
+  var l = _lojas[lojaIdx];
+  document.getElementById('header-title').textContent = (l.local || l.loja) + ' · ' + l.loja;
+  document.getElementById('sub-info').textContent = 'Detalhe da loja · ' + _ultima;
+  // render detail if not yet rendered
+  if (!document.getElementById('ph-' + lojaIdx)) {
+    renderDetail(_lojas, lojaIdx);
+  }
+  window.scrollTo(0, 0);
+}
+
+/* ── SVG helpers ── */
 function svgClock() {
   return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>';
 }
 function svgFolder() {
   return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>';
+}
+function svgArrow() {
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
 }
 
 function toggleH(li) {
@@ -394,6 +575,14 @@ function toggleS(li) {
   if (b) { b.classList.toggle('active', stateS[li]); b.innerHTML = svgFolder() + (stateS[li] ? 'Fechar' : 'Secções'); }
 }
 
+function setFilter(f) {
+  _activeFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(function(b) {
+    b.classList.toggle('active', b.dataset.filter === f);
+  });
+  renderHomeTable(_lojas);
+}
+
 fetch('dados.json?t=' + Date.now())
   .then(function(r) { return r.json(); })
   .then(function(json) {
@@ -401,6 +590,15 @@ fetch('dados.json?t=' + Date.now())
     var semanas = [];
     data.forEach(function(i) { var s = String(i.Semana||'').trim(); if (s && semanas.indexOf(s)===-1) semanas.push(s); });
     var ultima = semanas[semanas.length - 1] || '';
+    var penultima = semanas[semanas.length - 2] || null;
+    _ultima = ultima;
+
+    /* IDs present in penultimate week (to detect new stores) */
+    var idsPenultima = {};
+    if (penultima) {
+      data.filter(function(i) { return i.Loja && !i.Secção && String(i.Semana||'').trim() === penultima; })
+        .forEach(function(i) { idsPenultima[String(i.Loja).trim()] = true; });
+    }
 
     var lojas = data.filter(function(i) { return i.Loja && !i.Secção && String(i.Semana||'').trim() === ultima; })
       .map(function(i) {
@@ -409,10 +607,13 @@ fetch('dados.json?t=' + Date.now())
         var pctPF=pT>0?(pF/pT*100):0, pctNF=nT>0?(nF/nT*100):0;
         var nivel=pctPF>=41?3:pctPF>=21?2:1;
         var loc=String(i['Resumo contactos.Localidade']||i['IM.Localidade']||'').trim();
-        return { loja:String(i.Loja).trim(), local:loc, pT:pT,pA:pA,pF:pF,nT:nT,nA:nA,nF:nF,
+        var lojaId = String(i.Loja).trim();
+        return { loja:lojaId, local:loc, pT:pT,pA:pA,pF:pF,nT:nT,nA:nA,nF:nF,
           pctPF:pctPF.toFixed(1), pctNF:pctNF.toFixed(1),
           pctPFInt:Math.round(pctPF), pctNFInt:Math.round(pctNF),
-          nivel:nivel, historico:[], seccoes:[] };
+          nivel:nivel, historico:[], seccoes:[],
+          isNew: penultima ? !idsPenultima[lojaId] : false
+        };
       });
 
     lojas.sort(function(a,b) { return a.nivel!==b.nivel ? a.nivel-b.nivel : Number(a.pctPF)-Number(b.pctPF); });
@@ -445,29 +646,188 @@ fetch('dados.json?t=' + Date.now())
     });
     lojas.forEach(function(l) { l.seccoes.sort(function(a,b){ return b.pA-a.pA; }); });
 
+    _lojas = lojas;
+
     document.getElementById('sub-info').textContent = lojas.length + ' lojas · ' + ultima;
     document.getElementById('periodo').textContent = '📅 ' + ultima;
 
-    render(lojas);
+    renderHome(lojas, ultima, penultima);
   })
   .catch(function(e) {
-    document.getElementById('app').innerHTML = '<div class="loading" style="color:#b83232">Erro ao carregar: ' + e.message + '</div>';
+    document.getElementById('home-screen').innerHTML = '<div class="loading" style="color:#b83232">Erro ao carregar: ' + e.message + '</div>';
   });
 
-function pillCls(n) { return n===1?'pill-n1':n===2?'pill-n2':'pill-n3'; }
+/* ── HOME RENDER ── */
+function renderHome(lojas, ultima, penultima) {
+  var n1 = lojas.filter(function(l){ return l.nivel===1; }).length;
+  var n2 = lojas.filter(function(l){ return l.nivel===2; }).length;
+  var n3 = lojas.filter(function(l){ return l.nivel===3; }).length;
+  var novas = lojas.filter(function(l){ return l.isNew; }).length;
+  var totalPT = lojas.reduce(function(s,l){ return s+l.pT; },0);
+  var totalPF = lojas.reduce(function(s,l){ return s+l.pF; },0);
+  var pctGlobal = totalPT>0 ? Math.round(totalPF/totalPT*100) : 0;
+
+  var html = '';
+
+  /* Stats row */
+  html += '<div class="home-stats">';
+  html += statCard('Total de Lojas', lojas.length, penultima ? 'Esta semana' : 'Todas as lojas', '');
+  html += statCard('Nível 1 — Crítico', n1, '0–20% prog. fechadas', 'accent-red');
+  html += statCard('Nível 2 — Atenção', n2, '21–40% prog. fechadas', 'accent-amber');
+  html += statCard('Nível 3 — OK', n3, '41%+ prog. fechadas', 'accent-green');
+  if (penultima) {
+    html += statCard('Entradas Novas', novas, 'Não presentes em '+penultima, novas>0?'accent-blue':'');
+  }
+  html += '<div class="stat-card" style="background:linear-gradient(135deg,#f0f2fb,#fdf3eb)">'
+    + '<div class="stat-card-label">Taxa Global P Fechadas</div>'
+    + '<div style="font-family:\'DM Serif Display\',serif;font-size:36px;line-height:1;color:var(--bar-blue)">'+pctGlobal+'%</div>'
+    + '<div class="stat-card-sub">Média de todas as lojas</div>'
+    + '</div>';
+  html += '</div>';
+
+  /* Filter bar */
+  var newCount = lojas.filter(function(l){ return l.isNew; }).length;
+  var oldCount = lojas.length - newCount;
+  html += '<div class="filter-bar">';
+  html += '<span class="filter-label">Mostrar:</span>';
+  html += '<button class="filter-btn active" data-filter="all" onclick="setFilter(\'all\')">Todas ('+lojas.length+')</button>';
+  html += '<button class="filter-btn" data-filter="old" onclick="setFilter(\'old\')">Lojas Anteriores ('+oldCount+')</button>';
+  if (newCount > 0) {
+    html += '<button class="filter-btn" data-filter="new" onclick="setFilter(\'new\')">Entradas Novas ('+newCount+')</button>';
+  }
+  html += '<div class="filter-divider"></div>';
+  html += '<button class="filter-btn" data-filter="n1" onclick="setFilter(\'n1\')">🔴 N1 ('+n1+')</button>';
+  html += '<button class="filter-btn" data-filter="n2" onclick="setFilter(\'n2\')">🟠 N2 ('+n2+')</button>';
+  html += '<button class="filter-btn" data-filter="n3" onclick="setFilter(\'n3\')">🟢 N3 ('+n3+')</button>';
+  html += '</div>';
+
+  /* Table shell — rows injected by renderHomeTable */
+  html += '<div class="home-table">';
+  html += '<div class="ht-head">';
+  html += '<div class="ht-th">#</div>';
+  html += '<div class="ht-th">Nível</div>';
+  html += '<div class="ht-th left">Loja</div>';
+  html += '<div class="ht-th">P Tarefas</div>';
+  html += '<div class="ht-th">NP Tarefas</div>';
+  html += '<div class="ht-th">% Fechadas</div>';
+  html += '<div class="ht-th">Estado</div>';
+  html += '<div class="ht-th">Detalhe</div>';
+  html += '</div>';
+  html += '<div id="ht-body"></div>';
+  html += '</div>';
+
+  /* Bottom legend */
+  html += '<div class="bottom-bar" style="margin-top:20px">';
+  html += '<div class="level-legend"><div class="level-legend-title">Classificação de Nível</div><div class="level-items">';
+  html += '<div class="level-item"><div class="level-dot pill-n1">N1</div><span>0–20% prog. fechadas — crítico</span></div>';
+  html += '<div class="level-item"><div class="level-dot pill-n2">N2</div><span>21–40% fechadas — atenção</span></div>';
+  html += '<div class="level-item"><div class="level-dot pill-n3">N3</div><span>41%+ fechadas — satisfatório</span></div>';
+  html += '</div></div>';
+  html += '<div class="action-banner"><div class="action-icon">⚠</div><div><div class="action-title">Ação Recomendada</div><div class="action-desc">Contactar urgentemente responsáveis das lojas N1. Clique em "Detalhe" para ver o histórico e secções.</div></div></div>';
+  html += '</div>';
+
+  document.getElementById('home-screen').innerHTML = html;
+  document.getElementById('home-screen').classList.add('active');
+  renderHomeTable(lojas);
+}
+
+function statCard(label, val, sub, accent) {
+  return '<div class="stat-card '+(accent||'')+'">'
+    +'<div class="stat-card-label">'+label+'</div>'
+    +'<div class="stat-card-val">'+val+'</div>'
+    +'<div class="stat-card-sub">'+sub+'</div>'
+    +'</div>';
+}
+
+function renderHomeTable(lojas) {
+  var f = _activeFilter;
+  var filtered = lojas.filter(function(l) {
+    if (f === 'new') return l.isNew;
+    if (f === 'old') return !l.isNew;
+    if (f === 'n1')  return l.nivel === 1;
+    if (f === 'n2')  return l.nivel === 2;
+    if (f === 'n3')  return l.nivel === 3;
+    return true;
+  });
+
+  var html = '';
+  if (filtered.length === 0) {
+    html = '<div style="padding:32px;text-align:center;color:var(--ink-4);font-size:13px">Sem lojas para este filtro.</div>';
+  } else {
+    filtered.forEach(function(l) {
+      var li = lojas.indexOf(l); /* real index for detail navigation */
+      var pc = pillCls(l.nivel);
+      html += '<div class="ht-row'+(l.isNew?' new-loja':'')+'" onclick="goDetail('+li+')">';
+
+      /* rank */
+      html += '<div class="ht-td rank-td">';
+      html += '<div class="rank-num">'+(li+1)+'</div>';
+      html += '<div class="rank-pill '+pc+'">N'+l.nivel+'</div>';
+      html += '</div>';
+
+      /* level badge (hidden on mobile, rank already has it) */
+      html += '<div class="ht-td level-td"><div class="rank-pill '+pc+'" style="font-size:11px;padding:3px 9px">N'+l.nivel+'</div></div>';
+
+      /* identity */
+      html += '<div class="ht-td left id-td" style="flex-direction:column;align-items:flex-start;gap:2px">';
+      html += '<div style="font-weight:600;font-size:13.5px">'+(l.local||l.loja)+'</div>';
+      html += '<div style="font-size:11.5px;color:var(--ink-4)">'+l.loja+'</div>';
+      html += '</div>';
+
+      /* P metrics */
+      html += '<div class="ht-td metrics-td" style="flex-direction:column;gap:2px">';
+      html += '<div style="font-size:11px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:var(--ink-4)">Total '+fmt(l.pT)+'</div>';
+      html += '<div style="font-size:12px;color:var(--ink-3)">'+fmt(l.pA)+' abertas · '+fmt(l.pF)+' fechadas</div>';
+      html += '</div>';
+
+      /* NP metrics */
+      html += '<div class="ht-td" style="flex-direction:column;gap:2px">';
+      html += '<div style="font-size:11px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:var(--ink-4)">Total '+fmt(l.nT)+'</div>';
+      html += '<div style="font-size:12px;color:var(--ink-3)">'+fmt(l.nA)+' abertas · '+fmt(l.nF)+' fechadas</div>';
+      html += '</div>';
+
+      /* progress */
+      html += '<div class="ht-td prog-td"><div class="mini-prog">';
+      html += '<div class="mini-row">'
+        +'<span style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.4px;color:var(--ink-4);min-width:20px">P</span>'
+        +'<div class="mini-track"><div class="mini-fill fill-blue" style="width:'+l.pctPFInt+'%"></div></div>'
+        +'<span class="mini-pct" style="color:var(--bar-blue)">'+l.pctPFInt+'%</span>'
+        +'</div>';
+      html += '<div class="mini-row">'
+        +'<span style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.4px;color:var(--ink-4);min-width:20px">NP</span>'
+        +'<div class="mini-track"><div class="mini-fill fill-orange" style="width:'+l.pctNFInt+'%"></div></div>'
+        +'<span class="mini-pct" style="color:var(--bar-orange)">'+l.pctNFInt+'%</span>'
+        +'</div>';
+      html += '</div></div>';
+
+      /* new badge */
+      html += '<div class="ht-td new-td">';
+      if (l.isNew) html += '<span class="new-badge">✦ Nova</span>';
+      html += '</div>';
+
+      /* detail button */
+      html += '<div class="ht-td act-td" onclick="event.stopPropagation()">';
+      html += '<button class="btn-detail" onclick="goDetail('+li+')">Detalhe '+svgArrow()+'</button>';
+      html += '</div>';
+
+      html += '</div>';
+    });
+  }
+  document.getElementById('ht-body').innerHTML = html;
+}
+
+
 
 function fmt(n) {
-  /* format number with thousands dot separator */
   return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 }
 
-function render(lojas) {
+function renderDetail(lojas, focusIdx) {
+  var li = focusIdx;
+  var l  = lojas[li];
+  var pc = pillCls(l.nivel);
   var html = '';
-
   html += '<div class="card-list">';
-
-  lojas.forEach(function(l, li) {
-    var pc = pillCls(l.nivel);
 
     /* History panel */
     var histRows = l.historico.map(function(h) {
@@ -576,115 +936,62 @@ function render(lojas) {
     html += '<div class="panel" id="ps-'+li+'"><div class="panel-body"><div class="panel-title">Secções · '+l.seccoes.length+'</div>'+secHtml+'</div></div>';
 
     html += '</div>'; /* loja-card */
-  });
 
   html += '</div>'; /* card-list */
 
-  /* Legend note below cards */
+  /* Legend */
   html += '<div class="legend-bar" style="margin-top:14px;margin-bottom:0">';
   html += '<div class="legend-item"><div class="legend-dot" style="background:var(--bar-blue)"></div><span class="legend-label">P</span> = Tarefas Programadas</div>';
   html += '<div class="legend-sep"></div>';
   html += '<div class="legend-item"><div class="legend-dot" style="background:var(--bar-orange)"></div><span class="legend-label">NP</span> = Tarefas Não Programadas</div>';
   html += '</div>';
 
-  /* Bottom */
-  html += '<div class="bottom-bar">';
-  html += '<div class="level-legend"><div class="level-legend-title">Classificação de Nível</div><div class="level-items">';
-  html += '<div class="level-item"><div class="level-dot pill-n1">N1</div><span>0–20% programadas fechadas</span></div>';
-  html += '<div class="level-item"><div class="level-dot pill-n2">N2</div><span>21–40% fechadas</span></div>';
-  html += '<div class="level-item"><div class="level-dot pill-n3">N3</div><span>41%+ fechadas</span></div>';
-  html += '</div></div>';
-  html += '<div class="action-banner"><div class="action-icon">⚠</div><div><div class="action-title">Ação Recomendada</div><div class="action-desc">Contactar urgentemente responsáveis das lojas N1.</div></div></div>';
-  html += '</div>';
-
   document.getElementById('app').innerHTML = html;
 
-  /* Charts */
-  lojas.forEach(function(l, li) {
-    var el = document.getElementById('pnp-'+li);
-    if (el && l.historico.length>0) {
-      var sems=[], pp=[], np=[];
-      l.historico.forEach(function(h) {
-        sems.push(h.Semana||'');
-        var pT=Number(h['P Total'])||0, pF=Number(h['P Fechado'])||0;
-        var nT=Number(h['NP Total'])||0, nF=Number(h['NP Fechado'])||0;
-        pp.push(pT>0?parseFloat((pF/pT*100).toFixed(1)):0);
-        np.push(nT>0?parseFloat((nF/nT*100).toFixed(1)):0);
-      });
-      charts['pnp-'+li] = new Chart(el.getContext('2d'), {
-        type:'bar', plugins:[ChartDataLabels],
-        data:{ labels:sems, datasets:[
-          {
-            label:'% de Programadas Fechadas',
-            data:pp,
-            backgroundColor:'rgba(59,63,216,.75)',
-            borderRadius:3,borderWidth:0
-          },
-          {
-            label:'% de Não Programadas Fechadas',
-            data:np,
-            backgroundColor:'rgba(232,146,74,.8)',
-            borderRadius:3,borderWidth:0
-          }
-        ]},
-        options:{
-          indexAxis:'y',responsive:true,maintainAspectRatio:false,
-          layout:{padding:{right:56}},
-          plugins:{
-            datalabels:{
-              anchor:'end',align:'right',
-              formatter:function(v){ return v+'%'; },
-              font:{size:11,weight:'700'},
-              color:'#3a3835'
-            },
-            legend:{
-              position:'top',
-              labels:{
-                font:{size:12,weight:'500'},
-                color:'#3a3835',
-                padding:16,
-                usePointStyle:true,
-                pointStyleWidth:10
-              }
-            },
-            tooltip:{
-              callbacks:{
-                title:function(items){ return 'Semana: '+items[0].label; },
-                label:function(c){
-                  var name = c.dataset.label;
-                  return ' '+name+': '+c.parsed.x+'%';
-                }
-              },
-              titleFont:{size:12,weight:'600'},
-              bodyFont:{size:12},
-              padding:10
-            }
-          },
-          scales:{
-            x:{
-              beginAtZero:true,max:100,
-              title:{display:true,text:'Percentagem de tarefas fechadas (%)',color:'#9c9a95',font:{size:10,weight:'600'}},
-              ticks:{color:'#9c9a95',font:{size:10},callback:function(v){return v+'%';}},
-              grid:{color:'rgba(0,0,0,.04)'}
-            },
-            y:{ticks:{color:'#3a3835',font:{size:10,weight:'500'}},grid:{display:false}}
-          }
+  /* Charts — only for this loja */
+  var el = document.getElementById('pnp-'+li);
+  if (el && l.historico.length>0) {
+    var sems=[], pp=[], np=[];
+    l.historico.forEach(function(h) {
+      sems.push(h.Semana||'');
+      var pT=Number(h['P Total'])||0, pF=Number(h['P Fechado'])||0;
+      var nT=Number(h['NP Total'])||0, nF=Number(h['NP Fechado'])||0;
+      pp.push(pT>0?parseFloat((pF/pT*100).toFixed(1)):0);
+      np.push(nT>0?parseFloat((nF/nT*100).toFixed(1)):0);
+    });
+    charts['pnp-'+li] = new Chart(el.getContext('2d'), {
+      type:'bar', plugins:[ChartDataLabels],
+      data:{ labels:sems, datasets:[
+        { label:'% de Programadas Fechadas', data:pp, backgroundColor:'rgba(59,63,216,.75)', borderRadius:3, borderWidth:0 },
+        { label:'% de Não Programadas Fechadas', data:np, backgroundColor:'rgba(232,146,74,.8)', borderRadius:3, borderWidth:0 }
+      ]},
+      options:{
+        indexAxis:'y', responsive:true, maintainAspectRatio:false,
+        layout:{padding:{right:56}},
+        plugins:{
+          datalabels:{ anchor:'end', align:'right', formatter:function(v){ return v+'%'; }, font:{size:11,weight:'700'}, color:'#3a3835' },
+          legend:{ position:'top', labels:{ font:{size:12,weight:'500'}, color:'#3a3835', padding:16, usePointStyle:true, pointStyleWidth:10 } },
+          tooltip:{ callbacks:{ title:function(items){ return 'Semana: '+items[0].label; }, label:function(c){ return ' '+c.dataset.label+': '+c.parsed.x+'%'; } }, titleFont:{size:12,weight:'600'}, bodyFont:{size:12}, padding:10 }
+        },
+        scales:{
+          x:{ beginAtZero:true, max:100, title:{display:true,text:'Percentagem de tarefas fechadas (%)',color:'#9c9a95',font:{size:10,weight:'600'}}, ticks:{color:'#9c9a95',font:{size:10},callback:function(v){return v+'%';}}, grid:{color:'rgba(0,0,0,.04)'} },
+          y:{ ticks:{color:'#3a3835',font:{size:10,weight:'500'}}, grid:{display:false} }
         }
-      });
-    }
-    l.seccoes.forEach(function(s,si) {
-      var sel=document.getElementById('sc-'+li+'-'+si);
-      if (!sel) return;
-      var pP=s.pT>0?parseFloat((s.pF/s.pT*100).toFixed(1)):0;
-      var pN=s.nT>0?parseFloat((s.nF/s.nT*100).toFixed(1)):0;
-      charts['sc-'+li+'-'+si]=new Chart(sel.getContext('2d'),{
-        type:'bar',plugins:[ChartDataLabels],
-        data:{labels:['Programadas','Não Prog.'],datasets:[{data:[pP,pN],backgroundColor:['rgba(59,63,216,.75)','rgba(232,146,74,.8)'],borderRadius:3,borderWidth:0}]},
-        options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,layout:{padding:{right:42}},
-          plugins:{datalabels:{anchor:'end',align:'right',formatter:function(v){return v+'%';},font:{size:11,weight:'600'},color:'#3a3835'},legend:{display:false}},
-          scales:{x:{beginAtZero:true,max:100,display:false},y:{ticks:{font:{size:11,weight:'500'},color:'#3a3835'},grid:{display:false}}}
-        }
-      });
+      }
+    });
+  }
+  l.seccoes.forEach(function(s,si) {
+    var sel=document.getElementById('sc-'+li+'-'+si);
+    if (!sel) return;
+    var pP=s.pT>0?parseFloat((s.pF/s.pT*100).toFixed(1)):0;
+    var pN=s.nT>0?parseFloat((s.nF/s.nT*100).toFixed(1)):0;
+    charts['sc-'+li+'-'+si]=new Chart(sel.getContext('2d'),{
+      type:'bar', plugins:[ChartDataLabels],
+      data:{labels:['Programadas','Não Prog.'],datasets:[{data:[pP,pN],backgroundColor:['rgba(59,63,216,.75)','rgba(232,146,74,.8)'],borderRadius:3,borderWidth:0}]},
+      options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,layout:{padding:{right:42}},
+        plugins:{datalabels:{anchor:'end',align:'right',formatter:function(v){return v+'%';},font:{size:11,weight:'600'},color:'#3a3835'},legend:{display:false}},
+        scales:{x:{beginAtZero:true,max:100,display:false},y:{ticks:{font:{size:11,weight:'500'},color:'#3a3835'},grid:{display:false}}}
+      }
     });
   });
 }
