@@ -148,6 +148,39 @@ body {
   gap: 2px;
 }
 .metric-group:last-child { border-right: none; }
+.metric-group.is-total {
+  background: #f0f2fb;
+}
+.metric-group.is-total .mg-val { color: var(--bar-blue); }
+.metric-group.is-total-np {
+  background: #fdf3eb;
+}
+.metric-group.is-total-np .mg-val { color: var(--bar-orange); }
+
+/* bold separator between P group and NP group */
+.col-metrics-sep {
+  width: 2px;
+  background: var(--line-2);
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.col-metrics-sep::before {
+  content: 'NP';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--line-2);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  color: var(--ink-4);
+  padding: 3px 4px;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+
 .metric-group-sep {
   width: 1px; background: var(--line); align-self: stretch; flex-shrink: 0;
   margin: 0 0;
@@ -159,11 +192,6 @@ body {
 }
 .mg-val { font-size: 20px; font-weight: 600; color: var(--ink); line-height: 1; }
 .mg-sub { font-size: 11px; color: var(--ink-4); margin-top: 1px; }
-
-/* separator between P and NP groups */
-.col-sep {
-  width: 1px; background: var(--line-2); align-self: stretch; flex-shrink: 0;
-}
 
 /* progress + actions column */
 .col-right {
@@ -445,12 +473,42 @@ function render(lojas) {
     var histRows = l.historico.map(function(h) {
       var hpT=Number(h['P Total'])||0,hpF=Number(h['P Fechado'])||0;
       var hnT=Number(h['NP Total'])||0,hnF=Number(h['NP Fechado'])||0;
-      return '<tr><td>'+(h.Semana||'—')+'</td><td>'+(hpT-hpF)+'</td><td>'+hpF+'</td><td>'+(hnT-hnF)+'</td><td>'+hnF+'</td></tr>';
+      var hpPct = hpT>0 ? (hpF/hpT*100).toFixed(1) : '0.0';
+      var hnPct = hnT>0 ? (hnF/hnT*100).toFixed(1) : '0.0';
+      return '<tr>'
+        +'<td>'+(h.Semana||'—')+'</td>'
+        +'<td>'+fmt(hpT)+'</td>'
+        +'<td>'+fmt(hpT-hpF)+'</td>'
+        +'<td>'+fmt(hpF)+'</td>'
+        +'<td style="color:var(--bar-blue);font-weight:700">'+hpPct+'%</td>'
+        +'<td>'+fmt(hnT)+'</td>'
+        +'<td>'+fmt(hnT-hnF)+'</td>'
+        +'<td>'+fmt(hnF)+'</td>'
+        +'<td style="color:var(--bar-orange);font-weight:700">'+hnPct+'%</td>'
+        +'</tr>';
     }).join('');
     var chartH = Math.max(180, l.historico.length*58+80);
+
     var histHtml = l.historico.length>0
-      ? '<div class="chart-wrap" style="height:'+chartH+'px;margin-bottom:20px"><canvas id="pnp-'+li+'"></canvas></div>'
-        +'<div style="overflow-x:auto"><table class="dtable"><thead><tr><th>Semana</th><th>P Abertas</th><th>P Fechadas</th><th>NP Abertas</th><th>NP Fechadas</th></tr></thead><tbody>'+histRows+'</tbody></table></div>'
+      ? '<div style="margin-bottom:8px">'
+        + '<div style="font-size:10px;font-weight:700;letter-spacing:0.6px;text-transform:uppercase;color:#9c9a95;margin-bottom:6px">Gráfico — % de tarefas fechadas por semana (Programadas vs Não Programadas)</div>'
+        + '<div class="chart-wrap" style="height:'+chartH+'px;margin-bottom:20px"><canvas id="pnp-'+li+'"></canvas></div>'
+        + '</div>'
+        + '<div style="font-size:10px;font-weight:700;letter-spacing:0.6px;text-transform:uppercase;color:#9c9a95;margin-bottom:8px">Tabela de valores — Programadas (P) e Não Programadas (NP)</div>'
+        + '<div style="overflow-x:auto"><table class="dtable">'
+        + '<thead><tr>'
+        + '<th>Semana</th>'
+        + '<th style="background:#f0f2fb;color:var(--bar-blue)">P Total</th>'
+        + '<th>P Abertas</th>'
+        + '<th>P Fechadas</th>'
+        + '<th style="color:var(--bar-blue)">% P Fechadas</th>'
+        + '<th style="background:#fdf3eb;color:var(--bar-orange)">NP Total</th>'
+        + '<th>NP Abertas</th>'
+        + '<th>NP Fechadas</th>'
+        + '<th style="color:var(--bar-orange)">% NP Fechadas</th>'
+        + '</tr></thead>'
+        + '<tbody>'+histRows+'</tbody>'
+        + '</table></div>'
       : '<p style="color:#9c9a95;font-size:13px">Sem dados históricos.</p>';
 
     /* Sections panel */
@@ -473,16 +531,22 @@ function render(lojas) {
     /* Metrics */
     html += '<div class="col-metrics">';
     var groups = [
-      {label:'P Total',   val:fmt(l.pT)},
-      {label:'P Abertas', val:fmt(l.pA)},
-      {label:'P Fechadas',val:fmt(l.pF)},
-      {label:'NP Total',  val:fmt(l.nT)},
-      {label:'NP Abertas',val:fmt(l.nA)},
-      {label:'NP Fechadas',val:fmt(l.nF)}
+      {label:'P Total',    val:fmt(l.pT), cls:'is-total'},
+      {label:'P Abertas',  val:fmt(l.pA), cls:''},
+      {label:'P Fechadas', val:fmt(l.pF), cls:''}
     ];
-    groups.forEach(function(g, gi) {
-      if (gi===3) html += '<div style="width:1px;background:var(--line-2);align-self:stretch;flex-shrink:0"></div>';
-      html += '<div class="metric-group"><div class="mg-label">'+g.label+'</div><div class="mg-val">'+g.val+'</div></div>';
+    groups.forEach(function(g) {
+      html += '<div class="metric-group '+g.cls+'"><div class="mg-label">'+g.label+'</div><div class="mg-val">'+g.val+'</div></div>';
+    });
+    /* Bold separator P | NP */
+    html += '<div class="col-metrics-sep"></div>';
+    var groupsNP = [
+      {label:'NP Total',    val:fmt(l.nT), cls:'is-total-np'},
+      {label:'NP Abertas',  val:fmt(l.nA), cls:''},
+      {label:'NP Fechadas', val:fmt(l.nF), cls:''}
+    ];
+    groupsNP.forEach(function(g) {
+      html += '<div class="metric-group '+g.cls+'"><div class="mg-label">'+g.label+'</div><div class="mg-val">'+g.val+'</div></div>';
     });
     html += '</div>';
 
@@ -550,14 +614,61 @@ function render(lojas) {
       charts['pnp-'+li] = new Chart(el.getContext('2d'), {
         type:'bar', plugins:[ChartDataLabels],
         data:{ labels:sems, datasets:[
-          {label:'Programadas (%)',data:pp,backgroundColor:'rgba(59,63,216,.75)',borderRadius:3,borderWidth:0},
-          {label:'Não Prog. (%)',data:np,backgroundColor:'rgba(232,146,74,.8)',borderRadius:3,borderWidth:0}
+          {
+            label:'% de Programadas Fechadas',
+            data:pp,
+            backgroundColor:'rgba(59,63,216,.75)',
+            borderRadius:3,borderWidth:0
+          },
+          {
+            label:'% de Não Programadas Fechadas',
+            data:np,
+            backgroundColor:'rgba(232,146,74,.8)',
+            borderRadius:3,borderWidth:0
+          }
         ]},
-        options:{ indexAxis:'y',responsive:true,maintainAspectRatio:false,layout:{padding:{right:52}},
-          plugins:{ datalabels:{anchor:'end',align:'right',formatter:function(v){return v+'%';},font:{size:11,weight:'600'},color:'#3a3835'},
-            legend:{position:'top',labels:{font:{size:11},color:'#3a3835',padding:10,usePointStyle:true}} },
-          scales:{ x:{beginAtZero:true,max:100,ticks:{color:'#9c9a95',font:{size:10}},grid:{color:'rgba(0,0,0,.04)'}},
-            y:{ticks:{color:'#3a3835',font:{size:10,weight:'500'}},grid:{display:false}} }
+        options:{
+          indexAxis:'y',responsive:true,maintainAspectRatio:false,
+          layout:{padding:{right:56}},
+          plugins:{
+            datalabels:{
+              anchor:'end',align:'right',
+              formatter:function(v){ return v+'%'; },
+              font:{size:11,weight:'700'},
+              color:'#3a3835'
+            },
+            legend:{
+              position:'top',
+              labels:{
+                font:{size:12,weight:'500'},
+                color:'#3a3835',
+                padding:16,
+                usePointStyle:true,
+                pointStyleWidth:10
+              }
+            },
+            tooltip:{
+              callbacks:{
+                title:function(items){ return 'Semana: '+items[0].label; },
+                label:function(c){
+                  var name = c.dataset.label;
+                  return ' '+name+': '+c.parsed.x+'%';
+                }
+              },
+              titleFont:{size:12,weight:'600'},
+              bodyFont:{size:12},
+              padding:10
+            }
+          },
+          scales:{
+            x:{
+              beginAtZero:true,max:100,
+              title:{display:true,text:'Percentagem de tarefas fechadas (%)',color:'#9c9a95',font:{size:10,weight:'600'}},
+              ticks:{color:'#9c9a95',font:{size:10},callback:function(v){return v+'%';}},
+              grid:{color:'rgba(0,0,0,.04)'}
+            },
+            y:{ticks:{color:'#3a3835',font:{size:10,weight:'500'}},grid:{display:false}}
+          }
         }
       });
     }
