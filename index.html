@@ -818,6 +818,8 @@ function renderHomeTable(lojas) {
 
 
 
+function pillCls(n) { return n===1?'pill-n1':n===2?'pill-n2':'pill-n3'; }
+
 function fmt(n) {
   return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 }
@@ -1001,6 +1003,9 @@ function svgClock() {
 }
 function svgFolder() {
   return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;flex-shrink:0"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>';
+}
+function svgArrow() {
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;flex-shrink:0"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
 }
 </script>
 </body>
