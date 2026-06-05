@@ -412,82 +412,44 @@ body {
   display: inline-flex; align-items: center;
   padding: 2px 7px; border-radius: 99px;
   background: #dcfce7; color: #16a34a;
-  font-size: 9.5px; font-weight: 700; letter-spacing: 0.3px;
-  white-space: nowrap;
+  font-size: 11px; font-weight: 600;
 }
 
-/* mini progress in home table */
-.mini-prog { width: 100%; display: flex; flex-direction: column; gap: 5px; }
+.mini-prog { display: flex; flex-direction: column; gap: 4px; }
 .mini-row { display: flex; align-items: center; gap: 6px; }
-.mini-track { flex: 1; height: 5px; background: var(--bar-track); border-radius: 99px; overflow: hidden; }
+.mini-track { height: 4px; border-radius: 99px; background: var(--bar-track); flex: 1; overflow: hidden; }
 .mini-fill { height: 100%; border-radius: 99px; }
-.mini-pct { font-size: 11px; font-weight: 700; min-width: 32px; text-align: right; }
+.mini-pct { font-size: 10px; font-weight: 700; min-width: 28px; text-align: right; }
 
-/* detalhe button in home table */
-.btn-detail {
-  display: inline-flex; align-items: center; gap: 5px;
-  padding: 6px 14px; border-radius: 7px;
-  border: 1px solid var(--line-2); background: #fff;
-  font-size: 12px; font-weight: 500; color: var(--ink-2);
-  cursor: pointer; font-family: 'DM Sans', sans-serif;
-  transition: all 0.15s; white-space: nowrap;
-}
-.btn-detail:hover { background: var(--ink); border-color: var(--ink); color: #fff; }
-.btn-detail svg { width: 12px; height: 12px; }
+.rank-td { padding: 0; }
+.level-td { display: none; }
+.id-td { }
+.metrics-td { }
+.prog-td { }
+.new-td { }
 
-@media (max-width: 800px) {
-  .ht-head { display: none; }
-  .ht-row {
-    grid-template-columns: 44px 1fr;
-    grid-template-rows: auto auto auto;
-    gap: 0;
-  }
-  .ht-td { min-height: auto; padding: 10px 12px; }
-  .ht-td.rank-td { grid-row: 1/4; border-right: 1px solid var(--line); flex-direction: column; gap: 4px; }
-  .ht-td.id-td   { grid-column: 2; grid-row: 1; border-right: none; border-bottom: 1px solid var(--line); justify-content: flex-start; }
-  .ht-td.metrics-td { grid-column: 2; grid-row: 2; border-right: none; border-bottom: 1px solid var(--line); gap: 12px; flex-wrap: wrap; }
-  .ht-td.prog-td  { grid-column: 2; grid-row: 3; border-right: none; }
-  .ht-td.level-td, .ht-td.new-td, .ht-td.act-td { display: none; }
-  .home-stats { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 1024px) {
+  .ht-head { grid-template-columns: 52px 56px 140px 1fr 1fr 100px 80px; }
+  .ht-row { grid-template-columns: 52px 56px 140px 1fr 1fr 100px 80px; }
+  .level-td { display: flex; }
 }
 
+@media (max-width: 768px) {
+  .ht-head { grid-template-columns: 40px 120px 1fr 1fr 80px; }
+  .ht-row { grid-template-columns: 40px 120px 1fr 1fr 80px; }
+  .ht-th, .ht-td { padding: 8px 10px; font-size: 11px; }
+  .rank-td { display: none; }
+  .level-td { display: flex; }
+  .metrics-td { display: none; }
+  .prog-td { display: none; }
+  .new-td { display: none; }
+}
 
-/* ── MOBILE ── */
-@media (max-width: 800px) {
-  .header { padding: 0 16px; }
-  .main { padding: 16px 12px 48px; }
-
-  .card-main {
-    grid-template-columns: 48px 1fr;
-    grid-template-rows: auto auto auto;
-  }
-  .col-rank {
-    grid-row: 1 / 4; border-right: 1px solid var(--line);
-    align-self: stretch;
-  }
-  .col-id {
-    grid-column: 2; grid-row: 1;
-    border-right: none; border-bottom: 1px solid var(--line);
-    padding: 14px 16px 12px;
-  }
-  .col-metrics {
-    grid-column: 2; grid-row: 2;
-    border-right: none; border-bottom: 1px solid var(--line);
-    flex-wrap: wrap;
-  }
-  .metric-group { min-width: 60px; padding: 10px 10px; }
-  .mg-val { font-size: 16px; }
-  .col-right {
-    grid-column: 2; grid-row: 3;
-    min-width: 0; padding: 12px 14px;
-    flex-direction: column; align-items: stretch; gap: 12px;
-  }
-  .actions-col { flex-direction: row; }
-  .btn-card { flex: 1; justify-content: center; }
-  .panel-body { padding: 16px; }
-  .sec-grid { grid-template-columns: 1fr; }
-  .bottom-bar { flex-direction: column; }
-  .level-items { flex-direction: column; gap: 8px; }
+.loading {
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--ink-4);
+  font-size: 14px;
 }
 </style>
 </head>
@@ -495,10 +457,6 @@ body {
 
 <header class="header">
   <div class="header-left">
-    <button class="btn-back" id="btn-back" onclick="goHome()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-      Voltar
-    </button>
     <div class="header-icon">
       <svg viewBox="0 0 24 24"><rect x="3" y="13" width="4" height="8" rx="1"/><rect x="10" y="9" width="4" height="12" rx="1"/><rect x="17" y="5" width="4" height="16" rx="1"/></svg>
     </div>
@@ -707,9 +665,9 @@ function renderHome(lojas, ultima, penultima) {
   html += '<div class="ht-th">#</div>';
   html += '<div class="ht-th">Nível</div>';
   html += '<div class="ht-th left">Loja</div>';
-  html += '<div class="ht-th">P Tarefas</div>';
-  html += '<div class="ht-th">NP Tarefas</div>';
-  html += '<div class="ht-th">% Fechadas</div>';
+  html += '<div class="ht-th">Tarefas Programadas</div>';
+  html += '<div class="ht-th">Tarefas Não Programadas</div>';
+  html += '<div class="ht-th">% Fechadas (P vs NP)</div>';
   html += '<div class="ht-th">Estado</div>';
   html += '<div class="ht-th">Detalhe</div>';
   html += '</div>';
@@ -786,7 +744,7 @@ function renderHomeTable(lojas) {
       html += '<div style="font-size:12px;color:var(--ink-3)">'+fmt(l.nA)+' abertas · '+fmt(l.nF)+' fechadas</div>';
       html += '</div>';
 
-      /* progress */
+      /* progress - COMPARAÇÃO P vs NP */
       html += '<div class="ht-td prog-td"><div class="mini-prog">';
       html += '<div class="mini-row">'
         +'<span style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.4px;color:var(--ink-4);min-width:20px">P</span>'
@@ -806,8 +764,8 @@ function renderHomeTable(lojas) {
       html += '</div>';
 
       /* detail button */
-      html += '<div class="ht-td act-td" onclick="event.stopPropagation()">';
-      html += '<button class="btn-detail" onclick="goDetail('+li+')">Detalhe '+svgArrow()+'</button>';
+      html += '<div class="ht-td">';
+      html += '<button class="btn-card" onclick="goDetail('+li+');event.stopPropagation();">'+svgArrow()+'Ver</button>';
       html += '</div>';
 
       html += '</div>';
