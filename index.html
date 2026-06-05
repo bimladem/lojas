@@ -165,21 +165,6 @@ body {
   flex-shrink: 0;
   position: relative;
 }
-.col-metrics-sep::before {
-  content: 'NP';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: var(--line-2);
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: 0.4px;
-  color: var(--ink-4);
-  padding: 3px 4px;
-  border-radius: 3px;
-  white-space: nowrap;
-}
 
 .metric-group-sep {
   width: 1px; background: var(--line); align-self: stretch; flex-shrink: 0;
@@ -336,6 +321,7 @@ body {
   border-radius: 14px; padding: 20px 20px 16px;
   box-shadow: var(--shadow);
   display: flex; flex-direction: column; gap: 6px;
+  text-align: center; align-items: center; justify-content: center;
 }
 .stat-card-label {
   font-size: 12px; font-weight: 700; letter-spacing: 0.7px;
@@ -377,7 +363,7 @@ body {
 }
 .ht-head {
   display: grid;
-  grid-template-columns: 52px 56px 190px 1fr 1fr 130px 100px 120px;
+  grid-template-columns: 52px 190px 1fr 1fr 130px 100px 120px;
   background: #f8f8fa; border-bottom: 1px solid var(--line);
 }
 .ht-th {
@@ -390,7 +376,7 @@ body {
 
 .ht-row {
   display: grid;
-  grid-template-columns: 52px 56px 190px 1fr 1fr 130px 100px 120px;
+  grid-template-columns: 52px 190px 1fr 1fr 130px 100px 120px;
   border-bottom: 1px solid var(--line);
   transition: background 0.12s;
   cursor: pointer;
@@ -412,82 +398,33 @@ body {
   display: inline-flex; align-items: center;
   padding: 2px 7px; border-radius: 99px;
   background: #dcfce7; color: #16a34a;
-  font-size: 9.5px; font-weight: 700; letter-spacing: 0.3px;
-  white-space: nowrap;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.3px;
 }
 
-/* mini progress in home table */
-.mini-prog { width: 100%; display: flex; flex-direction: column; gap: 5px; }
-.mini-row { display: flex; align-items: center; gap: 6px; }
-.mini-track { flex: 1; height: 5px; background: var(--bar-track); border-radius: 99px; overflow: hidden; }
-.mini-fill { height: 100%; border-radius: 99px; }
+.mini-prog { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+.mini-row { display: flex; align-items: center; gap: 8px; }
+.mini-track { flex: 1; height: 4px; border-radius: 4px; background: #eee; overflow: hidden; }
+.mini-fill { height: 100%; border-radius: 4px; }
 .mini-pct { font-size: 11px; font-weight: 700; min-width: 32px; text-align: right; }
 
-/* detalhe button in home table */
 .btn-detail {
-  display: inline-flex; align-items: center; gap: 5px;
-  padding: 6px 14px; border-radius: 7px;
-  border: 1px solid var(--line-2); background: #fff;
-  font-size: 12px; font-weight: 500; color: var(--ink-2);
-  cursor: pointer; font-family: 'DM Sans', sans-serif;
-  transition: all 0.15s; white-space: nowrap;
+  padding: 6px 12px; border-radius: 6px; border: 1px solid var(--line-2);
+  background: #fff; font-size: 12px; font-weight: 600; color: var(--ink-2);
+  cursor: pointer; display: flex; align-items: center; gap: 5px;
+  transition: all 0.1s;
 }
-.btn-detail:hover { background: var(--ink); border-color: var(--ink); color: #fff; }
+.btn-detail:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
 .btn-detail svg { width: 12px; height: 12px; }
 
-@media (max-width: 800px) {
-  .ht-head { display: none; }
-  .ht-row {
-    grid-template-columns: 44px 1fr;
-    grid-template-rows: auto auto auto;
-    gap: 0;
-  }
-  .ht-td { min-height: auto; padding: 10px 12px; }
-  .ht-td.rank-td { grid-row: 1/4; border-right: 1px solid var(--line); flex-direction: column; gap: 4px; }
-  .ht-td.id-td   { grid-column: 2; grid-row: 1; border-right: none; border-bottom: 1px solid var(--line); justify-content: flex-start; }
-  .ht-td.metrics-td { grid-column: 2; grid-row: 2; border-right: none; border-bottom: 1px solid var(--line); gap: 12px; flex-wrap: wrap; }
-  .ht-td.prog-td  { grid-column: 2; grid-row: 3; border-right: none; }
-  .ht-td.level-td, .ht-td.new-td, .ht-td.act-td { display: none; }
-  .home-stats { grid-template-columns: repeat(2, 1fr); }
+.loading { padding: 60px; text-align: center; font-size: 15px; color: var(--ink-4); font-weight: 500; }
+
+@media (max-width: 1100px) {
+  .ht-head, .ht-row { grid-template-columns: 52px 160px 1fr 1fr 100px 100px; }
+  .prog-td, .level-td { display: none; }
 }
-
-
-/* ── MOBILE ── */
-@media (max-width: 800px) {
-  .header { padding: 0 16px; }
-  .main { padding: 16px 12px 48px; }
-
-  .card-main {
-    grid-template-columns: 48px 1fr;
-    grid-template-rows: auto auto auto;
-  }
-  .col-rank {
-    grid-row: 1 / 4; border-right: 1px solid var(--line);
-    align-self: stretch;
-  }
-  .col-id {
-    grid-column: 2; grid-row: 1;
-    border-right: none; border-bottom: 1px solid var(--line);
-    padding: 14px 16px 12px;
-  }
-  .col-metrics {
-    grid-column: 2; grid-row: 2;
-    border-right: none; border-bottom: 1px solid var(--line);
-    flex-wrap: wrap;
-  }
-  .metric-group { min-width: 60px; padding: 10px 10px; }
-  .mg-val { font-size: 16px; }
-  .col-right {
-    grid-column: 2; grid-row: 3;
-    min-width: 0; padding: 12px 14px;
-    flex-direction: column; align-items: stretch; gap: 12px;
-  }
-  .actions-col { flex-direction: row; }
-  .btn-card { flex: 1; justify-content: center; }
-  .panel-body { padding: 16px; }
-  .sec-grid { grid-template-columns: 1fr; }
-  .bottom-bar { flex-direction: column; }
-  .level-items { flex-direction: column; gap: 8px; }
+@media (max-width: 850px) {
+  .ht-head, .ht-row { grid-template-columns: 52px 1fr 1fr 80px; }
+  .metrics-td, .new-td { display: none; }
 }
 </style>
 </head>
@@ -496,7 +433,7 @@ body {
 <header class="header">
   <div class="header-left">
     <button class="btn-back" id="btn-back" onclick="goHome()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
       Voltar
     </button>
     <div class="header-icon">
@@ -541,10 +478,8 @@ function goDetail(lojaIdx) {
   var l = _lojas[lojaIdx];
   document.getElementById('header-title').textContent = (l.local || l.loja) + ' · ' + l.loja;
   document.getElementById('sub-info').textContent = 'Detalhe da loja · ' + _ultima;
-  // render detail if not yet rendered
-  if (!document.getElementById('ph-' + lojaIdx)) {
-    renderDetail(_lojas, lojaIdx);
-  }
+  // render detail
+  renderDetail(_lojas, lojaIdx);
   window.scrollTo(0, 0);
 }
 
@@ -654,7 +589,7 @@ fetch('dados.json?t=' + Date.now())
     renderHome(lojas, ultima, penultima);
   })
   .catch(function(e) {
-    document.getElementById('home-screen').innerHTML = '<div class="loading" style="color:#b83232">Erro ao carregar: ' + e.message + '</div>';
+    document.getElementById('home-screen').innerHTML = '<div class="loading" style="color:var(--n1)">Erro ao carregar: ' + e.message + '</div>';
   });
 
 /* ── HOME RENDER ── */
@@ -693,7 +628,7 @@ function renderHome(lojas, ultima, penultima) {
   }
   html += '<div class="filter-divider"></div>';
   html += '<button class="filter-btn" data-filter="n1" onclick="setFilter(\'n1\')">🔴 N1 ('+n1+')</button>';
-  html += '<button class="filter-btn" data-filter="n2" onclick="setFilter(\'n2\')">🟠 N2 ('+n2+')</button>';
+  html += '<button class="filter-btn" data-filter="n2" onclick="setFilter(\'n2\')">🟡 N2 ('+n2+')</button>';
   html += '<button class="filter-btn" data-filter="n3" onclick="setFilter(\'n3\')">🟢 N3 ('+n3+')</button>';
   html += '</div>';
 
@@ -701,7 +636,6 @@ function renderHome(lojas, ultima, penultima) {
   html += '<div class="home-table">';
   html += '<div class="ht-head">';
   html += '<div class="ht-th">#</div>';
-  html += '<div class="ht-th">Nível</div>';
   html += '<div class="ht-th left">Loja</div>';
   html += '<div class="ht-th">Tarefas Programadas</div>';
   html += '<div class="ht-th">Tarefas Não Programadas</div>';
@@ -761,9 +695,6 @@ function renderHomeTable(lojas) {
       html += '<div class="rank-pill '+pc+'">N'+l.nivel+'</div>';
       html += '</div>';
 
-      /* level badge (hidden on mobile, rank already has it) */
-      html += '<div class="ht-td level-td"><div class="rank-pill '+pc+'" style="font-size:11px;padding:3px 9px">N'+l.nivel+'</div></div>';
-
       /* identity */
       html += '<div class="ht-td left id-td" style="flex-direction:column;align-items:flex-start;gap:2px">';
       html += '<div style="font-weight:600;font-size:13.5px">'+(l.local||l.loja)+'</div>';
@@ -812,13 +743,8 @@ function renderHomeTable(lojas) {
   document.getElementById('ht-body').innerHTML = html;
 }
 
-
-
 function pillCls(n) { return n===1?'pill-n1':n===2?'pill-n2':'pill-n3'; }
-
-function fmt(n) {
-  return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-}
+function fmt(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.'); }
 
 function renderDetail(lojas, focusIdx) {
   var li = focusIdx;
@@ -827,7 +753,7 @@ function renderDetail(lojas, focusIdx) {
   var html = '';
   html += '<div class="card-list">';
 
-    /* History panel */
+    /* History panel content */
     var histRows = l.historico.map(function(h) {
       var hpT=Number(h['P Total'])||0,hpF=Number(h['P Fechado'])||0;
       var hnT=Number(h['NP Total'])||0,hnF=Number(h['NP Fechado'])||0;
@@ -869,7 +795,7 @@ function renderDetail(lojas, focusIdx) {
         + '</table></div>'
       : '<p style="color:#9c9a95;font-size:13px">Sem dados históricos.</p>';
 
-    /* Sections panel */
+    /* Sections panel content */
     var secHtml = l.seccoes.length>0
       ? '<div class="sec-grid">'+l.seccoes.map(function(s,si) {
           return '<div class="sec-card"><div class="sec-card-head">'+s.nome+'</div>'
@@ -896,7 +822,7 @@ function renderDetail(lojas, focusIdx) {
     groups.forEach(function(g) {
       html += '<div class="metric-group '+g.cls+'"><div class="mg-label">'+g.label+'</div><div class="mg-val">'+g.val+'</div></div>';
     });
-    /* Bold separator P | NP */
+    /* Separator without NP text */
     html += '<div class="col-metrics-sep"></div>';
     var groupsNP = [
       {label:'NP Total',    val:fmt(l.nT), cls:'is-total-np'},
@@ -946,62 +872,55 @@ function renderDetail(lojas, focusIdx) {
 
   document.getElementById('app').innerHTML = html;
 
-  /* Charts — only for this loja */
+  /* Charts */
   var el = document.getElementById('pnp-'+li);
   if (el && l.historico.length>0) {
     var sems=[], pp=[], np=[];
-    l.historico.forEach(function(h) {
-      sems.push(h.Semana||'');
-      var pT=Number(h['P Total'])||0, pF=Number(h['P Fechado'])||0;
-      var nT=Number(h['NP Total'])||0, nF=Number(h['NP Fechado'])||0;
-      pp.push(pT>0?parseFloat((pF/pT*100).toFixed(1)):0);
-      np.push(nT>0?parseFloat((nF/nT*100).toFixed(1)):0);
+    l.historico.forEach(function(h){
+      sems.push(h.Semana);
+      var tP=Number(h['P Total'])||0, fP=Number(h['P Fechado'])||0;
+      var tN=Number(h['NP Total'])||0, fN=Number(h['NP Fechado'])||0;
+      pp.push(tP>0?Math.round(fP/tP*100):0);
+      np.push(tN>0?Math.round(fN/tN*100):0);
     });
-    charts['pnp-'+li] = new Chart(el.getContext('2d'), {
-      type:'bar', plugins:[ChartDataLabels],
-      data:{ labels:sems, datasets:[
-        { label:'% de Programadas Fechadas', data:pp, backgroundColor:'rgba(59,63,216,.75)', borderRadius:3, borderWidth:0 },
-        { label:'% de Não Programadas Fechadas', data:np, backgroundColor:'rgba(232,146,74,.8)', borderRadius:3, borderWidth:0 }
-      ]},
-      options:{
-        indexAxis:'y', responsive:true, maintainAspectRatio:false,
-        layout:{padding:{right:56}},
-        plugins:{
-          datalabels:{ anchor:'end', align:'right', formatter:function(v){ return v+'%'; }, font:{size:11,weight:'700'}, color:'#3a3835' },
-          legend:{ position:'top', labels:{ font:{size:12,weight:'500'}, color:'#3a3835', padding:16, usePointStyle:true, pointStyleWidth:10 } },
-          tooltip:{ callbacks:{ title:function(items){ return 'Semana: '+items[0].label; }, label:function(c){ return ' '+c.dataset.label+': '+c.parsed.x+'%'; } }, titleFont:{size:12,weight:'600'}, bodyFont:{size:12}, padding:10 }
-        },
-        scales:{
-          x:{ beginAtZero:true, max:100, title:{display:true,text:'Percentagem de tarefas fechadas (%)',color:'#9c9a95',font:{size:10,weight:'600'}}, ticks:{color:'#9c9a95',font:{size:10},callback:function(v){return v+'%';}}, grid:{color:'rgba(0,0,0,.04)'} },
-          y:{ ticks:{color:'#3a3835',font:{size:10,weight:'500'}}, grid:{display:false} }
-        }
+    new Chart(el.getContext('2d'), {
+      type: 'line',
+      data: {
+        labels: sems,
+        datasets: [
+          { label:'% P Fechadas', data:pp, borderColor:'var(--bar-blue)', backgroundColor:'var(--bar-blue)', tension:0.3, borderWidth:3, pointRadius:4 },
+          { label:'% NP Fechadas', data:np, borderColor:'var(--bar-orange)', backgroundColor:'var(--bar-orange)', tension:0.3, borderWidth:3, pointRadius:4 }
+        ]
+      },
+      options: {
+        responsive:true, maintainAspectRatio:false,
+        plugins: { legend: { position:'top', labels:{ boxWidth:12, font:{size:11, weight:'600'} } } },
+        scales: { y: { min:0, max:100, ticks:{ callback:function(v){return v+'%';} } } }
       }
     });
   }
+
   l.seccoes.forEach(function(s,si) {
-    var sel=document.getElementById('sc-'+li+'-'+si);
+    var sel = document.getElementById('sc-'+li+'-'+si);
     if (!sel) return;
-    var pP=s.pT>0?parseFloat((s.pF/s.pT*100).toFixed(1)):0;
-    var pN=s.nT>0?parseFloat((s.nF/s.nT*100).toFixed(1)):0;
-    charts['sc-'+li+'-'+si]=new Chart(sel.getContext('2d'),{
-      type:'bar', plugins:[ChartDataLabels],
-      data:{labels:['Programadas','Não Prog.'],datasets:[{data:[pP,pN],backgroundColor:['rgba(59,63,216,.75)','rgba(232,146,74,.8)'],borderRadius:3,borderWidth:0}]},
-      options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,layout:{padding:{right:42}},
-        plugins:{datalabels:{anchor:'end',align:'right',formatter:function(v){return v+'%';},font:{size:11,weight:'600'},color:'#3a3835'},legend:{display:false}},
-        scales:{x:{beginAtZero:true,max:100,display:false},y:{ticks:{font:{size:11,weight:'500'},color:'#3a3835'},grid:{display:false}}}
+    new Chart(sel.getContext('2d'), {
+      type: 'bar',
+      data: {
+        labels: ['P Fechadas', 'NP Fechadas'],
+        datasets: [{
+          data: [s.pT>0?Math.round(s.pF/s.pT*100):0, s.nT>0?Math.round(s.nF/s.nT*100):0],
+          backgroundColor: ['var(--bar-blue)', 'var(--bar-orange)'],
+          borderRadius: 4
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: { x: { min: 0, max: 100, display: false }, y: { display: false } }
       }
     });
   });
-}
-
-function svgClock() {
-  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;flex-shrink:0"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>';
-}
-function svgFolder() {
-  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;flex-shrink:0"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>';
-}
-function svgArrow() {
-  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;flex-shrink:0"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
 }
 </script>
 </body>
