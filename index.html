@@ -18,11 +18,11 @@
   --paper-3: #f0f0f2;
   --line: #e8e8ec;
   --line-2: #d8d8de;
-  --n1: #b83232; --n1-bg: #fdf0f0;
-  --n2: #b87a32; --n2-bg: #fdf6ee;
+  --n1: #ff3b30; --n1-bg: #fff1f0;
+  --n2: #ffcc00; --n2-bg: #fffbeb;
   --n3: #2e7d52; --n3-bg: #eef6f2;
-  --bar-blue: #3b3fd8;
-  --bar-orange: #e8924a;
+  --bar-blue: #007aff;
+  --bar-orange: #ff9500;
   --bar-track: #e4e4e8;
   --btn-border: #d8d8de;
   --btn-text: #444;
@@ -165,21 +165,6 @@ body {
   flex-shrink: 0;
   position: relative;
 }
-.col-metrics-sep::before {
-  content: 'NP';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: var(--line-2);
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: 0.4px;
-  color: var(--ink-4);
-  padding: 3px 4px;
-  border-radius: 3px;
-  white-space: nowrap;
-}
 
 .metric-group-sep {
   width: 1px; background: var(--line); align-self: stretch; flex-shrink: 0;
@@ -303,7 +288,7 @@ body {
   flex: 2; min-width: 260px; background: #fff8f4; border: 1px solid #f0d8c8;
   border-radius: 12px; padding: 16px 20px; display: flex; align-items: center; gap: 14px;
 }
-.action-icon { width: 38px; height: 38px; border-radius: 9px; background: #e8924a; display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; }
+.action-icon { width: 38px; height: 38px; border-radius: 9px; background: #ff9500; display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; }
 .action-title { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
 .action-desc { font-size: 12px; color: var(--ink-3); line-height: 1.4; }
 
@@ -377,7 +362,7 @@ body {
 }
 .ht-head {
   display: grid;
-  grid-template-columns: 52px 56px 190px 1fr 1fr 130px 100px 120px;
+  grid-template-columns: 52px 190px 1fr 1fr 130px 100px 120px;
   background: #f8f8fa; border-bottom: 1px solid var(--line);
 }
 .ht-th {
@@ -390,7 +375,7 @@ body {
 
 .ht-row {
   display: grid;
-  grid-template-columns: 52px 56px 190px 1fr 1fr 130px 100px 120px;
+  grid-template-columns: 52px 190px 1fr 1fr 130px 100px 120px;
   border-bottom: 1px solid var(--line);
   transition: background 0.12s;
   cursor: pointer;
@@ -412,82 +397,33 @@ body {
   display: inline-flex; align-items: center;
   padding: 2px 7px; border-radius: 99px;
   background: #dcfce7; color: #16a34a;
-  font-size: 9.5px; font-weight: 700; letter-spacing: 0.3px;
-  white-space: nowrap;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.3px;
 }
 
-/* mini progress in home table */
-.mini-prog { width: 100%; display: flex; flex-direction: column; gap: 5px; }
-.mini-row { display: flex; align-items: center; gap: 6px; }
-.mini-track { flex: 1; height: 5px; background: var(--bar-track); border-radius: 99px; overflow: hidden; }
-.mini-fill { height: 100%; border-radius: 99px; }
+.mini-prog { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+.mini-row { display: flex; align-items: center; gap: 8px; }
+.mini-track { flex: 1; height: 4px; border-radius: 4px; background: #eee; overflow: hidden; }
+.mini-fill { height: 100%; border-radius: 4px; }
 .mini-pct { font-size: 11px; font-weight: 700; min-width: 32px; text-align: right; }
 
-/* detalhe button in home table */
 .btn-detail {
-  display: inline-flex; align-items: center; gap: 5px;
-  padding: 6px 14px; border-radius: 7px;
-  border: 1px solid var(--line-2); background: #fff;
-  font-size: 12px; font-weight: 500; color: var(--ink-2);
-  cursor: pointer; font-family: 'DM Sans', sans-serif;
-  transition: all 0.15s; white-space: nowrap;
+  padding: 6px 12px; border-radius: 6px; border: 1px solid var(--line-2);
+  background: #fff; font-size: 12px; font-weight: 600; color: var(--ink-2);
+  cursor: pointer; display: flex; align-items: center; gap: 5px;
+  transition: all 0.1s;
 }
-.btn-detail:hover { background: var(--ink); border-color: var(--ink); color: #fff; }
+.btn-detail:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
 .btn-detail svg { width: 12px; height: 12px; }
 
-@media (max-width: 800px) {
-  .ht-head { display: none; }
-  .ht-row {
-    grid-template-columns: 44px 1fr;
-    grid-template-rows: auto auto auto;
-    gap: 0;
-  }
-  .ht-td { min-height: auto; padding: 10px 12px; }
-  .ht-td.rank-td { grid-row: 1/4; border-right: 1px solid var(--line); flex-direction: column; gap: 4px; }
-  .ht-td.id-td   { grid-column: 2; grid-row: 1; border-right: none; border-bottom: 1px solid var(--line); justify-content: flex-start; }
-  .ht-td.metrics-td { grid-column: 2; grid-row: 2; border-right: none; border-bottom: 1px solid var(--line); gap: 12px; flex-wrap: wrap; }
-  .ht-td.prog-td  { grid-column: 2; grid-row: 3; border-right: none; }
-  .ht-td.level-td, .ht-td.new-td, .ht-td.act-td { display: none; }
-  .home-stats { grid-template-columns: repeat(2, 1fr); }
+.loading { padding: 60px; text-align: center; font-size: 15px; color: var(--ink-4); font-weight: 500; }
+
+@media (max-width: 1100px) {
+  .ht-head, .ht-row { grid-template-columns: 52px 160px 1fr 1fr 100px 100px; }
+  .prog-td, .level-td { display: none; }
 }
-
-
-/* ── MOBILE ── */
-@media (max-width: 800px) {
-  .header { padding: 0 16px; }
-  .main { padding: 16px 12px 48px; }
-
-  .card-main {
-    grid-template-columns: 48px 1fr;
-    grid-template-rows: auto auto auto;
-  }
-  .col-rank {
-    grid-row: 1 / 4; border-right: 1px solid var(--line);
-    align-self: stretch;
-  }
-  .col-id {
-    grid-column: 2; grid-row: 1;
-    border-right: none; border-bottom: 1px solid var(--line);
-    padding: 14px 16px 12px;
-  }
-  .col-metrics {
-    grid-column: 2; grid-row: 2;
-    border-right: none; border-bottom: 1px solid var(--line);
-    flex-wrap: wrap;
-  }
-  .metric-group { min-width: 60px; padding: 10px 10px; }
-  .mg-val { font-size: 16px; }
-  .col-right {
-    grid-column: 2; grid-row: 3;
-    min-width: 0; padding: 12px 14px;
-    flex-direction: column; align-items: stretch; gap: 12px;
-  }
-  .actions-col { flex-direction: row; }
-  .btn-card { flex: 1; justify-content: center; }
-  .panel-body { padding: 16px; }
-  .sec-grid { grid-template-columns: 1fr; }
-  .bottom-bar { flex-direction: column; }
-  .level-items { flex-direction: column; gap: 8px; }
+@media (max-width: 850px) {
+  .ht-head, .ht-row { grid-template-columns: 52px 1fr 1fr 80px; }
+  .metrics-td, .new-td { display: none; }
 }
 </style>
 </head>
@@ -496,7 +432,7 @@ body {
 <header class="header">
   <div class="header-left">
     <button class="btn-back" id="btn-back" onclick="goHome()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
       Voltar
     </button>
     <div class="header-icon">
@@ -654,7 +590,7 @@ fetch('dados.json?t=' + Date.now())
     renderHome(lojas, ultima, penultima);
   })
   .catch(function(e) {
-    document.getElementById('home-screen').innerHTML = '<div class="loading" style="color:#b83232">Erro ao carregar: ' + e.message + '</div>';
+    document.getElementById('home-screen').innerHTML = '<div class="loading" style="color:#ff3b30">Erro ao carregar: ' + e.message + '</div>';
   });
 
 /* ── HOME RENDER ── */
@@ -693,7 +629,7 @@ function renderHome(lojas, ultima, penultima) {
   }
   html += '<div class="filter-divider"></div>';
   html += '<button class="filter-btn" data-filter="n1" onclick="setFilter(\'n1\')">🔴 N1 ('+n1+')</button>';
-  html += '<button class="filter-btn" data-filter="n2" onclick="setFilter(\'n2\')">🟠 N2 ('+n2+')</button>';
+  html += '<button class="filter-btn" data-filter="n2" onclick="setFilter(\'n2\')">🟡 N2 ('+n2+')</button>';
   html += '<button class="filter-btn" data-filter="n3" onclick="setFilter(\'n3\')">🟢 N3 ('+n3+')</button>';
   html += '</div>';
 
@@ -701,7 +637,6 @@ function renderHome(lojas, ultima, penultima) {
   html += '<div class="home-table">';
   html += '<div class="ht-head">';
   html += '<div class="ht-th">#</div>';
-  html += '<div class="ht-th">Nível</div>';
   html += '<div class="ht-th left">Loja</div>';
   html += '<div class="ht-th">Tarefas Programadas</div>';
   html += '<div class="ht-th">Tarefas Não Programadas</div>';
@@ -761,9 +696,6 @@ function renderHomeTable(lojas) {
       html += '<div class="rank-pill '+pc+'">N'+l.nivel+'</div>';
       html += '</div>';
 
-      /* level badge (hidden on mobile, rank already has it) */
-      html += '<div class="ht-td level-td"><div class="rank-pill '+pc+'" style="font-size:11px;padding:3px 9px">N'+l.nivel+'</div></div>';
-
       /* identity */
       html += '<div class="ht-td left id-td" style="flex-direction:column;align-items:flex-start;gap:2px">';
       html += '<div style="font-weight:600;font-size:13.5px">'+(l.local||l.loja)+'</div>';
@@ -812,196 +744,103 @@ function renderHomeTable(lojas) {
   document.getElementById('ht-body').innerHTML = html;
 }
 
-
-
-function pillCls(n) { return n===1?'pill-n1':n===2?'pill-n2':'pill-n3'; }
-
-function fmt(n) {
-  return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+function pillCls(n) {
+  if (n===1) return 'pill-n1';
+  if (n===2) return 'pill-n2';
+  return 'pill-n3';
 }
+function fmt(n) { return n.toLocaleString('pt-PT'); }
 
-function renderDetail(lojas, focusIdx) {
-  var li = focusIdx;
-  var l  = lojas[li];
-  var pc = pillCls(l.nivel);
+function renderDetail(lojas, li) {
+  var l = lojas[li];
+  var app = document.getElementById('app');
   var html = '';
-  html += '<div class="card-list">';
 
-    /* History panel */
-    var histRows = l.historico.map(function(h) {
-      var hpT=Number(h['P Total'])||0,hpF=Number(h['P Fechado'])||0;
-      var hnT=Number(h['NP Total'])||0,hnF=Number(h['NP Fechado'])||0;
-      var hpPct = hpT>0 ? (hpF/hpT*100).toFixed(1) : '0.0';
-      var hnPct = hnT>0 ? (hnF/hnT*100).toFixed(1) : '0.0';
-      return '<tr>'
-        +'<td>'+(h.Semana||'—')+'</td>'
-        +'<td>'+fmt(hpT)+'</td>'
-        +'<td>'+fmt(hpT-hpF)+'</td>'
-        +'<td>'+fmt(hpF)+'</td>'
-        +'<td style="color:var(--bar-blue);font-weight:700">'+hpPct+'%</td>'
-        +'<td>'+fmt(hnT)+'</td>'
-        +'<td>'+fmt(hnT-hnF)+'</td>'
-        +'<td>'+fmt(hnF)+'</td>'
-        +'<td style="color:var(--bar-orange);font-weight:700">'+hnPct+'%</td>'
-        +'</tr>';
-    }).join('');
-    var chartH = Math.max(180, l.historico.length*58+80);
-
-    var histHtml = l.historico.length>0
-      ? '<div style="margin-bottom:8px">'
-        + '<div style="font-size:10px;font-weight:700;letter-spacing:0.6px;text-transform:uppercase;color:#9c9a95;margin-bottom:6px">Gráfico — % de tarefas fechadas por semana (Programadas vs Não Programadas)</div>'
-        + '<div class="chart-wrap" style="height:'+chartH+'px;margin-bottom:20px"><canvas id="pnp-'+li+'"></canvas></div>'
-        + '</div>'
-        + '<div style="font-size:10px;font-weight:700;letter-spacing:0.6px;text-transform:uppercase;color:#9c9a95;margin-bottom:8px">Tabela de valores — Programadas (P) e Não Programadas (NP)</div>'
-        + '<div style="overflow-x:auto"><table class="dtable">'
-        + '<thead><tr>'
-        + '<th>Semana</th>'
-        + '<th style="background:#f0f2fb;color:var(--bar-blue)">P Total</th>'
-        + '<th>P Abertas</th>'
-        + '<th>P Fechadas</th>'
-        + '<th style="color:var(--bar-blue)">% P Fechadas</th>'
-        + '<th style="background:#fdf3eb;color:var(--bar-orange)">NP Total</th>'
-        + '<th>NP Abertas</th>'
-        + '<th>NP Fechadas</th>'
-        + '<th style="color:var(--bar-orange)">% NP Fechadas</th>'
-        + '</tr></thead>'
-        + '<tbody>'+histRows+'</tbody>'
-        + '</table></div>'
-      : '<p style="color:#9c9a95;font-size:13px">Sem dados históricos.</p>';
-
-    /* Sections panel */
-    var secHtml = l.seccoes.length>0
-      ? '<div class="sec-grid">'+l.seccoes.map(function(s,si) {
-          return '<div class="sec-card"><div class="sec-card-head">'+s.nome+'</div>'
-            +'<div class="sec-card-body"><div style="height:72px;position:relative"><canvas id="sc-'+li+'-'+si+'"></canvas></div></div></div>';
-        }).join('')+'</div>'
-      : '<p style="color:#9c9a95;font-size:13px">Sem secções disponíveis.</p>';
-
-    html += '<div class="loja-card">';
-    html += '<div class="card-main">';
-
-    /* Rank */
-    html += '<div class="col-rank"><div class="rank-num">'+(li+1)+'</div><div class="rank-pill '+pc+'">N'+l.nivel+'</div></div>';
-
-    /* Identity */
-    html += '<div class="col-id"><div class="loja-nome">'+(l.local||l.loja)+'</div><div class="loja-code">'+l.loja+'</div></div>';
-
-    /* Metrics */
-    html += '<div class="col-metrics">';
-    var groups = [
-      {label:'P Total',    val:fmt(l.pT), cls:'is-total'},
-      {label:'P Abertas',  val:fmt(l.pA), cls:''},
-      {label:'P Fechadas', val:fmt(l.pF), cls:''}
-    ];
-    groups.forEach(function(g) {
-      html += '<div class="metric-group '+g.cls+'"><div class="mg-label">'+g.label+'</div><div class="mg-val">'+g.val+'</div></div>';
-    });
-    /* Bold separator P | NP */
-    html += '<div class="col-metrics-sep"></div>';
-    var groupsNP = [
-      {label:'NP Total',    val:fmt(l.nT), cls:'is-total-np'},
-      {label:'NP Abertas',  val:fmt(l.nA), cls:''},
-      {label:'NP Fechadas', val:fmt(l.nF), cls:''}
-    ];
-    groupsNP.forEach(function(g) {
-      html += '<div class="metric-group '+g.cls+'"><div class="mg-label">'+g.label+'</div><div class="mg-val">'+g.val+'</div></div>';
-    });
-    html += '</div>';
-
-    /* Right: progress + buttons */
-    html += '<div class="col-right">';
-    html += '<div class="progress-block">';
-    html += '<div class="progress-row">'
-      +'<div class="progress-label-row"><span class="prog-label">Programadas</span><span class="prog-pct">'+l.pctPFInt+'%</span></div>'
-      +'<div class="prog-track"><div class="prog-fill fill-blue" style="width:'+l.pctPFInt+'%"></div></div>'
-      +'</div>';
-    html += '<div class="progress-row">'
-      +'<div class="progress-label-row"><span class="prog-label">Não Prog.</span><span class="prog-pct">'+l.pctNFInt+'%</span></div>'
-      +'<div class="prog-track"><div class="prog-fill fill-orange" style="width:'+l.pctNFInt+'%"></div></div>'
-      +'</div>';
-    html += '</div>';
-
-    html += '<div class="actions-col">';
-    html += '<button class="btn-card" id="bh-'+li+'" onclick="toggleH('+li+')">'+svgClock()+'Histórico</button>';
-    html += '<button class="btn-card" id="bs-'+li+'" onclick="toggleS('+li+')">'+svgFolder()+'Secções</button>';
-    html += '</div>';
-    html += '</div>'; /* col-right */
-
-    html += '</div>'; /* card-main */
-
-    /* Panels */
-    html += '<div class="panel" id="ph-'+li+'"><div class="panel-body"><div class="panel-title">Evolução Histórica · '+l.loja+'</div>'+histHtml+'</div></div>';
-    html += '<div class="panel" id="ps-'+li+'"><div class="panel-body"><div class="panel-title">Secções · '+l.seccoes.length+'</div>'+secHtml+'</div></div>';
-
-    html += '</div>'; /* loja-card */
-
-  html += '</div>'; /* card-list */
-
-  /* Legend */
-  html += '<div class="legend-bar" style="margin-top:14px;margin-bottom:0">';
-  html += '<div class="legend-item"><div class="legend-dot" style="background:var(--bar-blue)"></div><span class="legend-label">P</span> = Tarefas Programadas</div>';
-  html += '<div class="legend-sep"></div>';
-  html += '<div class="legend-item"><div class="legend-dot" style="background:var(--bar-orange)"></div><span class="legend-label">NP</span> = Tarefas Não Programadas</div>';
+  // Main metrics card
+  html += '<div class="loja-card" style="margin-bottom:24px">';
+  html += '<div class="card-main">';
+  html += '<div class="col-rank"><div class="rank-num">'+(li+1)+'</div><div class="rank-pill '+pillCls(l.nivel)+'">N'+l.nivel+'</div></div>';
+  html += '<div class="col-id"><div class="loja-nome">'+(l.local||l.loja)+'</div><div class="loja-code">'+l.loja+'</div></div>';
+  html += '<div class="col-metrics">';
+  html += metricGroup('Programadas', l.pT, l.pA, l.pF, 'is-total');
+  html += '<div class="col-metrics-sep"></div>';
+  html += metricGroup('Não Programadas', l.nT, l.nA, l.nF, 'is-total-np');
+  html += '</div>';
+  html += '<div class="col-right">';
+  html += '<div class="progress-block">';
+  html += progressRow('Progresso Programadas', l.pctPFInt, 'fill-blue');
+  html += progressRow('Progresso Não Programadas', l.pctNFInt, 'fill-orange');
+  html += '</div>';
+  html += '</div>';
+  html += '</div>';
   html += '</div>';
 
-  document.getElementById('app').innerHTML = html;
-
-  /* Charts — only for this loja */
-  var el = document.getElementById('pnp-'+li);
-  if (el && l.historico.length>0) {
-    var sems=[], pp=[], np=[];
-    l.historico.forEach(function(h) {
-      sems.push(h.Semana||'');
-      var pT=Number(h['P Total'])||0, pF=Number(h['P Fechado'])||0;
-      var nT=Number(h['NP Total'])||0, nF=Number(h['NP Fechado'])||0;
-      pp.push(pT>0?parseFloat((pF/pT*100).toFixed(1)):0);
-      np.push(nT>0?parseFloat((nF/nT*100).toFixed(1)):0);
-    });
-    charts['pnp-'+li] = new Chart(el.getContext('2d'), {
-      type:'bar', plugins:[ChartDataLabels],
-      data:{ labels:sems, datasets:[
-        { label:'% de Programadas Fechadas', data:pp, backgroundColor:'rgba(59,63,216,.75)', borderRadius:3, borderWidth:0 },
-        { label:'% de Não Programadas Fechadas', data:np, backgroundColor:'rgba(232,146,74,.8)', borderRadius:3, borderWidth:0 }
-      ]},
-      options:{
-        indexAxis:'y', responsive:true, maintainAspectRatio:false,
-        layout:{padding:{right:56}},
-        plugins:{
-          datalabels:{ anchor:'end', align:'right', formatter:function(v){ return v+'%'; }, font:{size:11,weight:'700'}, color:'#3a3835' },
-          legend:{ position:'top', labels:{ font:{size:12,weight:'500'}, color:'#3a3835', padding:16, usePointStyle:true, pointStyleWidth:10 } },
-          tooltip:{ callbacks:{ title:function(items){ return 'Semana: '+items[0].label; }, label:function(c){ return ' '+c.dataset.label+': '+c.parsed.x+'%'; } }, titleFont:{size:12,weight:'600'}, bodyFont:{size:12}, padding:10 }
-        },
-        scales:{
-          x:{ beginAtZero:true, max:100, title:{display:true,text:'Percentagem de tarefas fechadas (%)',color:'#9c9a95',font:{size:10,weight:'600'}}, ticks:{color:'#9c9a95',font:{size:10},callback:function(v){return v+'%';}}, grid:{color:'rgba(0,0,0,.04)'} },
-          y:{ ticks:{color:'#3a3835',font:{size:10,weight:'500'}}, grid:{display:false} }
-        }
-      }
-    });
-  }
-  l.seccoes.forEach(function(s,si) {
-    var sel=document.getElementById('sc-'+li+'-'+si);
-    if (!sel) return;
-    var pP=s.pT>0?parseFloat((s.pF/s.pT*100).toFixed(1)):0;
-    var pN=s.nT>0?parseFloat((s.nF/s.nT*100).toFixed(1)):0;
-    charts['sc-'+li+'-'+si]=new Chart(sel.getContext('2d'),{
-      type:'bar', plugins:[ChartDataLabels],
-      data:{labels:['Programadas','Não Prog.'],datasets:[{data:[pP,pN],backgroundColor:['rgba(59,63,216,.75)','rgba(232,146,74,.8)'],borderRadius:3,borderWidth:0}]},
-      options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,layout:{padding:{right:42}},
-        plugins:{datalabels:{anchor:'end',align:'right',formatter:function(v){return v+'%';},font:{size:11,weight:'600'},color:'#3a3835'},legend:{display:false}},
-        scales:{x:{beginAtZero:true,max:100,display:false},y:{ticks:{font:{size:11,weight:'500'},color:'#3a3835'},grid:{display:false}}}
-      }
-    });
+  // Two columns for history and sections
+  html += '<div style="display:grid; grid-template-columns: 1fr 1fr; gap:24px">';
+  
+  // Left: History
+  html += '<div>';
+  html += '<div class="chart-wrap"><div class="panel-title">Histórico de Fecho (P vs NP)</div><canvas id="pnp-'+li+'" height="220"></canvas></div>';
+  html += '<table class="dtable"><thead><tr><th>Semana</th><th>P Total</th><th>P Fech.</th><th>NP Total</th><th>NP Fech.</th></tr></thead><tbody>';
+  l.historico.forEach(function(h){
+    html += '<tr><td>'+h.Semana+'</td><td>'+(h['P Total']||0)+'</td><td>'+(h['P Fechado']||0)+'</td><td>'+(h['NP Total']||0)+'</td><td>'+(h['NP Fechado']||0)+'</td></tr>';
   });
+  html += '</tbody></table>';
+  html += '</div>';
+
+  // Right: Sections
+  html += '<div>';
+  html += '<div class="panel-title">Estado por Secção (Semana Atual)</div>';
+  if (l.seccoes.length===0) {
+    html += '<div style="padding:40px; text-align:center; background:#fff; border:1px solid var(--line); border-radius:12px; color:var(--ink-4)">Sem dados de secções.</div>';
+  } else {
+    html += '<div class="sec-grid" style="grid-template-columns: 1fr; margin-top:0">';
+    l.seccoes.forEach(function(s){
+      var p = s.pT>0 ? Math.round(s.pF/s.pT*100) : 0;
+      html += '<div class="sec-card"><div class="sec-card-head">'+s.nome+'</div><div class="sec-card-body">';
+      html += '<div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:6px"><span>P: '+s.pF+'/'+s.pT+'</span><span style="font-weight:700">'+p+'%</span></div>';
+      html += '<div class="prog-track" style="height:4px; margin-bottom:10px"><div class="prog-fill fill-blue" style="width:'+p+'%"></div></div>';
+      html += '<div style="font-size:11px; color:var(--ink-4)">NP: '+s.nF+'/'+s.nT+' fechadas</div>';
+      html += '</div></div>';
+    });
+    html += '</div>';
+  }
+  html += '</div>';
+
+  html += '</div>';
+  
+  app.innerHTML = html;
+  renderChart(l, li);
 }
 
-function svgClock() {
-  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;flex-shrink:0"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>';
+function metricGroup(label, t, a, f, cls) {
+  return '<div class="metric-group '+cls+'"><div class="mg-label">'+label+'</div><div class="mg-val">'+fmt(t)+'</div><div class="mg-sub">'+fmt(a)+' abertas</div></div>';
 }
-function svgFolder() {
-  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;flex-shrink:0"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>';
+function progressRow(label, pct, cls) {
+  return '<div class="progress-row"><div class="progress-label-row"><span class="prog-label">'+label+'</span><span class="prog-pct">'+pct+'%</span></div><div class="prog-track"><div class="prog-fill '+cls+'" style="width:'+pct+'%"></div></div></div>';
 }
-function svgArrow() {
-  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;flex-shrink:0"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
+
+function renderChart(l, li) {
+  var ctx = document.getElementById('pnp-'+li).getContext('2d');
+  var labels = l.historico.map(function(h){ return h.Semana; });
+  var pData = l.historico.map(function(h){ var t=Number(h['P Total'])||0; return t>0 ? Math.round((Number(h['P Fechado'])||0)/t*100) : 0; });
+  var npData = l.historico.map(function(h){ var t=Number(h['NP Total'])||0; return t>0 ? Math.round((Number(h['NP Fechado'])||0)/t*100) : 0; });
+
+  charts['pnp-'+li] = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [
+        { label: '% P Fechadas', data: pData, borderColor: '#007aff', backgroundColor: '#007aff', tension: 0.3, borderWidth: 3, pointRadius: 4 },
+        { label: '% NP Fechadas', data: npData, borderColor: '#ff9500', backgroundColor: '#ff9500', tension: 0.3, borderWidth: 3, pointRadius: 4 }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'top', labels: { boxWidth: 12, font: { size: 11, weight: '600' } } } },
+      scales: { y: { min: 0, max: 100, ticks: { callback: function(v){ return v+'%'; } } } }
+    }
+  });
 }
 </script>
 </body>
