@@ -115,15 +115,19 @@ body {
   font-family: 'DM Serif Display', serif;
   font-size: 26px; line-height: 1;
   color: var(--ink-2);
-  margin-bottom: 4px;
+  margin-bottom: 8px;
 }
 .rank-pill {
-  padding: 2px 7px; border-radius: 99px;
-  font-size: 10px; font-weight: 700; letter-spacing: 0.3px;
+  padding: 4px 12px; border-radius: 99px;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.3px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
 }
-.pill-n1 { background: var(--n1-bg); color: var(--n1); border: 1px solid var(--n1); }
-.pill-n2 { background: var(--n2-bg); color: var(--n2); border: 1px solid var(--n2); }
-.pill-n3 { background: var(--n3-bg); color: var(--n3); border: 1px solid var(--n3); }
+.pill-n1 { background: var(--n1-bg); color: var(--n1); border: 2px solid var(--n1); }
+.pill-n2 { background: var(--n2-bg); color: var(--n2); border: 2px solid var(--n2); }
+.pill-n3 { background: var(--n3-bg); color: var(--n3); border: 2px solid var(--n3); }
 
 /* identity column */
 .col-id {
@@ -449,7 +453,7 @@ body {
     gap: 0;
   }
   .ht-td { min-height: auto; padding: 10px 12px; }
-  .ht-td.rank-td { grid-row: 1/4; border-right: 1px solid var(--line); flex-direction: column; gap: 4px; }
+  .ht-td.rank-td { grid-row: 1/4; border-right: 1px solid var(--line); flex-direction: column; gap: 8px; }
   .ht-td.id-td   { grid-column: 2; grid-row: 1; border-right: none; border-bottom: 1px solid var(--line); justify-content: flex-start; }
   .ht-td.metrics-td { grid-column: 2; grid-row: 2; border-right: none; border-bottom: 1px solid var(--line); gap: 12px; flex-wrap: wrap; }
   .ht-td.prog-td  { grid-column: 2; grid-row: 3; border-right: none; }
