@@ -18,9 +18,9 @@
   --paper-3: #e8e6e2;
   --line: #e8e8ec;
   --line-2: #d8d8de;
-  --n1: #b83232; --n1-bg: #fdf0f0;
-  --n2: #b87a32; --n2-bg: #fdf6ee;
-  --n3: #2e7d52; --n3-bg: #eef6f2;
+  --n1: #e01010; --n1-bg: #fff0f0;
+  --n2: #e07800; --n2-bg: #fff4e0;
+  --n3: #c49a00; --n3-bg: #fffbe0;
   --bar-blue: #3b3fd8;
   --bar-orange: #e8924a;
   --bar-track: #e4e4e8;
@@ -375,7 +375,7 @@ body {
 }
 .ht-head {
   display: grid;
-  grid-template-columns: 60px 64px 210px 1fr 1fr 150px 110px 136px;
+  grid-template-columns: 76px 210px 1fr 1fr 150px 110px 136px;
   background: #f8f8fa; border-bottom: 1px solid var(--line);
 }
 .ht-th {
@@ -388,7 +388,7 @@ body {
 
 .ht-row {
   display: grid;
-  grid-template-columns: 60px 64px 210px 1fr 1fr 150px 110px 136px;
+  grid-template-columns: 76px 210px 1fr 1fr 150px 110px 136px;
   border-bottom: 1px solid var(--line);
   transition: background 0.12s;
   cursor: pointer;
@@ -445,7 +445,7 @@ body {
   .ht-td.id-td   { grid-column: 2; grid-row: 1; border-right: none; border-bottom: 1px solid var(--line); justify-content: flex-start; }
   .ht-td.metrics-td { grid-column: 2; grid-row: 2; border-right: none; border-bottom: 1px solid var(--line); gap: 12px; flex-wrap: wrap; }
   .ht-td.prog-td  { grid-column: 2; grid-row: 3; border-right: none; }
-  .ht-td.level-td, .ht-td.new-td, .ht-td.act-td { display: none; }
+  .ht-td.new-td, .ht-td.act-td { display: none; }
   .home-stats { grid-template-columns: repeat(2, 1fr); }
 }
 
@@ -698,7 +698,6 @@ function renderHome(lojas, ultima, penultima) {
   html += '<div class="home-table">';
   html += '<div class="ht-head">';
   html += '<div class="ht-th">#</div>';
-  html += '<div class="ht-th">Nível</div>';
   html += '<div class="ht-th left">Loja</div>';
   html += '<div class="ht-th">P Tarefas</div>';
   html += '<div class="ht-th">NP Tarefas</div>';
@@ -753,13 +752,10 @@ function renderHomeTable(lojas) {
       html += '<div class="ht-row'+(l.isNew?' new-loja':'')+'" onclick="goDetail('+li+')">';
 
       /* rank */
-      html += '<div class="ht-td rank-td" style="flex-direction:column;gap:6px;align-items:center;justify-content:center;background:#fafafa">';
+      html += '<div class="ht-td rank-td" style="flex-direction:column;gap:6px;align-items:center;justify-content:center;background:#f0ede8">';
       html += '<div style="font-family:\'DM Serif Display\',serif;font-size:26px;font-weight:400;color:var(--ink-2);line-height:1">'+(li+1)+'</div>';
       html += '<div class="rank-pill '+pc+'" style="font-size:12px;padding:3px 10px">N'+l.nivel+'</div>';
       html += '</div>';
-
-      /* level badge (hidden on mobile, rank already has it) */
-      html += '<div class="ht-td level-td"><div class="rank-pill '+pc+'" style="font-size:11px;padding:3px 9px">N'+l.nivel+'</div></div>';
 
       /* identity */
       html += '<div class="ht-td left id-td" style="flex-direction:column;align-items:flex-start;gap:3px">';
