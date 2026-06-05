@@ -9,13 +9,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.1.0/chartjs-plugin-datalabels.min.js"></script>
 <style>
 :root {
-  --ink: #0f0e0d;
-  --ink-2: #3a3835;
-  --ink-3: #6b6860;
-  --ink-4: #9c9a95;
-  --paper: #eeecea;
-  --paper-2: #f7f6f3;
-  --paper-3: #e8e6e2;
+  --ink: #0a0908;
+  --ink-2: #2a2825;
+  --ink-3: #4e4b46;
+  --ink-4: #7a7872;
+  --paper: #e6e3e0;
+  --paper-2: #f0ede9;
+  --paper-3: #dedad5;
   --line: #e8e8ec;
   --line-2: #d8d8de;
   --n1: #e01010; --n1-bg: #fff0f0;
@@ -334,6 +334,7 @@ body {
   border-radius: 14px; padding: 20px 20px 16px;
   box-shadow: var(--shadow);
   display: flex; flex-direction: column; gap: 6px;
+  align-items: center; text-align: center;
 }
 .stat-card-label {
   font-size: 12px; font-weight: 700; letter-spacing: 0.7px;
@@ -701,7 +702,7 @@ function renderHome(lojas, ultima, penultima) {
   html += '<div class="ht-th left">Loja</div>';
   html += '<div class="ht-th">P Tarefas</div>';
   html += '<div class="ht-th">NP Tarefas</div>';
-  html += '<div class="ht-th">% Fechadas</div>';
+  html += '<div class="ht-th">Comparação P vs NP</div>';
   html += '<div class="ht-th">Estado</div>';
   html += '<div class="ht-th">Detalhe</div>';
   html += '</div>';
