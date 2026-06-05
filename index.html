@@ -18,11 +18,11 @@
   --paper-3: #f0f0f2;
   --line: #e8e8ec;
   --line-2: #d8d8de;
-  --n1: #ff3b30; --n1-bg: #fff1f0;
-  --n2: #ffcc00; --n2-bg: #fffbeb;
+  --n1: #b83232; --n1-bg: #fdf0f0;
+  --n2: #b87a32; --n2-bg: #fdf6ee;
   --n3: #2e7d52; --n3-bg: #eef6f2;
-  --bar-blue: #007aff;
-  --bar-orange: #ff9500;
+  --bar-blue: #3b3fd8;
+  --bar-orange: #e8924a;
   --bar-track: #e4e4e8;
   --btn-border: #d8d8de;
   --btn-text: #444;
@@ -49,7 +49,7 @@ body {
 }
 .header-left { display: flex; align-items: center; gap: 12px; }
 .header-icon {
-  width: 36px; height: 36px; border-radius: 9px;
+  width: 36px; height: 36px; border-radius: 99px;
   background: #1c1c2e;
   display: flex; align-items: center; justify-content: center;
 }
@@ -288,7 +288,7 @@ body {
   flex: 2; min-width: 260px; background: #fff8f4; border: 1px solid #f0d8c8;
   border-radius: 12px; padding: 16px 20px; display: flex; align-items: center; gap: 14px;
 }
-.action-icon { width: 38px; height: 38px; border-radius: 9px; background: #ff9500; display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; }
+.action-icon { width: 38px; height: 38px; border-radius: 9px; background: #e8924a; display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; }
 .action-title { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
 .action-desc { font-size: 12px; color: var(--ink-3); line-height: 1.4; }
 
@@ -589,7 +589,7 @@ fetch('dados.json?t=' + Date.now())
     renderHome(lojas, ultima, penultima);
   })
   .catch(function(e) {
-    document.getElementById('home-screen').innerHTML = '<div class="loading" style="color:#ff3b30">Erro ao carregar: ' + e.message + '</div>';
+    document.getElementById('home-screen').innerHTML = '<div class="loading" style="color:var(--n1)">Erro ao carregar: ' + e.message + '</div>';
   });
 
 /* ── HOME RENDER ── */
