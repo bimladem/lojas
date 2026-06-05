@@ -13,9 +13,9 @@
   --ink-2: #3a3835;
   --ink-3: #6b6860;
   --ink-4: #9c9a95;
-  --paper: #f5f5f7;
-  --paper-2: #ffffff;
-  --paper-3: #f0f0f2;
+  --paper: #eeecea;
+  --paper-2: #f7f6f3;
+  --paper-3: #e8e6e2;
   --line: #e8e8ec;
   --line-2: #d8d8de;
   --n1: #b83232; --n1-bg: #fdf0f0;
@@ -37,10 +37,22 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* soften all pure-white surfaces to warm off-white */
+.loja-card, .home-table, .stat-card, .level-legend,
+.chart-wrap, .sec-card, .legend-bar { background: #faf9f6; }
+.btn-card, .btn-detail, .filter-btn { background: #f7f6f3; }
+.ht-head, .dtable th, .sec-card-head { background: #f0ede8; }
+.col-rank { background: #f0ede8; }
+.panel-body { background: #f5f3ef; }
+.ht-row:hover { background: #f0ede8 !important; }
+.ht-row.new-loja { background: #f0faf4; }
+.ht-row.new-loja:hover { background: #e6f7ed !important; }
+.dtable tbody tr:hover td { background: #f0ede8; }
+
 /* ── HEADER ── */
 .header {
   position: sticky; top: 0; z-index: 200;
-  background: rgba(255,255,255,.97);
+  background: rgba(247,246,243,.97);
   backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--line);
   padding: 0 32px;
@@ -165,22 +177,6 @@ body {
   background: var(--line-2);
   align-self: stretch;
   flex-shrink: 0;
-  position: relative;
-}
-.col-metrics-sep::before {
-  content: 'NP';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: var(--line-2);
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: 0.4px;
-  color: var(--ink-4);
-  padding: 3px 4px;
-  border-radius: 3px;
-  white-space: nowrap;
 }
 
 .metric-group-sep {
@@ -680,11 +676,6 @@ function renderHome(lojas, ultima, penultima) {
   if (penultima) {
     html += statCard('Entradas Novas', novas, 'Não presentes em '+penultima, novas>0?'accent-blue':'');
   }
-  html += '<div class="stat-card" style="background:linear-gradient(135deg,#f0f2fb,#fdf3eb)">'
-    + '<div class="stat-card-label">Taxa Global P Fechadas</div>'
-    + '<div style="font-family:\'DM Serif Display\',serif;font-size:36px;line-height:1;color:var(--bar-blue)">'+pctGlobal+'%</div>'
-    + '<div class="stat-card-sub">Média de todas as lojas</div>'
-    + '</div>';
   html += '</div>';
 
   /* Filter bar */
