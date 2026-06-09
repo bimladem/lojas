@@ -19,8 +19,8 @@
   --line: #d1d1d1;
   --line-2: #b1b1b1;
   --n1: #d00000; --n1-bg: #fff0f0; /* Vermelho */
-  --n2: #c06000; --n2-bg: #fff4e0; /* Laranja */
-  --n3: #ffcc00; --n3-bg: #fffbe6; /* Amarelo */
+  --n2: #ff7b00; --n2-bg: #fff3e6; /* Laranja Vibrante */
+  --n3: #ffd900; --n3-bg: #fffde6; /* Amarelo Brilhante */
   --n4: #000080; --n4-bg: #e0e0ff; /* Azul escuro */
   --bar-blue: #2b2fd8;
   --bar-orange: #d8722a;
@@ -622,7 +622,7 @@ function renderHome(lojas, ultima, penultima) {
   html += statCard('Nível 1', n1, '0–20% prog. fechadas', 'accent-red');
   html += statCard('Nível 2', n2, '21–40% prog. fechadas', 'accent-amber');
   html += statCard('Nível 3', n3, '41–50% prog. fechadas', 'accent-yellow');
-  html += statCard('Nível 4', n4, '51–100% prog. fechadas', 'accent-navy');
+  html += statCard('Nível 4', n4, '> 50% prog. fechadas', 'accent-navy');
   if (penultima) {
     html += statCard('Entradas Novas', novas, 'Não presentes em '+penultima, novas>0?'accent-blue':'');
   }
@@ -665,7 +665,7 @@ function renderHome(lojas, ultima, penultima) {
   html += '<div class="level-item"><div class="level-dot pill-n1">N1</div><span>0–20% prog. fechadas</span></div>';
   html += '<div class="level-item"><div class="level-dot pill-n2">N2</div><span>21–40% fechadas</span></div>';
   html += '<div class="level-item"><div class="level-dot pill-n3">N3</div><span>41–50% fechadas</span></div>';
-  html += '<div class="level-item"><div class="level-dot pill-n4">N4</div><span>51–100% fechadas</span></div>';
+  html += '<div class="level-item"><div class="level-dot pill-n4">N4</div><span>> 50% fechadas</span></div>';
   html += '</div></div>';
   html += '<div class="action-banner"><div class="action-icon">⚠</div><div><div class="action-title">Ação Recomendada</div><div class="action-desc">Contactar urgentemente responsáveis das lojas N1. Clique em "Detalhe" para ver o histórico e secções.</div></div></div>';
   html += '</div>';
