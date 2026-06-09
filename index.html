@@ -9,85 +9,85 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.1.0/chartjs-plugin-datalabels.min.js"></script>
 <style>
 :root {
-  --ink: #0a0908;
-  --ink-2: #2a2825;
-  --ink-3: #4e4b46;
-  --ink-4: #7a7872;
-  --paper: #e6e3e0;
-  --paper-2: #f0ede9;
-  --paper-3: #dedad5;
-  --line: #e8e8ec;
-  --line-2: #d8d8de;
-  --n1: #e01010; --n1-bg: #fff0f0;
-  --n2: #e07800; --n2-bg: #fff4e0;
-  --n3: #c49a00; --n3-bg: #fffbe0;
-  --bar-blue: #3b3fd8;
-  --bar-orange: #e8924a;
+  --ink: #000000; /* Aumentado o contraste (mais escuro) */
+  --ink-2: #1a1a1a;
+  --ink-3: #333333;
+  --ink-4: #555555;
+  --paper: #ffffff; /* Aumentado o contraste (fundo branco puro) */
+  --paper-2: #f8f9fa;
+  --paper-3: #f1f3f5;
+  --line: #d1d1d1; /* Linhas mais visíveis para contraste */
+  --line-2: #b1b1b1;
+  --n1: #d00000; --n1-bg: #fff0f0;
+  --n2: #c06000; --n2-bg: #fff4e0;
+  --n3: #008000; --n3-bg: #e0ffe0;
+  --bar-blue: #2b2fd8;
+  --bar-orange: #d8722a;
   --bar-track: #e4e4e8;
-  --btn-border: #d8d8de;
-  --btn-text: #444;
-  --shadow: 0 1px 4px rgba(0,0,0,.06), 0 2px 12px rgba(0,0,0,.04);
+  --btn-border: #b1b1b1;
+  --btn-text: #222;
+  --shadow: 0 1px 6px rgba(0,0,0,.1), 0 2px 16px rgba(0,0,0,.08);
 }
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 body {
   font-family: 'DM Sans', sans-serif;
   background: var(--paper);
   color: var(--ink);
-  font-size: 14px;
+  font-size: 16px; /* Aumentado o tamanho das letras em geral (era 14px) */
   -webkit-font-smoothing: antialiased;
 }
 
 /* soften all pure-white surfaces to warm off-white */
 .loja-card, .home-table, .stat-card, .level-legend,
-.chart-wrap, .sec-card, .legend-bar { background: #faf9f6; }
-.btn-card, .btn-detail, .filter-btn { background: #f7f6f3; }
-.ht-head, .dtable th, .sec-card-head { background: #f0ede8; }
-.col-rank { background: #f0ede8; }
-.panel-body { background: #f5f3ef; }
-.ht-row:hover { background: #f0ede8 !important; }
+.chart-wrap, .sec-card, .legend-bar { background: #ffffff; border: 1px solid var(--line); }
+.btn-card, .btn-detail, .filter-btn { background: #fdfdfd; }
+.ht-head, .dtable th, .sec-card-head { background: #f1f3f5; }
+.col-rank { background: #f1f3f5; }
+.panel-body { background: #f8f9fa; }
+.ht-row:hover { background: #f1f3f5 !important; }
 .ht-row.new-loja { background: #f0faf4; }
 .ht-row.new-loja:hover { background: #e6f7ed !important; }
-.dtable tbody tr:hover td { background: #f0ede8; }
+.dtable tbody tr:hover td { background: #f1f3f5; }
 
 /* ── HEADER ── */
 .header {
   position: sticky; top: 0; z-index: 200;
-  background: rgba(247,246,243,.97);
+  background: rgba(255,255,255,.98);
   backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--line);
+  border-bottom: 2px solid var(--line);
   padding: 0 32px;
-  height: 62px;
+  height: 70px;
   display: flex; align-items: center; justify-content: space-between; gap: 20px;
 }
 .header-left { display: flex; align-items: center; gap: 12px; }
 .header-icon {
-  width: 36px; height: 36px; border-radius: 9px;
-  background: #1c1c2e;
+  width: 40px; height: 40px; border-radius: 9px;
+  background: #000;
   display: flex; align-items: center; justify-content: center;
 }
-.header-icon svg { width: 18px; height: 18px; fill: #fff; }
-.header-title { font-family: 'DM Serif Display', serif; font-size: 19px; color: var(--ink); letter-spacing: -0.2px; white-space: nowrap; }
-.header-subtitle { font-size: 11.5px; color: var(--ink-4); margin-top: 1px; }
+.header-icon svg { width: 20px; height: 20px; fill: #fff; }
+.header-title { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--ink); letter-spacing: -0.2px; white-space: nowrap; }
+.header-subtitle { font-size: 13px; color: var(--ink-4); margin-top: 1px; }
 .header-badge {
-  padding: 5px 14px; border-radius: 99px;
-  background: #f0f0f5; border: 1px solid var(--line-2);
-  font-size: 12px; font-weight: 500; color: var(--ink-2); white-space: nowrap;
+  padding: 6px 16px; border-radius: 99px;
+  background: #f1f3f5; border: 1px solid var(--line-2);
+  font-size: 14px; font-weight: 600; color: var(--ink-2); white-space: nowrap;
 }
 
 /* ── MAIN ── */
-.main { max-width: 1320px; margin: 0 auto; padding: 28px 24px 64px; }
+.main { max-width: 1400px; margin: 0 auto; padding: 28px 24px 64px; }
 
 /* ── LEGEND BAR ── */
 .legend-bar {
   display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
-  padding: 10px 16px;
+  padding: 12px 20px;
   background: #fff; border: 1px solid var(--line); border-radius: 10px;
-  font-size: 12.5px; color: var(--ink-3);
+  font-size: 14px; color: var(--ink-2);
 }
 .legend-item { display: flex; align-items: center; gap: 7px; }
-.legend-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
-.legend-label { font-weight: 600; color: var(--ink-2); }
-.legend-sep { width: 1px; height: 16px; background: var(--line-2); }
+.legend-dot { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
+.legend-label { font-weight: 700; color: var(--ink); }
+.legend-sep { width: 1px; height: 18px; background: var(--line-2); }
 
 /* ── CARD LIST ── */
 .card-list { display: flex; flex-direction: column; gap: 0; }
@@ -97,19 +97,19 @@ body {
   background: #fff;
   border: 1px solid var(--line);
   border-radius: 14px;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   overflow: hidden;
   box-shadow: var(--shadow);
   transition: box-shadow 0.15s;
 }
-.loja-card:hover { box-shadow: 0 2px 16px rgba(0,0,0,.09); }
+.loja-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,.12); }
 
 .card-main {
   display: grid;
-  grid-template-columns: 56px 200px 1fr auto;
+  grid-template-columns: 64px 240px 1fr auto;
   align-items: center;
   padding: 0;
-  min-height: 88px;
+  min-height: 100px;
   gap: 0;
 }
 
@@ -119,33 +119,33 @@ body {
   padding: 20px 10px;
   border-right: 1px solid var(--line);
   align-self: stretch;
-  background: #fafafa;
+  background: #f8f9fa;
   gap: 6px;
   text-align: center;
 }
 .rank-num {
   font-family: 'DM Serif Display', serif;
-  font-size: 28px; line-height: 1;
-  color: var(--ink-2);
+  font-size: 32px; line-height: 1;
+  color: var(--ink);
 }
 .rank-pill {
-  padding: 3px 10px; border-radius: 99px;
-  font-size: 12px; font-weight: 700; letter-spacing: 0.3px;
+  padding: 4px 12px; border-radius: 99px;
+  font-size: 13px; font-weight: 800; letter-spacing: 0.3px;
   text-align: center;
 }
-.pill-n1 { background: var(--n1-bg); color: var(--n1); }
-.pill-n2 { background: var(--n2-bg); color: var(--n2); }
-.pill-n3 { background: var(--n3-bg); color: var(--n3); }
+.pill-n1 { background: var(--n1-bg); color: var(--n1); border: 1px solid var(--n1); }
+.pill-n2 { background: var(--n2-bg); color: var(--n2); border: 1px solid var(--n2); }
+.pill-n3 { background: var(--n3-bg); color: var(--n3); border: 1px solid var(--n3); }
 
 /* identity column */
 .col-id {
-  padding: 20px 20px;
+  padding: 20px 24px;
   border-right: 1px solid var(--line);
   align-self: stretch;
   display: flex; flex-direction: column; justify-content: center;
 }
-.loja-nome { font-size: 17px; font-weight: 600; color: var(--ink); line-height: 1.2; }
-.loja-code { font-size: 13px; color: var(--ink-4); margin-top: 4px; font-weight: 400; }
+.loja-nome { font-size: 19px; font-weight: 700; color: var(--ink); line-height: 1.2; }
+.loja-code { font-size: 14px; color: var(--ink-3); margin-top: 4px; font-weight: 500; }
 
 /* metrics column */
 .col-metrics {
@@ -155,11 +155,11 @@ body {
 }
 .metric-group {
   display: flex; flex-direction: column; align-items: center; justify-content: center;
-  padding: 16px 18px;
+  padding: 16px 20px;
   border-right: 1px solid var(--line);
-  min-width: 88px;
+  min-width: 100px;
   flex: 1;
-  gap: 3px;
+  gap: 4px;
 }
 .metric-group:last-child { border-right: none; }
 .metric-group.is-total {
@@ -184,31 +184,31 @@ body {
   margin: 0 0;
 }
 .mg-label {
-  font-size: 10.5px; font-weight: 700; letter-spacing: 0.5px;
-  text-transform: uppercase; color: var(--ink-3); white-space: nowrap;
+  font-size: 12px; font-weight: 800; letter-spacing: 0.5px;
+  text-transform: uppercase; color: var(--ink-2); white-space: nowrap;
   margin-bottom: 3px;
 }
-.mg-val { font-size: 22px; font-weight: 600; color: var(--ink); line-height: 1; }
-.mg-sub { font-size: 12px; color: var(--ink-4); margin-top: 2px; }
+.mg-val { font-size: 26px; font-weight: 700; color: var(--ink); line-height: 1; }
+.mg-sub { font-size: 14px; color: var(--ink-3); margin-top: 2px; font-weight: 500; }
 
 /* progress + actions column */
 .col-right {
   display: flex; align-items: center;
-  padding: 14px 22px;
-  gap: 22px;
+  padding: 14px 24px;
+  gap: 24px;
   align-self: stretch;
-  min-width: 360px;
+  min-width: 400px;
 }
 
-.progress-block { flex: 1; display: flex; flex-direction: column; gap: 10px; }
-.progress-row { display: flex; flex-direction: column; gap: 4px; }
+.progress-block { flex: 1; display: flex; flex-direction: column; gap: 12px; }
+.progress-row { display: flex; flex-direction: column; gap: 6px; }
 .progress-label-row {
   display: flex; justify-content: space-between; align-items: center;
 }
-.prog-label { font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: var(--ink-4); }
-.prog-pct { font-size: 12px; font-weight: 700; color: var(--ink-2); }
+.prog-label { font-size: 11px; font-weight: 800; letter-spacing: 0.6px; text-transform: uppercase; color: var(--ink-3); }
+.prog-pct { font-size: 14px; font-weight: 800; color: var(--ink); }
 .prog-track {
-  height: 6px; border-radius: 99px; background: var(--bar-track);
+  height: 8px; border-radius: 99px; background: var(--bar-track);
   overflow: hidden;
 }
 .prog-fill {
@@ -218,37 +218,37 @@ body {
 .fill-blue { background: var(--bar-blue); }
 .fill-orange { background: var(--bar-orange); }
 
-.actions-col { display: flex; flex-direction: column; gap: 8px; flex-shrink: 0; }
+.actions-col { display: flex; flex-direction: column; gap: 10px; flex-shrink: 0; }
 .btn-card {
-  display: flex; align-items: center; gap: 7px;
-  padding: 8px 16px;
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 18px;
   border: 1px solid var(--btn-border);
   border-radius: 8px;
   background: #fff;
   color: var(--btn-text);
-  font-size: 12.5px; font-weight: 500;
+  font-size: 14px; font-weight: 600;
   cursor: pointer;
   font-family: 'DM Sans', sans-serif;
   white-space: nowrap;
   transition: all 0.15s;
-  min-width: 110px; justify-content: flex-start;
+  min-width: 120px; justify-content: flex-start;
 }
-.btn-card:hover { background: #f5f5f7; border-color: #bbb; }
-.btn-card.active { background: #1c1c2e; border-color: #1c1c2e; color: #fff; }
-.btn-card svg { width: 14px; height: 14px; flex-shrink: 0; opacity: 0.6; }
+.btn-card:hover { background: #f1f3f5; border-color: #888; }
+.btn-card.active { background: #000; border-color: #000; color: #fff; }
+.btn-card svg { width: 16px; height: 16px; flex-shrink: 0; opacity: 0.8; }
 .btn-card.active svg { opacity: 1; }
 
 /* ── PANEL ── */
 .panel { display: none; }
 .panel.open { display: block; }
 .panel-body {
-  padding: 24px 28px;
+  padding: 24px 32px;
   border-top: 1px solid var(--line);
-  background: #fafafa;
+  background: #f8f9fa;
 }
 .panel-title {
   font-family: 'DM Serif Display', serif;
-  font-size: 16px; font-weight: 400; color: var(--ink);
+  font-size: 18px; font-weight: 400; color: var(--ink);
   margin-bottom: 16px; padding-bottom: 10px;
   border-bottom: 1px solid var(--line);
 }
@@ -257,53 +257,53 @@ body {
 .chart-wrap {
   position: relative; width: 100%; background: #fff;
   border: 1px solid var(--line); border-radius: 12px;
-  padding: 20px; margin-bottom: 20px;
+  padding: 24px; margin-bottom: 24px;
   box-shadow: var(--shadow);
 }
 .dtable {
   width: 100%; border-collapse: collapse;
   background: #fff; border: 1px solid var(--line);
-  border-radius: 12px; overflow: hidden; font-size: 14px;
+  border-radius: 12px; overflow: hidden; font-size: 15px;
   box-shadow: var(--shadow);
 }
 .dtable th {
-  padding: 12px 18px; background: #f8f8fa;
-  border-bottom: 1px solid var(--line);
-  font-size: 11.5px; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 0.5px; color: var(--ink-3); text-align: center;
+  padding: 14px 20px; background: #f1f3f5;
+  border-bottom: 2px solid var(--line);
+  font-size: 13px; font-weight: 800; text-transform: uppercase;
+  letter-spacing: 0.5px; color: var(--ink); text-align: center;
 }
 .dtable td {
-  padding: 13px 18px; border-bottom: 1px solid var(--line);
-  text-align: center; color: var(--ink); font-weight: 500;
+  padding: 14px 20px; border-bottom: 1px solid var(--line);
+  text-align: center; color: var(--ink); font-weight: 600;
 }
 .dtable tr:last-child td { border-bottom: none; }
-.dtable tbody tr:hover td { background: #f8f8fa; }
+.dtable tbody tr:hover td { background: #f1f3f5; }
 
 .sec-grid {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 12px; margin-top: 16px;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px; margin-top: 16px;
 }
 .sec-card { background: #fff; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; box-shadow: var(--shadow); }
-.sec-card-head { padding: 11px 14px; background: #f8f8fa; border-bottom: 1px solid var(--line); font-size: 12.5px; font-weight: 600; color: var(--ink); }
-.sec-card-body { padding: 12px 14px; }
+.sec-card-head { padding: 12px 16px; background: #f1f3f5; border-bottom: 1px solid var(--line); font-size: 14px; font-weight: 700; color: var(--ink); }
+.sec-card-body { padding: 14px 16px; }
 
 /* ── BOTTOM ── */
-.bottom-bar { margin-top: 24px; display: flex; gap: 14px; flex-wrap: wrap; }
+.bottom-bar { margin-top: 24px; display: flex; gap: 16px; flex-wrap: wrap; }
 .level-legend {
-  flex: 1; min-width: 240px; background: #fff;
-  border: 1px solid var(--line); border-radius: 12px; padding: 16px 20px; box-shadow: var(--shadow);
+  flex: 1; min-width: 280px; background: #fff;
+  border: 1px solid var(--line); border-radius: 12px; padding: 20px 24px; box-shadow: var(--shadow);
 }
-.level-legend-title { font-size: 10px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: var(--ink-4); margin-bottom: 12px; }
-.level-items { display: flex; gap: 16px; flex-wrap: wrap; }
-.level-item { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--ink-2); }
-.level-dot { width: 26px; height: 26px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; flex-shrink: 0; }
+.level-legend-title { font-size: 12px; font-weight: 800; letter-spacing: 0.6px; text-transform: uppercase; color: var(--ink-3); margin-bottom: 12px; }
+.level-items { display: flex; gap: 20px; flex-wrap: wrap; }
+.level-item { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--ink); font-weight: 500; }
+.level-dot { width: 30px; height: 30px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; flex-shrink: 0; }
 .action-banner {
-  flex: 2; min-width: 260px; background: #fff8f4; border: 1px solid #f0d8c8;
-  border-radius: 12px; padding: 16px 20px; display: flex; align-items: center; gap: 14px;
+  flex: 2; min-width: 300px; background: #fff5f0; border: 1px solid #eec0a0;
+  border-radius: 12px; padding: 20px 24px; display: flex; align-items: center; gap: 16px;
 }
-.action-icon { width: 38px; height: 38px; border-radius: 9px; background: #e8924a; display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; }
-.action-title { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
-.action-desc { font-size: 12px; color: var(--ink-3); line-height: 1.4; }
+.action-icon { width: 42px; height: 42px; border-radius: 9px; background: #d8722a; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; color: #fff; }
+.action-title { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.action-desc { font-size: 14px; color: var(--ink-2); line-height: 1.5; font-weight: 500; }
 
 /* ── HOME SCREEN ── */
 .home-screen, .detail-screen { display: none; }
@@ -311,40 +311,40 @@ body {
 
 /* back button in header */
 .btn-back {
-  display: none; align-items: center; gap: 6px;
-  padding: 6px 12px; border-radius: 7px;
+  display: none; align-items: center; gap: 8px;
+  padding: 8px 16px; border-radius: 7px;
   border: 1px solid var(--line-2); background: var(--paper-3);
-  font-size: 12.5px; font-weight: 500; color: var(--ink-2);
+  font-size: 14px; font-weight: 600; color: var(--ink);
   cursor: pointer; font-family: 'DM Sans', sans-serif;
   transition: all 0.15s;
 }
-.btn-back:hover { border-color: var(--ink-2); background: var(--paper); }
+.btn-back:hover { border-color: var(--ink); background: var(--paper-2); }
 .btn-back.visible { display: flex; }
-.btn-back svg { width: 14px; height: 14px; }
+.btn-back svg { width: 16px; height: 16px; }
 
 /* stat cards row */
 .home-stats {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 12px;
-  margin-bottom: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
 }
 .stat-card {
   background: #fff; border: 1px solid var(--line);
-  border-radius: 14px; padding: 20px 20px 16px;
+  border-radius: 14px; padding: 24px 20px 20px;
   box-shadow: var(--shadow);
-  display: flex; flex-direction: column; gap: 6px;
+  display: flex; flex-direction: column; gap: 8px;
   align-items: center; text-align: center;
 }
 .stat-card-label {
-  font-size: 12px; font-weight: 700; letter-spacing: 0.7px;
-  text-transform: uppercase; color: var(--ink-4);
+  font-size: 13px; font-weight: 800; letter-spacing: 0.7px;
+  text-transform: uppercase; color: var(--ink-3);
 }
 .stat-card-val {
   font-family: 'DM Serif Display', serif;
-  font-size: 42px; line-height: 1; color: var(--ink);
+  font-size: 48px; line-height: 1; color: var(--ink);
 }
-.stat-card-sub { font-size: 13px; color: var(--ink-4); margin-top: 2px; }
+.stat-card-sub { font-size: 14px; color: var(--ink-3); margin-top: 2px; font-weight: 500; }
 .stat-card.accent-red   .stat-card-val { color: var(--n1); }
 .stat-card.accent-amber .stat-card-val { color: var(--n2); }
 .stat-card.accent-green .stat-card-val { color: var(--n3); }
@@ -352,22 +352,22 @@ body {
 
 /* filter bar */
 .filter-bar {
-  display: flex; align-items: center; gap: 8px;
-  margin-bottom: 16px; flex-wrap: wrap;
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 20px; flex-wrap: wrap;
 }
-.filter-label { font-size: 13px; color: var(--ink-3); font-weight: 600; margin-right: 4px; }
+.filter-label { font-size: 15px; color: var(--ink); font-weight: 700; margin-right: 6px; }
 .filter-btn {
-  padding: 6px 16px; border-radius: 99px;
+  padding: 8px 20px; border-radius: 99px;
   border: 1px solid var(--line-2); background: #fff;
-  font-size: 13px; font-weight: 500; color: var(--ink-3);
+  font-size: 14px; font-weight: 600; color: var(--ink-2);
   cursor: pointer; font-family: 'DM Sans', sans-serif;
   transition: all 0.15s; white-space: nowrap;
 }
-.filter-btn:hover { border-color: var(--ink-2); color: var(--ink); }
+.filter-btn:hover { border-color: var(--ink); color: var(--ink); }
 .filter-btn.active {
-  background: var(--ink); border-color: var(--ink); color: #fff;
+  background: #000; border-color: #000; color: #fff;
 }
-.filter-divider { width: 1px; height: 20px; background: var(--line-2); }
+.filter-divider { width: 1px; height: 24px; background: var(--line-2); }
 
 /* summary table */
 .home-table {
@@ -376,117 +376,68 @@ body {
 }
 .ht-head {
   display: grid;
-  grid-template-columns: 76px 210px 1fr 1fr 150px 110px 136px;
-  background: #f8f8fa; border-bottom: 1px solid var(--line);
+  /* Ajustado para acomodar títulos maiores e manter Comparação P vs NP em uma linha */
+  grid-template-columns: 80px 240px 1fr 1fr 180px 120px 140px;
+  background: #f1f3f5; border-bottom: 2px solid var(--line);
 }
 .ht-th {
-  padding: 14px 16px; font-size: 12px; font-weight: 700;
-  letter-spacing: 0.5px; text-transform: uppercase; color: var(--ink-3);
+  padding: 16px 12px; font-size: 14px; font-weight: 800; /* Títulos destacados e maiores */
+  letter-spacing: 0.5px; text-transform: uppercase; color: var(--ink);
   text-align: center; border-right: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: center;
+  white-space: nowrap; /* Garante que fiquem na mesma linha */
 }
 .ht-th:last-child { border-right: none; }
-.ht-th.left { text-align: left; }
+.ht-th.left { justify-content: flex-start; text-align: left; padding-left: 20px; }
 
 .ht-row {
   display: grid;
-  grid-template-columns: 76px 210px 1fr 1fr 150px 110px 136px;
+  grid-template-columns: 80px 240px 1fr 1fr 180px 120px 140px;
   border-bottom: 1px solid var(--line);
   transition: background 0.12s;
   cursor: pointer;
 }
 .ht-row:last-child { border-bottom: none; }
-.ht-row:hover { background: var(--paper); }
+.ht-row:hover { background: #f8f9fa; }
 .ht-row.new-loja { background: #f6fef9; }
 .ht-row.new-loja:hover { background: #edfaf2; }
 
 .ht-td {
-  padding: 16px 16px; display: flex; align-items: center;
+  padding: 18px 12px; display: flex; align-items: center;
   justify-content: center; border-right: 1px solid var(--line);
-  font-size: 15px; color: var(--ink); min-height: 76px;
+  font-size: 16px; font-weight: 600; color: var(--ink);
 }
 .ht-td:last-child { border-right: none; }
-.ht-td.left { justify-content: flex-start; }
+.ht-td.left { justify-content: flex-start; text-align: left; padding-left: 20px; }
 
+.rank-td { background: #f1f3f5; }
 .new-badge {
-  display: inline-flex; align-items: center;
-  padding: 2px 7px; border-radius: 99px;
-  background: #dcfce7; color: #16a34a;
-  font-size: 9.5px; font-weight: 700; letter-spacing: 0.3px;
-  white-space: nowrap;
+  background: #e6f4ea; color: #1e7e34; border: 1px solid #1e7e34;
+  padding: 4px 10px; border-radius: 99px; font-size: 12px; font-weight: 800;
 }
 
-/* mini progress in home table */
-.mini-prog { width: 100%; display: flex; flex-direction: column; gap: 6px; }
-.mini-row { display: flex; align-items: center; gap: 7px; }
-.mini-track { flex: 1; height: 6px; background: var(--bar-track); border-radius: 99px; overflow: hidden; }
+.mini-prog { flex: 1; display: flex; flex-direction: column; gap: 8px; width: 100%; }
+.mini-row { display: flex; align-items: center; gap: 8px; }
+.mini-track { flex: 1; height: 8px; background: var(--bar-track); border-radius: 99px; overflow: hidden; }
 .mini-fill { height: 100%; border-radius: 99px; }
-.mini-pct { font-size: 13px; font-weight: 700; min-width: 36px; text-align: right; }
+.mini-pct { font-size: 13px; font-weight: 800; min-width: 38px; text-align: right; }
 
-/* detalhe button in home table */
 .btn-detail {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 8px 16px; border-radius: 7px;
-  border: 1px solid var(--line-2); background: #fff;
-  font-size: 13px; font-weight: 500; color: var(--ink-2);
-  cursor: pointer; font-family: 'DM Sans', sans-serif;
-  transition: all 0.15s; white-space: nowrap;
+  padding: 8px 14px; border-radius: 8px; border: 1px solid var(--line-2);
+  background: #fff; font-size: 13px; font-weight: 700; color: var(--ink-2);
+  cursor: pointer; display: flex; align-items: center; gap: 6px; transition: all 0.15s;
 }
-.btn-detail:hover { background: var(--ink); border-color: var(--ink); color: #fff; }
-.btn-detail svg { width: 13px; height: 13px; }
+.btn-detail:hover { background: #000; color: #fff; border-color: #000; }
+.btn-detail svg { width: 14px; height: 14px; }
 
-@media (max-width: 800px) {
-  .ht-head { display: none; }
-  .ht-row {
-    grid-template-columns: 44px 1fr;
-    grid-template-rows: auto auto auto;
-    gap: 0;
-  }
-  .ht-td { min-height: auto; padding: 10px 12px; }
-  .ht-td.rank-td { grid-row: 1/4; border-right: 1px solid var(--line); flex-direction: column; gap: 4px; }
-  .ht-td.id-td   { grid-column: 2; grid-row: 1; border-right: none; border-bottom: 1px solid var(--line); justify-content: flex-start; }
-  .ht-td.metrics-td { grid-column: 2; grid-row: 2; border-right: none; border-bottom: 1px solid var(--line); gap: 12px; flex-wrap: wrap; }
-  .ht-td.prog-td  { grid-column: 2; grid-row: 3; border-right: none; }
-  .ht-td.new-td, .ht-td.act-td { display: none; }
-  .home-stats { grid-template-columns: repeat(2, 1fr); }
-}
-
+.loading { padding: 60px; text-align: center; font-size: 18px; font-weight: 600; color: var(--ink-3); }
 
 /* ── MOBILE ── */
-@media (max-width: 800px) {
-  .header { padding: 0 16px; }
-  .main { padding: 16px 12px 48px; }
-
-  .card-main {
-    grid-template-columns: 48px 1fr;
-    grid-template-rows: auto auto auto;
-  }
-  .col-rank {
-    grid-row: 1 / 4; border-right: 1px solid var(--line);
-    align-self: stretch;
-  }
-  .col-id {
-    grid-column: 2; grid-row: 1;
-    border-right: none; border-bottom: 1px solid var(--line);
-    padding: 14px 16px 12px;
-  }
-  .col-metrics {
-    grid-column: 2; grid-row: 2;
-    border-right: none; border-bottom: 1px solid var(--line);
-    flex-wrap: wrap;
-  }
-  .metric-group { min-width: 60px; padding: 10px 10px; }
-  .mg-val { font-size: 16px; }
-  .col-right {
-    grid-column: 2; grid-row: 3;
-    min-width: 0; padding: 12px 14px;
-    flex-direction: column; align-items: stretch; gap: 12px;
-  }
-  .actions-col { flex-direction: row; }
-  .btn-card { flex: 1; justify-content: center; }
-  .panel-body { padding: 16px; }
-  .sec-grid { grid-template-columns: 1fr; }
-  .bottom-bar { flex-direction: column; }
-  .level-items { flex-direction: column; gap: 8px; }
+@media (max-width: 1024px) {
+  .ht-head, .ht-row { grid-template-columns: 60px 180px 1fr 1fr 140px 100px 110px; }
+  .ht-th, .ht-td { font-size: 13px; padding: 12px 8px; }
+  .loja-nome { font-size: 16px; }
+  .mg-val { font-size: 22px; }
 }
 </style>
 </head>
@@ -495,7 +446,7 @@ body {
 <header class="header">
   <div class="header-left">
     <button class="btn-back" id="btn-back" onclick="goHome()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
       Voltar
     </button>
     <div class="header-icon">
@@ -549,13 +500,13 @@ function goDetail(lojaIdx) {
 
 /* ── SVG helpers ── */
 function svgClock() {
-  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>';
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>';
 }
 function svgFolder() {
-  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>';
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>';
 }
 function svgArrow() {
-  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
 }
 
 function toggleH(li) {
@@ -745,7 +696,7 @@ function renderHomeTable(lojas) {
 
   var html = '';
   if (filtered.length === 0) {
-    html = '<div style="padding:32px;text-align:center;color:var(--ink-4);font-size:13px">Sem lojas para este filtro.</div>';
+    html = '<div style="padding:32px;text-align:center;color:var(--ink-4);font-size:15px">Sem lojas para este filtro.</div>';
   } else {
     filtered.forEach(function(l) {
       var li = lojas.indexOf(l); /* real index for detail navigation */
@@ -753,38 +704,38 @@ function renderHomeTable(lojas) {
       html += '<div class="ht-row'+(l.isNew?' new-loja':'')+'" onclick="goDetail('+li+')">';
 
       /* rank */
-      html += '<div class="ht-td rank-td" style="flex-direction:column;gap:6px;align-items:center;justify-content:center;background:#f0ede8">';
-      html += '<div style="font-family:\'DM Serif Display\',serif;font-size:26px;font-weight:400;color:var(--ink-2);line-height:1">'+(li+1)+'</div>';
-      html += '<div class="rank-pill '+pc+'" style="font-size:12px;padding:3px 10px">N'+l.nivel+'</div>';
+      html += '<div class="ht-td rank-td" style="flex-direction:column;gap:6px;align-items:center;justify-content:center;background:#f1f3f5">';
+      html += '<div style="font-family:\'DM Serif Display\',serif;font-size:30px;font-weight:400;color:var(--ink);line-height:1">'+(li+1)+'</div>';
+      html += '<div class="rank-pill '+pc+'" style="font-size:13px;padding:4px 12px">N'+l.nivel+'</div>';
       html += '</div>';
 
       /* identity */
       html += '<div class="ht-td left id-td" style="flex-direction:column;align-items:flex-start;gap:3px">';
-      html += '<div style="font-weight:600;font-size:15px">'+(l.local||l.loja)+'</div>';
-      html += '<div style="font-size:12.5px;color:var(--ink-4)">'+l.loja+'</div>';
+      html += '<div style="font-weight:700;font-size:18px">'+(l.local||l.loja)+'</div>';
+      html += '<div style="font-size:14px;color:var(--ink-3)">'+l.loja+'</div>';
       html += '</div>';
 
       /* P metrics */
-      html += '<div class="ht-td metrics-td" style="flex-direction:column;gap:3px">';
-      html += '<div style="font-size:12px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:var(--ink-4)">Total '+fmt(l.pT)+'</div>';
-      html += '<div style="font-size:13px;color:var(--ink-3)">'+fmt(l.pA)+' abertas · '+fmt(l.pF)+' fechadas</div>';
+      html += '<div class="ht-td metrics-td" style="flex-direction:column;gap:4px">';
+      html += '<div style="font-size:13px;font-weight:800;letter-spacing:0.5px;text-transform:uppercase;color:var(--ink-3)">Total '+fmt(l.pT)+'</div>';
+      html += '<div style="font-size:14px;color:var(--ink-2);font-weight:500">'+fmt(l.pA)+' abertas · '+fmt(l.pF)+' fechadas</div>';
       html += '</div>';
 
       /* NP metrics */
-      html += '<div class="ht-td" style="flex-direction:column;gap:3px">';
-      html += '<div style="font-size:12px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:var(--ink-4)">Total '+fmt(l.nT)+'</div>';
-      html += '<div style="font-size:13px;color:var(--ink-3)">'+fmt(l.nA)+' abertas · '+fmt(l.nF)+' fechadas</div>';
+      html += '<div class="ht-td" style="flex-direction:column;gap:4px">';
+      html += '<div style="font-size:13px;font-weight:800;letter-spacing:0.5px;text-transform:uppercase;color:var(--ink-3)">Total '+fmt(l.nT)+'</div>';
+      html += '<div style="font-size:14px;color:var(--ink-2);font-weight:500">'+fmt(l.nA)+' abertas · '+fmt(l.nF)+' fechadas</div>';
       html += '</div>';
 
       /* progress */
       html += '<div class="ht-td prog-td"><div class="mini-prog">';
       html += '<div class="mini-row">'
-        +'<span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.4px;color:var(--ink-4);min-width:22px">P</span>'
+        +'<span style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:0.4px;color:var(--ink-3);min-width:26px">P</span>'
         +'<div class="mini-track"><div class="mini-fill fill-blue" style="width:'+l.pctPFInt+'%"></div></div>'
         +'<span class="mini-pct" style="color:var(--bar-blue)">'+l.pctPFInt+'%</span>'
         +'</div>';
       html += '<div class="mini-row">'
-        +'<span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.4px;color:var(--ink-4);min-width:22px">NP</span>'
+        +'<span style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:0.4px;color:var(--ink-3);min-width:26px">NP</span>'
         +'<div class="mini-track"><div class="mini-fill fill-orange" style="width:'+l.pctNFInt+'%"></div></div>'
         +'<span class="mini-pct" style="color:var(--bar-orange)">'+l.pctNFInt+'%</span>'
         +'</div>';
@@ -806,196 +757,103 @@ function renderHomeTable(lojas) {
   document.getElementById('ht-body').innerHTML = html;
 }
 
+function renderDetail(lojas, li) {
+  var l = lojas[li];
+  var app = document.getElementById('app');
+  var html = '';
 
+  /* Main Card Info */
+  html += '<div class="loja-card" style="margin-bottom:24px">';
+  html += '<div class="card-main">';
+  html += '<div class="col-rank"><div class="rank-num">'+(li+1)+'</div><div class="rank-pill '+pillCls(l.nivel)+'">N'+l.nivel+'</div></div>';
+  html += '<div class="col-id"><div class="loja-nome">'+(l.local||l.loja)+'</div><div class="loja-code">'+l.loja+'</div></div>';
+  html += '<div class="col-metrics">';
+  html += '<div class="metric-group is-total"><div class="mg-label">P Total</div><div class="mg-val">'+fmt(l.pT)+'</div><div class="mg-sub">'+fmt(l.pF)+' fechadas</div></div>';
+  html += '<div class="metric-group"><div class="mg-label">P Aberto</div><div class="mg-val">'+fmt(l.pA)+'</div><div class="mg-sub">'+l.pctPF+'% concluído</div></div>';
+  html += '<div class="col-metrics-sep"></div>';
+  html += '<div class="metric-group is-total-np"><div class="mg-label">NP Total</div><div class="mg-val">'+fmt(l.nT)+'</div><div class="mg-sub">'+fmt(l.nF)+' fechadas</div></div>';
+  html += '<div class="metric-group"><div class="mg-label">NP Aberto</div><div class="mg-val">'+fmt(l.nA)+'</div><div class="mg-sub">'+l.pctNF+'% concluído</div></div>';
+  html += '</div>';
+  html += '<div class="col-right"><div class="progress-block">';
+  html += '<div class="progress-row"><div class="progress-label-row"><span class="prog-label">Progresso P</span><span class="prog-pct">'+l.pctPF+'%</span></div><div class="prog-track"><div class="prog-fill fill-blue" style="width:'+l.pctPF+'%"></div></div></div>';
+  html += '<div class="progress-row"><div class="progress-label-row"><span class="prog-label">Progresso NP</span><span class="prog-pct">'+l.pctNF+'%</span></div><div class="prog-track"><div class="prog-fill fill-orange" style="width:'+l.pctNF+'%"></div></div></div>';
+  html += '</div></div>';
+  html += '</div></div>';
+
+  /* Sections & History Buttons */
+  html += '<div style="display:flex;gap:12px;margin-bottom:24px">';
+  html += '<button id="bs-'+li+'" class="btn-card active" onclick="toggleS('+li+')">'+svgFolder()+' Secções</button>';
+  html += '<button id="bh-'+li+'" class="btn-card" onclick="toggleH('+li+')">'+svgClock()+' Histórico</button>';
+  html += '</div>';
+
+  /* Sections Panel */
+  html += '<div id="ps-'+li+'" class="panel open"><div class="panel-body">';
+  html += '<div class="panel-title">Distribuição por Secção</div>';
+  if (!l.seccoes || l.seccoes.length===0) {
+    html += '<div style="padding:20px;text-align:center;color:var(--ink-4)">Sem dados de secções disponíveis.</div>';
+  } else {
+    html += '<div class="sec-grid">';
+    l.seccoes.forEach(function(s) {
+      var pPct = s.pT>0?Math.round(s.pF/s.pT*100):0;
+      var nPct = s.nT>0?Math.round(s.nF/s.nT*100):0;
+      html += '<div class="sec-card"><div class="sec-card-head">'+s.nome+'</div><div class="sec-card-body">';
+      html += '<div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;font-size:11px;font-weight:700;margin-bottom:4px"><span>P: '+s.pF+'/'+s.pT+'</span><span>'+pPct+'%</span></div><div class="prog-track" style="height:4px"><div class="prog-fill fill-blue" style="width:'+pPct+'%"></div></div></div>';
+      html += '<div><div style="display:flex;justify-content:space-between;font-size:11px;font-weight:700;margin-bottom:4px"><span>NP: '+s.nF+'/'+s.nT+'</span><span>'+nPct+'%</span></div><div class="prog-track" style="height:4px"><div class="prog-fill fill-orange" style="width:'+nPct+'%"></div></div></div>';
+      html += '</div></div>';
+    });
+    html += '</div>';
+  }
+  html += '</div></div>';
+
+  /* History Panel */
+  html += '<div id="ph-'+li+'" class="panel"><div class="panel-body">';
+  html += '<div class="panel-title">Evolução Semanal (P vs NP)</div>';
+  html += '<div class="chart-wrap"><canvas id="pnp-'+li+'" height="120"></canvas></div>';
+  html += '<table class="dtable"><thead><tr><th>Semana</th><th>P Total</th><th>P Aberto</th><th>P Fechado</th><th>% P</th><th>NP Total</th><th>NP Aberto</th><th>NP Fechado</th><th>% NP</th></tr></thead><tbody>';
+  l.historico.forEach(function(h) {
+    var pT=Number(h['P Total'])||0, pA=Number(h['P Aberto'])||0, pF=Number(h['P Fechado'])||0;
+    var nT=Number(h['NP Total'])||0, nA=Number(h['NP Aberto'])||0, nF=Number(h['NP Fechado'])||0;
+    var pP=pT>0?Math.round(pF/pT*100):0, nP=nT>0?Math.round(nF/nT*100):0;
+    html += '<tr><td>'+h.Semana+'</td><td>'+pT+'</td><td>'+pA+'</td><td>'+pF+'</td><td>'+pP+'%</td><td>'+nT+'</td><td>'+nA+'</td><td>'+nF+'</td><td>'+nP+'%</td></tr>';
+  });
+  html += '</tbody></table>';
+  html += '</div></div>';
+
+  app.innerHTML = html;
+
+  /* Init Chart */
+  setTimeout(function() {
+    var ctx = document.getElementById('pnp-'+li).getContext('2d');
+    var labels = l.historico.map(function(h){ return h.Semana; });
+    var pData = l.historico.map(function(h){ var t=Number(h['P Total'])||0; return t>0?Math.round((Number(h['P Fechado'])||0)/t*100):0; });
+    var nData = l.historico.map(function(h){ var t=Number(h['NP Total'])||0; return t>0?Math.round((Number(h['NP Fechado'])||0)/t*100):0; });
+
+    charts['pnp-'+li] = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [
+          { label: '% P Fechado', data: pData, borderColor: '#3b3fd8', backgroundColor: '#3b3fd822', tension: 0.3, fill: true, pointRadius: 4 },
+          { label: '% NP Fechado', data: nData, borderColor: '#e8924a', backgroundColor: '#e8924a22', tension: 0.3, fill: true, pointRadius: 4 }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { position: 'top', labels: { font: { family: 'DM Sans', size: 12, weight: '600' } } } },
+        scales: {
+          y: { min: 0, max: 100, ticks: { callback: function(v){ return v+'%'; }, font: { size: 11 } } },
+          x: { ticks: { font: { size: 11 } } }
+        }
+      }
+    });
+  }, 50);
+}
 
 function pillCls(n) { return n===1?'pill-n1':n===2?'pill-n2':'pill-n3'; }
 
 function fmt(n) {
-  return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-}
-
-function renderDetail(lojas, focusIdx) {
-  var li = focusIdx;
-  var l  = lojas[li];
-  var pc = pillCls(l.nivel);
-  var html = '';
-  html += '<div class="card-list">';
-
-    /* History panel */
-    var histRows = l.historico.map(function(h) {
-      var hpT=Number(h['P Total'])||0,hpF=Number(h['P Fechado'])||0;
-      var hnT=Number(h['NP Total'])||0,hnF=Number(h['NP Fechado'])||0;
-      var hpPct = hpT>0 ? (hpF/hpT*100).toFixed(1) : '0.0';
-      var hnPct = hnT>0 ? (hnF/hnT*100).toFixed(1) : '0.0';
-      return '<tr>'
-        +'<td>'+(h.Semana||'—')+'</td>'
-        +'<td>'+fmt(hpT)+'</td>'
-        +'<td>'+fmt(hpT-hpF)+'</td>'
-        +'<td>'+fmt(hpF)+'</td>'
-        +'<td style="color:var(--bar-blue);font-weight:700">'+hpPct+'%</td>'
-        +'<td>'+fmt(hnT)+'</td>'
-        +'<td>'+fmt(hnT-hnF)+'</td>'
-        +'<td>'+fmt(hnF)+'</td>'
-        +'<td style="color:var(--bar-orange);font-weight:700">'+hnPct+'%</td>'
-        +'</tr>';
-    }).join('');
-    var chartH = Math.max(180, l.historico.length*58+80);
-
-    var histHtml = l.historico.length>0
-      ? '<div style="margin-bottom:8px">'
-        + '<div style="font-size:10px;font-weight:700;letter-spacing:0.6px;text-transform:uppercase;color:#9c9a95;margin-bottom:6px">Gráfico — % de tarefas fechadas por semana (Programadas vs Não Programadas)</div>'
-        + '<div class="chart-wrap" style="height:'+chartH+'px;margin-bottom:20px"><canvas id="pnp-'+li+'"></canvas></div>'
-        + '</div>'
-        + '<div style="font-size:10px;font-weight:700;letter-spacing:0.6px;text-transform:uppercase;color:#9c9a95;margin-bottom:8px">Tabela de valores — Programadas (P) e Não Programadas (NP)</div>'
-        + '<div style="overflow-x:auto"><table class="dtable">'
-        + '<thead><tr>'
-        + '<th>Semana</th>'
-        + '<th style="background:#f0f2fb;color:var(--bar-blue)">P Total</th>'
-        + '<th>P Abertas</th>'
-        + '<th>P Fechadas</th>'
-        + '<th style="color:var(--bar-blue)">% P Fechadas</th>'
-        + '<th style="background:#fdf3eb;color:var(--bar-orange)">NP Total</th>'
-        + '<th>NP Abertas</th>'
-        + '<th>NP Fechadas</th>'
-        + '<th style="color:var(--bar-orange)">% NP Fechadas</th>'
-        + '</tr></thead>'
-        + '<tbody>'+histRows+'</tbody>'
-        + '</table></div>'
-      : '<p style="color:#9c9a95;font-size:13px">Sem dados históricos.</p>';
-
-    /* Sections panel */
-    var secHtml = l.seccoes.length>0
-      ? '<div class="sec-grid">'+l.seccoes.map(function(s,si) {
-          return '<div class="sec-card"><div class="sec-card-head">'+s.nome+'</div>'
-            +'<div class="sec-card-body"><div style="height:72px;position:relative"><canvas id="sc-'+li+'-'+si+'"></canvas></div></div></div>';
-        }).join('')+'</div>'
-      : '<p style="color:#9c9a95;font-size:13px">Sem secções disponíveis.</p>';
-
-    html += '<div class="loja-card">';
-    html += '<div class="card-main">';
-
-    /* Rank */
-    html += '<div class="col-rank"><div class="rank-num">'+(li+1)+'</div><div class="rank-pill '+pc+'">N'+l.nivel+'</div></div>';
-
-    /* Identity */
-    html += '<div class="col-id"><div class="loja-nome">'+(l.local||l.loja)+'</div><div class="loja-code">'+l.loja+'</div></div>';
-
-    /* Metrics */
-    html += '<div class="col-metrics">';
-    var groups = [
-      {label:'P Total',    val:fmt(l.pT), cls:'is-total'},
-      {label:'P Abertas',  val:fmt(l.pA), cls:''},
-      {label:'P Fechadas', val:fmt(l.pF), cls:''}
-    ];
-    groups.forEach(function(g) {
-      html += '<div class="metric-group '+g.cls+'"><div class="mg-label">'+g.label+'</div><div class="mg-val">'+g.val+'</div></div>';
-    });
-    /* Bold separator P | NP */
-    html += '<div class="col-metrics-sep"></div>';
-    var groupsNP = [
-      {label:'NP Total',    val:fmt(l.nT), cls:'is-total-np'},
-      {label:'NP Abertas',  val:fmt(l.nA), cls:''},
-      {label:'NP Fechadas', val:fmt(l.nF), cls:''}
-    ];
-    groupsNP.forEach(function(g) {
-      html += '<div class="metric-group '+g.cls+'"><div class="mg-label">'+g.label+'</div><div class="mg-val">'+g.val+'</div></div>';
-    });
-    html += '</div>';
-
-    /* Right: progress + buttons */
-    html += '<div class="col-right">';
-    html += '<div class="progress-block">';
-    html += '<div class="progress-row">'
-      +'<div class="progress-label-row"><span class="prog-label">Programadas</span><span class="prog-pct">'+l.pctPFInt+'%</span></div>'
-      +'<div class="prog-track"><div class="prog-fill fill-blue" style="width:'+l.pctPFInt+'%"></div></div>'
-      +'</div>';
-    html += '<div class="progress-row">'
-      +'<div class="progress-label-row"><span class="prog-label">Não Prog.</span><span class="prog-pct">'+l.pctNFInt+'%</span></div>'
-      +'<div class="prog-track"><div class="prog-fill fill-orange" style="width:'+l.pctNFInt+'%"></div></div>'
-      +'</div>';
-    html += '</div>';
-
-    html += '<div class="actions-col">';
-    html += '<button class="btn-card" id="bh-'+li+'" onclick="toggleH('+li+')">'+svgClock()+'Histórico</button>';
-    html += '<button class="btn-card" id="bs-'+li+'" onclick="toggleS('+li+')">'+svgFolder()+'Secções</button>';
-    html += '</div>';
-    html += '</div>'; /* col-right */
-
-    html += '</div>'; /* card-main */
-
-    /* Panels */
-    html += '<div class="panel" id="ph-'+li+'"><div class="panel-body"><div class="panel-title">Evolução Histórica · '+l.loja+'</div>'+histHtml+'</div></div>';
-    html += '<div class="panel" id="ps-'+li+'"><div class="panel-body"><div class="panel-title">Secções · '+l.seccoes.length+'</div>'+secHtml+'</div></div>';
-
-    html += '</div>'; /* loja-card */
-
-  html += '</div>'; /* card-list */
-
-  /* Legend */
-  html += '<div class="legend-bar" style="margin-top:14px;margin-bottom:0">';
-  html += '<div class="legend-item"><div class="legend-dot" style="background:var(--bar-blue)"></div><span class="legend-label">P</span> = Tarefas Programadas</div>';
-  html += '<div class="legend-sep"></div>';
-  html += '<div class="legend-item"><div class="legend-dot" style="background:var(--bar-orange)"></div><span class="legend-label">NP</span> = Tarefas Não Programadas</div>';
-  html += '</div>';
-
-  document.getElementById('app').innerHTML = html;
-
-  /* Charts — only for this loja */
-  var el = document.getElementById('pnp-'+li);
-  if (el && l.historico.length>0) {
-    var sems=[], pp=[], np=[];
-    l.historico.forEach(function(h) {
-      sems.push(h.Semana||'');
-      var pT=Number(h['P Total'])||0, pF=Number(h['P Fechado'])||0;
-      var nT=Number(h['NP Total'])||0, nF=Number(h['NP Fechado'])||0;
-      pp.push(pT>0?parseFloat((pF/pT*100).toFixed(1)):0);
-      np.push(nT>0?parseFloat((nF/nT*100).toFixed(1)):0);
-    });
-    charts['pnp-'+li] = new Chart(el.getContext('2d'), {
-      type:'bar', plugins:[ChartDataLabels],
-      data:{ labels:sems, datasets:[
-        { label:'% de Programadas Fechadas', data:pp, backgroundColor:'rgba(59,63,216,.75)', borderRadius:3, borderWidth:0 },
-        { label:'% de Não Programadas Fechadas', data:np, backgroundColor:'rgba(232,146,74,.8)', borderRadius:3, borderWidth:0 }
-      ]},
-      options:{
-        indexAxis:'y', responsive:true, maintainAspectRatio:false,
-        layout:{padding:{right:56}},
-        plugins:{
-          datalabels:{ anchor:'end', align:'right', formatter:function(v){ return v+'%'; }, font:{size:11,weight:'700'}, color:'#3a3835' },
-          legend:{ position:'top', labels:{ font:{size:12,weight:'500'}, color:'#3a3835', padding:16, usePointStyle:true, pointStyleWidth:10 } },
-          tooltip:{ callbacks:{ title:function(items){ return 'Semana: '+items[0].label; }, label:function(c){ return ' '+c.dataset.label+': '+c.parsed.x+'%'; } }, titleFont:{size:12,weight:'600'}, bodyFont:{size:12}, padding:10 }
-        },
-        scales:{
-          x:{ beginAtZero:true, max:100, title:{display:true,text:'Percentagem de tarefas fechadas (%)',color:'#9c9a95',font:{size:10,weight:'600'}}, ticks:{color:'#9c9a95',font:{size:10},callback:function(v){return v+'%';}}, grid:{color:'rgba(0,0,0,.04)'} },
-          y:{ ticks:{color:'#3a3835',font:{size:10,weight:'500'}}, grid:{display:false} }
-        }
-      }
-    });
-  }
-  l.seccoes.forEach(function(s,si) {
-    var sel=document.getElementById('sc-'+li+'-'+si);
-    if (!sel) return;
-    var pP=s.pT>0?parseFloat((s.pF/s.pT*100).toFixed(1)):0;
-    var pN=s.nT>0?parseFloat((s.nF/s.nT*100).toFixed(1)):0;
-    charts['sc-'+li+'-'+si]=new Chart(sel.getContext('2d'),{
-      type:'bar', plugins:[ChartDataLabels],
-      data:{labels:['Programadas','Não Prog.'],datasets:[{data:[pP,pN],backgroundColor:['rgba(59,63,216,.75)','rgba(232,146,74,.8)'],borderRadius:3,borderWidth:0}]},
-      options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,layout:{padding:{right:42}},
-        plugins:{datalabels:{anchor:'end',align:'right',formatter:function(v){return v+'%';},font:{size:11,weight:'600'},color:'#3a3835'},legend:{display:false}},
-        scales:{x:{beginAtZero:true,max:100,display:false},y:{ticks:{font:{size:11,weight:'500'},color:'#3a3835'},grid:{display:false}}}
-      }
-    });
-  });
-}
-
-function svgClock() {
-  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;flex-shrink:0"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>';
-}
-function svgFolder() {
-  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;flex-shrink:0"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>';
-}
-function svgArrow() {
-  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;flex-shrink:0"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
+  return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 }
 </script>
 </body>
