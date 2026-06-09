@@ -9,14 +9,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.1.0/chartjs-plugin-datalabels.min.js"></script>
 <style>
 :root {
-  --ink: #000000; /* Aumentado o contraste (mais escuro) */
+  --ink: #000000; /* Alto contraste */
   --ink-2: #1a1a1a;
   --ink-3: #333333;
   --ink-4: #555555;
-  --paper: #ffffff; /* Aumentado o contraste (fundo branco puro) */
+  --paper: #ffffff; /* Fundo branco puro para contraste */
   --paper-2: #f8f9fa;
   --paper-3: #f1f3f5;
-  --line: #d1d1d1; /* Linhas mais visíveis para contraste */
+  --line: #d1d1d1;
   --line-2: #b1b1b1;
   --n1: #d00000; --n1-bg: #fff0f0;
   --n2: #c06000; --n2-bg: #fff4e0;
@@ -33,7 +33,7 @@ body {
   font-family: 'DM Sans', sans-serif;
   background: var(--paper);
   color: var(--ink);
-  font-size: 16px; /* Aumentado o tamanho das letras em geral (era 14px) */
+  font-size: 16px; /* Aumentado em geral */
   -webkit-font-smoothing: antialiased;
 }
 
@@ -376,16 +376,15 @@ body {
 }
 .ht-head {
   display: grid;
-  /* Ajustado para acomodar títulos maiores e manter Comparação P vs NP em uma linha */
   grid-template-columns: 80px 240px 1fr 1fr 180px 120px 140px;
   background: #f1f3f5; border-bottom: 2px solid var(--line);
 }
 .ht-th {
-  padding: 16px 12px; font-size: 14px; font-weight: 800; /* Títulos destacados e maiores */
+  padding: 16px 12px; font-size: 14px; font-weight: 800;
   letter-spacing: 0.5px; text-transform: uppercase; color: var(--ink);
   text-align: center; border-right: 1px solid var(--line);
   display: flex; align-items: center; justify-content: center;
-  white-space: nowrap; /* Garante que fiquem na mesma linha */
+  white-space: nowrap;
 }
 .ht-th:last-child { border-right: none; }
 .ht-th.left { justify-content: flex-start; text-align: left; padding-left: 20px; }
@@ -500,13 +499,13 @@ function goDetail(lojaIdx) {
 
 /* ── SVG helpers ── */
 function svgClock() {
-  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>';
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;flex-shrink:0"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>';
 }
 function svgFolder() {
-  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>';
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;flex-shrink:0"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>';
 }
 function svgArrow() {
-  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;flex-shrink:0"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
 }
 
 function toggleH(li) {
@@ -705,37 +704,37 @@ function renderHomeTable(lojas) {
 
       /* rank */
       html += '<div class="ht-td rank-td" style="flex-direction:column;gap:6px;align-items:center;justify-content:center;background:#f1f3f5">';
-      html += '<div style="font-family:\'DM Serif Display\',serif;font-size:30px;font-weight:400;color:var(--ink);line-height:1">'+(li+1)+'</div>';
+      html += '<div style="font-family:\'DM Serif Display\',serif;font-size:30px;font-weight:400;color:'#000000';line-height:1">'+(li+1)+'</div>';
       html += '<div class="rank-pill '+pc+'" style="font-size:13px;padding:4px 12px">N'+l.nivel+'</div>';
       html += '</div>';
 
       /* identity */
       html += '<div class="ht-td left id-td" style="flex-direction:column;align-items:flex-start;gap:3px">';
       html += '<div style="font-weight:700;font-size:18px">'+(l.local||l.loja)+'</div>';
-      html += '<div style="font-size:14px;color:var(--ink-3)">'+l.loja+'</div>';
+      html += '<div style="font-size:14px;color:'#555555'">'+l.loja+'</div>';
       html += '</div>';
 
       /* P metrics */
       html += '<div class="ht-td metrics-td" style="flex-direction:column;gap:4px">';
-      html += '<div style="font-size:13px;font-weight:800;letter-spacing:0.5px;text-transform:uppercase;color:var(--ink-3)">Total '+fmt(l.pT)+'</div>';
+      html += '<div style="font-size:13px;font-weight:800;letter-spacing:0.5px;text-transform:uppercase;color:'#555555'">Total '+fmt(l.pT)+'</div>';
       html += '<div style="font-size:14px;color:var(--ink-2);font-weight:500">'+fmt(l.pA)+' abertas · '+fmt(l.pF)+' fechadas</div>';
       html += '</div>';
 
       /* NP metrics */
       html += '<div class="ht-td" style="flex-direction:column;gap:4px">';
-      html += '<div style="font-size:13px;font-weight:800;letter-spacing:0.5px;text-transform:uppercase;color:var(--ink-3)">Total '+fmt(l.nT)+'</div>';
+      html += '<div style="font-size:13px;font-weight:800;letter-spacing:0.5px;text-transform:uppercase;color:'#555555'">Total '+fmt(l.nT)+'</div>';
       html += '<div style="font-size:14px;color:var(--ink-2);font-weight:500">'+fmt(l.nA)+' abertas · '+fmt(l.nF)+' fechadas</div>';
       html += '</div>';
 
       /* progress */
       html += '<div class="ht-td prog-td"><div class="mini-prog">';
       html += '<div class="mini-row">'
-        +'<span style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:0.4px;color:var(--ink-3);min-width:26px">P</span>'
+        +'<span style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:0.4px;color:'#555555';min-width:26px">P</span>'
         +'<div class="mini-track"><div class="mini-fill fill-blue" style="width:'+l.pctPFInt+'%"></div></div>'
         +'<span class="mini-pct" style="color:var(--bar-blue)">'+l.pctPFInt+'%</span>'
         +'</div>';
       html += '<div class="mini-row">'
-        +'<span style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:0.4px;color:var(--ink-3);min-width:26px">NP</span>'
+        +'<span style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:0.4px;color:'#555555';min-width:26px">NP</span>'
         +'<div class="mini-track"><div class="mini-fill fill-orange" style="width:'+l.pctNFInt+'%"></div></div>'
         +'<span class="mini-pct" style="color:var(--bar-orange)">'+l.pctNFInt+'%</span>'
         +'</div>';
@@ -757,103 +756,184 @@ function renderHomeTable(lojas) {
   document.getElementById('ht-body').innerHTML = html;
 }
 
-function renderDetail(lojas, li) {
-  var l = lojas[li];
-  var app = document.getElementById('app');
+function renderDetail(lojas, focusIdx) {
+  var li = focusIdx;
+  var l  = lojas[li];
+  var pc = pillCls(l.nivel);
   var html = '';
+  html += '<div class="card-list">';
 
-  /* Main Card Info */
-  html += '<div class="loja-card" style="margin-bottom:24px">';
-  html += '<div class="card-main">';
-  html += '<div class="col-rank"><div class="rank-num">'+(li+1)+'</div><div class="rank-pill '+pillCls(l.nivel)+'">N'+l.nivel+'</div></div>';
-  html += '<div class="col-id"><div class="loja-nome">'+(l.local||l.loja)+'</div><div class="loja-code">'+l.loja+'</div></div>';
-  html += '<div class="col-metrics">';
-  html += '<div class="metric-group is-total"><div class="mg-label">P Total</div><div class="mg-val">'+fmt(l.pT)+'</div><div class="mg-sub">'+fmt(l.pF)+' fechadas</div></div>';
-  html += '<div class="metric-group"><div class="mg-label">P Aberto</div><div class="mg-val">'+fmt(l.pA)+'</div><div class="mg-sub">'+l.pctPF+'% concluído</div></div>';
-  html += '<div class="col-metrics-sep"></div>';
-  html += '<div class="metric-group is-total-np"><div class="mg-label">NP Total</div><div class="mg-val">'+fmt(l.nT)+'</div><div class="mg-sub">'+fmt(l.nF)+' fechadas</div></div>';
-  html += '<div class="metric-group"><div class="mg-label">NP Aberto</div><div class="mg-val">'+fmt(l.nA)+'</div><div class="mg-sub">'+l.pctNF+'% concluído</div></div>';
-  html += '</div>';
-  html += '<div class="col-right"><div class="progress-block">';
-  html += '<div class="progress-row"><div class="progress-label-row"><span class="prog-label">Progresso P</span><span class="prog-pct">'+l.pctPF+'%</span></div><div class="prog-track"><div class="prog-fill fill-blue" style="width:'+l.pctPF+'%"></div></div></div>';
-  html += '<div class="progress-row"><div class="progress-label-row"><span class="prog-label">Progresso NP</span><span class="prog-pct">'+l.pctNF+'%</span></div><div class="prog-track"><div class="prog-fill fill-orange" style="width:'+l.pctNF+'%"></div></div></div>';
-  html += '</div></div>';
-  html += '</div></div>';
+    /* History panel content */
+    var histRows = l.historico.map(function(h) {
+      var hpT=Number(h['P Total'])||0,hpF=Number(h['P Fechado'])||0;
+      var hnT=Number(h['NP Total'])||0,hnF=Number(h['NP Fechado'])||0;
+      var hpPct = hpT>0 ? (hpF/hpT*100).toFixed(1) : '0.0';
+      var hnPct = hnT>0 ? (hnF/hnT*100).toFixed(1) : '0.0';
+      return '<tr>'
+        +'<td>'+(h.Semana||'—')+'</td>'
+        +'<td>'+fmt(hpT)+'</td>'
+        +'<td>'+fmt(hpT-hpF)+'</td>'
+        +'<td>'+fmt(hpF)+'</td>'
+        +'<td style="color:var(--bar-blue);font-weight:700">'+hpPct+'%</td>'
+        +'<td>'+fmt(hnT)+'</td>'
+        +'<td>'+fmt(hnT-hnF)+'</td>'
+        +'<td>'+fmt(hnF)+'</td>'
+        +'<td style="color:var(--bar-orange);font-weight:700">'+hnPct+'%</td>'
+        +'</tr>';
+    }).join('');
+    var chartH = Math.max(180, l.historico.length*58+80);
 
-  /* Sections & History Buttons */
-  html += '<div style="display:flex;gap:12px;margin-bottom:24px">';
-  html += '<button id="bs-'+li+'" class="btn-card active" onclick="toggleS('+li+')">'+svgFolder()+' Secções</button>';
-  html += '<button id="bh-'+li+'" class="btn-card" onclick="toggleH('+li+')">'+svgClock()+' Histórico</button>';
-  html += '</div>';
+    var histHtml = l.historico.length>0
+      ? '<div style="margin-bottom:8px">'
+        + '<div style="font-size:12px;font-weight:800;letter-spacing:0.6px;text-transform:uppercase;color:'#555555';margin-bottom:6px">Gráfico — % de tarefas fechadas por semana (Programadas vs Não Programadas)</div>'
+        + '<div class="chart-wrap" style="height:'+chartH+'px;margin-bottom:20px"><canvas id="pnp-'+li+'"></canvas></div>'
+        + '</div>'
+        + '<div style="font-size:12px;font-weight:800;letter-spacing:0.6px;text-transform:uppercase;color:'#555555';margin-bottom:8px">Tabela de valores — Programadas (P) e Não Programadas (NP)</div>'
+        + '<div style="overflow-x:auto"><table class="dtable">'
+        + '<thead><tr>'
+        + '<th>Semana</th>'
+        + '<th style="background:#f0f2fb;color:var(--bar-blue)">P Total</th>'
+        + '<th>P Abertas</th>'
+        + '<th>P Fechadas</th>'
+        + '<th style="color:var(--bar-blue)">% P Fechadas</th>'
+        + '<th style="background:#fdf3eb;color:var(--bar-orange)">NP Total</th>'
+        + '<th>NP Abertas</th>'
+        + '<th>NP Fechadas</th>'
+        + '<th style="color:var(--bar-orange)">% NP Fechadas</th>'
+        + '</tr></thead>'
+        + '<tbody>'+histRows+'</tbody>'
+        + '</table></div>'
+      : '<p style="color:var(--ink-4);font-size:15px">Sem dados históricos.</p>';
 
-  /* Sections Panel */
-  html += '<div id="ps-'+li+'" class="panel open"><div class="panel-body">';
-  html += '<div class="panel-title">Distribuição por Secção</div>';
-  if (!l.seccoes || l.seccoes.length===0) {
-    html += '<div style="padding:20px;text-align:center;color:var(--ink-4)">Sem dados de secções disponíveis.</div>';
-  } else {
-    html += '<div class="sec-grid">';
-    l.seccoes.forEach(function(s) {
-      var pPct = s.pT>0?Math.round(s.pF/s.pT*100):0;
-      var nPct = s.nT>0?Math.round(s.nF/s.nT*100):0;
-      html += '<div class="sec-card"><div class="sec-card-head">'+s.nome+'</div><div class="sec-card-body">';
-      html += '<div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;font-size:11px;font-weight:700;margin-bottom:4px"><span>P: '+s.pF+'/'+s.pT+'</span><span>'+pPct+'%</span></div><div class="prog-track" style="height:4px"><div class="prog-fill fill-blue" style="width:'+pPct+'%"></div></div></div>';
-      html += '<div><div style="display:flex;justify-content:space-between;font-size:11px;font-weight:700;margin-bottom:4px"><span>NP: '+s.nF+'/'+s.nT+'</span><span>'+nPct+'%</span></div><div class="prog-track" style="height:4px"><div class="prog-fill fill-orange" style="width:'+nPct+'%"></div></div></div>';
-      html += '</div></div>';
+    /* Sections panel content */
+    var secHtml = l.seccoes.length>0
+      ? '<div class="sec-grid">'+l.seccoes.map(function(s,si) {
+          return '<div class="sec-card"><div class="sec-card-head">'+s.nome+'</div>'
+            +'<div class="sec-card-body"><div style="height:72px;position:relative"><canvas id="sc-'+li+'-'+si+'"></canvas></div></div></div>';
+        }).join('')+'</div>'
+      : '<p style="color:var(--ink-4);font-size:15px">Sem secções disponíveis.</p>';
+
+    html += '<div class="loja-card">';
+    html += '<div class="card-main">';
+
+    /* Rank */
+    html += '<div class="col-rank"><div class="rank-num">'+(li+1)+'</div><div class="rank-pill '+pc+'">N'+l.nivel+'</div></div>';
+
+    /* Identity */
+    html += '<div class="col-id"><div class="loja-nome">'+(l.local||l.loja)+'</div><div class="loja-code">'+l.loja+'</div></div>';
+
+    /* Metrics */
+    html += '<div class="col-metrics">';
+    var groups = [
+      {label:'P Total',    val:fmt(l.pT), cls:'is-total'},
+      {label:'P Abertas',  val:fmt(l.pA), cls:''},
+      {label:'P Fechadas', val:fmt(l.pF), cls:''}
+    ];
+    groups.forEach(function(g) {
+      html += '<div class="metric-group '+g.cls+'"><div class="mg-label">'+g.label+'</div><div class="mg-val">'+g.val+'</div></div>';
+    });
+    /* Bold separator P | NP */
+    html += '<div class="col-metrics-sep"></div>';
+    var groupsNP = [
+      {label:'NP Total',    val:fmt(l.nT), cls:'is-total-np'},
+      {label:'NP Abertas',  val:fmt(l.nA), cls:''},
+      {label:'NP Fechadas', val:fmt(l.nF), cls:''}
+    ];
+    groupsNP.forEach(function(g) {
+      html += '<div class="metric-group '+g.cls+'"><div class="mg-label">'+g.label+'</div><div class="mg-val">'+g.val+'</div></div>';
     });
     html += '</div>';
-  }
-  html += '</div></div>';
 
-  /* History Panel */
-  html += '<div id="ph-'+li+'" class="panel"><div class="panel-body">';
-  html += '<div class="panel-title">Evolução Semanal (P vs NP)</div>';
-  html += '<div class="chart-wrap"><canvas id="pnp-'+li+'" height="120"></canvas></div>';
-  html += '<table class="dtable"><thead><tr><th>Semana</th><th>P Total</th><th>P Aberto</th><th>P Fechado</th><th>% P</th><th>NP Total</th><th>NP Aberto</th><th>NP Fechado</th><th>% NP</th></tr></thead><tbody>';
-  l.historico.forEach(function(h) {
-    var pT=Number(h['P Total'])||0, pA=Number(h['P Aberto'])||0, pF=Number(h['P Fechado'])||0;
-    var nT=Number(h['NP Total'])||0, nA=Number(h['NP Aberto'])||0, nF=Number(h['NP Fechado'])||0;
-    var pP=pT>0?Math.round(pF/pT*100):0, nP=nT>0?Math.round(nF/nT*100):0;
-    html += '<tr><td>'+h.Semana+'</td><td>'+pT+'</td><td>'+pA+'</td><td>'+pF+'</td><td>'+pP+'%</td><td>'+nT+'</td><td>'+nA+'</td><td>'+nF+'</td><td>'+nP+'%</td></tr>';
-  });
-  html += '</tbody></table>';
-  html += '</div></div>';
+    /* Right: progress + buttons */
+    html += '<div class="col-right">';
+    html += '<div class="progress-block">';
+    html += '<div class="progress-row">'
+      +'<div class="progress-label-row"><span class="prog-label">Programadas</span><span class="prog-pct">'+l.pctPFInt+'%</span></div>'
+      +'<div class="prog-track"><div class="prog-fill fill-blue" style="width:'+l.pctPFInt+'%"></div></div>'
+      +'</div>';
+    html += '<div class="progress-row">'
+      +'<div class="progress-label-row"><span class="prog-label">Não Prog.</span><span class="prog-pct">'+l.pctNFInt+'%</span></div>'
+      +'<div class="prog-track"><div class="prog-fill fill-orange" style="width:'+l.pctNFInt+'%"></div></div>'
+      +'</div>';
+    html += '</div>';
 
-  app.innerHTML = html;
+    html += '<div class="actions-col">';
+    html += '<button class="btn-card" id="bh-'+li+'" onclick="toggleH('+li+')">'+svgClock()+'Histórico</button>';
+    html += '<button class="btn-card" id="bs-'+li+'" onclick="toggleS('+li+')">'+svgFolder()+'Secções</button>';
+    html += '</div>';
+    html += '</div>'; /* col-right */
 
-  /* Init Chart */
-  setTimeout(function() {
-    var ctx = document.getElementById('pnp-'+li).getContext('2d');
-    var labels = l.historico.map(function(h){ return h.Semana; });
-    var pData = l.historico.map(function(h){ var t=Number(h['P Total'])||0; return t>0?Math.round((Number(h['P Fechado'])||0)/t*100):0; });
-    var nData = l.historico.map(function(h){ var t=Number(h['NP Total'])||0; return t>0?Math.round((Number(h['NP Fechado'])||0)/t*100):0; });
+    html += '</div>'; /* card-main */
 
-    charts['pnp-'+li] = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: labels,
-        datasets: [
-          { label: '% P Fechado', data: pData, borderColor: '#3b3fd8', backgroundColor: '#3b3fd822', tension: 0.3, fill: true, pointRadius: 4 },
-          { label: '% NP Fechado', data: nData, borderColor: '#e8924a', backgroundColor: '#e8924a22', tension: 0.3, fill: true, pointRadius: 4 }
-        ]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: { legend: { position: 'top', labels: { font: { family: 'DM Sans', size: 12, weight: '600' } } } },
-        scales: {
-          y: { min: 0, max: 100, ticks: { callback: function(v){ return v+'%'; }, font: { size: 11 } } },
-          x: { ticks: { font: { size: 11 } } }
+    /* Panels */
+    html += '<div class="panel" id="ph-'+li+'"><div class="panel-body"><div class="panel-title">Evolução Histórica · '+l.loja+'</div>'+histHtml+'</div></div>';
+    html += '<div class="panel" id="ps-'+li+'"><div class="panel-body"><div class="panel-title">Secções · '+l.seccoes.length+'</div>'+secHtml+'</div></div>';
+
+    html += '</div>'; /* loja-card */
+
+  html += '</div>'; /* card-list */
+
+  /* Legend */
+  html += '<div class="legend-bar" style="margin-top:14px;margin-bottom:0">';
+  html += '<div class="legend-item"><div class="legend-dot" style="background:var(--bar-blue)"></div><span class="legend-label">P</span> = Tarefas Programadas</div>';
+  html += '<div class="legend-sep"></div>';
+  html += '<div class="legend-item"><div class="legend-dot" style="background:var(--bar-orange)"></div><span class="legend-label">NP</span> = Tarefas Não Programadas</div>';
+  html += '</div>';
+
+  document.getElementById('app').innerHTML = html;
+
+  /* Charts — only for this loja */
+  var el = document.getElementById('pnp-'+li);
+  if (el && l.historico.length>0) {
+    var sems=[], pp=[], np=[];
+    l.historico.forEach(function(h) {
+      sems.push(h.Semana||'');
+      var pT=Number(h['P Total'])||0, pF=Number(h['P Fechado'])||0;
+      var nT=Number(h['NP Total'])||0, nF=Number(h['NP Fechado'])||0;
+      pp.push(pT>0?parseFloat((pF/pT*100).toFixed(1)):0);
+      np.push(nT>0?parseFloat((nF/nT*100).toFixed(1)):0);
+    });
+    charts['pnp-'+li] = new Chart(el.getContext('2d'), {
+      type:'bar', plugins:[ChartDataLabels],
+      data:{ labels:sems, datasets:[
+        { label:'% de Programadas Fechadas', data:pp, backgroundColor:'rgba(59,63,216,.75)', borderRadius:3, borderWidth:0 },
+        { label:'% de Não Programadas Fechadas', data:np, backgroundColor:'rgba(232,146,74,.8)', borderRadius:3, borderWidth:0 }
+      ]},
+      options:{
+        indexAxis:'y', responsive:true, maintainAspectRatio:false,
+        layout:{padding:{right:56}},
+        plugins:{
+          datalabels:{ anchor:'end', align:'right', formatter:function(v){ return v+'%'; }, font:{size:11,weight:'700'}, color:'#000' },
+          legend:{ position:'top', labels:{ font:{size:12,weight:'700'}, color:'#000', padding:16, usePointStyle:true, pointStyleWidth:10 } },
+          tooltip:{ callbacks:{ title:function(items){ return 'Semana: '+items[0].label; }, label:function(c){ return ' '+c.dataset.label+': '+c.parsed.x+'%'; } }, titleFont:{size:12,weight:'700'}, bodyFont:{size:12}, padding:10 }
+        },
+        scales:{
+          x:{ beginAtZero:true, max:100, title:{display:true,text:'Percentagem de tarefas fechadas (%)',color:'#555555',font:{size:10,weight:'700'}}, ticks:{color:'#555555',font:{size:10},callback:function(v){return v+'%';}}, grid:{color:'rgba(0,0,0,.08)'} },
+          y:{ ticks:{color:'#000000',font:{size:10,weight:'700'}}, grid:{display:false} }
         }
       }
     });
-  }, 50);
+  }
+  l.seccoes.forEach(function(s,si) {
+    var sel=document.getElementById('sc-'+li+'-'+si);
+    if (!sel) return;
+    var pP=s.pT>0?parseFloat((s.pF/s.pT*100).toFixed(1)):0;
+    var pN=s.nT>0?parseFloat((s.nF/s.nT*100).toFixed(1)):0;
+    charts['sc-'+li+'-'+si]=new Chart(sel.getContext('2d'),{
+      type:'bar', plugins:[ChartDataLabels],
+      data:{labels:['Programadas','Não Prog.'],datasets:[{data:[pP,pN],backgroundColor:['rgba(59,63,216,.75)','rgba(232,146,74,.8)'],borderRadius:3,borderWidth:0}]},
+      options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,layout:{padding:{right:42}},
+        plugins:{datalabels:{anchor:'end',align:'right',formatter:function(v){return v+'%';},font:{size:11,weight:'700'},color:'#000'},legend:{display:false}},
+        scales:{x:{beginAtZero:true,max:100,display:false},y:{ticks:{font:{size:11,weight:'700'},color:'#000000'},grid:{display:false}}}
+      }
+    });
+  });
 }
 
 function pillCls(n) { return n===1?'pill-n1':n===2?'pill-n2':'pill-n3'; }
 
 function fmt(n) {
-  return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 </script>
 </body>
