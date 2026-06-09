@@ -18,9 +18,9 @@
   --paper-3: #f1f3f5;
   --line: #d1d1d1;
   --line-2: #b1b1b1;
-  --n1: #d00000; --n1-bg: #fff0f0;
+  --n1: #008000; --n1-bg: #e0ffe0;
   --n2: #c06000; --n2-bg: #fff4e0;
-  --n3: #008000; --n3-bg: #e0ffe0;
+  --n3: #d00000; --n3-bg: #fff0f0;
   --bar-blue: #2b2fd8;
   --bar-orange: #d8722a;
   --bar-track: #e4e4e8;
@@ -340,9 +340,9 @@ body {
   font-size: 42px; line-height: 1; color: var(--ink);
 }
 .stat-card-sub { font-size: 13px; color: var(--ink-4); margin-top: 2px; font-weight: 600; }
-.stat-card.accent-red   .stat-card-val { color: var(--n1); }
+.stat-card.accent-red   .stat-card-val { color: var(--n3); }
 .stat-card.accent-amber .stat-card-val { color: var(--n2); }
-.stat-card.accent-green .stat-card-val { color: var(--n3); }
+.stat-card.accent-green .stat-card-val { color: var(--n1); }
 .stat-card.accent-blue  .stat-card-val { color: var(--bar-blue); }
 
 /* filter bar */
@@ -547,7 +547,7 @@ fetch('dados.json?t=' + Date.now())
         var pT=Number(i['P Total'])||0, pA=Number(i['P Aberto'])||0, pF=Number(i['P Fechado'])||0;
         var nT=Number(i['NP Total'])||0, nA=Number(i['NP Aberto'])||0, nF=Number(i['NP Fechado'])||0;
         var pctPF=pT>0?(pF/pT*100):0, pctNF=nT>0?(nF/nT*100):0;
-        var nivel=pctPF>=41?3:pctPF>=21?2:1;
+        var nivel=pctPF>=41?1:pctPF>=21?2:3;
         var loc=String(i['Resumo contactos.Localidade']||i['IM.Localidade']||'').trim();
         var lojaId = String(i.Loja).trim();
         return { loja:lojaId, local:loc, pT:pT,pA:pA,pF:pF,nT:nT,nA:nA,nF:nF,
@@ -614,9 +614,9 @@ function renderHome(lojas, ultima, penultima) {
   /* Stats row */
   html += '<div class="home-stats">';
   html += statCard('Total de Lojas', lojas.length, penultima ? 'Esta semana' : 'Todas as lojas', '');
-  html += statCard('Nível 1 — Crítico', n1, '0–20% prog. fechadas', 'accent-red');
+  html += statCard('Nível 1 — OK', n1, '41%+ prog. fechadas', 'accent-green');
   html += statCard('Nível 2 — Atenção', n2, '21–40% prog. fechadas', 'accent-amber');
-  html += statCard('Nível 3 — OK', n3, '41%+ prog. fechadas', 'accent-green');
+  html += statCard('Nível 3 — Crítico', n3, '0–20% prog. fechadas', 'accent-red');
   if (penultima) {
     html += statCard('Entradas Novas', novas, 'Não presentes em '+penultima, novas>0?'accent-blue':'');
   }
@@ -633,9 +633,9 @@ function renderHome(lojas, ultima, penultima) {
     html += '<button class="filter-btn" data-filter="new" onclick="setFilter(\'new\')">Entradas Novas ('+newCount+')</button>';
   }
   html += '<div class="filter-divider"></div>';
-  html += '<button class="filter-btn" data-filter="n1" onclick="setFilter(\'n1\')">🔴 N1 ('+n1+')</button>';
+  html += '<button class="filter-btn" data-filter="n1" onclick="setFilter(\'n1\')">🟢 N1 ('+n1+')</button>';
   html += '<button class="filter-btn" data-filter="n2" onclick="setFilter(\'n2\')">🟠 N2 ('+n2+')</button>';
-  html += '<button class="filter-btn" data-filter="n3" onclick="setFilter(\'n3\')">🟢 N3 ('+n3+')</button>';
+  html += '<button class="filter-btn" data-filter="n3" onclick="setFilter(\'n3\')">🔴 N3 ('+n3+')</button>';
   html += '</div>';
 
   /* Table shell — rows injected by renderHomeTable */
@@ -655,11 +655,11 @@ function renderHome(lojas, ultima, penultima) {
   /* Bottom legend - RESTAURADO */
   html += '<div class="bottom-bar" style="margin-top:20px">';
   html += '<div class="level-legend"><div class="level-legend-title">Classificação de Nível</div><div class="level-items">';
-  html += '<div class="level-item"><div class="level-dot pill-n1">N1</div><span>0–20% prog. fechadas — crítico</span></div>';
+  html += '<div class="level-item"><div class="level-dot pill-n1">N1</div><span>41%+ fechadas — satisfatório</span></div>';
   html += '<div class="level-item"><div class="level-dot pill-n2">N2</div><span>21–40% fechadas — atenção</span></div>';
-  html += '<div class="level-item"><div class="level-dot pill-n3">N3</div><span>41%+ fechadas — satisfatório</span></div>';
+  html += '<div class="level-item"><div class="level-dot pill-n3">N3</div><span>0–20% prog. fechadas — crítico</span></div>';
   html += '</div></div>';
-  html += '<div class="action-banner"><div class="action-icon">⚠</div><div><div class="action-title">Ação Recomendada</div><div class="action-desc">Contactar urgentemente responsáveis das lojas N1. Clique em "Detalhe" para ver o histórico e secções.</div></div></div>';
+  html += '<div class="action-banner"><div class="action-icon">⚠</div><div><div class="action-title">Ação Recomendada</div><div class="action-desc">Contactar urgentemente responsáveis das lojas N3. Clique em "Detalhe" para ver o histórico e secções.</div></div></div>';
   html += '</div>';
 
   document.getElementById('home-screen').innerHTML = html;
