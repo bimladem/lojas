@@ -21,7 +21,6 @@
   --n1: #d00000; --n1-bg: #fff0f0; /* Vermelho */
   --n2: #ff7b00; --n2-bg: #fff3e6; /* Laranja Vibrante */
   --n3: #ffd900; --n3-bg: #fffde6; /* Amarelo Brilhante */
-  --n4: #000080; --n4-bg: #e0e0ff; /* Azul escuro */
   --bar-blue: #2b2fd8;
   --bar-orange: #d8722a;
   --bar-track: #e4e4e8;
@@ -137,7 +136,6 @@ body {
 .pill-n1 { background: var(--n1-bg); color: var(--n1); }
 .pill-n2 { background: var(--n2-bg); color: var(--n2); }
 .pill-n3 { background: var(--n3-bg); color: var(--n3); }
-.pill-n4 { background: var(--n4-bg); color: var(--n4); }
 
 /* identity column */
 .col-id {
@@ -345,7 +343,6 @@ body {
 .stat-card.accent-red    .stat-card-val { color: var(--n1); }
 .stat-card.accent-amber  .stat-card-val { color: var(--n2); }
 .stat-card.accent-yellow .stat-card-val { color: var(--n3); }
-.stat-card.accent-navy   .stat-card-val { color: var(--n4); }
 .stat-card.accent-blue   .stat-card-val { color: var(--bar-blue); }
 
 /* filter bar */
@@ -550,8 +547,8 @@ fetch('dados.json?t=' + Date.now())
         var pT=Number(i['P Total'])||0, pA=Number(i['P Aberto'])||0, pF=Number(i['P Fechado'])||0;
         var nT=Number(i['NP Total'])||0, nA=Number(i['NP Aberto'])||0, nF=Number(i['NP Fechado'])||0;
         var pctPF=pT>0?(pF/pT*100):0, pctNF=nT>0?(nF/nT*100):0;
-        // NOVA LÓGICA: N1 (0-20), N2 (21-40), N3 (41-50), N4 (>50)
-        var nivel=pctPF>50?4:pctPF>=41?3:pctPF>=21?2:1;
+        // LÓGICA CORRIGIDA: N1 (0-20), N2 (21-40), N3 (>=41)
+        var nivel=pctPF>=41?3:pctPF>=21?2:1;
         var loc=String(i['Resumo contactos.Localidade']||i['IM.Localidade']||'').trim();
         var lojaId = String(i.Loja).trim();
         return { loja:lojaId, local:loc, pT:pT,pA:pA,pF:pF,nT:nT,nA:nA,nF:nF,
@@ -608,7 +605,6 @@ function renderHome(lojas, ultima, penultima) {
   var n1 = lojas.filter(function(l){ return l.nivel===1; }).length;
   var n2 = lojas.filter(function(l){ return l.nivel===2; }).length;
   var n3 = lojas.filter(function(l){ return l.nivel===3; }).length;
-  var n4 = lojas.filter(function(l){ return l.nivel===4; }).length;
   var novas = lojas.filter(function(l){ return l.isNew; }).length;
   var totalPT = lojas.reduce(function(s,l){ return s+l.pT; },0);
   var totalPF = lojas.reduce(function(s,l){ return s+l.pF; },0);
@@ -622,7 +618,6 @@ function renderHome(lojas, ultima, penultima) {
   html += statCard('Nível 1', n1, '0–20% prog. fechadas', 'accent-red');
   html += statCard('Nível 2', n2, '21–40% prog. fechadas', 'accent-amber');
   html += statCard('Nível 3', n3, '41–50% prog. fechadas', 'accent-yellow');
-  html += statCard('Nível 4', n4, '> 50% prog. fechadas', 'accent-navy');
   if (penultima) {
     html += statCard('Entradas Novas', novas, 'Não presentes em '+penultima, novas>0?'accent-blue':'');
   }
@@ -642,7 +637,6 @@ function renderHome(lojas, ultima, penultima) {
   html += '<button class="filter-btn" data-filter="n1" onclick="setFilter(\'n1\')">🔴 N1 ('+n1+')</button>';
   html += '<button class="filter-btn" data-filter="n2" onclick="setFilter(\'n2\')">🟠 N2 ('+n2+')</button>';
   html += '<button class="filter-btn" data-filter="n3" onclick="setFilter(\'n3\')">🟡 N3 ('+n3+')</button>';
-  html += '<button class="filter-btn" data-filter="n4" onclick="setFilter(\'n4\')">🔵 N4 ('+n4+')</button>';
   html += '</div>';
 
   /* Table shell — rows injected by renderHomeTable */
@@ -665,7 +659,6 @@ function renderHome(lojas, ultima, penultima) {
   html += '<div class="level-item"><div class="level-dot pill-n1">N1</div><span>0–20% prog. fechadas</span></div>';
   html += '<div class="level-item"><div class="level-dot pill-n2">N2</div><span>21–40% fechadas</span></div>';
   html += '<div class="level-item"><div class="level-dot pill-n3">N3</div><span>41–50% fechadas</span></div>';
-  html += '<div class="level-item"><div class="level-dot pill-n4">N4</div><span>> 50% fechadas</span></div>';
   html += '</div></div>';
   html += '<div class="action-banner"><div class="action-icon">⚠</div><div><div class="action-title">Ação Recomendada</div><div class="action-desc">Contactar urgentemente responsáveis das lojas N1. Clique em "Detalhe" para ver o histórico e secções.</div></div></div>';
   html += '</div>';
@@ -691,7 +684,6 @@ function renderHomeTable(lojas) {
     if (f === 'n1')  return l.nivel === 1;
     if (f === 'n2')  return l.nivel === 2;
     if (f === 'n3')  return l.nivel === 3;
-    if (f === 'n4')  return l.nivel === 4;
     return true;
   });
 
@@ -932,7 +924,7 @@ function renderDetail(lojas, focusIdx) {
   });
 }
 
-function pillCls(n) { return n===1?'pill-n1':n===2?'pill-n2':n===3?'pill-n3':'pill-n4'; }
+function pillCls(n) { return n===1?'pill-n1':n===2?'pill-n2':'pill-n3'; }
 
 function fmt(n) {
   return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
