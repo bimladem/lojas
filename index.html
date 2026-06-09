@@ -614,9 +614,9 @@ function renderHome(lojas, ultima, penultima) {
   /* Stats row */
   html += '<div class="home-stats">';
   html += statCard('Total de Lojas', lojas.length, penultima ? 'Esta semana' : 'Todas as lojas', '');
-  html += statCard('Nível 1 — Grau 1 de Conformidade', n1, '0–20% prog. fechadas', 'accent-red');
-  html += statCard('Nível 2 — Grau 2 de Conformidade', n2, '21–40% prog. fechadas', 'accent-gray');
-  html += statCard('Nível 3 — Grau 3 de Conformidade', n3, '41%+ prog. fechadas', 'accent-navy');
+  html += statCard('Nível 1', n1, '0–20% prog. fechadas', 'accent-red');
+  html += statCard('Nível 2', n2, '21–40% prog. fechadas', 'accent-gray');
+  html += statCard('Nível 3', n3, '41–100% prog. fechadas', 'accent-navy');
   if (penultima) {
     html += statCard('Entradas Novas', novas, 'Não presentes em '+penultima, novas>0?'accent-blue':'');
   }
@@ -655,11 +655,11 @@ function renderHome(lojas, ultima, penultima) {
   /* Bottom legend - RESTAURADO */
   html += '<div class="bottom-bar" style="margin-top:20px">';
   html += '<div class="level-legend"><div class="level-legend-title">Classificação de Nível</div><div class="level-items">';
-  html += '<div class="level-item"><div class="level-dot pill-n1">N1</div><span>0–20% prog. fechadas — Grau 1 de Conformidade</span></div>';
-  html += '<div class="level-item"><div class="level-dot pill-n2">N2</div><span>21–40% fechadas — Grau 2 de Conformidade</span></div>';
-  html += '<div class="level-item"><div class="level-dot pill-n3">N3</div><span>41%+ fechadas — Grau 3 de Conformidade</span></div>';
+  html += '<div class="level-item"><div class="level-dot pill-n1">N1</div><span>0–20% prog. fechadas</span></div>';
+  html += '<div class="level-item"><div class="level-dot pill-n2">N2</div><span>21–40% fechadas</span></div>';
+  html += '<div class="level-item"><div class="level-dot pill-n3">N3</div><span>41–100% fechadas</span></div>';
   html += '</div></div>';
-  html += '<div class="action-banner"><div class="action-icon">⚠</div><div><div class="action-title">Ação Recomendada</div><div class="action-desc">Contactar urgentemente responsáveis das lojas com Grau 1 de Conformidade (N1). Clique em "Detalhe" para ver o histórico e secções.</div></div></div>';
+  html += '<div class="action-banner"><div class="action-icon">⚠</div><div><div class="action-title">Ação Recomendada</div><div class="action-desc">Contactar urgentemente responsáveis das lojas N1. Clique em "Detalhe" para ver o histórico e secções.</div></div></div>';
   html += '</div>';
 
   document.getElementById('home-screen').innerHTML = html;
