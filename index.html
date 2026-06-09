@@ -9,11 +9,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.1.0/chartjs-plugin-datalabels.min.js"></script>
 <style>
 :root {
-  --ink: #000000;
+  --ink: #000000; /* ALTO CONTRASTE: Preto puro */
   --ink-2: #1a1a1a;
   --ink-3: #333333;
   --ink-4: #555555;
-  --paper: #ffffff;
+  --paper: #ffffff; /* ALTO CONTRASTE: Branco puro */
   --paper-2: #f8f9fa;
   --paper-3: #f1f3f5;
   --line: #d1d1d1;
@@ -26,19 +26,20 @@
   --bar-track: #e4e4e8;
   --btn-border: #b1b1b1;
   --btn-text: #222;
-  --shadow: 0 1px 6px rgba(0,0,0,.1), 0 2px 16px rgba(0,0,0,.08);
+  --shadow: 0 1px 6px rgba(0,0,0,.1), 0 2px 12px rgba(0,0,0,.08);
 }
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 body {
   font-family: 'DM Sans', sans-serif;
   background: var(--paper);
   color: var(--ink);
-  font-size: 16px;
+  font-size: 16px; /* TAMANHO AUMENTADO GERAL */
   -webkit-font-smoothing: antialiased;
 }
 
+/* soften all pure-white surfaces to warm off-white */
 .loja-card, .home-table, .stat-card, .level-legend,
-.chart-wrap, .sec-card, .legend-bar { background: #ffffff; border: 1px solid var(--line); }
+.chart-wrap, .sec-card, .legend-bar { background: #ffffff; }
 .btn-card, .btn-detail, .filter-btn { background: #fdfdfd; }
 .ht-head, .dtable th, .sec-card-head { background: #f1f3f5; }
 .col-rank { background: #f1f3f5; }
@@ -48,97 +49,105 @@ body {
 .ht-row.new-loja:hover { background: #e6f7ed !important; }
 .dtable tbody tr:hover td { background: #f1f3f5; }
 
+/* ── HEADER ── */
 .header {
   position: sticky; top: 0; z-index: 200;
   background: rgba(255,255,255,.98);
   backdrop-filter: blur(16px);
-  border-bottom: 2px solid var(--line);
+  border-bottom: 1px solid var(--line);
   padding: 0 32px;
-  height: 70px;
+  height: 62px;
   display: flex; align-items: center; justify-content: space-between; gap: 20px;
 }
 .header-left { display: flex; align-items: center; gap: 12px; }
 .header-icon {
-  width: 40px; height: 40px; border-radius: 9px;
-  background: #000;
+  width: 36px; height: 36px; border-radius: 9px;
+  background: #1c1c2e;
   display: flex; align-items: center; justify-content: center;
 }
-.header-icon svg { width: 20px; height: 20px; fill: #fff; }
-.header-title { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--ink); letter-spacing: -0.2px; white-space: nowrap; }
-.header-subtitle { font-size: 13px; color: var(--ink-4); margin-top: 1px; }
+.header-icon svg { width: 18px; height: 18px; fill: #fff; }
+.header-title { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--ink); letter-spacing: -0.2px; white-space: nowrap; }
+.header-subtitle { font-size: 12px; color: var(--ink-4); margin-top: 1px; }
 .header-badge {
-  padding: 6px 16px; border-radius: 99px;
+  padding: 5px 14px; border-radius: 99px;
   background: #f1f3f5; border: 1px solid var(--line-2);
-  font-size: 14px; font-weight: 600; color: var(--ink-2); white-space: nowrap;
+  font-size: 13px; font-weight: 600; color: var(--ink-2); white-space: nowrap;
 }
 
-.main { max-width: 1400px; margin: 0 auto; padding: 28px 24px 64px; }
+/* ── MAIN ── */
+.main { max-width: 1320px; margin: 0 auto; padding: 28px 24px 64px; }
 
+/* ── LEGEND BAR ── */
 .legend-bar {
   display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
-  padding: 12px 20px;
+  padding: 10px 16px;
   background: #fff; border: 1px solid var(--line); border-radius: 10px;
-  font-size: 14px; color: var(--ink-2);
+  font-size: 13px; color: var(--ink-2);
 }
 .legend-item { display: flex; align-items: center; gap: 7px; }
-.legend-dot { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
+.legend-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
 .legend-label { font-weight: 700; color: var(--ink); }
-.legend-sep { width: 1px; height: 18px; background: var(--line-2); }
+.legend-sep { width: 1px; height: 16px; background: var(--line-2); }
 
+/* ── CARD LIST ── */
 .card-list { display: flex; flex-direction: column; gap: 0; }
 
+/* ── LOJA CARD ── */
 .loja-card {
   background: #fff;
   border: 1px solid var(--line);
   border-radius: 14px;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   overflow: hidden;
   box-shadow: var(--shadow);
   transition: box-shadow 0.15s;
 }
-.loja-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,.12); }
+.loja-card:hover { box-shadow: 0 2px 16px rgba(0,0,0,.09); }
 
 .card-main {
   display: grid;
-  grid-template-columns: 64px 240px 1fr auto;
+  grid-template-columns: 56px 200px 1fr auto;
   align-items: center;
   padding: 0;
-  min-height: 100px;
+  min-height: 88px;
   gap: 0;
 }
 
+/* rank column */
 .col-rank {
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   padding: 20px 10px;
   border-right: 1px solid var(--line);
   align-self: stretch;
-  background: #f8f9fa;
+  background: #f1f3f5;
   gap: 6px;
   text-align: center;
 }
 .rank-num {
   font-family: 'DM Serif Display', serif;
-  font-size: 32px; line-height: 1;
-  color: var(--ink);
+  font-size: 28px; line-height: 1;
+  color: var(--ink-2);
 }
 .rank-pill {
-  padding: 4px 12px; border-radius: 99px;
-  font-size: 13px; font-weight: 800; letter-spacing: 0.3px;
+  padding: 3px 10px; border-radius: 99px;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.3px;
   text-align: center;
 }
-.pill-n1 { background: var(--n1-bg); color: var(--n1); border: 1px solid var(--n1); }
-.pill-n2 { background: var(--n2-bg); color: var(--n2); border: 1px solid var(--n2); }
-.pill-n3 { background: var(--n3-bg); color: var(--n3); border: 1px solid var(--n3); }
+.pill-n1 { background: var(--n1-bg); color: var(--n1); }
+.pill-n2 { background: var(--n2-bg); color: var(--n2); }
+.pill-n3 { background: var(--n3-bg); color: var(--n3); }
 
+/* identity column */
 .col-id {
-  padding: 20px 24px;
+  padding: 20px 20px;
   border-right: 1px solid var(--line);
   align-self: stretch;
   display: flex; flex-direction: column; justify-content: center;
 }
-.loja-nome { font-size: 19px; font-weight: 700; color: var(--ink); line-height: 1.2; }
-.loja-code { font-size: 14px; color: var(--ink-3); margin-top: 4px; font-weight: 500; }
+.loja-nome { font-size: 18px; font-weight: 700; color: var(--ink); line-height: 1.2; }
+.loja-code { font-size: 13px; color: var(--ink-4); margin-top: 4px; font-weight: 500; }
 
+/* metrics column */
 .col-metrics {
   display: flex; align-items: stretch;
   border-right: 1px solid var(--line);
@@ -146,11 +155,11 @@ body {
 }
 .metric-group {
   display: flex; flex-direction: column; align-items: center; justify-content: center;
-  padding: 16px 20px;
+  padding: 16px 18px;
   border-right: 1px solid var(--line);
-  min-width: 100px;
+  min-width: 88px;
   flex: 1;
-  gap: 4px;
+  gap: 3px;
 }
 .metric-group:last-child { border-right: none; }
 .metric-group.is-total {
@@ -162,6 +171,7 @@ body {
 }
 .metric-group.is-total-np .mg-val { color: var(--bar-orange); }
 
+/* bold separator between P group and NP group */
 .col-metrics-sep {
   width: 2px;
   background: var(--line-2);
@@ -170,29 +180,30 @@ body {
 }
 
 .mg-label {
-  font-size: 12px; font-weight: 800; letter-spacing: 0.5px;
-  text-transform: uppercase; color: var(--ink-2); white-space: nowrap;
+  font-size: 11px; font-weight: 800; letter-spacing: 0.5px;
+  text-transform: uppercase; color: var(--ink-3); white-space: nowrap;
   margin-bottom: 3px;
 }
-.mg-val { font-size: 26px; font-weight: 700; color: var(--ink); line-height: 1; }
+.mg-val { font-size: 24px; font-weight: 700; color: var(--ink); line-height: 1; }
 
+/* progress + actions column */
 .col-right {
   display: flex; align-items: center;
-  padding: 14px 24px;
-  gap: 24px;
+  padding: 14px 22px;
+  gap: 22px;
   align-self: stretch;
-  min-width: 400px;
+  min-width: 360px;
 }
 
-.progress-block { flex: 1; display: flex; flex-direction: column; gap: 12px; }
-.progress-row { display: flex; flex-direction: column; gap: 6px; }
+.progress-block { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+.progress-row { display: flex; flex-direction: column; gap: 4px; }
 .progress-label-row {
   display: flex; justify-content: space-between; align-items: center;
 }
-.prog-label { font-size: 11px; font-weight: 800; letter-spacing: 0.6px; text-transform: uppercase; color: var(--ink-3); }
-.prog-pct { font-size: 14px; font-weight: 800; color: var(--ink); }
+.prog-label { font-size: 10px; font-weight: 800; letter-spacing: 0.6px; text-transform: uppercase; color: var(--ink-4); }
+.prog-pct { font-size: 13px; font-weight: 800; color: var(--ink-2); }
 .prog-track {
-  height: 8px; border-radius: 99px; background: var(--bar-track);
+  height: 6px; border-radius: 99px; background: var(--bar-track);
   overflow: hidden;
 }
 .prog-fill {
@@ -202,44 +213,46 @@ body {
 .fill-blue { background: var(--bar-blue); }
 .fill-orange { background: var(--bar-orange); }
 
-.actions-col { display: flex; flex-direction: column; gap: 10px; flex-shrink: 0; }
+.actions-col { display: flex; flex-direction: column; gap: 8px; flex-shrink: 0; }
 .btn-card {
-  display: flex; align-items: center; gap: 8px;
-  padding: 10px 18px;
+  display: flex; align-items: center; gap: 7px;
+  padding: 8px 16px;
   border: 1px solid var(--btn-border);
   border-radius: 8px;
   background: #fff;
   color: var(--btn-text);
-  font-size: 14px; font-weight: 600;
+  font-size: 13px; font-weight: 600;
   cursor: pointer;
   font-family: 'DM Sans', sans-serif;
   white-space: nowrap;
   transition: all 0.15s;
-  min-width: 120px; justify-content: flex-start;
+  min-width: 110px; justify-content: flex-start;
 }
 .btn-card:hover { background: #f1f3f5; border-color: #888; }
-.btn-card.active { background: #000; border-color: #000; color: #fff; }
-.btn-card svg { width: 16px; height: 16px; flex-shrink: 0; opacity: 0.8; }
+.btn-card.active { background: #1c1c2e; border-color: #1c1c2e; color: #fff; }
+.btn-card svg { width: 14px; height: 14px; flex-shrink: 0; opacity: 0.6; }
 .btn-card.active svg { opacity: 1; }
 
+/* ── PANEL ── */
 .panel { display: none; }
 .panel.open { display: block; }
 .panel-body {
-  padding: 24px 32px;
+  padding: 24px 28px;
   border-top: 1px solid var(--line);
   background: #f8f9fa;
 }
 .panel-title {
   font-family: 'DM Serif Display', serif;
-  font-size: 18px; font-weight: 400; color: var(--ink);
+  font-size: 17px; font-weight: 400; color: var(--ink);
   margin-bottom: 16px; padding-bottom: 10px;
   border-bottom: 1px solid var(--line);
 }
 
+/* ── CHARTS & TABLES ── */
 .chart-wrap {
   position: relative; width: 100%; background: #fff;
   border: 1px solid var(--line); border-radius: 12px;
-  padding: 24px; margin-bottom: 24px;
+  padding: 20px; margin-bottom: 20px;
   box-shadow: var(--shadow);
 }
 .dtable {
@@ -249,135 +262,156 @@ body {
   box-shadow: var(--shadow);
 }
 .dtable th {
-  padding: 14px 20px; background: #f1f3f5;
-  border-bottom: 2px solid var(--line);
-  font-size: 13px; font-weight: 800; text-transform: uppercase;
+  padding: 12px 18px; background: #f1f3f5;
+  border-bottom: 1px solid var(--line);
+  font-size: 12px; font-weight: 800; text-transform: uppercase;
   letter-spacing: 0.5px; color: var(--ink); text-align: center;
 }
 .dtable td {
-  padding: 14px 20px; border-bottom: 1px solid var(--line);
+  padding: 13px 18px; border-bottom: 1px solid var(--line);
   text-align: center; color: var(--ink); font-weight: 600;
 }
 .dtable tr:last-child td { border-bottom: none; }
 .dtable tbody tr:hover td { background: #f1f3f5; }
 
 .sec-grid {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 14px; margin-top: 16px;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px; margin-top: 16px;
 }
 .sec-card { background: #fff; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; box-shadow: var(--shadow); }
-.sec-card-head { padding: 12px 16px; background: #f1f3f5; border-bottom: 1px solid var(--line); font-size: 14px; font-weight: 700; color: var(--ink); }
-.sec-card-body { padding: 14px 16px; }
+.sec-card-head { padding: 11px 14px; background: #f1f3f5; border-bottom: 1px solid var(--line); font-size: 13px; font-weight: 700; color: var(--ink); }
+.sec-card-body { padding: 12px 14px; }
 
+/* ── HOME SCREEN ── */
+.home-screen, .detail-screen { display: none; }
+.home-screen.active, .detail-screen.active { display: block; }
+
+/* back button in header */
+.btn-back {
+  display: none; align-items: center; gap: 6px;
+  padding: 6px 12px; border-radius: 7px;
+  border: 1px solid var(--line-2); background: var(--paper-3);
+  font-size: 13px; font-weight: 600; color: var(--ink-2);
+  cursor: pointer; font-family: 'DM Sans', sans-serif;
+  transition: all 0.15s;
+}
+.btn-back:hover { border-color: var(--ink-2); background: var(--paper); }
+.btn-back.visible { display: flex; }
+.btn-back svg { width: 14px; height: 14px; }
+
+/* stat cards row */
 .home-stats {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 16px;
-  margin-bottom: 32px;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
 }
 .stat-card {
   background: #fff; border: 1px solid var(--line);
-  border-radius: 14px; padding: 24px 20px 20px;
+  border-radius: 14px; padding: 20px 20px 16px;
   box-shadow: var(--shadow);
-  display: flex; flex-direction: column; gap: 8px;
+  display: flex; flex-direction: column; gap: 6px;
   align-items: center; text-align: center;
 }
 .stat-card-label {
-  font-size: 13px; font-weight: 800; letter-spacing: 0.7px;
-  text-transform: uppercase; color: var(--ink-3);
+  font-size: 12px; font-weight: 800; letter-spacing: 0.7px;
+  text-transform: uppercase; color: var(--ink-4);
 }
 .stat-card-val {
   font-family: 'DM Serif Display', serif;
-  font-size: 48px; line-height: 1; color: var(--ink);
+  font-size: 42px; line-height: 1; color: var(--ink);
 }
-.stat-card-sub { font-size: 14px; color: var(--ink-3); margin-top: 2px; font-weight: 500; }
+.stat-card-sub { font-size: 13px; color: var(--ink-4); margin-top: 2px; font-weight: 500; }
 .stat-card.accent-red   .stat-card-val { color: var(--n1); }
 .stat-card.accent-amber .stat-card-val { color: var(--n2); }
 .stat-card.accent-green .stat-card-val { color: var(--n3); }
 .stat-card.accent-blue  .stat-card-val { color: var(--bar-blue); }
 
+/* filter bar */
 .filter-bar {
-  display: flex; align-items: center; gap: 10px;
-  margin-bottom: 20px; flex-wrap: wrap;
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 16px; flex-wrap: wrap;
 }
-.filter-label { font-size: 15px; color: var(--ink); font-weight: 700; margin-right: 6px; }
+.filter-label { font-size: 14px; color: var(--ink); font-weight: 700; margin-right: 4px; }
 .filter-btn {
-  padding: 8px 20px; border-radius: 99px;
+  padding: 6px 16px; border-radius: 99px;
   border: 1px solid var(--line-2); background: #fff;
-  font-size: 14px; font-weight: 600; color: var(--ink-2);
+  font-size: 13px; font-weight: 600; color: var(--ink-3);
   cursor: pointer; font-family: 'DM Sans', sans-serif;
   transition: all 0.15s; white-space: nowrap;
 }
 .filter-btn:hover { border-color: var(--ink); color: var(--ink); }
 .filter-btn.active {
-  background: #000; border-color: #000; color: #fff;
+  background: var(--ink); border-color: var(--ink); color: #fff;
 }
-.filter-divider { width: 1px; height: 24px; background: var(--line-2); }
+.filter-divider { width: 1px; height: 20px; background: var(--line-2); }
 
+/* summary table */
 .home-table {
   background: #fff; border: 1px solid var(--line);
   border-radius: 14px; overflow: hidden; box-shadow: var(--shadow);
 }
 .ht-head {
   display: grid;
-  grid-template-columns: 80px 240px 1fr 1fr 180px 120px 140px;
-  background: #f1f3f5; border-bottom: 2px solid var(--line);
+  /* AJUSTE: Largura das colunas para manter títulos em uma linha */
+  grid-template-columns: 76px 210px 1fr 1fr 180px 110px 136px;
+  background: #f1f3f5; border-bottom: 1px solid var(--line);
 }
 .ht-th {
-  padding: 16px 12px; font-size: 14px; font-weight: 800;
+  padding: 14px 12px; font-size: 13px; font-weight: 800; /* TÍTULOS DESTACADOS */
   letter-spacing: 0.5px; text-transform: uppercase; color: var(--ink);
   text-align: center; border-right: 1px solid var(--line);
-  display: flex; align-items: center; justify-content: center;
-  white-space: nowrap;
+  white-space: nowrap; /* GARANTE UMA LINHA */
 }
 .ht-th:last-child { border-right: none; }
-.ht-th.left { justify-content: flex-start; text-align: left; padding-left: 20px; }
+.ht-th.left { text-align: left; padding-left: 16px; }
 
 .ht-row {
   display: grid;
-  grid-template-columns: 80px 240px 1fr 1fr 180px 120px 140px;
+  grid-template-columns: 76px 210px 1fr 1fr 180px 110px 136px;
   border-bottom: 1px solid var(--line);
   transition: background 0.12s;
   cursor: pointer;
 }
 .ht-row:last-child { border-bottom: none; }
-.ht-row:hover { background: #f8f9fa; }
+.ht-row:hover { background: #f1f3f5; }
 .ht-row.new-loja { background: #f6fef9; }
 .ht-row.new-loja:hover { background: #edfaf2; }
 
 .ht-td {
-  padding: 18px 12px; display: flex; align-items: center;
+  padding: 16px 12px; display: flex; align-items: center;
   justify-content: center; border-right: 1px solid var(--line);
-  font-size: 16px; font-weight: 600; color: var(--ink);
+  font-size: 16px; color: var(--ink); font-weight: 600;
 }
 .ht-td:last-child { border-right: none; }
-.ht-td.left { justify-content: flex-start; text-align: left; padding-left: 20px; }
+.ht-td.left { justify-content: flex-start; text-align: left; padding-left: 16px; }
 
 .rank-td { background: #f1f3f5; }
 .new-badge {
   background: #e6f4ea; color: #1e7e34; border: 1px solid #1e7e34;
-  padding: 4px 10px; border-radius: 99px; font-size: 12px; font-weight: 800;
+  padding: 3px 10px; border-radius: 99px; font-size: 11px; font-weight: 700;
 }
 
 .mini-prog { flex: 1; display: flex; flex-direction: column; gap: 8px; width: 100%; }
 .mini-row { display: flex; align-items: center; gap: 8px; }
-.mini-track { flex: 1; height: 8px; background: var(--bar-track); border-radius: 99px; overflow: hidden; }
+.mini-track { flex: 1; height: 6px; background: var(--bar-track); border-radius: 99px; overflow: hidden; }
 .mini-fill { height: 100%; border-radius: 99px; }
-.mini-pct { font-size: 13px; font-weight: 800; min-width: 38px; text-align: right; }
+.mini-pct { font-size: 12px; font-weight: 700; min-width: 34px; text-align: right; }
 
 .btn-detail {
-  padding: 8px 14px; border-radius: 8px; border: 1px solid var(--line-2);
-  background: #fff; font-size: 13px; font-weight: 700; color: var(--ink-2);
-  cursor: pointer; display: flex; align-items: center; gap: 6px; transition: all 0.15s;
+  padding: 7px 12px; border-radius: 7px; border: 1px solid var(--line-2);
+  background: #fff; font-size: 12px; font-weight: 700; color: var(--ink-2);
+  cursor: pointer; display: flex; align-items: center; gap: 5px; transition: all 0.15s;
 }
-.btn-detail:hover { background: #000; color: #fff; border-color: #000; }
-.btn-detail svg { width: 14px; height: 14px; }
+.btn-detail:hover { background: #1c1c2e; color: #fff; border-color: #1c1c2e; }
+.btn-detail svg { width: 12px; height: 12px; }
 
-.loading { padding: 60px; text-align: center; font-size: 18px; font-weight: 600; color: var(--ink-3); }
+.loading { padding: 60px; text-align: center; font-size: 16px; font-weight: 600; color: var(--ink-3); }
 
+/* ── MOBILE ── */
 @media (max-width: 1024px) {
-  .ht-head, .ht-row { grid-template-columns: 60px 180px 1fr 1fr 140px 100px 110px; }
-  .ht-th, .ht-td { font-size: 13px; padding: 12px 8px; }
+  .ht-head, .ht-row { grid-template-columns: 60px 180px 1fr 1fr 140px 90px 110px; }
+  .ht-th, .ht-td { font-size: 12px; padding: 12px 6px; }
 }
 </style>
 </head>
@@ -386,7 +420,7 @@ body {
 <header class="header">
   <div class="header-left">
     <button class="btn-back" id="btn-back" onclick="goHome()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
       Voltar
     </button>
     <div class="header-icon">
@@ -415,6 +449,7 @@ var stateH = {}, stateS = {};
 var _lojas = [], _ultima = '';
 var _activeFilter = 'all';
 
+/* ── Navigation ── */
 function goHome() {
   document.getElementById('home-screen').classList.add('active');
   document.getElementById('detail-screen').classList.remove('active');
@@ -430,12 +465,14 @@ function goDetail(lojaIdx) {
   var l = _lojas[lojaIdx];
   document.getElementById('header-title').textContent = (l.local || l.loja) + ' · ' + l.loja;
   document.getElementById('sub-info').textContent = 'Detalhe da loja · ' + _ultima;
+  // render detail if not yet rendered
   if (!document.getElementById('ph-' + lojaIdx)) {
     renderDetail(_lojas, lojaIdx);
   }
   window.scrollTo(0, 0);
 }
 
+/* ── SVG helpers ── */
 function svgClock() {
   return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;flex-shrink:0"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>';
 }
@@ -480,6 +517,7 @@ fetch('dados.json?t=' + Date.now())
     var penultima = semanas[semanas.length - 2] || null;
     _ultima = ultima;
 
+    /* IDs present in penultimate week (to detect new stores) */
     var idsPenultima = {};
     if (penultima) {
       data.filter(function(i) { return i.Loja && !i.Secção && String(i.Semana||'').trim() === penultima; })
@@ -533,20 +571,26 @@ fetch('dados.json?t=' + Date.now())
     lojas.forEach(function(l) { l.seccoes.sort(function(a,b){ return b.pA-a.pA; }); });
 
     _lojas = lojas;
+
     document.getElementById('sub-info').textContent = lojas.length + ' lojas · ' + ultima;
     document.getElementById('periodo').textContent = '📅 ' + ultima;
+
     renderHome(lojas, ultima, penultima);
   })
   .catch(function(e) {
     document.getElementById('home-screen').innerHTML = '<div class="loading" style="color:#b83232">Erro ao carregar: ' + e.message + '</div>';
   });
 
+/* ── HOME RENDER ── */
 function renderHome(lojas, ultima, penultima) {
   var n1 = lojas.filter(function(l){ return l.nivel===1; }).length;
   var n2 = lojas.filter(function(l){ return l.nivel===2; }).length;
   var n3 = lojas.filter(function(l){ return l.nivel===3; }).length;
   var novas = lojas.filter(function(l){ return l.isNew; }).length;
+
   var html = '';
+
+  /* Stats row */
   html += '<div class="home-stats">';
   html += statCard('Total de Lojas', lojas.length, penultima ? 'Esta semana' : 'Todas as lojas', '');
   html += statCard('Nível 1 — Crítico', n1, '0–20% prog. fechadas', 'accent-red');
@@ -556,6 +600,8 @@ function renderHome(lojas, ultima, penultima) {
     html += statCard('Entradas Novas', novas, 'Não presentes em '+penultima, novas>0?'accent-blue':'');
   }
   html += '</div>';
+
+  /* Filter bar */
   var newCount = lojas.filter(function(l){ return l.isNew; }).length;
   var oldCount = lojas.length - newCount;
   html += '<div class="filter-bar">';
@@ -570,6 +616,8 @@ function renderHome(lojas, ultima, penultima) {
   html += '<button class="filter-btn" data-filter="n2" onclick="setFilter(\'n2\')">🟠 N2 ('+n2+')</button>';
   html += '<button class="filter-btn" data-filter="n3" onclick="setFilter(\'n3\')">🟢 N3 ('+n3+')</button>';
   html += '</div>';
+
+  /* Table shell — rows injected by renderHomeTable */
   html += '<div class="home-table">';
   html += '<div class="ht-head">';
   html += '<div class="ht-th">#</div>';
@@ -582,6 +630,7 @@ function renderHome(lojas, ultima, penultima) {
   html += '</div>';
   html += '<div id="ht-body"></div>';
   html += '</div>';
+
   document.getElementById('home-screen').innerHTML = html;
   document.getElementById('home-screen').classList.add('active');
   renderHomeTable(lojas);
@@ -605,48 +654,64 @@ function renderHomeTable(lojas) {
     if (f === 'n3')  return l.nivel === 3;
     return true;
   });
+
   var html = '';
   if (filtered.length === 0) {
-    html = '<div style="padding:32px;text-align:center;color:#555555;font-size:15px">Sem lojas para este filtro.</div>';
+    html = '<div style="padding:32px;text-align:center;color:var(--ink-4);font-size:13px">Sem lojas para este filtro.</div>';
   } else {
     filtered.forEach(function(l) {
-      var li = lojas.indexOf(l);
+      var li = lojas.indexOf(l); /* real index for detail navigation */
       var pc = pillCls(l.nivel);
       html += '<div class="ht-row'+(l.isNew?' new-loja':'')+'" onclick="goDetail('+li+')">';
+
+      /* rank */
       html += '<div class="ht-td rank-td" style="flex-direction:column;gap:6px;align-items:center;justify-content:center;background:#f1f3f5">';
-      html += '<div style="font-family:\'DM Serif Display\',serif;font-size:30px;font-weight:400;color:#000000;line-height:1">'+(li+1)+'</div>';
-      html += '<div class="rank-pill '+pc+'" style="font-size:13px;padding:4px 12px">N'+l.nivel+'</div>';
+      html += '<div style="font-family:\'DM Serif Display\',serif;font-size:26px;font-weight:400;color:var(--ink-2);line-height:1">'+(li+1)+'</div>';
+      html += '<div class="rank-pill '+pc+'" style="font-size:12px;padding:3px 10px">N'+l.nivel+'</div>';
       html += '</div>';
+
+      /* identity */
       html += '<div class="ht-td left id-td" style="flex-direction:column;align-items:flex-start;gap:3px">';
-      html += '<div style="font-weight:700;font-size:18px">'+(l.local||l.loja)+'</div>';
-      html += '<div style="font-size:14px;color:#555555">'+l.loja+'</div>';
+      html += '<div style="font-weight:700;font-size:15px">'+(l.local||l.loja)+'</div>';
+      html += '<div style="font-size:12.5px;color:var(--ink-4)">'+l.loja+'</div>';
       html += '</div>';
-      html += '<div class="ht-td metrics-td" style="flex-direction:column;gap:4px">';
-      html += '<div style="font-size:13px;font-weight:800;letter-spacing:0.5px;text-transform:uppercase;color:#555555">Total '+fmt(l.pT)+'</div>';
-      html += '<div style="font-size:14px;color:#1a1a1a;font-weight:500">'+fmt(l.pA)+' abertas · '+fmt(l.pF)+' fechadas</div>';
+
+      /* P metrics */
+      html += '<div class="ht-td metrics-td" style="flex-direction:column;gap:3px">';
+      html += '<div style="font-size:12px;font-weight:800;letter-spacing:0.5px;text-transform:uppercase;color:var(--ink-4)">Total '+fmt(l.pT)+'</div>';
+      html += '<div style="font-size:13px;color:var(--ink-3)">'+fmt(l.pA)+' abertas · '+fmt(l.pF)+' fechadas</div>';
       html += '</div>';
-      html += '<div class="ht-td" style="flex-direction:column;gap:4px">';
-      html += '<div style="font-size:13px;font-weight:800;letter-spacing:0.5px;text-transform:uppercase;color:#555555">Total '+fmt(l.nT)+'</div>';
-      html += '<div style="font-size:14px;color:#1a1a1a;font-weight:500">'+fmt(l.nA)+' abertas · '+fmt(l.nF)+' fechadas</div>';
+
+      /* NP metrics */
+      html += '<div class="ht-td" style="flex-direction:column;gap:3px">';
+      html += '<div style="font-size:12px;font-weight:800;letter-spacing:0.5px;text-transform:uppercase;color:var(--ink-4)">Total '+fmt(l.nT)+'</div>';
+      html += '<div style="font-size:13px;color:var(--ink-3)">'+fmt(l.nA)+' abertas · '+fmt(l.nF)+' fechadas</div>';
       html += '</div>';
+
+      /* progress */
       html += '<div class="ht-td prog-td"><div class="mini-prog">';
       html += '<div class="mini-row">'
-        +'<span style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:0.4px;color:#555555;min-width:26px">P</span>'
+        +'<span style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.4px;color:var(--ink-4);min-width:22px">P</span>'
         +'<div class="mini-track"><div class="mini-fill fill-blue" style="width:'+l.pctPFInt+'%"></div></div>'
         +'<span class="mini-pct" style="color:var(--bar-blue)">'+l.pctPFInt+'%</span>'
         +'</div>';
       html += '<div class="mini-row">'
-        +'<span style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:0.4px;color:#555555;min-width:26px">NP</span>'
+        +'<span style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.4px;color:var(--ink-4);min-width:22px">NP</span>'
         +'<div class="mini-track"><div class="mini-fill fill-orange" style="width:'+l.pctNFInt+'%"></div></div>'
         +'<span class="mini-pct" style="color:var(--bar-orange)">'+l.pctNFInt+'%</span>'
         +'</div>';
       html += '</div></div>';
+
+      /* new badge */
       html += '<div class="ht-td new-td">';
       if (l.isNew) html += '<span class="new-badge">✦ Nova</span>';
       html += '</div>';
+
+      /* detail button */
       html += '<div class="ht-td act-td" onclick="event.stopPropagation()">';
       html += '<button class="btn-detail" onclick="goDetail('+li+')">Detalhe '+svgArrow()+'</button>';
       html += '</div>';
+
       html += '</div>';
     });
   }
@@ -659,6 +724,8 @@ function renderDetail(lojas, focusIdx) {
   var pc = pillCls(l.nivel);
   var html = '';
   html += '<div class="card-list">';
+
+    /* History panel */
     var histRows = l.historico.map(function(h) {
       var hpT=Number(h['P Total'])||0,hpF=Number(h['P Fechado'])||0;
       var hnT=Number(h['NP Total'])||0,hnF=Number(h['NP Fechado'])||0;
@@ -677,12 +744,13 @@ function renderDetail(lojas, focusIdx) {
         +'</tr>';
     }).join('');
     var chartH = Math.max(180, l.historico.length*58+80);
+
     var histHtml = l.historico.length>0
       ? '<div style="margin-bottom:8px">'
-        + '<div style="font-size:12px;font-weight:800;letter-spacing:0.6px;text-transform:uppercase;color:#555555;margin-bottom:6px">Gráfico — % de tarefas fechadas por semana (Programadas vs Não Programadas)</div>'
+        + '<div style="font-size:10px;font-weight:800;letter-spacing:0.6px;text-transform:uppercase;color:#9c9a95;margin-bottom:6px">Gráfico — % de tarefas fechadas por semana (Programadas vs Não Programadas)</div>'
         + '<div class="chart-wrap" style="height:'+chartH+'px;margin-bottom:20px"><canvas id="pnp-'+li+'"></canvas></div>'
         + '</div>'
-        + '<div style="font-size:12px;font-weight:800;letter-spacing:0.6px;text-transform:uppercase;color:#555555;margin-bottom:8px">Tabela de valores — Programadas (P) e Não Programadas (NP)</div>'
+        + '<div style="font-size:10px;font-weight:800;letter-spacing:0.6px;text-transform:uppercase;color:#9c9a95;margin-bottom:8px">Tabela de valores — Programadas (P) e Não Programadas (NP)</div>'
         + '<div style="overflow-x:auto"><table class="dtable">'
         + '<thead><tr>'
         + '<th>Semana</th>'
@@ -697,26 +765,48 @@ function renderDetail(lojas, focusIdx) {
         + '</tr></thead>'
         + '<tbody>'+histRows+'</tbody>'
         + '</table></div>'
-      : '<p style="color:#555555;font-size:15px">Sem dados históricos.</p>';
+      : '<p style="color:#9c9a95;font-size:13px">Sem dados históricos.</p>';
+
+    /* Sections panel */
     var secHtml = l.seccoes.length>0
       ? '<div class="sec-grid">'+l.seccoes.map(function(s,si) {
           return '<div class="sec-card"><div class="sec-card-head">'+s.nome+'</div>'
             +'<div class="sec-card-body"><div style="height:72px;position:relative"><canvas id="sc-'+li+'-'+si+'"></canvas></div></div></div>';
         }).join('')+'</div>'
-      : '<p style="color:#555555;font-size:15px">Sem secções disponíveis.</p>';
+      : '<p style="color:#9c9a95;font-size:13px">Sem secções disponíveis.</p>';
+
     html += '<div class="loja-card">';
     html += '<div class="card-main">';
+
+    /* Rank */
     html += '<div class="col-rank"><div class="rank-num">'+(li+1)+'</div><div class="rank-pill '+pc+'">N'+l.nivel+'</div></div>';
+
+    /* Identity */
     html += '<div class="col-id"><div class="loja-nome">'+(l.local||l.loja)+'</div><div class="loja-code">'+l.loja+'</div></div>';
+
+    /* Metrics */
     html += '<div class="col-metrics">';
-    html += '<div class="metric-group is-total"><div class="mg-label">P Total</div><div class="mg-val">'+fmt(l.pT)+'</div></div>';
-    html += '<div class="metric-group"><div class="mg-label">P Abertas</div><div class="mg-val">'+fmt(l.pA)+'</div></div>';
-    html += '<div class="metric-group"><div class="mg-label">P Fechadas</div><div class="mg-val">'+fmt(l.pF)+'</div></div>';
+    var groups = [
+      {label:'P Total',    val:fmt(l.pT), cls:'is-total'},
+      {label:'P Abertas',  val:fmt(l.pA), cls:''},
+      {label:'P Fechadas', val:fmt(l.pF), cls:''}
+    ];
+    groups.forEach(function(g) {
+      html += '<div class="metric-group '+g.cls+'"><div class="mg-label">'+g.label+'</div><div class="mg-val">'+g.val+'</div></div>';
+    });
+    /* Bold separator P | NP */
     html += '<div class="col-metrics-sep"></div>';
-    html += '<div class="metric-group is-total-np"><div class="mg-label">NP Total</div><div class="mg-val">'+fmt(l.nT)+'</div></div>';
-    html += '<div class="metric-group"><div class="mg-label">NP Abertas</div><div class="mg-val">'+fmt(l.nA)+'</div></div>';
-    html += '<div class="metric-group"><div class="mg-label">NP Fechadas</div><div class="mg-val">'+fmt(l.nF)+'</div></div>';
+    var groupsNP = [
+      {label:'NP Total',    val:fmt(l.nT), cls:'is-total-np'},
+      {label:'NP Abertas',  val:fmt(l.nA), cls:''},
+      {label:'NP Fechadas', val:fmt(l.nF), cls:''}
+    ];
+    groupsNP.forEach(function(g) {
+      html += '<div class="metric-group '+g.cls+'"><div class="mg-label">'+g.label+'</div><div class="mg-val">'+g.val+'</div></div>';
+    });
     html += '</div>';
+
+    /* Right: progress + buttons */
     html += '<div class="col-right">';
     html += '<div class="progress-block">';
     html += '<div class="progress-row">'
@@ -728,22 +818,33 @@ function renderDetail(lojas, focusIdx) {
       +'<div class="prog-track"><div class="prog-fill fill-orange" style="width:'+l.pctNFInt+'%"></div></div>'
       +'</div>';
     html += '</div>';
+
     html += '<div class="actions-col">';
     html += '<button class="btn-card" id="bh-'+li+'" onclick="toggleH('+li+')">'+svgClock()+'Histórico</button>';
     html += '<button class="btn-card" id="bs-'+li+'" onclick="toggleS('+li+')">'+svgFolder()+'Secções</button>';
     html += '</div>';
-    html += '</div>';
-    html += '</div>';
+    html += '</div>'; /* col-right */
+
+    html += '</div>'; /* card-main */
+
+    /* Panels */
     html += '<div class="panel" id="ph-'+li+'"><div class="panel-body"><div class="panel-title">Evolução Histórica · '+l.loja+'</div>'+histHtml+'</div></div>';
     html += '<div class="panel" id="ps-'+li+'"><div class="panel-body"><div class="panel-title">Secções · '+l.seccoes.length+'</div>'+secHtml+'</div></div>';
-    html += '</div>';
-  html += '</div>';
+
+    html += '</div>'; /* loja-card */
+
+  html += '</div>'; /* card-list */
+
+  /* Legend */
   html += '<div class="legend-bar" style="margin-top:14px;margin-bottom:0">';
   html += '<div class="legend-item"><div class="legend-dot" style="background:var(--bar-blue)"></div><span class="legend-label">P</span> = Tarefas Programadas</div>';
   html += '<div class="legend-sep"></div>';
   html += '<div class="legend-item"><div class="legend-dot" style="background:var(--bar-orange)"></div><span class="legend-label">NP</span> = Tarefas Não Programadas</div>';
   html += '</div>';
+
   document.getElementById('app').innerHTML = html;
+
+  /* Charts — only for this loja */
   var el = document.getElementById('pnp-'+li);
   if (el && l.historico.length>0) {
     var sems=[], pp=[], np=[];
@@ -764,13 +865,13 @@ function renderDetail(lojas, focusIdx) {
         indexAxis:'y', responsive:true, maintainAspectRatio:false,
         layout:{padding:{right:56}},
         plugins:{
-          datalabels:{ anchor:'end', align:'right', formatter:function(v){ return v+'%'; }, font:{size:11,weight:'700'}, color:'#000' },
-          legend:{ position:'top', labels:{ font:{size:12,weight:'700'}, color:'#000', padding:16, usePointStyle:true, pointStyleWidth:10 } },
-          tooltip:{ callbacks:{ title:function(items){ return 'Semana: '+items[0].label; }, label:function(c){ return ' '+c.dataset.label+': '+c.parsed.x+'%'; } }, titleFont:{size:12,weight:'700'}, bodyFont:{size:12}, padding:10 }
+          datalabels:{ anchor:'end', align:'right', formatter:function(v){ return v+'%'; }, font:{size:11,weight:'700'}, color:'#3a3835' },
+          legend:{ position:'top', labels:{ font:{size:12,weight:'500'}, color:'#3a3835', padding:16, usePointStyle:true, pointStyleWidth:10 } },
+          tooltip:{ callbacks:{ title:function(items){ return 'Semana: '+items[0].label; }, label:function(c){ return ' '+c.dataset.label+': '+c.parsed.x+'%'; } }, titleFont:{size:12,weight:'600'}, bodyFont:{size:12}, padding:10 }
         },
         scales:{
-          x:{ beginAtZero:true, max:100, title:{display:true,text:'Percentagem de tarefas fechadas (%)',color:'#555555',font:{size:10,weight:'700'}}, ticks:{color:'#555555',font:{size:10},callback:function(v){return v+'%';}}, grid:{color:'rgba(0,0,0,.08)'} },
-          y:{ ticks:{color:'#000000',font:{size:10,weight:'700'}}, grid:{display:false} }
+          x:{ beginAtZero:true, max:100, title:{display:true,text:'Percentagem de tarefas fechadas (%)',color:'#9c9a95',font:{size:10,weight:'600'}}, ticks:{color:'#9c9a95',font:{size:10},callback:function(v){return v+'%';}}, grid:{color:'rgba(0,0,0,.04)'} },
+          y:{ ticks:{color:'#3a3835',font:{size:10,weight:'500'}}, grid:{display:false} }
         }
       }
     });
@@ -784,15 +885,18 @@ function renderDetail(lojas, focusIdx) {
       type:'bar', plugins:[ChartDataLabels],
       data:{labels:['Programadas','Não Prog.'],datasets:[{data:[pP,pN],backgroundColor:['rgba(59,63,216,.75)','rgba(232,146,74,.8)'],borderRadius:3,borderWidth:0}]},
       options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,layout:{padding:{right:42}},
-        plugins:{datalabels:{anchor:'end',align:'right',formatter:function(v){return v+'%';},font:{size:11,weight:'700'},color:'#000'},legend:{display:false}},
-        scales:{x:{beginAtZero:true,max:100,display:false},y:{ticks:{font:{size:11,weight:'700'},color:'#000000'},grid:{display:false}}}
+        plugins:{datalabels:{anchor:'end',align:'right',formatter:function(v){return v+'%';},font:{size:11,weight:'600'},color:'#3a3835'},legend:{display:false}},
+        scales:{x:{beginAtZero:true,max:100,display:false},y:{ticks:{font:{size:11,weight:'500'},color:'#3a3835'},grid:{display:false}}}
       }
     });
   });
 }
 
 function pillCls(n) { return n===1?'pill-n1':n===2?'pill-n2':'pill-n3'; }
-function fmt(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, "."); }
+
+function fmt(n) {
+  return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
 </script>
 </body>
 </html>
