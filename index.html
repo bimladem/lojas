@@ -20,7 +20,7 @@
   --line-2: #b1b1b1;
   --n1: #ff2222; --n1-bg: #fff2f2; /* Vermelho Vivo e Claro */
   --n2: #ff7b00; --n2-bg: #fff3e6; /* Laranja Vibrante */
-  --n3: #e6b800; --n3-bg: #fffde6; /* Amarelo Vibrante com Contraste */
+  --n3: #ffcc00; --n3-bg: #fffbe6; /* Amarelo Mais Puro e Vibrante */
   --bar-blue: #2b2fd8;
   --bar-orange: #d8722a;
   --bar-track: #e4e4e8;
@@ -657,10 +657,10 @@ function renderHome(lojas, ultima, penultima) {
   html += '<div class="bottom-bar" style="margin-top:20px">';
   html += '<div class="level-legend"><div class="level-legend-title">Classificação de Nível</div><div class="level-items">';
   html += '<div class="level-item"><div class="level-dot pill-n1">N1</div><span>0–20% prog. fechadas</span></div>';
-  html += '<div class="level-item"><div class="level-dot pill-n2">N2</div><span>21–40% fechadas</span></div>';
-  html += '<div class="level-item"><div class="level-dot pill-n3">N3</div><span>41–50% fechadas</span></div>';
+  html += '<div class="level-item"><div class="level-dot pill-n2">N2</div><span>21–40% prog. fechadas</span></div>';
+  html += '<div class="level-item"><div class="level-dot pill-n3">N3</div><span>41–50% prog. fechadas</span></div>';
   html += '</div></div>';
-  html += '<div class="action-banner"><div class="action-icon">⚠</div><div><div class="action-title">Ação Recomendada</div><div class="action-desc">Contactar urgentemente responsáveis das lojas N1. Clique em "Detalhe" para ver o histórico e secções.</div></div></div>';
+  html += '<div class="action-banner"><div class="action-icon">⚠</div><div><div class="action-title">Ação Recomendada</div><div class="action-desc">Contactar urgentemente responsáveis das lojas. Clique em "Detalhe" para ver o histórico e secções.</div></div></div>';
   html += '</div>';
 
   document.getElementById('home-screen').innerHTML = html;
