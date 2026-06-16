@@ -212,36 +212,92 @@ var _currentSubareaIdx = 0;
 
 function fmt(n) { return Number(n).toLocaleString('pt-PT'); }
 
-function getNivel(l) {
-  var p = l.totais.total > 0 ? Math.round(l.totais.fechadas / l.totais.total * 100) : 0;
-  if (p >= 41) return 'N3';
-  if (p >= 21) return 'N2';
-  return 'N1';
-}
-
 function loadData() {
-  fetch('Dados.json?t=' + Date.now())
+  // Tentamos carregar dados.json (conforme o código do utilizador) ou Dados.json
+  fetch('dados.json?t=' + Date.now())
     .then(r => r.json())
     .then(json => {
-      _lojas = json.lojas || [];
-      updateHeader(json);
-      renderHome();
+      processData(json);
     })
     .catch(e => {
-      document.getElementById('tbl-body').innerHTML = `<tr><td colspan="6" class="loading" style="color:red">Erro: ${e.message}</td></tr>`;
+      // Se falhar, tentamos Dados.json
+      fetch('Dados.json?t=' + Date.now())
+        .then(r => r.json())
+        .then(json => processData(json))
+        .catch(err => {
+          document.getElementById('tbl-body').innerHTML = `<tr><td colspan="6" class="loading" style="color:red">Erro ao carregar dados: ${err.message}</td></tr>`;
+        });
     });
 }
 
-function updateHeader(json) {
-  var dt = json.atualizadoEm ? new Date(json.atualizadoEm) : new Date();
-  document.getElementById('hdate').textContent = dt.toLocaleDateString('pt-PT', {day:'2-digit', month:'short', year:'numeric'});
-  document.getElementById('hsub').textContent = _lojas.length + ' lojas monitorizadas';
+function processData(json) {
+  var data = json.data || json.lojas || [];
+  if (json.data) {
+    // Lógica de processamento baseada no pasted_content_3.txt
+    var semanas = [];
+    data.forEach(function(i) { var s = String(i.Semana||'').trim(); if (s && semanas.indexOf(s)===-1) semanas.push(s); });
+    var ultima = semanas[semanas.length - 1] || '';
+    
+    var lojas = data.filter(function(i) { return i.Loja && !i.Secção && String(i.Semana||'').trim() === ultima; })
+      .map(function(i) {
+        var pT=Number(i['P Total'])||0, pF=Number(i['P Fechado'])||0;
+        var pctPF=pT>0?(pF/pT*100):0;
+        var nivel=pctPF>=41?3:pctPF>=21?2:1;
+        var loc=String(i['Resumo contactos.Localidade']||i['IM.Localidade']||'').trim();
+        var lojaId = String(i.Loja).trim();
+        return { 
+          id: lojaId, 
+          nome: loc || lojaId, 
+          totais: { total: pT, fechadas: pF, porFechar: pT - pF },
+          nivel: nivel,
+          areas: [] 
+        };
+      });
+
+    // Processar Secções (Áreas)
+    data.forEach(function(i) {
+      if (!i.Secção) return;
+      var m=String(i.Secção).trim().match(/^(IM \d+)\s+(.+)$/);
+      if (!m) return;
+      var lojaId = m[1].trim();
+      var areaNome = m[2].trim();
+      if (areaNome.toLowerCase()==='admin') return;
+      
+      var loja = lojas.find(l => l.id === lojaId);
+      if (loja) {
+        var pT=Number(i['Programadas Total'])||0, pF=Number(i['Programadas Fechadas'])||0;
+        // No novo design, tratamos cada Secção como uma "Área" com uma "Subárea" única (ou agrupamos se necessário)
+        // Para simplificar, cada Secção do Excel será uma Área no detalhe
+        loja.areas.push({
+          area: areaNome,
+          subareas: [{
+            subarea: "Geral",
+            total: pT,
+            fechadas: pF,
+            porFechar: pT - pF
+          }]
+        });
+      }
+    });
+
+    _lojas = lojas;
+    document.getElementById('hdate').textContent = ultima;
+    document.getElementById('hsub').textContent = _lojas.length + ' lojas monitorizadas';
+  } else {
+    // Fallback para o formato antigo se for o caso
+    _lojas = data;
+    var dt = json.atualizadoEm ? new Date(json.atualizadoEm) : new Date();
+    document.getElementById('hdate').textContent = dt.toLocaleDateString('pt-PT', {day:'2-digit', month:'short', year:'numeric'});
+    document.getElementById('hsub').textContent = _lojas.length + ' lojas monitorizadas';
+  }
+  
+  renderHome();
 }
 
 function renderHome() {
-  var n1 = _lojas.filter(l => getNivel(l) === 'N1').length;
-  var n2 = _lojas.filter(l => getNivel(l) === 'N2').length;
-  var n3 = _lojas.filter(l => getNivel(l) === 'N3').length;
+  var n1 = _lojas.filter(l => l.nivel === 1).length;
+  var n2 = _lojas.filter(l => l.nivel === 2).length;
+  var n3 = _lojas.filter(l => l.nivel === 3).length;
 
   document.getElementById('kpi-total').textContent = _lojas.length;
   document.getElementById('kpi-n1').textContent = n1;
@@ -255,7 +311,7 @@ function renderHome() {
         <td class="col-center"><span class="rank-num">${i + 1}</span></td>
         <td>
           <span class="loja-nome">${l.nome}</span>
-          <span class="loja-id">ID ${l.id || '—'}</span>
+          <span class="loja-id">${l.id || '—'}</span>
         </td>
         <td class="col-center">${fmt(l.totais.total)}</td>
         <td class="col-center">${fmt(l.totais.fechadas)}</td>
@@ -266,7 +322,7 @@ function renderHome() {
       </tr>
     `;
   });
-  document.getElementById('tbl-body').innerHTML = html;
+  document.getElementById('tbl-body').innerHTML = html || '<tr><td colspan="6" class="loading">Sem dados disponíveis.</td></tr>';
 }
 
 function showDetail(idx) {
@@ -294,19 +350,23 @@ function renderDetail() {
   h += `<div class="loja-header">
           <div>
             <div class="lh-title">${l.nome}</div>
-            <div class="lh-meta">ID ${l.id || '—'} · ${fmt(l.totais.total)} tarefas totais</div>
+            <div class="lh-meta">${l.id || '—'} · ${fmt(l.totais.total)} tarefas totais</div>
           </div>
         </div>`;
 
-  h += `<div class="area-tabs">`;
-  l.areas.forEach((a, i) => {
-    h += `<button class="area-tab ${i === _currentAreaIdx ? 'on' : ''}" onclick="selectArea(${i})">${a.area}</button>`;
-  });
-  h += `</div>`;
+  if (l.areas && l.areas.length > 0) {
+    h += `<div class="area-tabs">`;
+    l.areas.forEach((a, i) => {
+      h += `<button class="area-tab ${i === _currentAreaIdx ? 'on' : ''}" onclick="selectArea(${i})">${a.area}</button>`;
+    });
+    h += `</div>`;
 
-  h += `<div class="subarea-section" id="subarea-content">`;
-  h += renderSubarea();
-  h += `</div>`;
+    h += `<div class="subarea-section" id="subarea-content">`;
+    h += renderSubarea();
+    h += `</div>`;
+  } else {
+    h += `<div class="loading">Sem detalhes de áreas disponíveis para esta loja.</div>`;
+  }
 
   document.getElementById('detail-content').innerHTML = h;
 }
@@ -327,14 +387,17 @@ function renderSubarea() {
   var sub = area.subareas[_currentSubareaIdx];
   var h = '';
 
-  h += `<div class="subarea-row">
-          <span class="sub-lbl">Subárea:</span>
-          <select class="sub-select" onchange="selectSubarea(this.value)">`;
-  area.subareas.forEach((s, i) => {
-    h += `<option value="${i}" ${i === _currentSubareaIdx ? 'selected' : ''}>${s.subarea}</option>`;
-  });
-  h += `</select>
-        </div>`;
+  // Só mostramos o select se houver mais do que uma subárea
+  if (area.subareas.length > 1) {
+    h += `<div class="subarea-row">
+            <span class="sub-lbl">Subárea:</span>
+            <select class="sub-select" onchange="selectSubarea(this.value)">`;
+    area.subareas.forEach((s, i) => {
+      h += `<option value="${i}" ${i === _currentSubareaIdx ? 'selected' : ''}>${s.subarea}</option>`;
+    });
+    h += `</select>
+          </div>`;
+  }
 
   h += `<div class="vals-grid">
           <div class="val-card">
